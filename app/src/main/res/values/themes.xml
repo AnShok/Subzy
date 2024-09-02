@@ -1,9 +1,27 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
     <!-- Base application theme. -->
     <style name="Base.Theme.Subzy" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Общие настройки для темы, применимые как для светлой, так и для темной тем -->
+
+        <!-- Основные цвета -->
+        <item name="colorPrimary">@color/Primary_100</item>
+        <item name="colorPrimaryVariant">@color/Primary_500</item>
+        <item name="colorOnPrimary">@color/White</item>
+
+        <item name="colorSecondary">@color/Accent_P_100</item>
+        <item name="colorSecondaryVariant">@color/Accent_P_50</item>
+        <item name="colorOnSecondary">@color/White</item>
+
+        <!-- Фоновые и текстовые цвета для светлой темы -->
+        <item name="android:colorBackground">@color/Gray_10</item>
+        <item name="android:textColorPrimary">@color/Gray_100</item>
+        <item name="android:textColorSecondary">@color/Gray_70</item>
     </style>
 
-    <style name="Theme.Subzy" parent="Base.Theme.Subzy" />
+    <!-- Тема приложения -->
+    <style name="Theme.Subzy" parent="Base.Theme.Subzy">
+        <!-- Дополнительные настройки можно добавить здесь -->
+    </style>
+
 </resources>
