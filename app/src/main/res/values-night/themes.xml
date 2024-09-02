@@ -1,7 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Subzy" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+    <!-- Base application theme for Dark mode -->
+    <style name="Base.Theme.Subzy" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Основные цвета для темной темы -->
+        <item name="colorPrimary">@color/Primary_100</item>
+        <item name="colorPrimaryVariant">@color/Primary_500</item>
+        <item name="colorOnPrimary">@color/Gray_100</item>
+
+        <item name="colorSecondary">@color/Accent_S_100</item>
+        <item name="colorSecondaryVariant">@color/Accent_S_50</item>
+        <item name="colorOnSecondary">@color/Gray_100</item>
+
+        <!-- Фоновые и текстовые цвета для темной темы -->
+        <item name="android:colorBackground">@color/Gray_100</item>
+        <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:textColorSecondary">@color/Gray_20</item>
     </style>
+
+    <!-- Тема приложения -->
+    <style name="Theme.Subzy" parent="Base.Theme.Subzy">
+        <!-- Дополнительные настройки можно добавить здесь -->
+    </style>
+
 </resources>
