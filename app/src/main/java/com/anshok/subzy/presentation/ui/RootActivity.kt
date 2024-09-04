@@ -1,7 +1,6 @@
 package com.anshok.subzy.presentation.ui
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -23,7 +22,8 @@ class RootActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.navController
 
         binding.bottomNavigationView.setupWithNavController(navController)
@@ -34,6 +34,7 @@ class RootActivity : AppCompatActivity() {
                     binding.bottomNavigationView.isVisible = true
                     binding.fab.isVisible = true
                 }
+
                 else -> {
                     binding.bottomNavigationView.isVisible = false
                     binding.fab.isVisible = false

@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bottom_navigation_background"
+        app:elevation="4dp"
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconSize="18dp"
         app:itemIconTint="@drawable/nav_color"
@@ -32,8 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border"
-        app:menu="@menu/bottom_navigation_menu"
-        app:elevation="4dp"/>
+        app:menu="@menu/bottom_navigation_menu" />
 
     <!-- Плавающая кнопка действия (FAB) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -46,13 +46,13 @@
         android:tint="@color/White"
         android:translationZ="8dp"
         app:backgroundTint="@color/Accent_P_100"
+        app:elevation="8dp"
         app:fabCustomSize="58dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation_view"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border"
-        app:rippleColor="@color/Accent_P_0"
-        app:elevation="8dp"/>
+        app:rippleColor="@color/Accent_P_0" />
 
     <!-- Отcтупы -->
     <androidx.constraintlayout.widget.Guideline

@@ -10,32 +10,28 @@
         android:id="@+id/homeFragment"
         android:name="com.anshok.subzy.presentation.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
     <!-- SpendFragment -->
     <fragment
         android:id="@+id/spendFragment"
         android:name="com.anshok.subzy.presentation.ui.SpendFragment"
         android:label="fragment_spend"
-        tools:layout="@layout/fragment_spend">
-    </fragment>
+        tools:layout="@layout/fragment_spend" />
 
     <!-- CalendarFragment -->
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.anshok.subzy.presentation.ui.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar">
-    </fragment>
+        tools:layout="@layout/fragment_calendar" />
 
     <!-- WalletFragment -->
     <fragment
         android:id="@+id/walletFragment"
         android:name="com.anshok.subzy.presentation.ui.WalletFragment"
         android:label="fragment_wallet"
-        tools:layout="@layout/fragment_wallet">
-    </fragment>
+        tools:layout="@layout/fragment_wallet" />
 
     <fragment
         android:id="@+id/newSubscriptionFragment"
