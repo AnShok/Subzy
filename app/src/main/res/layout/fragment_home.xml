@@ -6,16 +6,180 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Screen"
-        android:textColor="@color/Gray_70"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <!-- Круглый прогресс-бар -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="32dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="75"
+        android:progressDrawable="@drawable/circular_progress"
+        android:rotation="270"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar">
+
+        <!-- Лого -->
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="App Logo"
+            android:src="@drawable/app_logo_transparent" />
+
+        <!-- Название приложения -->
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sybzy"
+            android:textColor="@color/White"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- Текущая сумма -->
+    <TextView
+        android:id="@+id/currentAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$1,235"
+        android:textColor="@color/White"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appTitle" />
+
+    <!-- Текст This month bills -->
+    <TextView
+        android:id="@+id/monthBills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This month bills"
+        android:textColor="@color/Gray_30"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/currentAmount" />
+
+    <!-- Кнопка "See your budget" -->
+    <Button
+        android:id="@+id/seeBudgetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/Gray_60"
+        android:text="See your budget"
+        android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/monthBills" />
+
+    <!-- Метрики подписок -->
+    <LinearLayout
+        android:id="@+id/subscriptionsMetrics"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seeBudgetButton">
+
+        <TextView
+            android:id="@+id/activeSubs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active subs\n12"
+            android:textAlignment="center"
+            android:textColor="@color/White" />
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/highestSubs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Highest subs\n$19.99"
+            android:textAlignment="center"
+            android:textColor="@color/White" />
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/lowestSubs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lowest subs\n$5.99"
+            android:textAlignment="center"
+            android:textColor="@color/White" />
+
+    </LinearLayout>
+
+
+    <!-- TabLayout для переключения вкладок -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_subscription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toBottomOf="@id/subscriptionsMetrics"
+        app:tabIndicatorColor="@color/White"
+        app:tabTextAppearance="@style/CustomTabText"
+        app:tabTextColor="@color/White"
+        tools:tabs="Your subscriptions, Upcoming bills" />
+
+    <!-- ViewPager2 для отображения контента -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout_subscription"
+        tools:listitem="@layout/fragment_your_subscriptions" />
+
+
+    <!-- Отcтупы -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="23dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="23dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
