@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_bottom_navigation_home"
+        android:title="" />
+
+    <item
+        android:id="@+id/spendFragment"
+        android:icon="@drawable/ic_bottom_navigation_spending_budgets"
+        android:title="" />
+
+    <!-- Этот элемент будет использоваться как заглушка для центрального FAB -->
+    <item
+        android:id="@+id/empty"
+        android:enabled="false"
+        android:title="" />
+
+    <item
+        android:id="@+id/calendarFragment"
+        android:icon="@drawable/ic_bottom_navigation_calendar"
+        android:title="" />
+
+    <item
+        android:id="@+id/walletFragment"
+        android:icon="@drawable/ic_bottom_navigation_wallet"
+        android:title="" />
+</menu>

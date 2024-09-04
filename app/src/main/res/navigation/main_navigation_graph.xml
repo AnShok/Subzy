@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- HomeFragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.anshok.subzy.presentation.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+    </fragment>
+
+    <!-- SpendFragment -->
+    <fragment
+        android:id="@+id/spendFragment"
+        android:name="com.anshok.subzy.presentation.ui.SpendFragment"
+        android:label="fragment_spend"
+        tools:layout="@layout/fragment_spend">
+    </fragment>
+
+    <!-- CalendarFragment -->
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.anshok.subzy.presentation.ui.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar">
+    </fragment>
+
+    <!-- WalletFragment -->
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.anshok.subzy.presentation.ui.WalletFragment"
+        android:label="fragment_wallet"
+        tools:layout="@layout/fragment_wallet">
+    </fragment>
+
+    <fragment
+        android:id="@+id/newSubscriptionFragment"
+        android:name="com.anshok.subzy.presentation.ui.NewSubscriptionFragment"
+        android:label="fragment_new_subscription"
+        tools:layout="@layout/fragment_new_subscription" />
+
+</navigation>

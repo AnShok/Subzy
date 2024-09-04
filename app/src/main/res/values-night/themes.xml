@@ -1,20 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme for Dark mode -->
-    <style name="Base.Theme.Subzy" parent="Theme.Material3.Dark.NoActionBar">
-        <!-- Основные цвета для темной темы -->
-        <item name="colorPrimary">@color/Primary_100</item>
-        <item name="colorPrimaryVariant">@color/Primary_500</item>
-        <item name="colorOnPrimary">@color/Gray_100</item>
+    <style name="Base.Theme.Subzy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Цвет фона -->
+        <item name="colorPrimary">@color/Gray_70</item>
 
-        <item name="colorSecondary">@color/Accent_S_100</item>
-        <item name="colorSecondaryVariant">@color/Accent_S_50</item>
-        <item name="colorOnSecondary">@color/Gray_100</item>
+        <!-- Текст основной -->
+        <item name="colorOnPrimary">@color/black</item>
 
-        <!-- Фоновые и текстовые цвета для темной темы -->
-        <item name="android:colorBackground">@color/Gray_100</item>
-        <item name="android:textColorPrimary">@color/White</item>
-        <item name="android:textColorSecondary">@color/Gray_20</item>
+        <item name="colorSecondary">@color/light_gray</item>
+        <item name="colorSecondaryVariant">@color/gray</item>
+
+        <!-- текст в edit text -->
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- hint в edit text -->
+        <item name="colorOnSecondaryFixed">@color/gray</item>
+
+        <!-- кнопки -->
+         <item name="colorSurface">@color/Gray_60</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- кнопки сброса и добавления в избранное -->
+        <item name="colorAccent">@color/red</item>
+
+        <!--позволяет динамически изменять фон окна приложения в соответствии с выбранной темой-->
+        <item name="android:windowBackground">@color/black</item>
     </style>
 
     <!-- Тема приложения -->
