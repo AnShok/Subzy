@@ -144,13 +144,17 @@
         android:id="@+id/tab_layout_subscription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_marginVertical="16dp"
+        android:background="@drawable/tab_background"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border"
         app:layout_constraintTop_toBottomOf="@id/subscriptionsMetrics"
+        app:tabGravity="center"
         app:tabIndicatorColor="@color/White"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@null"
         app:tabTextAppearance="@style/CustomTabText"
-        app:tabTextColor="@color/White"
         tools:tabs="Your subscriptions, Upcoming bills" />
 
     <!-- ViewPager2 для отображения контента -->

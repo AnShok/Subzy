@@ -1,31 +1,31 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
+    <!-- Base application theme for light mode -->
     <style name="Base.Theme.Subzy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Цвет фона -->
-        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimary">@color/Gray_100</item>
 
         <!-- Текст основной -->
         <item name="colorOnPrimary">@color/white</item>
 
-        <item name="colorSecondary">@color/light_gray</item>
-        <item name="colorSecondaryVariant">@color/gray</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorSecondaryVariant">@color/light_gray</item>
 
         <!-- текст в edit text -->
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
 
         <!-- hint в edit text -->
         <item name="colorOnSecondaryFixed">@color/gray</item>
 
         <!-- кнопки -->
-        <item name="colorSurface">@color/blue</item>
+        <item name="colorSurface">@color/Gray_60</item>
         <item name="colorOnSurface">@color/white</item>
 
         <!-- кнопки сброса и добавления в избранное -->
         <item name="colorAccent">@color/red</item>
 
         <!--позволяет динамически изменять фон окна приложения в соответствии с выбранной темой-->
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/Gray_80</item>
     </style>
 
     <!-- Тема приложения -->

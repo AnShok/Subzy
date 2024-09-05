@@ -1,12 +1,12 @@
 package com.anshok.subzy.util.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.anshok.subzy.presentation.ui.HomeFragment
 import com.anshok.subzy.presentation.ui.UpcomingBillsFragment
 import com.anshok.subzy.presentation.ui.YourSubscriptionsFragment
 
-class SubscriptionPagerAdapter(fragmentActivity: FragmentActivity) :
+class SubscriptionPagerAdapter(fragmentActivity: HomeFragment) :
     FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int {
