@@ -13,6 +13,12 @@
     <color name="Gray_10">#E0E0E6</color>
     <color name="White">#FFFFFF</color>
 
+    <color name="Gray_75">#282832</color>
+    <color name="Gray_65">#30303c</color>
+    <color name="Gray_55">#414152</color>
+    <color name="Gray_56">#3d3d47</color>
+
+
     <!--Primary -->
     <color name="Primary_100">#5E00F5</color>
     <color name="Primary_500">#7722FF</color>
