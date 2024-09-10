@@ -21,7 +21,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
 
             <!-- Отcтупы -->
             <androidx.constraintlayout.widget.Guideline
@@ -37,7 +38,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="18dp" />
-            <!-- Круглый прогресс-бар -->
 
             <ImageButton
                 android:id="@+id/settings_button"
@@ -51,17 +51,51 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/Gray_30" />
 
+            <!-- Круглый прогресс-бар -->
+            <com.zigis.segmentedarcview.SegmentedArcView
+                android:id="@+id/progress_view"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="62dp"
+                android:elevation="4dp"
+                app:layout_constraintBottom_toTopOf="@id/subscriptionsMetrics"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sav_segmentSeparationAngle="9"
+                app:sav_segmentThickness="10dp"
+                app:sav_startAngle="140"
+                app:sav_sweepAngle="260"
+                app:sav_useCustomSweepAngles="true"
+                tools:visibility="gone" />
+
+            <com.zigis.segmentedarcview.SegmentedArcView
+                android:id="@+id/progress_view_background"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="62dp"
+                android:elevation="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/seeBudgetButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sav_segmentSeparationAngle="9"
+                app:sav_segmentThickness="10dp"
+                app:sav_startAngle="140"
+                app:sav_sweepAngle="260" />
+
             <!-- Лого и название приложения -->
             <LinearLayout
                 android:id="@+id/appTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="54dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
+                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
+                app:layout_constraintTop_toBottomOf="@+id/settings_button">
 
                 <!-- Лого -->
                 <ImageView
@@ -74,44 +108,47 @@
                 <!-- Название приложения -->
                 <TextView
                     android:id="@+id/appName"
+                    style="@style/TextAppearance.Headline4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:text="Sybzy"
-                    android:textColor="@color/White"
-                    android:textSize="18sp" />
+                    android:textStyle="bold"
+                    android:textColor="@color/White" />
             </LinearLayout>
 
             <!-- Текущая сумма -->
             <TextView
                 android:id="@+id/currentAmount"
+                style="@style/TextAppearance.Headline7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
                 android:text="$1,235"
                 android:textColor="@color/White"
-                android:textSize="32sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/appTitle" />
+                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
+                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
+                app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
             <!-- Текст This month bills -->
             <TextView
                 android:id="@+id/monthBills"
+                style="@style/TextAppearance.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="16dp"
                 android:text="This month bills"
                 android:textColor="@color/Gray_30"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/currentAmount" />
+                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
+                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
+                app:layout_constraintTop_toBottomOf="@+id/currentAmount" />
 
             <!-- Кнопка See your budget -->
             <Button
                 android:id="@+id/seeBudgetButton"
+                style="@style/TextAppearance.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -120,24 +157,24 @@
                 android:text="See your budget"
                 android:textAllCaps="false"
                 android:textColor="@color/White"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/monthBills" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
+                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
+                app:layout_constraintTop_toBottomOf="@+id/monthBills" />
 
             <!-- Метрики подписок -->
             <LinearLayout
                 android:id="@+id/subscriptionsMetrics"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="26dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="3"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/seeBudgetButton"
                 app:layout_constraintEnd_toStartOf="@id/end_border_upcard"
                 app:layout_constraintStart_toEndOf="@id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@id/seeBudgetButton">
+                >
 
                 <!-- Карточка Active subs -->
                 <androidx.cardview.widget.CardView
