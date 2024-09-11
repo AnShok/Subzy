@@ -22,7 +22,7 @@
         <item name="colorOnSurface">@color/white</item>
 
         <!-- кнопки сброса и добавления в избранное -->
-        <item name="colorAccent">@color/red</item>
+        <item name="colorAccent">@color/Accent_P_50</item>
 
         <!--позволяет динамически изменять фон окна приложения в соответствии с выбранной темой-->
         <item name="android:windowBackground">@color/Gray_80</item>
