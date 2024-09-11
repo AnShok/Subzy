@@ -20,26 +20,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Заголовок страницы -->
+
     <TextView
         android:id="@+id/title"
         style="@style/TextAppearance.Headline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="Settings"
         android:textColor="@color/Gray_30"
+        app:layout_constraintBottom_toBottomOf="@+id/back_button"
         app:layout_constraintEnd_toStartOf="@id/end_border"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@id/start_border"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/back_button" />
 
     <!-- Аватар профиля -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_image_card"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginTop="40dp"
-        app:cardCornerRadius="36dp"
+        app:cardCornerRadius="45dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,12 +60,12 @@
     <!-- Имя пользователя -->
     <TextView
         android:id="@+id/user_name"
+        style="@style/TextAppearance.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Pyska"
         android:textColor="@color/white"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,20 +147,20 @@
                     android:src="@drawable/ic_security" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="Security"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fingerprint"
-                    android:textColor="@color/Gray_30"
-                    android:textSize="14sp" />
+                    android:textColor="@color/Gray_30" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -184,13 +186,15 @@
                     android:src="@drawable/ic_icloud" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="Sub Sync"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+
+                    />
 
                 <Switch
                     android:layout_width="wrap_content"
@@ -246,20 +250,20 @@
                     android:src="@drawable/ic_sorting" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="Sorting"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date"
-                    android:textColor="@color/Gray_30"
-                    android:textSize="14sp" />
+                    android:textColor="@color/Gray_30" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -286,20 +290,20 @@
                     android:src="@drawable/ic_summary" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="Summary"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Average"
-                    android:textColor="@color/Gray_30"
-                    android:textSize="14sp" />
+                    android:textColor="@color/Gray_30" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -325,20 +329,20 @@
                     android:src="@drawable/ic_money" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="Default currency"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="USD ($)"
-                    android:textColor="@color/Gray_30"
-                    android:textSize="14sp" />
+                    android:textColor="@color/Gray_30" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -397,20 +401,20 @@
                     android:src="@drawable/ic_app_icon" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="App icon"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Default"
-                    android:textColor="@color/Gray_30"
-                    android:textSize="14sp" />
+                    android:textColor="@color/Gray_30" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -436,20 +440,20 @@
                     android:src="@drawable/ic_theme" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:text="Theme"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white" />
 
                 <TextView
+                    style="@style/TextAppearance.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dark"
-                    android:textColor="@color/Gray_30"
-                    android:textSize="14sp" />
+                    android:textColor="@color/Gray_30" />
 
                 <ImageButton
                     android:layout_width="wrap_content"

@@ -2,6 +2,7 @@ package com.anshok.subzy.presentation.ui.root
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -30,22 +31,39 @@ class RootActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment, R.id.spendFragment, R.id.calendarFragment, R.id.walletFragment -> {
+                R.id.homeFragment, R.id.calendarFragment -> {
+                    // Установка цвета статус-бара для HomeFragment и CalendarFragment
+                    setStatusBarColor(R.color.Gray_75)
                     binding.bottomNavigationView.isVisible = true
                     binding.fab.isVisible = true
                 }
 
+                R.id.spendFragment, R.id.walletFragment -> {
+                    // Установка цвета статус-бара для SpendFragment и WalletFragment
+                    setStatusBarColor(R.color.Gray_80)
+                    binding.bottomNavigationView.isVisible = true
+                    binding.fab.isVisible = true
+                }
+
+                R.id.settingsFragment, R.id.newSubscriptionFragment -> {
+                    // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
+                    setStatusBarColor(R.color.Gray_80)
+                    binding.bottomNavigationView.isVisible = false
+                    binding.fab.isVisible = false
+                }
+
                 else -> {
+                    // Установка стандартного цвета статус-бара
+                    setStatusBarColor(R.color.Gray_80)
                     binding.bottomNavigationView.isVisible = false
                     binding.fab.isVisible = false
                 }
             }
         }
-        // Обработка нажатия на FloatingActionButton
+
+        // Обработка нажатия на FloatingActionButton (FAB)
         binding.fab.setOnClickListener {
             navController.navigate(R.id.newSubscriptionFragment)
-            // Действие при нажатии на FAB
-            // Например, можно открыть новый фрагмент или диалог
         }
 
         // Обработка системных отступов для корректной работы с навигацией и FAB
@@ -55,5 +73,10 @@ class RootActivity : AppCompatActivity() {
             binding.fab.translationY = -systemBarsInsets.bottom.toFloat() / 2
             insets
         }
+    }
+
+    // Метод для установки цвета статус-бара
+    private fun setStatusBarColor(colorResId: Int) {
+        window.statusBarColor = ContextCompat.getColor(this, colorResId)
     }
 }
