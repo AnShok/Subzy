@@ -17,7 +17,7 @@ class DottedCircleView @JvmOverloads constructor(
     private var numberOfDots = 30
     private var dotRadius = 5f
     private var circleRadius = 100f
-    private var dotColor = ContextCompat.getColor(context, R.color.Gray_65)
+    private var dotColor = ContextCompat.getColor(context, R.color.Gray_62)
     private var startAngle = 0.0
     private var endAngle = 360.0
 

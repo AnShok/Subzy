@@ -60,8 +60,8 @@ class HomeFragment : Fragment() {
         val arcViewBackground = binding.progressViewBackground
         arcViewBackground.segments = listOf(
             ArcSegment(
-                ContextCompat.getColor(requireContext(), R.color.Gray_65),
-                ContextCompat.getColor(requireContext(), R.color.Gray_65)
+                ContextCompat.getColor(requireContext(), R.color.Gray_62),
+                ContextCompat.getColor(requireContext(), R.color.Gray_62)
             )
         )
 
@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
             numberOfDots = 32,
             dotRadius = 5f,
             circleRadius = 315f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_65),
+            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_62),
             startAngle = 140.0,  // Угол начала
             endAngle = 408.0     // Угол конца
         )
@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
             numberOfDots = 92,
             dotRadius = 5f,
             circleRadius = 450f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_65),
+            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_62),
             startAngle = 135.0,    // Угол начала
             endAngle = 408.0     // Угол конца
         )
