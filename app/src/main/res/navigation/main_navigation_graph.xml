@@ -10,33 +10,57 @@
         android:id="@+id/homeFragment"
         android:name="com.anshok.subzy.presentation.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
 
     <!-- SpendFragment -->
     <fragment
         android:id="@+id/spendFragment"
         android:name="com.anshok.subzy.presentation.ui.SpendFragment"
         android:label="fragment_spend"
-        tools:layout="@layout/fragment_spend" />
+        tools:layout="@layout/fragment_spend">
+        <action
+            android:id="@+id/action_spendFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
 
     <!-- CalendarFragment -->
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.anshok.subzy.presentation.ui.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar">
+        <action
+            android:id="@+id/action_calendarFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
 
     <!-- WalletFragment -->
     <fragment
         android:id="@+id/walletFragment"
         android:name="com.anshok.subzy.presentation.ui.WalletFragment"
         android:label="fragment_wallet"
-        tools:layout="@layout/fragment_wallet" />
+        tools:layout="@layout/fragment_wallet">
+        <action
+            android:id="@+id/action_walletFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
 
+    <!-- newSubscriptionFragment -->
     <fragment
         android:id="@+id/newSubscriptionFragment"
         android:name="com.anshok.subzy.presentation.ui.NewSubscriptionFragment"
         android:label="fragment_new_subscription"
         tools:layout="@layout/fragment_new_subscription" />
+
+    <!-- SettingsFragment -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.anshok.subzy.presentation.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

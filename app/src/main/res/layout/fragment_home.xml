@@ -93,7 +93,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
                 app:layout_constraintEnd_toEndOf="@id/progress_view_background"
                 app:layout_constraintStart_toStartOf="@id/progress_view_background"
-                app:layout_constraintTop_toTopOf="@id/progress_view_background"/>
+                app:layout_constraintTop_toTopOf="@id/progress_view_background" />
 
             <!-- Градиентная View на заднем плане -->
             <View
@@ -102,10 +102,10 @@
                 android:layout_height="0dp"
                 android:background="@drawable/gradient_overlay_home_fragment"
                 android:elevation="2dp"
-                app:layout_constraintTop_toBottomOf="@+id/currentAmount"
                 app:layout_constraintBottom_toTopOf="@id/subscriptionsMetrics"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentAmount" />
 
             <com.anshok.subzy.util.extensions.DottedCircleView
                 android:id="@+id/dot_outside"
@@ -116,7 +116,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
                 app:layout_constraintEnd_toEndOf="@id/progress_view_background"
                 app:layout_constraintStart_toStartOf="@id/progress_view_background"
-                app:layout_constraintTop_toTopOf="@id/progress_view_background"/>
+                app:layout_constraintTop_toTopOf="@id/progress_view_background" />
 
             <com.anshok.subzy.util.extensions.DottedCircleView
                 android:id="@+id/dot_outside_second"
@@ -127,7 +127,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
                 app:layout_constraintEnd_toEndOf="@id/progress_view_background"
                 app:layout_constraintStart_toStartOf="@id/progress_view_background"
-                app:layout_constraintTop_toTopOf="@id/progress_view_background"/>
+                app:layout_constraintTop_toTopOf="@id/progress_view_background" />
 
             <!-- Лого и название приложения -->
             <LinearLayout
@@ -157,9 +157,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
-                    android:text="Sybzy"
-                    android:textStyle="bold"
-                    android:textColor="@color/White" />
+                    android:text="Subzy"
+                    android:textColor="@color/White"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Текущая сумма -->
@@ -184,9 +184,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:elevation="1dp"
                 android:text="This month bills"
                 android:textColor="@color/Gray_30"
-                android:elevation="1dp"
                 app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
                 app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
                 app:layout_constraintTop_toBottomOf="@+id/currentAmount" />
@@ -214,14 +214,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="horizontal"
+                android:visibility="visible"
                 android:weightSum="3"
-                android:elevation="2dp"
-                app:layout_constraintTop_toBottomOf="@id/seeBudgetButton"
                 app:layout_constraintEnd_toStartOf="@id/end_border_upcard"
                 app:layout_constraintStart_toEndOf="@id/start_border_upcard"
-                android:visibility="visible">
+                app:layout_constraintTop_toBottomOf="@id/seeBudgetButton">
 
                 <!-- Карточка Active subs -->
                 <androidx.cardview.widget.CardView

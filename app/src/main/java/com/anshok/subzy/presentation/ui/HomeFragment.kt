@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
@@ -40,6 +41,10 @@ class HomeFragment : Fragment() {
             63f,  // progressPercentage - Процент заполения,
             260f    // maxSweepAngle - Максимальный угол секции
         )
+
+        binding.settingsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
     }
 
     private fun setUpTabLayoutWithViewPager() {
