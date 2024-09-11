@@ -29,13 +29,15 @@ class HomeFragment : Fragment() {
     ): View {
         // Возвращаем root view, как обычно
         setUpTabLayoutWithViewPager()
+        setupDottedCircles()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupArcView(
-            100f,  // progressPercentage - Процент заполения,
+            63f,  // progressPercentage - Процент заполения,
             260f    // maxSweepAngle - Максимальный угол секции
         )
     }
@@ -71,8 +73,8 @@ class HomeFragment : Fragment() {
             val animatedValue = animation.animatedValue as Float
             arcView.segments = listOf(
                 ArcSegment(
-                    ContextCompat.getColor(requireContext(), R.color.Primary_20),
-                    ContextCompat.getColor(requireContext(), R.color.Primary_20),
+                    ContextCompat.getColor(requireContext(), R.color.Primary_10),
+                    ContextCompat.getColor(requireContext(), R.color.Accent_P_100),
                     sweepAngle = maxSweepAngle * (animatedValue / 100f) //рассчет для секции
                 )
             )
@@ -83,6 +85,52 @@ class HomeFragment : Fragment() {
             minAlpha = 0.4F,
             maxAlpha = 1F,
             duration = 2000L
+        )
+    }
+
+    // Отдельный метод для настройки всех кругов
+    private fun setupDottedCircles() {
+        setupDotInside()
+        setupDotOutside()
+        setupDotOutsideSecond()
+    }
+
+    // Настройка внутреннего круга с заданными углами
+    private fun setupDotInside() {
+        val dotInside = binding.dotInside
+        dotInside.setCircleParams(
+            numberOfDots = 32,
+            dotRadius = 5f,
+            circleRadius = 315f,
+            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_65),
+            startAngle = 140.0,  // Угол начала
+            endAngle = 408.0     // Угол конца
+        )
+    }
+
+    // Настройка внешнего круга с заданными углами
+    private fun setupDotOutside() {
+        val dotOutside = binding.dotOutside
+        dotOutside.setCircleParams(
+            numberOfDots = 92,
+            dotRadius = 5f,
+            circleRadius = 450f,
+            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_65),
+            startAngle = 135.0,    // Угол начала
+            endAngle = 408.0     // Угол конца
+        )
+    }
+
+    // Настройка внешнего круга с заданными углами
+    private fun setupDotOutsideSecond() {
+        val dotOutside = binding.dotOutsideSecond
+        dotOutside.setCircleParams(
+            numberOfDots = 110,
+            dotRadius = 5f,
+            circleRadius = 520f,
+            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_65),
+            startAngle = 135.0,    // Угол начала
+            endAngle = 408.0     // Угол конца
         )
     }
 }

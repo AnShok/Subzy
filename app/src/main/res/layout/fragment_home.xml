@@ -67,7 +67,7 @@
                 app:sav_startAngle="140"
                 app:sav_sweepAngle="260"
                 app:sav_useCustomSweepAngles="true"
-                tools:visibility="gone" />
+                tools:visibility="visible" />
 
             <com.zigis.segmentedarcview.SegmentedArcView
                 android:id="@+id/progress_view_background"
@@ -75,7 +75,7 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="62dp"
                 android:elevation="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/seeBudgetButton"
+                app:layout_constraintBottom_toTopOf="@id/subscriptionsMetrics"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -83,6 +83,36 @@
                 app:sav_segmentThickness="10dp"
                 app:sav_startAngle="140"
                 app:sav_sweepAngle="260" />
+
+            <com.anshok.subzy.util.extensions.DottedCircleView
+                android:id="@+id/dot_inside"
+                android:layout_width="270dp"
+                android:layout_height="270dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
+                app:layout_constraintEnd_toEndOf="@id/progress_view_background"
+                app:layout_constraintStart_toStartOf="@id/progress_view_background"
+                app:layout_constraintTop_toTopOf="@id/progress_view_background"/>
+
+            <com.anshok.subzy.util.extensions.DottedCircleView
+                android:id="@+id/dot_outside"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
+                app:layout_constraintEnd_toEndOf="@id/progress_view_background"
+                app:layout_constraintStart_toStartOf="@id/progress_view_background"
+                app:layout_constraintTop_toTopOf="@id/progress_view_background"/>
+
+            <com.anshok.subzy.util.extensions.DottedCircleView
+                android:id="@+id/dot_outside_second"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
+                app:layout_constraintEnd_toEndOf="@id/progress_view_background"
+                app:layout_constraintStart_toStartOf="@id/progress_view_background"
+                app:layout_constraintTop_toTopOf="@id/progress_view_background"/>
 
             <!-- Лого и название приложения -->
             <LinearLayout
@@ -174,7 +204,7 @@
                 app:layout_constraintTop_toBottomOf="@id/seeBudgetButton"
                 app:layout_constraintEnd_toStartOf="@id/end_border_upcard"
                 app:layout_constraintStart_toEndOf="@id/start_border_upcard"
-                >
+                android:visibility="visible">
 
                 <!-- Карточка Active subs -->
                 <androidx.cardview.widget.CardView
