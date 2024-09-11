@@ -66,4 +66,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="CustomTabText" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- На домашнем фрагменте скругление только нижних углов -->
+    <style name="CustomShapeUpCard" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+    </style>
 </resources>

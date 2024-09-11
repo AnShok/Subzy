@@ -77,4 +77,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Circular ProgressBar
+    implementation(libs.circularprogressbar)
+
+    implementation (libs.bio.matic.segmentedarcview)
+
 }

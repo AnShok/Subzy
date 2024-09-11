@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.UpcomingBillsFragment">
+
+    <!-- RecyclerView для списка предстоящих платежей -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/billsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="7"
+        tools:listitem="@layout/item_upcoming_bills" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
