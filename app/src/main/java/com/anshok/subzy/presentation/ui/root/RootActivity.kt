@@ -45,9 +45,16 @@ class RootActivity : AppCompatActivity() {
                     binding.fab.isVisible = true
                 }
 
-                R.id.settingsFragment, R.id.newSubscriptionFragment -> {
+                R.id.settingsFragment, R.id.addSubSearchFragment -> {
                     // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
                     setStatusBarColor(R.color.Gray_80)
+                    binding.bottomNavigationView.isVisible = false
+                    binding.fab.isVisible = false
+                }
+
+                R.id.addSubSearchFragment -> {
+                    // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
+                    setStatusBarColor(R.color.Gray_75)
                     binding.bottomNavigationView.isVisible = false
                     binding.fab.isVisible = false
                 }
@@ -63,7 +70,7 @@ class RootActivity : AppCompatActivity() {
 
         // Обработка нажатия на FloatingActionButton (FAB)
         binding.fab.setOnClickListener {
-            navController.navigate(R.id.newSubscriptionFragment)
+            navController.navigate(R.id.addSubSearchFragment)
         }
 
         // Обработка системных отступов для корректной работы с навигацией и FAB

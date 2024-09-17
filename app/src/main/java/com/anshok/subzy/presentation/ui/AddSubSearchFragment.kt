@@ -8,11 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.anshok.subzy.databinding.FragmentNewSubscriptionBinding
+import com.anshok.subzy.R
+import com.anshok.subzy.databinding.FragmentAddSubSearchBinding
 
-class NewSubscriptionFragment : Fragment() {
+class AddSubSearchFragment : Fragment() {
 
-    private val binding: FragmentNewSubscriptionBinding by viewBinding(CreateMethod.INFLATE)
+    private val binding: FragmentAddSubSearchBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,8 +27,14 @@ class NewSubscriptionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Обработка нажатия кнопки "Назад"
-        binding.btnBack.setOnClickListener {
+        binding.backButton.setOnClickListener {
             findNavController().navigateUp()
+        }
+        binding.addSubButton.setOnClickListener {
+            findNavController().navigate(R.id.action_addSubSearchFragment_to_addSubCreateFragment)
+        }
+        binding.createSubButton.setOnClickListener {
+            findNavController().navigate(R.id.action_addSubSearchFragment_to_addSubCreateFragment)
         }
     }
 }

@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Gray_100"
+    tools:context=".presentation.ui.AddSubCreateFragment">
+
+    <!-- Верхняя карточка с иконкой и названием -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/top_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="22dp"
+        app:cardBackgroundColor="@color/Gray_75"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="28dp">
+
+            <!-- Кнопка назад -->
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Заголовок страницы -->
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextAppearance.BodyLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Subscription"
+                android:textColor="@color/Gray_30"
+                app:layout_constraintBottom_toBottomOf="@id/back_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/back_button" />
+
+            <!-- Иконка приложения -->
+            <ImageView
+                android:id="@+id/app_icon"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="34dp"
+                android:contentDescription="App Icon"
+                android:src="@drawable/img_sub_placeholder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_new_sub_icon"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="34dp"
+                app:cardBackgroundColor="@color/Gray_75"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title">
+
+                <ImageView
+                    android:id="@+id/new_sub_icon"
+                    style="@style/new_sub_icon_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_sub_placeholder"
+                    app:shapeAppearanceOverlay="@style/new_sub_icon_shape" />
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- Поле для ввода названия подписки -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/subscription_name_txt_layout"
+                style="@style/textLayoutStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:hint="Subscription Name*"
+                app:cursorColor="@color/Accent_P_100"
+                app:hintTextColor="@color/Gray_30"
+                app:layout_constraintBottom_toBottomOf="@+id/app_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/app_icon"
+                app:layout_constraintTop_toTopOf="@id/app_icon">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/subscription_name_edit_txt"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:text="Spotify" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Поле для ввода цены подписки -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/subscription_price_txt_layout"
+                style="@style/textLayoutStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Price*"
+                android:minWidth="140dp"
+                android:maxWidth="140dp"
+                app:hintTextColor="@color/Gray_30"
+                app:cursorColor="@color/Accent_P_100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_icon">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/subscription_price_edit_txt"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:minWidth="140dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:text="5.99" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/currency_button"
+                style="@style/TextAppearance.Headline2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/shape_bottom_14dp_gray55"
+                android:clickable="true"
+                android:text="Валюта"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/subscription_price_txt_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/subscription_price_txt_layout"
+                app:layout_constraintTop_toTopOf="@+id/subscription_price_txt_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:id="@+id/circular_view_start"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/shape_circular"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@id/dashed_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dashed_line" />
+
+    <!-- Пунктирная линия -->
+    <View
+        android:id="@+id/dashed_line"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/dashed_line_new_sub"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@id/top_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/circular_view_end"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/shape_circular"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@id/dashed_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dashed_line" />
+
+
+    <!-- Нижняя карточка с деталями подписки -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/details_card"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="22dp"
+        app:cardBackgroundColor="@color/Gray_75"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <!-- Поля информации о подписке -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/details_card_inside"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/Gray_70"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:padding="20dp">
+
+                    <!-- Описание подписки -->
+                    <TextView
+                        android:id="@+id/description_label"
+                        style="@style/TextAppearance.Headline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@id/description_label"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/description_label">
+
+                        <TextView
+                            android:id="@+id/description_value"
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Music app"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:id="@+id/arrow_button_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+
+                    </LinearLayout>
+
+                    <!-- Категория -->
+                    <TextView
+                        android:id="@+id/category_label"
+                        style="@style/TextAppearance.Headline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:text="Category"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/description_label" />
+
+                    <LinearLayout
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@id/category_label"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/category_label">
+
+                        <TextView
+                            android:id="@+id/category_value"
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Enterteintment"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:id="@+id/arrow_button_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+
+                    </LinearLayout>
+
+
+                    <!-- Первый платеж -->
+                    <TextView
+                        android:id="@+id/first_payment_label"
+                        style="@style/TextAppearance.Headline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:text="First payment"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/category_label" />
+
+                    <LinearLayout
+                        android:id="@+id/first_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@id/first_payment_label"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/first_payment_label">
+
+                        <TextView
+                            android:id="@+id/first_payment_value"
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="08.01.2022"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:id="@+id/arrow_button_first_payment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+
+                    <!-- Напоминания -->
+                    <TextView
+                        android:id="@+id/reminder_label"
+                        style="@style/TextAppearance.Headline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:text="Reminder"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/first_payment_label" />
+
+                    <LinearLayout
+                        android:id="@+id/reminder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@id/reminder_label"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/reminder_label">
+
+                        <TextView
+                            android:id="@+id/reminder_value"
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Never"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:id="@+id/arrow_button_reminder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Метод оплаты -->
+                    <TextView
+                        android:id="@+id/payment_method_label"
+                        style="@style/TextAppearance.Headline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:text="Payment method"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/reminder_label" />
+
+
+                    <LinearLayout
+                        android:id="@+id/payment_method"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@id/payment_method_label"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/payment_method_label">
+
+                        <TextView
+                            android:id="@+id/payment_method_value"
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Not specified"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:id="@+id/arrow_button_payment_method"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Комментарий -->
+                    <TextView
+                        android:id="@+id/comment_label"
+                        style="@style/TextAppearance.Headline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:text="Сomment"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/payment_method_label" />
+
+
+                    <LinearLayout
+                        android:id="@+id/comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="@id/comment_label"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/comment_label">
+
+                        <TextView
+                            android:id="@+id/comment_value"
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Not specified"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:id="@+id/arrow_button_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Кнопка "Сохранить" -->
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/shape_button_24dp_gray55"
+                android:text="Save"
+                android:textColor="@color/White"
+                android:elevation="8dp"
+                app:backgroundTint="@color/Accent_P_100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -180,7 +180,7 @@
             <!-- Текст This month bills -->
             <TextView
                 android:id="@+id/monthBills"
-                style="@style/TextAppearance.Headline2"
+                style="@style/TextAppearance.Headline1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -198,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/shape_btn_see_budget"
+                android:background="@drawable/shape_button_22dp_gray55"
                 android:minHeight="32dp"
                 android:text="See your budget"
                 android:textAllCaps="false"
@@ -409,7 +409,7 @@
         app:layout_constraintEnd_toEndOf="@+id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border"
         app:layout_constraintTop_toBottomOf="@id/tab_layout_subscription"
-        tools:listitem="@layout/fragment_your_subscriptions" />
+        tools:listitem="@layout/fragment_home_rv_your_sub" />
 
 
     <!-- Отcтупы -->

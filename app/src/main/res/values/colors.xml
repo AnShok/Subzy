@@ -2,6 +2,7 @@
 <resources>
 
     <!--Grayscale -->
+    <color name="Gray_90">#131318</color>
     <color name="Gray_100">#0E0E12</color>
     <color name="Gray_80">#1C1C23</color>
     <color name="Gray_70">#353542</color>

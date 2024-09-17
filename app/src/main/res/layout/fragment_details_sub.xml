@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.DetailsSubFragment">
+
+    <!-- Верхняя карточка с иконкой и названием -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/top_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/Gray_65"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="28dp">
+
+            <!-- Кнопка назад -->
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_down"
+                android:contentDescription="Back"
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Заголовок страницы -->
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextAppearance.BodyLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subscription info"
+                android:textColor="@color/Gray_30"
+                app:layout_constraintTop_toTopOf="@id/back_button"
+                app:layout_constraintBottom_toBottomOf="@id/back_button"
+                app:layout_constraintStart_toEndOf="@id/back_button"
+                app:layout_constraintEnd_toStartOf="@id/delete_button"
+                app:layout_constraintHorizontal_bias="0.5" />
+
+            <!-- Кнопка удаления -->
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_trash"
+                android:layout_marginTop="4dp"
+                android:contentDescription="Delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Иконка приложения -->
+            <ImageView
+                android:id="@+id/app_icon"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="34dp"
+                android:src="@drawable/logo_spotify"
+                android:contentDescription="App Icon"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Название подписки -->
+            <TextView
+                android:id="@+id/subscription_name"
+                style="@style/TextAppearance.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Spotify"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/app_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Цена подписки -->
+            <TextView
+                android:id="@+id/subscription_price"
+                style="@style/TextAppearance.Headline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="22dp"
+                android:text="$5.99"
+                android:textColor="@color/Gray_30"
+                app:layout_constraintTop_toBottomOf="@id/subscription_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Пунктирная линия -->
+    <View
+        android:id="@+id/dashed_line"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/dashed_line_new_sub"
+        app:layout_constraintTop_toBottomOf="@id/top_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Нижняя карточка с деталями подписки -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/details_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/Gray_65"
+        app:layout_constraintTop_toBottomOf="@id/dashed_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="28dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/details_card_inside"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                android:background="@color/Accent_P_100"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <!-- Поля информации о подписке -->
+                    <TextView
+                        android:id="@+id/name_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/name_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spotify"
+                        android:textColor="@color/Gray_30"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toTopOf="@id/name_label"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/description_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Description"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@id/name_label"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/description_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Music app"
+                        android:textColor="@color/Gray_30"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@id/name_value"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Другие элементы (категория, первая оплата и т.д.) можно добавить таким же образом -->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Кнопка "Сохранить" -->
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/White"
+                android:background="@drawable/shape_button_24dp_gray55"
+                android:elevation="8dp"
+                app:backgroundTint="@color/Accent_P_100"
+                app:layout_constraintTop_toBottomOf="@id/details_card_inside"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
