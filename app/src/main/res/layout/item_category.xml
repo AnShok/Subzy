@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_sub_background_shape"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp">
+
+        <ImageView
+            android:id="@+id/item_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Category logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_entertainment" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.Headline2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorOnPrimary"
+            android:textFontWeight="500"
+            app:layout_constraintEnd_toStartOf="@id/cost"
+            app:layout_constraintStart_toEndOf="@id/item_logo"
+            app:layout_constraintTop_toTopOf="@id/item_logo"
+            tools:text="Entertainment" />
+
+        <TextView
+            android:id="@+id/cost"
+            style="@style/TextAppearance.Headline2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="15dp"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorOnPrimary"
+            android:textFontWeight="500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            tools:text="$50.98" />
+
+        <TextView
+            android:id="@+id/left_to_pay"
+            style="@style/TextAppearance.BodySmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textAllCaps="false"
+            android:textColor="@color/Gray_30"
+            app:layout_constraintEnd_toStartOf="@id/left_to_pay_title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="$50.98" />
+
+        <TextView
+            android:id="@+id/left_to_pay_title"
+            style="@style/TextAppearance.BodySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="left to spend"
+            android:textAllCaps="false"
+            android:textColor="@color/Gray_30"
+            app:layout_constraintEnd_toStartOf="@id/cost_value"
+            app:layout_constraintStart_toEndOf="@id/left_to_pay"
+            app:layout_constraintTop_toTopOf="@id/left_to_pay" />
+
+        <TextView
+            android:id="@+id/cost_value"
+            style="@style/TextAppearance.BodySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="15dp"
+            android:textAllCaps="false"
+            android:textColor="@color/Gray_30"
+            android:textFontWeight="500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/left_to_pay"
+            tools:text="of $600" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="16dp"
+            android:progress="75"
+            android:progressTint="@color/Accent_P_100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left_to_pay_title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

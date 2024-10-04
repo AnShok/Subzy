@@ -2,26 +2,37 @@
 
     <!-- Base application theme for Dark mode -->
     <style name="Base.Theme.Subzy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Цвет фона -->
-        <item name="colorPrimary">@color/Gray_56</item>
+        <!-- Этот цвет используется для фона верхних панелей приложения, таких как AppBar,
+         ToolBar, BottomNavigationView и других основных элементов интерфейса. -->
+        <item name="colorPrimary">@color/Accent_P_50</item>
 
-        <!-- Текст основной -->
+        <!-- Это цвет текста или иконок, которые находятся на фоне элементов, использующих colorOnPrimary  -->
         <item name="colorOnPrimary">@color/white</item>
 
+        <!-- Этот цвет применяется к второстепенным интерактивным элементам, таким как переключатели, чекбоксы и кнопки -->
         <item name="colorSecondary">@color/white</item>
+
+        <!--Это дополнительный цвет для вторичных элементов, который можно использовать для
+        вариаций элементов на экране, таких как подсветка или градиенты -->
         <item name="colorSecondaryVariant">@color/light_gray</item>
 
-        <!-- текст в edit text -->
+        <!-- Этот цвет используется для текста, который размещается на второстепенных элементах,
+        которые используют colorSecondary в качестве фона (например, текст в кнопках или EditText). -->
         <item name="colorOnSecondary">@color/white</item>
 
-        <!-- hint в edit text -->
+        <!-- Этот цвет обычно применяется к текстовым подсказкам (hint) или
+         неактивным элементам, находящимся на фоне, где используется colorSecondary. -->
         <item name="colorOnSecondaryFixed">@color/gray</item>
 
-        <!-- кнопки -->
+        <!-- Этот цвет используется для фона поверхностных элементов, таких как карты (CardView),
+         кнопки или другие элементы на экране. -->
         <item name="colorSurface">@color/Gray_60</item>
+
+        <!-- Цвет текста и иконок, которые отображаются на фоне элементов, использующих colorSurface -->
         <item name="colorOnSurface">@color/white</item>
 
-        <!-- кнопки сброса и добавления в избранное -->
+        <!-- Этот цвет применяется к акцентным элементам, таким как кнопки "Ок", "Отмена",
+         или интерактивные элементы, которые привлекают внимание пользователя. -->
         <item name="colorAccent">@color/Accent_P_100</item>
 
         <!--позволяет динамически изменять фон окна приложения в соответствии с выбранной темой-->

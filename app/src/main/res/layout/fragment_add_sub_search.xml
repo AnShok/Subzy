@@ -42,8 +42,8 @@
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginStart="-6dp"
+                android:layout_marginTop="24dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:backgroundTint="@color/Gray_30"
                 android:contentDescription="Back"
@@ -82,8 +82,8 @@
                 android:id="@+id/search_edit_frame"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title">
@@ -95,19 +95,19 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="12dp"
-                    android:background="@drawable/shape_bottom_14dp_gray55"
+                    android:background="@drawable/shape_bottom_14dp"
                     android:hint="@string/search_hint"
                     android:imeOptions="actionDone"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="16dp"
                     android:paddingTop="4dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="4dp"
-                    android:textCursorDrawable="@drawable/ic_edit_text_cursor"
-                    android:inputType="text"
+                    android:textAllCaps="false"
                     android:textColor="@color/White"
                     android:textColorHint="@color/Gray_30"
-                    android:textAllCaps="false" />
+                    android:textCursorDrawable="@drawable/ic_edit_text_cursor" />
 
                 <ImageView
                     android:id="@+id/search_icon_loupe"
@@ -131,7 +131,6 @@
                     android:src="@drawable/ic_close_cross"
                     android:visibility="gone" />
             </FrameLayout>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,21 +157,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp"
-        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="@+id/start_border">
 
         <Button
             android:id="@+id/create_sub_button"
             style="@style/TextAppearance.Headline2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_button_24dp_gray55"
+            android:background="@drawable/shape_24dp"
+            android:clickable="true"
+            android:elevation="8dp"
             android:text="Create"
             android:textAllCaps="false"
             android:textColor="@color/White"
-            android:clickable="true"
-            android:elevation="8dp"
             app:backgroundTint="@color/Accent_P_100"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/end_border"
