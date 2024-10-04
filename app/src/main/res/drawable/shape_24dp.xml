@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Основной фон с цветом и скругленными углами -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</layer-list>

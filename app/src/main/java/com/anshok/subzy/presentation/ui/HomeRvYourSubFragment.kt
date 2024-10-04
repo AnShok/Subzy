@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.anshok.subzy.databinding.FragmentYourSubscriptionsBinding
+import com.anshok.subzy.databinding.FragmentHomeRvYourSubBinding
 import com.anshok.subzy.util.adapter.SubscriptionsAdapter
 
-class YourSubscriptionsFragment : Fragment() {
+class HomeRvYourSubFragment : Fragment() {
 
     // Используем ViewBinding
-    private val binding: FragmentYourSubscriptionsBinding by viewBinding(CreateMethod.INFLATE)
+    private val binding: FragmentHomeRvYourSubBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

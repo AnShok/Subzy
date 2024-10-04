@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.AddSubSearchFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/upcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:cardBackgroundColor="@color/Gray_75"
+        app:cardElevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CustomShapeUpCard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Отcтупы -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_border_upcard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="18dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_border_upcard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="18dp" />
+
+            <!--Кнопка назад-->
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-6dp"
+                android:layout_marginTop="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@color/Gray_30"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Кнопка добавления вручную-->
+            <ImageButton
+                android:id="@+id/add_sub_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Add subscription"
+                android:src="@drawable/ic_add_app"
+                app:layout_constraintEnd_toStartOf="@+id/end_border_upcard"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!-- Заголовок страницы -->
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextAppearance.BodyLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New subscription"
+                android:textColor="@color/Gray_30"
+                app:layout_constraintBottom_toBottomOf="@+id/back_button"
+                app:layout_constraintEnd_toStartOf="@id/end_border_upcard"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toEndOf="@id/start_border_upcard"
+                app:layout_constraintTop_toTopOf="@+id/back_button" />
+
+            <FrameLayout
+                android:id="@+id/search_edit_frame"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title">
+
+                <EditText
+                    android:id="@+id/search_query"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="12dp"
+                    android:background="@drawable/shape_bottom_14dp"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="4dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/White"
+                    android:textColorHint="@color/Gray_30"
+                    android:textCursorDrawable="@drawable/ic_edit_text_cursor" />
+
+                <ImageView
+                    android:id="@+id/search_icon_loupe"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_search"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/clear_cross_ic"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_close_cross"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recycle_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingTop="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@id/progress_bar_next_page"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toBottomOf="@id/upcard"
+        tools:itemCount="3"
+        tools:listitem="@layout/search_item_view" />
+
+    <FrameLayout
+        android:id="@+id/create_sub_frame"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:layout_constraintStart_toStartOf="@+id/start_border">
+
+        <Button
+            android:id="@+id/create_sub_button"
+            style="@style/TextAppearance.Headline2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_24dp"
+            android:clickable="true"
+            android:elevation="8dp"
+            android:text="Create"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            app:backgroundTint="@color/Accent_P_100"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/end_border"
+            app:layout_constraintStart_toStartOf="@+id/start_border" />
+    </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_next_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="22dp"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/create_sub_frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_recycle_view"
+        app:layout_constraintVertical_weight="1"
+        tools:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upcard" />
+
+    <!-- Отcтупы -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="23dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="23dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

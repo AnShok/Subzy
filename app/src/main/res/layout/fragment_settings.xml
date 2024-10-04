@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.SettingsFragment">
+    tools:context=".presentation.ui.settings.SettingsFragment">
 
     <!--Кнопка назад-->
     <ImageButton
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="-6dp"
         android:layout_marginTop="32dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:backgroundTint="@color/Gray_30"
         android:contentDescription="Back"
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="@+id/start_border"
@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/TextAppearance.Headline3"
+        style="@style/TextAppearance.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings"
@@ -34,18 +34,26 @@
         app:layout_constraintStart_toEndOf="@id/start_border"
         app:layout_constraintTop_toTopOf="@+id/back_button" />
 
+    <View
+        android:id="@+id/border_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:layout_constraintEnd_toEndOf="@id/end_border"
+        app:layout_constraintStart_toStartOf="@id/start_border"
+        app:layout_constraintTop_toBottomOf="@+id/back_button" />
+
     <!-- Аватар профиля -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_image_card"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="38dp"
         app:cardCornerRadius="45dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title">
+        app:layout_constraintTop_toBottomOf="@id/border_line">
 
         <ImageView
             android:id="@+id/profile_image"
@@ -53,7 +61,8 @@
             android:layout_height="match_parent"
             android:contentDescription="Profile Picture"
             android:scaleType="centerCrop"
-            android:src="@drawable/photo" />
+            android:src="@drawable/photo"
+            tools:src="@drawable/photo" />
     </androidx.cardview.widget.CardView>
 
 
@@ -69,11 +78,13 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image_card" />
+        app:layout_constraintTop_toBottomOf="@id/profile_image_card"
+        tools:text="Pyska" />
 
     <!-- Почта пользователя -->
     <TextView
         android:id="@+id/user_email"
+        style="@style/TextAppearance.BodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -82,7 +93,8 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name" />
+        app:layout_constraintTop_toBottomOf="@id/user_name"
+        tools:text="jopka@gmail.com" />
 
     <!-- Кнопка редактирования профиля -->
     <Button
@@ -91,381 +103,386 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/shape_btn_see_budget"
+        android:background="@drawable/shape_22dp_gray55"
         android:minHeight="32dp"
         android:text="Edit profile"
         android:textAllCaps="false"
         android:textColor="@color/White"
         android:textStyle="bold"
+        app:backgroundTint="@color/Gray_65"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_email" />
 
-    <!-- Заголовок раздела General -->
-    <TextView
-        android:id="@+id/general_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="General"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@id/edit_profile_button" />
-
-    <!-- Карточка с настройками Security и iCloud Sync -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/general_card"
+    <!-- Прокручиваемая часть -->
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/Gray_65"
-        app:cardCornerRadius="12dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@id/general_title">
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_button">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <!-- Настройка Security -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Содержимое, которое должно прокручиваться -->
+
+            <!-- Заголовок раздела General -->
+            <TextView
+                android:id="@+id/general_title"
+                style="@style/TextAppearance.Headline2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_marginTop="16dp"
+                android:text="General"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Security"
-                    android:src="@drawable/ic_security" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Security"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fingerprint"
-                    android:textColor="@color/Gray_30" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Arrow"
-                    android:src="@drawable/ic_arrow_forward_medium" />
-            </LinearLayout>
-
-            <!-- Настройка iCloud Sync -->
-            <LinearLayout
+            <!-- Карточка с настройками Security и iCloud Sync -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/general_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                app:cardBackgroundColor="@color/Gray_65"
+                app:cardCornerRadius="12dp">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="iCloud Sync"
-                    android:src="@drawable/ic_icloud" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline3"
-                    android:layout_width="0dp"
+                <!-- Содержимое карточки -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Sub Sync"
-                    android:textColor="@color/white"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <!-- Настройка Security -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    />
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="Security"
+                            android:src="@drawable/ic_security" />
 
-                <Switch
-                    android:layout_width="wrap_content"
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Security"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fingerprint"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Настройка iCloud Sync -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="iCloud Sync"
+                            android:src="@drawable/ic_icloud" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Sub Sync"
+                            android:textColor="@color/white" />
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Заголовок раздела My subscriptions -->
+            <TextView
+                android:id="@+id/subscriptions_title"
+                style="@style/TextAppearance.Headline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="My subscriptions"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <!-- Содержимое карточки My subscriptions -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/subscriptions_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/Gray_65"
+                app:cardCornerRadius="12dp">
+
+                <!-- Содержимое карточки -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Настройка Sorting -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="Sorting"
+                            android:src="@drawable/ic_sorting" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Sorting"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Настройка Summary -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="Summary"
+                            android:src="@drawable/ic_summary" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Summary"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Настройка Default currency -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="Default currency"
+                            android:src="@drawable/ic_money" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Default currency"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="USD ($)"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Заголовок раздела Appearance -->
+            <TextView
+                android:id="@+id/appearance_title"
+                style="@style/TextAppearance.Headline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Appearance"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <!-- Содержимое карточки Appearance -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/appearance_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/Gray_65"
+                app:cardCornerRadius="12dp">
+
+                <!-- Содержимое карточки -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Настройка App icon -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="App icon"
+                            android:src="@drawable/ic_app_icon" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="App icon"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Default"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Настройка Theme -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="Theme"
+                            android:src="@drawable/ic_theme" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Theme"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dark"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Заголовок раздела Subscriptions -->
-    <TextView
-        android:id="@+id/subscriptions_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="My subscriptions"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@id/general_card" />
-
-    <!-- Карточка с настройками Subscriptions -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/subscriptions_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/Gray_65"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@id/subscriptions_title">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Настройка Sorting -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Sorting"
-                    android:src="@drawable/ic_sorting" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Sorting"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date"
-                    android:textColor="@color/Gray_30" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Arrow"
-                    android:src="@drawable/ic_arrow_forward_medium" />
-            </LinearLayout>
-
-            <!-- Настройка Summary -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Summary"
-                    android:src="@drawable/ic_summary" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Summary"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Average"
-                    android:textColor="@color/Gray_30" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Arrow"
-                    android:src="@drawable/ic_arrow_forward_medium" />
-            </LinearLayout>
-
-            <!-- Настройка Default currency -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Default currency"
-                    android:src="@drawable/ic_money" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Default currency"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="USD ($)"
-                    android:textColor="@color/Gray_30" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Arrow"
-                    android:src="@drawable/ic_arrow_forward_medium" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Заголовок раздела Appearance -->
-    <TextView
-        android:id="@+id/appearance_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="General"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@id/subscriptions_card" />
-
-    <!-- Карточка с настройками Appearance -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/appearance_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/Gray_65"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@id/appearance_title">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Настройка App icon -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="App icon"
-                    android:src="@drawable/ic_app_icon" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="App icon"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Default"
-                    android:textColor="@color/Gray_30" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Arrow"
-                    android:src="@drawable/ic_arrow_forward_medium" />
-            </LinearLayout>
-
-            <!-- Настройка Theme -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="Theme"
-                    android:src="@drawable/ic_theme" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Theme"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    style="@style/TextAppearance.Headline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dark"
-                    android:textColor="@color/Gray_30" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Arrow"
-                    android:src="@drawable/ic_arrow_forward_medium" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+    </ScrollView>
 
     <!-- Отcтупы -->
     <androidx.constraintlayout.widget.Guideline

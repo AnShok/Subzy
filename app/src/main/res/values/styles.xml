@@ -78,5 +78,37 @@
         <item name="cornerSizeTopRight">0dp</item>
     </style>
 
+    <!-- Новая подписка - поле для ввода названия подписки -->
+    <style name="textLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@drawable/new_sub_box_stroke</item>
+        <item name="android:textColorHint">@color/Gray_30</item>
+    </style>
 
+    <!-- скругление для иконки новой подписки -->
+    <style name="new_sub_icon_shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="new_sub_icon_background">
+        <item name="android:backgroundTint">@color/Gray_30</item>
+    </style>
+
+
+    <!-- Кастомный стиль для DatePickerDialog -->
+    <style name="CustomDatePickerDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <!-- Цвет кнопки "ОК" и "Отмена" -->
+        <item name="colorPrimary">@color/Accent_P_100</item>
+        <!-- Цвет текста кнопок -->
+    </style>
+
+    <!-- Стиль для BottomSheetDialog-->
+    <style name="BottomSheetDialogResizeStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <!-- Стиль для NumberPicker в выборе периода подписки-->
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@color/Gray_30</item>
+    </style>
 </resources>
