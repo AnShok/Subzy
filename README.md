@@ -1,6 +1,6 @@
 # Subzy
 
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0.0-blue) 
+![Kotlin](https://img.shields.io/badge/Kotlin-blue) 
 ![MVVM](https://img.shields.io/badge/Architecture-MVVM-brightgreen) 
 ![Gradle](https://img.shields.io/badge/Gradle-7.2.0-blue) 
 ![Min API Level](https://img.shields.io/badge/Min%20API-21-brightgreen) 
