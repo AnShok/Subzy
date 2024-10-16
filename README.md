@@ -1,4 +1,4 @@
-# Subzy
+# <img src="https://github.com/AnShok/Subzy/raw/main/app/src/main/res/drawable/app_logo_transparent.png" alt="Subzy Logo" width="50"/>  Subzy
 
 ![Kotlin](https://img.shields.io/badge/Kotlin-blue) 
 ![MVVM](https://img.shields.io/badge/Architecture-MVVM-brightgreen) 
