@@ -1,12 +1,25 @@
+import java.util.Properties
+
+// Загружаем local.properties
+val localProperties = Properties().apply {
+    file("../local.properties").inputStream().use { load(it) }
+}
+
+// Получаем значение LOGO_API_KEY
+val logoApiKey = localProperties.getProperty("LOGO_API_KEY") ?: throw GradleException("LOGO_API_KEY not found in local.properties")
+
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp") version "2.0.0-1.0.21"  // Для Room с использованием KSP
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.anshok.subzy"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.anshok.subzy"
@@ -16,6 +29,21 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Добавляем LOGO_API_KEY в BuildConfig
+        buildConfigField("String", "LOGO_API_KEY", "\"${logoApiKey}\"")
+
+        // Явно указываем пакет для BuildConfig
+        buildConfigField("String", "APPLICATION_ID", "\"$applicationId\"")
+
+        // Укажите путь для экспорта схемы Room
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -50,6 +78,8 @@ dependencies {
     // Room для работы с базой данных
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.core.ktx)
+    implementation(libs.androidx.junit.ktx)
     ksp(libs.androidx.room.compiler)
 
     // UI библиотеки
@@ -77,6 +107,21 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Тестирование
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:4.0.0")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+
+
+    // Интеграционные тесты
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation ("androidx.room:room-testing:2.4.2")
+    // Mockito для интеграционных тестов (androidTest)
+    androidTestImplementation ("org.mockito:mockito-android:4.0.0")
+    androidTestImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
     // Circular ProgressBar
     implementation(libs.circularprogressbar)

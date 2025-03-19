@@ -23,7 +23,7 @@
         android:id="@+id/bottom_navigation_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/shape_bottom_14dp"
         app:elevation="4dp"
         app:itemHorizontalTranslationEnabled="false"
@@ -31,8 +31,8 @@
         app:itemIconTint="@drawable/bottom_nav_color"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/end_border"
-        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
 
     <!-- Плавающая кнопка действия (FAB) -->
