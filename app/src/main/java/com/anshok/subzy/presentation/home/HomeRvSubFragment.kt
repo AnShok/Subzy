@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.ui
+package com.anshok.subzy.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.anshok.subzy.databinding.FragmentUpcomingBillsBinding
-import com.anshok.subzy.util.adapter.UpcomingBillsAdapter
+import com.anshok.subzy.databinding.FragmentHomeRvYourSubBinding
+import com.anshok.subzy.util.adapter.SubscriptionsAdapter
 
-class UpcomingBillsFragment : Fragment() {
+class HomeRvSubFragment : Fragment() {
 
     // Используем ViewBinding
-    private val binding: FragmentUpcomingBillsBinding by viewBinding(CreateMethod.INFLATE)
+    private val binding: FragmentHomeRvYourSubBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +28,7 @@ class UpcomingBillsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Инициализация RecyclerView через binding
-        binding.billsList.layoutManager = LinearLayoutManager(requireContext())
-        binding.billsList.adapter = UpcomingBillsAdapter()
+        binding.subscriptionsList.layoutManager = LinearLayoutManager(requireContext())
+        binding.subscriptionsList.adapter = SubscriptionsAdapter()
     }
 }

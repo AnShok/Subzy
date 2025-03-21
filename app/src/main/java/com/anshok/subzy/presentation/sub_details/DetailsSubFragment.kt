@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.ui.settings
+package com.anshok.subzy.presentation.sub_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.anshok.subzy.databinding.FragmentSettingsBinding
+import com.anshok.subzy.databinding.FragmentDetailsSubBinding
 
-class SettingsFragment : Fragment() {
+class DetailsSubFragment : Fragment() {
 
-    private val binding: FragmentSettingsBinding by viewBinding(CreateMethod.INFLATE)
+    private val binding: FragmentDetailsSubBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,9 +25,9 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Обработка нажатия на кнопку "Назад"
+        // Обработка нажатия кнопки "Назад"
         binding.backButton.setOnClickListener {
-            findNavController().navigateUp()  // Возвращение на предыдущий экран
+            findNavController().navigateUp()
         }
     }
 }

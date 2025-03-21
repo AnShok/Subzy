@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray_100"
-    tools:context=".presentation.ui.AddSubCreateFragment">
+    tools:context=".presentation.add_sub.create.AddSubCreateFragment">
 
     <!-- Верхняя карточка с иконкой и названием -->
     <com.google.android.material.card.MaterialCardView
@@ -151,7 +151,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/shape_bottom_14dp"
+                android:background="@drawable/shape_14dp"
+                app:cardElevation="8dp"
                 android:backgroundTint="@color/Accent_P_100"
                 android:clickable="true"
                 android:text="Валюта"

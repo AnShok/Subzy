@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.UpcomingBillsFragment">
+    tools:context=".presentation.home.HomeRvUpcomingBillsFragment">
 
     <!-- RecyclerView для списка предстоящих платежей -->
     <androidx.recyclerview.widget.RecyclerView

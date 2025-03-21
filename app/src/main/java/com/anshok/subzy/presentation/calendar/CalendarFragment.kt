@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.ui
+package com.anshok.subzy.presentation.calendar
 
 import android.os.Bundle
 import android.view.LayoutInflater

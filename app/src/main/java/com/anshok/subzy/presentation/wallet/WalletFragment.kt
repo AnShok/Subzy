@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.ui
+package com.anshok.subzy.presentation.wallet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.anshok.subzy.databinding.FragmentSpendBinding
+import com.anshok.subzy.databinding.FragmentWalletBinding
 
-class SpendFragment : Fragment() {
+class WalletFragment : Fragment() {
 
-    private val binding: FragmentSpendBinding by viewBinding(CreateMethod.INFLATE)
+    private val binding: FragmentWalletBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,12 +20,4 @@ class SpendFragment : Fragment() {
     ): View {
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
-
-
 }

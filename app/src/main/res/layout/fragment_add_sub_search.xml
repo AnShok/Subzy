@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.AddSubSearchFragment">
+    tools:context=".presentation.add_sub.search.AddSubSearchFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/upcard"
@@ -95,7 +95,8 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="12dp"
-                    android:background="@drawable/shape_bottom_14dp"
+                    android:background="@drawable/shape_14dp"
+                    app:cardElevation="8dp"
                     android:hint="@string/search_hint"
                     android:imeOptions="actionDone"
                     android:inputType="text"
@@ -150,7 +151,73 @@
         app:layout_constraintStart_toStartOf="@+id/start_border"
         app:layout_constraintTop_toBottomOf="@id/upcard"
         tools:itemCount="3"
-        tools:listitem="@layout/search_item_view" />
+        tools:listitem="@layout/search_item_view"
+        tools:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/search_default_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:src="@drawable/search_image_default"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/no_connection_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:src="@drawable/no_connection"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/no_connection_text"
+        style="@style/TextAppearance.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Нет соедиения с интернетом"
+        android:textColor="?attr/colorOnPrimary"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_connection_placeholder" />
+
+    <ImageView
+        android:id="@+id/no_sub_to_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:src="@drawable/no_sub_to_show"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/no_sub_to_show_text"
+        style="@style/TextAppearance.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Не удалось найти\n сервис"
+        android:textColor="?attr/colorOnPrimary"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_sub_to_show" />
 
     <FrameLayout
         android:id="@+id/create_sub_frame"
@@ -179,12 +246,24 @@
     </FrameLayout>
 
     <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/Accent_P_100"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upcard" />
+
+    <ProgressBar
         android:id="@+id/progress_bar_next_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="22dp"
-        android:indeterminateTint="@color/blue"
+        android:indeterminateTint="@color/Accent_P_100"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/create_sub_frame"
         app:layout_constraintEnd_toEndOf="parent"
@@ -192,18 +271,6 @@
         app:layout_constraintTop_toBottomOf="@id/search_recycle_view"
         app:layout_constraintVertical_weight="1"
         tools:visibility="gone" />
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/blue"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/upcard" />
 
     <!-- Отcтупы -->
     <androidx.constraintlayout.widget.Guideline

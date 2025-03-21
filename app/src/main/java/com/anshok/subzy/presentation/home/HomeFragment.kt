@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.ui
+package com.anshok.subzy.presentation.home
 
 import android.animation.ValueAnimator
 import android.os.Bundle

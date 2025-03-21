@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.ui
+package com.anshok.subzy.presentation.add_sub.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
