@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.ui.root
+package com.anshok.subzy.presentation.root
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

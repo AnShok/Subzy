@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.DetailsSubFragment">
+    tools:context=".presentation.sub_details.DetailsSubFragment">
 
     <!-- Верхняя карточка с иконкой и названием -->
     <com.google.android.material.card.MaterialCardView

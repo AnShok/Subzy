@@ -2,9 +2,9 @@ package com.anshok.subzy.util.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.anshok.subzy.presentation.ui.HomeFragment
-import com.anshok.subzy.presentation.ui.UpcomingBillsFragment
-import com.anshok.subzy.presentation.ui.HomeRvYourSubFragment
+import com.anshok.subzy.presentation.home.HomeFragment
+import com.anshok.subzy.presentation.home.HomeRvUpcomingBillsFragment
+import com.anshok.subzy.presentation.home.HomeRvSubFragment
 
 class SubscriptionPagerAdapter(fragmentActivity: HomeFragment) :
     FragmentStateAdapter(fragmentActivity) {
@@ -15,9 +15,9 @@ class SubscriptionPagerAdapter(fragmentActivity: HomeFragment) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> HomeRvYourSubFragment() // Вкладка 1
-            1 -> UpcomingBillsFragment()     // Вкладка 2
-            else -> HomeRvYourSubFragment()
+            0 -> HomeRvSubFragment() // Вкладка 1
+            1 -> HomeRvUpcomingBillsFragment()     // Вкладка 2
+            else -> HomeRvSubFragment()
         }
     }
 }

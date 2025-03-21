@@ -8,7 +8,7 @@
     <!-- HomeFragment -->
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.anshok.subzy.presentation.ui.HomeFragment"
+        android:name="com.anshok.subzy.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -22,7 +22,7 @@
     <!-- SpendFragment -->
     <fragment
         android:id="@+id/spendFragment"
-        android:name="com.anshok.subzy.presentation.ui.SpendFragment"
+        android:name="com.anshok.subzy.presentation.spend.SpendFragment"
         android:label="fragment_spend"
         tools:layout="@layout/fragment_spend">
         <action
@@ -33,7 +33,7 @@
     <!-- CalendarFragment -->
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.anshok.subzy.presentation.ui.CalendarFragment"
+        android:name="com.anshok.subzy.presentation.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar">
         <action
@@ -47,7 +47,7 @@
     <!-- WalletFragment -->
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.anshok.subzy.presentation.ui.WalletFragment"
+        android:name="com.anshok.subzy.presentation.wallet.WalletFragment"
         android:label="fragment_wallet"
         tools:layout="@layout/fragment_wallet">
         <action
@@ -58,7 +58,7 @@
     <!-- AddSubSearchFragment -->
     <fragment
         android:id="@+id/addSubSearchFragment"
-        android:name="com.anshok.subzy.presentation.ui.AddSubSearchFragment"
+        android:name="com.anshok.subzy.presentation.add_sub.search.AddSubSearchFragment"
         android:label="fragment_add_sub_search"
         tools:layout="@layout/fragment_add_sub_search" >
         <action
@@ -69,21 +69,21 @@
     <!-- AddSubCreateFragment -->
     <fragment
         android:id="@+id/addSubCreateFragment"
-        android:name="com.anshok.subzy.presentation.ui.AddSubCreateFragment"
+        android:name="com.anshok.subzy.presentation.add_sub.create.AddSubCreateFragment"
         android:label="fragment_vacancy"
         tools:layout="@layout/fragment_add_sub_create" />
 
     <!-- DetailsSubFragment -->
     <fragment
         android:id="@+id/detailsSubFragment"
-        android:name="com.anshok.subzy.presentation.ui.DetailsSubFragment"
+        android:name="com.anshok.subzy.presentation.sub_details.DetailsSubFragment"
         android:label="fragment_vacancy"
         tools:layout="@layout/fragment_details_sub" />
 
     <!-- SettingsFragment -->
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.anshok.subzy.presentation.ui.settings.SettingsFragment"
+        android:name="com.anshok.subzy.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 
