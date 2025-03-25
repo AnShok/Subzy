@@ -1,9 +1,9 @@
 package com.anshok.subzy.data.interceptors
 
 import android.util.Log
+import com.anshok.subzy.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
-import com.anshok.subzy.BuildConfig // Исправленный импорт
 
 object HeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {

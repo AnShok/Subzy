@@ -19,7 +19,8 @@ object EmbeddedLogoProvider {
         )
 
         embeddedLogos = logoJsonList.map { jsonItem ->
-            val resId = context.resources.getIdentifier(jsonItem.resName, "drawable", context.packageName)
+            val resId =
+                context.resources.getIdentifier(jsonItem.resName, "drawable", context.packageName)
             EmbeddedLogo(
                 name = jsonItem.name,
                 domain = jsonItem.domain,

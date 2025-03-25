@@ -1,12 +1,12 @@
 package com.anshok.subzy.domain.impl
 
-import com.anshok.subzy.domain.api.SubscriptionInteractor
-import com.anshok.subzy.domain.api.SubscriptionRepository
 import com.anshok.subzy.data.converters.DomainToEntityMapper
 import com.anshok.subzy.data.converters.EntityToDomainMapper
-import com.anshok.subzy.domain.model.Subscription
+import com.anshok.subzy.domain.api.SubscriptionInteractor
+import com.anshok.subzy.domain.api.SubscriptionRepository
 import com.anshok.subzy.domain.model.Category
 import com.anshok.subzy.domain.model.PaymentMethod
+import com.anshok.subzy.domain.model.Subscription
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -54,15 +54,20 @@ class SubscriptionInteractorImpl(
         repository.addCategoryToSubscription(subscriptionId, categoryId)
     }
 
-    override suspend fun addPaymentMethodToSubscription(subscriptionId: Long, paymentMethodId: Long) {
+    override suspend fun addPaymentMethodToSubscription(
+        subscriptionId: Long,
+        paymentMethodId: Long
+    ) {
         repository.addPaymentMethodToSubscription(subscriptionId, paymentMethodId)
     }
 
     override suspend fun getCategoriesForSubscription(subscriptionId: Long): List<Category> {
-        return repository.getCategoriesForSubscription(subscriptionId).map { EntityToDomainMapper.category(it) }
+        return repository.getCategoriesForSubscription(subscriptionId)
+            .map { EntityToDomainMapper.category(it) }
     }
 
     override suspend fun getPaymentMethodsForSubscription(subscriptionId: Long): List<PaymentMethod> {
-        return repository.getPaymentMethodsForSubscription(subscriptionId).map { EntityToDomainMapper.paymentMethod(it) }
+        return repository.getPaymentMethodsForSubscription(subscriptionId)
+            .map { EntityToDomainMapper.paymentMethod(it) }
     }
 }

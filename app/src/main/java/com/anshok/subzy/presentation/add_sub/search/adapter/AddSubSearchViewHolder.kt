@@ -22,6 +22,10 @@ class AddSubSearchViewHolder(
             positionTitle.isSelected = true
         }, 1500)
 
+        container.setOnClickListener {
+            onItemClick(item)
+        }
+
         val logoSource = when {
             item.logoUrl != null -> item.logoUrl
             item.logoResId != null -> item.logoResId
@@ -40,6 +44,6 @@ class AddSubSearchViewHolder(
             .into(itemLogo)
 
         // При клике на кнопку «+» вызываем callback
-        addSubButton.setOnClickListener { onItemClick(item) }
+        //addSubButton.setOnClickListener { onItemClick(item) }
     }
 }

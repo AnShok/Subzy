@@ -17,15 +17,15 @@ class SearchInteractorImpl(
     override suspend fun searchCompany(query: String): ResourceLogo<List<Logo>> {
         return withContext(Dispatchers.IO) {
             try {
-                // 🔍 Локальные совпадения
+                // Локальные совпадения
                 val localResults = EmbeddedLogoMapper.mapToDomainList(
                     EmbeddedLogoProvider.search(query)
                 )
 
-                // 🌐 Запрос к API
+                // Запрос к API
                 val apiResponse = repository.searchCompany(query)
 
-                // 🎯 API успешен
+                // API успешен
                 val apiResults = when (apiResponse) {
                     is ResourceLogo.Success -> apiResponse.data
                     is ResourceLogo.Error -> {
@@ -38,7 +38,7 @@ class SearchInteractorImpl(
                     }
                 }
 
-                // 🧠 Объединяем без дублей
+                // Объединяем без дублей
                 val combinedResults = (localResults + apiResults)
                     .distinctBy { it.name?.lowercase() ?: "" }
 

@@ -1,6 +1,9 @@
 package com.anshok.subzy.util
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class DebounceWrapper<T>(
     private val waitMs: Long,
