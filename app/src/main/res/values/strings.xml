@@ -2,4 +2,15 @@
     <string name="app_name">Subzy</string>
 
     <string name="search_hint">Enter request</string>
+
+
+    <string name="sub_not_found_or_deleted">Sub not found or\n deleted</string>
+    <string name="server_error">Server error</string>
+    <string name="favorite_list_empty">The list is empty</string>
+    <string name="there_no_such_sub">There are no such sub</string>
+    <string name="next_page_server_error">An error has occurred</string>
+    <string name="next_page_internet_error">Check your internet connection</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="no_more_data_add_manually">Других данных нет — добавьте вручную</string>
+
 </resources>

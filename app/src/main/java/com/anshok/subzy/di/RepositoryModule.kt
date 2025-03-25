@@ -1,5 +1,6 @@
 package com.anshok.subzy.di
 
+import com.anshok.subzy.data.local.impl.EmbeddedLogoProvider
 import com.anshok.subzy.data.repository.impl.CategoryRepositoryImpl
 import com.anshok.subzy.data.repository.impl.PaymentMethodRepositoryImpl
 import com.anshok.subzy.data.repository.impl.SearchRepositoryImpl
@@ -13,8 +14,7 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<SubscriptionRepository> {
         SubscriptionRepositoryImpl(
-            localDataSource = get(),
-            remoteDataSource = get()
+            localDataSource = get()
         )
     }
 

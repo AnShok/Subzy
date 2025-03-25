@@ -64,7 +64,7 @@ val dataModule = module {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://api.logo.dev/") // Базовый URL вашего API
+            .baseUrl("https://api.logo.dev/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
