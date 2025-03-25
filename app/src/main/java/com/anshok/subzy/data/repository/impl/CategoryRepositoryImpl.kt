@@ -1,8 +1,8 @@
 package com.anshok.subzy.data.repository.impl
 
 import com.anshok.subzy.data.local.LocalDataSource
-import com.anshok.subzy.data.local.db.entities.CategoryEntity
 import com.anshok.subzy.domain.api.CategoryRepository
+import com.anshok.subzy.data.local.db.entities.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
 class CategoryRepositoryImpl(

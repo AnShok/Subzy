@@ -11,6 +11,6 @@ interface LogoApiService {
     @GET("search")
     suspend fun searchCompany(
         @Query("q") query: String,
-        @Header("Authorization") token: String = "Bearer ${BuildConfig.LOGO_API_KEY}"
-    ): Response<LogoResponse>
+        //@Header("Authorization") token: String = "Bearer ${BuildConfig.LOGO_SECRET_KEY}"
+    ): Response<List<LogoResponse>>
 }

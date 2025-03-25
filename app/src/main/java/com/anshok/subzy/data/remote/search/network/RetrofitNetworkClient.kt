@@ -16,22 +16,22 @@ class RetrofitNetworkClient(
     private val context: Context
 ) : NetworkClient {
 
-    override suspend fun searchLogos(query: String): LogoResponse {
+    override suspend fun searchLogos(query: String): List<LogoResponse> {
         if (!context.isInternetAvailable()) {
-            return LogoResponse().apply { resultCode = RESULT_CODE_NO_INTERNET }
+            return listOf(LogoResponse(name = null, domain = null, logoUrl = null, resultCode = RESULT_CODE_NO_INTERNET))
         }
 
         return withContext(Dispatchers.IO) {
             try {
                 val response = logoApiService.searchCompany(query)
                 if (response.isSuccessful) {
-                    response.body()?.apply { resultCode = RESULT_CODE_SUCCESS }
-                        ?: LogoResponse().apply { resultCode = RESULT_CODE_SERVER_ERROR }
+                    response.body()?.map { it.copy(resultCode = RESULT_CODE_SUCCESS) }
+                        ?: listOf(LogoResponse(name = null, domain = null, logoUrl = null, resultCode = RESULT_CODE_SERVER_ERROR))
                 } else {
-                    LogoResponse().apply { resultCode = response.code() }
+                    listOf(LogoResponse(name = null, domain = null, logoUrl = null, resultCode = response.code()))
                 }
             } catch (e: HttpException) {
-                LogoResponse().apply { resultCode = RESULT_CODE_SERVER_ERROR }
+                listOf(LogoResponse(name = null, domain = null, logoUrl = null, resultCode = RESULT_CODE_SERVER_ERROR))
             }
         }
     }

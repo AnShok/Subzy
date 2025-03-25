@@ -7,7 +7,7 @@ val localProperties = Properties().apply {
 
 // Получаем значение LOGO_API_KEY
 val logoApiKey = localProperties.getProperty("LOGO_API_KEY") ?: throw GradleException("LOGO_API_KEY not found in local.properties")
-
+val logoSecretKey = localProperties.getProperty("LOGO_SECRET_KEY") ?: throw GradleException("LOGO_SECRET_KEY not found in local.properties")
 
 
 plugins {
@@ -31,7 +31,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // Добавляем LOGO_API_KEY в BuildConfig
-        buildConfigField("String", "LOGO_API_KEY", "\"${logoApiKey}\"")
+        buildConfigField("String", "LOGO_API_KEY", "\"${logoApiKey}\"") 
+        buildConfigField("String", "LOGO_SECRET_KEY", "\"${logoSecretKey}\"")
+
 
         // Явно указываем пакет для BuildConfig
         buildConfigField("String", "APPLICATION_ID", "\"$applicationId\"")
@@ -128,5 +130,5 @@ dependencies {
 
     implementation (libs.bio.matic.segmentedarcview)
     implementation ("com.google.android.material:material:1.9.0")
-
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
 }
