@@ -6,8 +6,6 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
 
-    // ... другие viewModels ...
-
     viewModel {
         AddSubSearchViewModel(
             searchInteractor = get(), get()

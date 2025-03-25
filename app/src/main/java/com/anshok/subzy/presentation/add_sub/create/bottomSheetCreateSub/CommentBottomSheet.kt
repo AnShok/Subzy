@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.bottomSheetCreateSub
+package com.anshok.subzy.presentation.add_sub.create.bottomSheetCreateSub
 
 import android.app.Dialog
 import android.content.Context
@@ -12,13 +12,13 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.anshok.subzy.databinding.FragmentDescriptionBottomSheetBinding
+import com.anshok.subzy.databinding.FragmentCommentBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DescriptionBottomSheet(private val onOptionSelected: (String?) -> Unit) :
+class CommentBottomSheet(private val onOptionSelected: (String?) -> Unit) :
     BottomSheetDialogFragment() {
 
-    private val binding: FragmentDescriptionBottomSheetBinding by viewBinding(CreateMethod.INFLATE)
+    private val binding: FragmentCommentBottomSheetBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -30,7 +30,7 @@ class DescriptionBottomSheet(private val onOptionSelected: (String?) -> Unit) :
         super.onViewCreated(view, savedInstanceState)
 
         // Следим за вводом текста в EditText
-        binding.descriptionEditText.addTextChangedListener(object : TextWatcher {
+        binding.commentEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -40,8 +40,8 @@ class DescriptionBottomSheet(private val onOptionSelected: (String?) -> Unit) :
 
         // Обработка нажатия кнопки "ОК"
         binding.saveButton.setOnClickListener {
-            val description = binding.descriptionEditText.text.toString()
-            onOptionSelected(description)
+            val comment = binding.commentEditText.text.toString()
+            onOptionSelected(comment)
             dismiss()
         }
 
@@ -61,11 +61,11 @@ class DescriptionBottomSheet(private val onOptionSelected: (String?) -> Unit) :
     override fun onResume() {
         super.onResume()
         // Задержка для корректного отображения клавиатуры
-        binding.descriptionEditText.post {
-            binding.descriptionEditText.requestFocus()
+        binding.commentEditText.post {
+            binding.commentEditText.requestFocus()
             val imm =
                 requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(binding.descriptionEditText, InputMethodManager.SHOW_IMPLICIT)
+            imm.showSoftInput(binding.commentEditText, InputMethodManager.SHOW_IMPLICIT)
         }
     }
 }

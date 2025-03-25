@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class CategoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val name: String, // Название категории (например, "Развлечения")
-    val budget: Double? = null, // Бюджет для категории (опционально)
-    val color: Int // Цвет категории (для отображения в UI)
+    val name: String,
+    val budget: Double? = null,
+    val color: Int
 )

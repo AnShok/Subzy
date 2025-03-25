@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.bottomSheetCreateSub
+package com.anshok.subzy.presentation.add_sub.create.bottomSheetCreateSub
 
 import android.os.Bundle
 import android.view.LayoutInflater

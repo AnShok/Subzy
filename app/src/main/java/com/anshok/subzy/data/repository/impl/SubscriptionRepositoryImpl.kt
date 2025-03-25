@@ -4,9 +4,9 @@ import com.anshok.subzy.data.local.LocalDataSource
 import com.anshok.subzy.data.local.db.entities.CategoryEntity
 import com.anshok.subzy.data.local.db.entities.PaymentMethodEntity
 import com.anshok.subzy.data.local.db.entities.SubscriptionCategoryEntity
+import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
 import com.anshok.subzy.data.local.db.entities.SubscriptionPaymentMethodEntity
 import com.anshok.subzy.domain.api.SubscriptionRepository
-import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
 import kotlinx.coroutines.flow.Flow
 
 class SubscriptionRepositoryImpl(
@@ -49,13 +49,24 @@ class SubscriptionRepositoryImpl(
 
     override suspend fun addCategoryToSubscription(subscriptionId: Long, categoryId: Long) {
         localDataSource.addCategoryToSubscription(
-            SubscriptionCategoryEntity(id = 0, subscriptionId = subscriptionId, categoryId = categoryId)
+            SubscriptionCategoryEntity(
+                id = 0,
+                subscriptionId = subscriptionId,
+                categoryId = categoryId
+            )
         )
     }
 
-    override suspend fun addPaymentMethodToSubscription(subscriptionId: Long, paymentMethodId: Long) {
+    override suspend fun addPaymentMethodToSubscription(
+        subscriptionId: Long,
+        paymentMethodId: Long
+    ) {
         localDataSource.addPaymentMethodToSubscription(
-            SubscriptionPaymentMethodEntity(id = 0, subscriptionId = subscriptionId, paymentMethodId = paymentMethodId)
+            SubscriptionPaymentMethodEntity(
+                id = 0,
+                subscriptionId = subscriptionId,
+                paymentMethodId = paymentMethodId
+            )
         )
     }
 

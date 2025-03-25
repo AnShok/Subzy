@@ -9,6 +9,6 @@ sealed interface ResourceLogo<T> {
         CLIENT_ERROR,
         SERVER_ERROR,
         NOT_FOUND,
-        UNKNOWN_ERROR // Новый случай
+        UNKNOWN_ERROR
     }
 }
