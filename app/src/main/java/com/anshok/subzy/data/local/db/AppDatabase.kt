@@ -20,9 +20,9 @@ import com.anshok.subzy.data.local.db.entities.SubscriptionPaymentMethodEntity
         SubscriptionEntity::class,
         CategoryEntity::class,
         PaymentMethodEntity::class,
-        SubscriptionCategoryEntity::class, // Добавляем сущность
-        SubscriptionPaymentMethodEntity::class, // Добавляем сущность
-        ReminderEntity::class // Добавляем сущность для напоминаний
+        SubscriptionCategoryEntity::class,
+        SubscriptionPaymentMethodEntity::class,
+        ReminderEntity::class
     ],
     version = 1,
 )

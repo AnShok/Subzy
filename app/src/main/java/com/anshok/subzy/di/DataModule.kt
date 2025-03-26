@@ -5,9 +5,9 @@ import com.anshok.subzy.data.NetworkClient
 import com.anshok.subzy.data.interceptors.HeaderInterceptor
 import com.anshok.subzy.data.interceptors.LoggingInterceptor
 import com.anshok.subzy.data.local.LocalDataSource
-import com.anshok.subzy.data.remote.RemoteDataSource
 import com.anshok.subzy.data.local.db.AppDatabase
 import com.anshok.subzy.data.local.impl.LocalDataSourceImpl
+import com.anshok.subzy.data.remote.RemoteDataSource
 import com.anshok.subzy.data.remote.impl.RemoteDataSourceImpl
 import com.anshok.subzy.data.remote.search.network.LogoApiService
 import com.google.gson.Gson
@@ -59,18 +59,18 @@ val dataModule = module {
     // Retrofit и LogoApiService
     single<LogoApiService> {
         val client = OkHttpClient.Builder()
-            .addInterceptor(LoggingInterceptor) // Логирование запросов
-            .addInterceptor(HeaderInterceptor) // Добавление заголовков
+            .addInterceptor(LoggingInterceptor)
+            .addInterceptor(HeaderInterceptor)
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://api.logo.dev/") // Базовый URL вашего API
+            .baseUrl("https://api.logo.dev/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(LogoApiService::class.java)
     }
 
-    // Gson (опционально, если используется вне Retrofit)
+    // Gson
     single { Gson() }
 }

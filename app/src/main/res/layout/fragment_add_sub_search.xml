@@ -10,7 +10,6 @@
         android:id="@+id/upcard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         app:cardBackgroundColor="@color/Gray_75"
         app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -155,19 +154,6 @@
         tools:visibility="visible"/>
 
     <ImageView
-        android:id="@+id/search_default_placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:src="@drawable/search_image_default"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone" />
-
-    <ImageView
         android:id="@+id/no_connection_placeholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -218,6 +204,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/no_sub_to_show" />
+
+    <ImageView
+        android:id="@+id/server_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:src="@drawable/server_error_placeholder_search"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/server_error_text"
+        style="@style/TextAppearance.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/server_error"
+        android:textColor="?attr/colorOnPrimary"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/server_error" />
+
 
     <FrameLayout
         android:id="@+id/create_sub_frame"

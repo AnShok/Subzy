@@ -1,16 +1,16 @@
 package com.anshok.subzy.data.repository.impl
 
 import com.anshok.subzy.data.local.LocalDataSource
-import com.anshok.subzy.data.remote.RemoteDataSource
-import com.anshok.subzy.data.remote.search.dto.LogoResponse
+import com.anshok.subzy.data.local.db.entities.CategoryEntity
+import com.anshok.subzy.data.local.db.entities.PaymentMethodEntity
+import com.anshok.subzy.data.local.db.entities.SubscriptionCategoryEntity
+import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
+import com.anshok.subzy.data.local.db.entities.SubscriptionPaymentMethodEntity
 import com.anshok.subzy.domain.api.SubscriptionRepository
-import com.anshok.subzy.data.local.db.entities.*
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 
 class SubscriptionRepositoryImpl(
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val localDataSource: LocalDataSource
 ) : SubscriptionRepository {
 
     override suspend fun insertSubscription(subscription: SubscriptionEntity): Boolean {
@@ -47,19 +47,26 @@ class SubscriptionRepositoryImpl(
         return localDataSource.getSubscriptionByName(name)
     }
 
-    override suspend fun searchCompany(query: String, apiKey: String): Response<LogoResponse> {
-        return remoteDataSource.searchCompany(query, apiKey)
-    }
-
     override suspend fun addCategoryToSubscription(subscriptionId: Long, categoryId: Long) {
         localDataSource.addCategoryToSubscription(
-            SubscriptionCategoryEntity(0, subscriptionId, categoryId)
+            SubscriptionCategoryEntity(
+                id = 0,
+                subscriptionId = subscriptionId,
+                categoryId = categoryId
+            )
         )
     }
 
-    override suspend fun addPaymentMethodToSubscription(subscriptionId: Long, paymentMethodId: Long) {
+    override suspend fun addPaymentMethodToSubscription(
+        subscriptionId: Long,
+        paymentMethodId: Long
+    ) {
         localDataSource.addPaymentMethodToSubscription(
-            SubscriptionPaymentMethodEntity(0, subscriptionId, paymentMethodId)
+            SubscriptionPaymentMethodEntity(
+                id = 0,
+                subscriptionId = subscriptionId,
+                paymentMethodId = paymentMethodId
+            )
         )
     }
 
@@ -69,21 +76,5 @@ class SubscriptionRepositoryImpl(
 
     override suspend fun getPaymentMethodsForSubscription(subscriptionId: Long): List<PaymentMethodEntity> {
         return localDataSource.getPaymentMethodsForSubscription(subscriptionId)
-    }
-
-    override suspend fun insertReminder(reminder: ReminderEntity) {
-        localDataSource.insertReminder(reminder)
-    }
-
-    override suspend fun deleteReminder(reminder: ReminderEntity) {
-        localDataSource.deleteReminder(reminder)
-    }
-
-    override fun getRemindersForSubscription(subscriptionId: Long): Flow<List<ReminderEntity>> {
-        return localDataSource.getRemindersForSubscription(subscriptionId)
-    }
-
-    override suspend fun deleteRemindersForSubscription(subscriptionId: Long) {
-        localDataSource.deleteRemindersForSubscription(subscriptionId)
     }
 }

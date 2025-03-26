@@ -1,7 +1,13 @@
 package com.anshok.subzy.data.converters
 
-import com.anshok.subzy.data.local.db.entities.*
-import com.anshok.subzy.domain.model.*
+import com.anshok.subzy.data.local.db.entities.CategoryEntity
+import com.anshok.subzy.data.local.db.entities.PaymentMethodEntity
+import com.anshok.subzy.data.local.db.entities.ReminderEntity
+import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
+import com.anshok.subzy.domain.model.Category
+import com.anshok.subzy.domain.model.PaymentMethod
+import com.anshok.subzy.domain.model.Reminder
+import com.anshok.subzy.domain.model.Subscription
 
 object DomainToEntityMapper {
 

@@ -1,0 +1,733 @@
+[
+  {
+    "name": "YouTube Premium",
+    "domain": "youtube.com",
+    "resName": "local_youtube"
+  },
+  {
+    "name": "Netflix",
+    "domain": "netflix.com",
+    "resName": "local_netflix"
+  },
+  {
+    "name": "Amazon Prime Video",
+    "domain": "amazon.com",
+    "resName": "local_amazon_prime_video"
+  },
+  {
+    "name": "Disney+",
+    "domain": "disneyplus.com",
+    "resName": "local_disney"
+  },
+  {
+    "name": "Hulu",
+    "domain": "hulu.com",
+    "resName": "local_hulu"
+  },
+  {
+    "name": "Яндекс Плюс",
+    "domain": "plus.yandex.ru",
+    "resName": "local_yandex_plus"
+  },
+  {
+    "name": "Spotify",
+    "domain": "spotify.com",
+    "resName": "local_spotify"
+  },
+  {
+    "name": "ESPN+",
+    "domain": "espn.com",
+    "resName": "local_espn"
+  },
+  {
+    "name": "HBO Max",
+    "domain": "hbomax.com",
+    "resName": "local_hbo_max"
+  },
+  {
+    "name": "Apple Music",
+    "domain": "apple.com",
+    "resName": "local_apple_music"
+  },
+  {
+    "name": "Paramount+",
+    "domain": "paramountplus.com",
+    "resName": "local_paramount"
+  },
+  {
+    "name": "Apple TV+",
+    "domain": "tv.apple.com",
+    "resName": "local_apple_tv"
+  },
+  {
+    "name": "Audible",
+    "domain": "audible.com",
+    "resName": "local_audible"
+  },
+  {
+    "name": "Amazon Music Unlimited",
+    "domain": "music.amazon.com",
+    "resName": "local_amazon_music_unlimited"
+  },
+  {
+    "name": "IVI",
+    "domain": "ivi.ru",
+    "resName": "local_ivi"
+  },
+  {
+    "name": "Kinopoisk",
+    "domain": "kinopoisk.ru",
+    "resName": "local_kinopoisk"
+  },
+  {
+    "name": "Tidal",
+    "domain": "tidal.com",
+    "resName": "local_tidal"
+  },
+  {
+    "name": "The New York Times",
+    "domain": "nytimes.com",
+    "resName": "local_the_new_york_times"
+  },
+  {
+    "name": "Kindle Unlimited",
+    "domain": "amazon.com",
+    "resName": "local_kindle_unlimited"
+  },
+  {
+    "name": "Peacock Premium",
+    "domain": "peacocktv.com",
+    "resName": "local_peacock_premium"
+  },
+  {
+    "name": "Microsoft 365",
+    "domain": "microsoft.com",
+    "resName": "local_microsoft_365"
+  },
+  {
+    "name": "Google One",
+    "domain": "one.google.com",
+    "resName": "local_google_one"
+  },
+  {
+    "name": "Wink",
+    "domain": "wink.rt.ru",
+    "resName": "local_wink"
+  },
+  {
+    "name": "Okko",
+    "domain": "okko.tv",
+    "resName": "local_okko"
+  },
+  {
+    "name": "Xbox Game Pass",
+    "domain": "xbox.com",
+    "resName": "local_xbox_game_pass"
+  },
+  {
+    "name": "PlayStation Plus",
+    "domain": "playstation.com",
+    "resName": "local_playstation_plus"
+  },
+  {
+    "name": "Adobe Creative Cloud",
+    "domain": "adobe.com",
+    "resName": "local_adobe_creative_cloud"
+  },
+  {
+    "name": "Dropbox",
+    "domain": "dropbox.com",
+    "resName": "local_dropbox"
+  },
+  {
+    "name": "The Wall Street Journal",
+    "domain": "wsj.com",
+    "resName": "local_the_wall_street_journal"
+  },
+  {
+    "name": "SiriusXM",
+    "domain": "siriusxm.com",
+    "resName": "local_siriusxm"
+  },
+  {
+    "name": "The Washington Post",
+    "domain": "subscribe.washingtonpost.com",
+    "resName": "local_the_washington_post"
+  },
+  {
+    "name": "Starz",
+    "domain": "starz.com",
+    "resName": "local_starz"
+  },
+  {
+    "name": "Pandora Premium",
+    "domain": "pandora.com",
+    "resName": "local_pandora_premium"
+  },
+  {
+    "name": "Showtime",
+    "domain": "showtime.com",
+    "resName": "local_showtime"
+  },
+  {
+    "name": "Megogo",
+    "domain": "megogo.ru",
+    "resName": "local_megogo"
+  },
+  {
+    "name": "SberPrime",
+    "domain": "sber.ru",
+    "resName": "local_sberprime"
+  },
+  {
+    "name": "Calm",
+    "domain": "calm.com",
+    "resName": "local_calm"
+  },
+  {
+    "name": "Headspace",
+    "domain": "headspace.com",
+    "resName": "local_headspace"
+  },
+  {
+    "name": "EA Play",
+    "domain": "ea.com",
+    "resName": "local_ea_play"
+  },
+  {
+    "name": "Nintendo Switch Online",
+    "domain": "nintendo.com",
+    "resName": "local_nintendo_switch_online"
+  },
+  {
+    "name": "Duolingo Plus",
+    "domain": "duolingo.com",
+    "resName": "local_duolingo_plus"
+  },
+  {
+    "name": "Crunchyroll Premium",
+    "domain": "crunchyroll.com",
+    "resName": "local_crunchyroll_premium"
+  },
+  {
+    "name": "Coursera",
+    "domain": "coursera.org",
+    "resName": "local_coursera"
+  },
+  {
+    "name": "Apple News+",
+    "domain": "apple.com",
+    "resName": "local_apple_news"
+  },
+  {
+    "name": "OnlyFans",
+    "domain": "onlyfans.com",
+    "resName": "local_onlyfans"
+  },
+  {
+    "name": "Patreon",
+    "domain": "patreon.com",
+    "resName": "local_patreon"
+  },
+  {
+    "name": "Amediateka",
+    "domain": "amediateka.ru",
+    "resName": "local_amediateka"
+  },
+  {
+    "name": "More.tv",
+    "domain": "more.tv",
+    "resName": "local_moretv"
+  },
+  {
+    "name": "Premier",
+    "domain": "premier.one",
+    "resName": "local_premier"
+  },
+  {
+    "name": "Babbel",
+    "domain": "babbel.com",
+    "resName": "local_babbel"
+  },
+  {
+    "name": "NordVPN",
+    "domain": "nordvpn.com",
+    "resName": "local_nordvpn"
+  },
+  {
+    "name": "Start",
+    "domain": "start.ru",
+    "resName": "local_start"
+  },
+  {
+    "name": "Strava Summit",
+    "domain": "strava.com",
+    "resName": "local_strava_summit"
+  },
+  {
+    "name": "MasterClass",
+    "domain": "masterclass.com",
+    "resName": "local_masterclass"
+  },
+  {
+    "name": "Evernote",
+    "domain": "evernote.com",
+    "resName": "local_evernote"
+  },
+  {
+    "name": "Rosetta Stone",
+    "domain": "rosettastone.com",
+    "resName": "local_rosetta_stone"
+  },
+  {
+    "name": "Udemy",
+    "domain": "udemy.com",
+    "resName": "local_udemy"
+  },
+  {
+    "name": "LinkedIn",
+    "domain": "linkedin.com",
+    "resName": "local_linkedin"
+  },
+  {
+    "name": "Walmart+",
+    "domain": "walmart.com",
+    "resName": "local_walmart"
+  },
+  {
+    "name": "Peloton App",
+    "domain": "onepeloton.com",
+    "resName": "local_peloton"
+  },
+  {
+    "name": "Grammarly Premium",
+    "domain": "grammarly.com",
+    "resName": "local_grammarly_premium"
+  },
+  {
+    "name": "Notion",
+    "domain": "notion.so",
+    "resName": "local_notion"
+  },
+  {
+    "name": "HelloFresh",
+    "domain": "hellofresh.com",
+    "resName": "local_hellofresh"
+  },
+  {
+    "name": "Discord",
+    "domain": "discord.com",
+    "resName": "local_discord"
+  },
+  {
+    "name": "Ubisoft+",
+    "domain": "store.ubi.com",
+    "resName": "local_ubisoft"
+  },
+  {
+    "name": "Skillshare",
+    "domain": "skillshare.com",
+    "resName": "local_skillshare"
+  },
+  {
+    "name": "WW (Weight Watchers)",
+    "domain": "weightwatchers.com",
+    "resName": "local_ww_weight_watchers"
+  },
+  {
+    "name": "DC Universe Infinite",
+    "domain": "dcuniverseinfinite.com",
+    "resName": "local_dc_universe_infinite"
+  },
+  {
+    "name": "Storytel",
+    "domain": "storytel.com",
+    "resName": "local_storytel"
+  },
+  {
+    "name": "Deezer",
+    "domain": "deezer.com",
+    "resName": "local_deezer"
+  },
+  {
+    "name": "Substack",
+    "domain": "substack.com",
+    "resName": "local_substack"
+  },
+  {
+    "name": "Humble Choice",
+    "domain": "humblebundle.com",
+    "resName": "local_humblebundle"
+  },
+  {
+    "name": "Twitch",
+    "domain": "twitch.tv",
+    "resName": "local_twitch"
+  },
+  {
+    "name": "Noom",
+    "domain": "noom.com",
+    "resName": "local_noom"
+  },
+  {
+    "name": "MyFitnessPal",
+    "domain": "myfitnesspal.com",
+    "resName": "local_myfitnesspal"
+  },
+  {
+    "name": "Flo Premium",
+    "domain": "flo.health",
+    "resName": "local_flo_premium"
+  },
+  {
+    "name": "Surfshark",
+    "domain": "surfshark.com",
+    "resName": "local_surfshark"
+  },
+  {
+    "name": "ExpressVPN",
+    "domain": "expressvpn.com",
+    "resName": "local_expressvpn"
+  },
+  {
+    "name": "Busuu",
+    "domain": "busuu.com",
+    "resName": "local_busuu"
+  },
+  {
+    "name": "Canva",
+    "domain": "canva.com",
+    "resName": "local_canva_pro"
+  },
+  {
+    "name": "Brilliant",
+    "domain": "brilliant.org",
+    "resName": "local_brilliant"
+  },
+  {
+    "name": "Clue Plus",
+    "domain": "helloclue.com",
+    "resName": "local_clue_plus"
+  },
+  {
+    "name": "LingQ",
+    "domain": "lingq.com",
+    "resName": "local_lingq"
+  },
+  {
+    "name": "Codecademy Pro",
+    "domain": "codecademy.com",
+    "resName": "local_codecademy_pro"
+  },
+  {
+    "name": "Pluralsight",
+    "domain": "pluralsight.com",
+    "resName": "local_pluralsight"
+  },
+  {
+    "name": "edX",
+    "domain": "edx.org",
+    "resName": "local_edx"
+  },
+  {
+    "name": "FutureLearn",
+    "domain": "futurelearn.com",
+    "resName": "local_futurelearn"
+  },
+  {
+    "name": "Bitdefender",
+    "domain": "bitdefender.com",
+    "resName": "local_bitdefender"
+  },
+  {
+    "name": "Proton VPN",
+    "domain": "protonvpn.com",
+    "resName": "local_proton_vpn"
+  },
+  {
+    "name": "Figma",
+    "domain": "figma.com",
+    "resName": "local_figma"
+  },
+  {
+    "name": "DashPass",
+    "domain": "doordash.com",
+    "resName": "local_dashpass"
+  },
+  {
+    "name": "Uber One",
+    "domain": "uber.com",
+    "resName": "local_uber_one"
+  },
+  {
+    "name": "Medium Membership",
+    "domain": "medium.com",
+    "resName": "local_medium_membership"
+  },
+  {
+    "name": "Bloomberg",
+    "domain": "bloomberg.com",
+    "resName": "local_bloomberg"
+  },
+  {
+    "name": "BritBox",
+    "domain": "britbox.com",
+    "resName": "local_britbox"
+  },
+  {
+    "name": "Tinkoff Pro",
+    "domain": "tbank.ru",
+    "resName": "local_tinkoff_pro"
+  },
+  {
+    "name": "Litres",
+    "domain": "litres.ru",
+    "resName": "local_litres"
+  },
+  {
+    "name": "Shudder",
+    "domain": "shudder.com",
+    "resName": "local_shudder"
+  },
+  {
+    "name": "Bookmate",
+    "domain": "bookmate.com",
+    "resName": "local_bookmate"
+  },
+  {
+    "name": "Acorn TV",
+    "domain": "acorn.tv",
+    "resName": "local_acorn_tv"
+  },
+  {
+    "name": "McAfee",
+    "domain": "mcafee.com",
+    "resName": "local_mcafee"
+  },
+  {
+    "name": "Notability",
+    "domain": "notability.com",
+    "resName": "local_notability"
+  },
+  {
+    "name": "1Password",
+    "domain": "1password.com",
+    "resName": "local_1password"
+  },
+  {
+    "name": "Khan Academy",
+    "domain": "khanacademy.org",
+    "resName": "local_khan_academy"
+  },
+  {
+    "name": "Avast Premium",
+    "domain": "avast.com",
+    "resName": "local_avast_premium"
+  },
+  {
+    "name": "ESET Internet Security",
+    "domain": "eset.com",
+    "resName": "local_eset_internet_security"
+  },
+  {
+    "name": "The Athletic",
+    "domain": "theathletic.com",
+    "resName": "local_the_athletic"
+  },
+  {
+    "name": "Business Insider",
+    "domain": "businessinsider.com",
+    "resName": "local_business_insider"
+  },
+  {
+    "name": "Instacart+",
+    "domain": "instacart.com",
+    "resName": "local_instacart"
+  },
+  {
+    "name": "Blue Apron",
+    "domain": "blueapron.com",
+    "resName": "local_blue_apron"
+  },
+  {
+    "name": "Scribd",
+    "domain": "scribd.com",
+    "resName": "local_scribd"
+  },
+  {
+    "name": "Kaspersky",
+    "domain": "kaspersky.com",
+    "resName": "local_kaspersky"
+  },
+
+  {
+    "name": "MUBI",
+    "domain": "mubi.com",
+    "resName": "local_mubi"
+  },
+  {
+    "name": "Factor_",
+    "domain": "factor75.com",
+    "resName": "local_factor_"
+  },
+  {
+    "name": "Stitch Fix",
+    "domain": "stitchfix.com",
+    "resName": "local_stitch_fix"
+  },
+  {
+    "name": "Quip",
+    "domain": "getquip.com",
+    "resName": "local_quip"
+  },
+  {
+    "name": "MeUndies",
+    "domain": "meundies.com",
+    "resName": "local_meundies"
+  },
+  {
+    "name": "BarkBox",
+    "domain": "barkbox.com",
+    "resName": "local_barkbox"
+  },
+  {
+    "name": "FabFitFun",
+    "domain": "fabfitfun.com",
+    "resName": "local_fabfitfun"
+  },
+  {
+    "name": "CuriosityStream",
+    "domain": "curiositystream.com",
+    "resName": "local_curiositystream"
+  },
+  {
+    "name": "MEGA",
+    "domain": "mega.io",
+    "resName": "local_mega"
+  },
+  {
+    "name": "Birchbox",
+    "domain": "birchbox.com",
+    "resName": "local_birchbox"
+  },
+  {
+    "name": "Kanopy",
+    "domain": "kanopy.com",
+    "resName": "local_kanopy"
+  },
+  {
+    "name": "MagellanTV",
+    "domain": "magellantv.com",
+    "resName": "local_magellantv"
+  },
+  {
+    "name": "Viki Pass",
+    "domain": "viki.com",
+    "resName": "local_viki_pass"
+  },
+  {
+    "name": "Сбер звук",
+    "domain": "sber-zvuk.com",
+    "resName": "local_sberzvuk"
+  },
+  {
+    "name": "Lingualeo",
+    "domain": "lingualeo.com",
+    "resName": "local_lingualeo"
+  },
+  {
+    "name": "Daily Harvest",
+    "domain": "dailyharvest.com",
+    "resName": "local_daily_harvest"
+  },
+  {
+    "name": "Boosty",
+    "domain": "boosty.to",
+    "resName": "local_boosty"
+  },
+  {
+    "name": "Depositphotos",
+    "domain": "depositphotos.com",
+    "resName": "local_depositphotos"
+  },
+  {
+    "name": "Epidemic Sound",
+    "domain": "epidemicsound.com",
+    "resName": "local_epidemic_sound"
+  },
+  {
+    "name": "Shutterstock",
+    "domain": "shutterstock.com",
+    "resName": "local_shutterstock"
+  },
+  {
+    "name": "Яндекс Музыка",
+    "domain": "music.yandex.ru",
+    "resName": "local_yandeks_muzyka"
+  },
+  {
+    "name": "VK Музыка",
+    "domain": "vk.com",
+    "resName": "local_vk_music"
+  },
+  {
+    "name": "Skyeng",
+    "domain": "skyeng.ru",
+    "resName": "local_skyeng"
+  },
+  {
+    "name": "Stepik",
+    "domain": "stepik.org",
+    "resName": "local_stepik"
+  },
+  {
+    "name": "Skillbox",
+    "domain": "skillbox.ru",
+    "resName": "local_skillbox"
+  },
+  {
+    "name": "Нетология",
+    "domain": "netology.ru",
+    "resName": "local_netologiya"
+  },
+  {
+    "name": "Фоксфорд",
+    "domain": "foxford.ru",
+    "resName": "local_foksford"
+  },
+  {
+    "name": "Учи.ру",
+    "domain": "uchi.ru",
+    "resName": "local_uchiru"
+  },
+  {
+    "name": "Skillfactory",
+    "domain": "skillfactory.ru",
+    "resName": "local_skillfactory"
+  },
+  {
+    "name": "Forbes Club",
+    "domain": "forbes.ru",
+    "resName": "local_forbes_club"
+  },
+  {
+    "name": "Коммерсантъ PRO",
+    "domain": "kommersant.ru",
+    "resName": "local_kommersant_pro"
+  },
+  {
+    "name": "Meduza+",
+    "domain": "meduza.io",
+    "resName": "local_meduza"
+  },
+  {
+    "name": "Coinmarketcap",
+    "domain": "coinmarketcap.com",
+    "resName": "local_coinmarketcap"
+  },
+  {
+    "name": "TradingView",
+    "domain": "tradingview.com",
+    "resName": "local_tradingview"
+  }
+]

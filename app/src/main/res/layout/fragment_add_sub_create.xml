@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Gray_100"
+    android:background="@color/Gray_80"
     tools:context=".presentation.add_sub.create.AddSubCreateFragment">
 
     <!-- Верхняя карточка с иконкой и названием -->
@@ -12,29 +12,43 @@
         android:id="@+id/top_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="22dp"
+        app:shapeAppearanceOverlay="@style/CustomShapeUpCard"
         app:cardBackgroundColor="@color/Gray_75"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+        app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="28dp">
+            android:layout_height="wrap_content">
+
+            <!-- Отcтупы -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_border_upcard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="18dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_border_upcard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="18dp" />
 
             <!-- Кнопка назад -->
             <ImageButton
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="-6dp"
+                android:layout_marginTop="24dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Back"
-                android:src="@drawable/ic_arrow_down"
-                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Заголовок страницы -->
@@ -46,9 +60,9 @@
                 android:text="New Subscription"
                 android:textColor="@color/Gray_30"
                 app:layout_constraintBottom_toBottomOf="@id/back_button"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/end_border_upcard"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/start_border_upcard"
                 app:layout_constraintTop_toTopOf="@id/back_button" />
 
             <!-- Иконка приложения -->
@@ -59,7 +73,7 @@
                 android:layout_marginTop="34dp"
                 android:contentDescription="App Icon"
                 android:src="@drawable/img_sub_placeholder"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
                 app:layout_constraintTop_toBottomOf="@id/title" />
 
             <androidx.cardview.widget.CardView
@@ -67,11 +81,11 @@
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_marginTop="34dp"
-                app:cardBackgroundColor="@color/Gray_75"
+                app:cardBackgroundColor="@color/Gray_55"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/start_border_upcard"
                 app:layout_constraintTop_toBottomOf="@id/title">
 
                 <ImageView
@@ -96,7 +110,7 @@
                 app:cursorColor="@color/Accent_P_100"
                 app:hintTextColor="@color/Gray_30"
                 app:layout_constraintBottom_toBottomOf="@+id/app_icon"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
                 app:layout_constraintStart_toEndOf="@+id/app_icon"
                 app:layout_constraintTop_toTopOf="@id/app_icon">
 
@@ -121,14 +135,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:hint="Price*"
                 android:maxWidth="140dp"
                 android:minWidth="140dp"
+                android:layout_marginBottom="16dp"
                 app:cursorColor="@color/Accent_P_100"
                 app:hintTextColor="@color/Gray_30"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/start_border_upcard"
                 app:layout_constraintTop_toBottomOf="@id/app_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -153,52 +167,18 @@
                 android:layout_marginStart="16dp"
                 android:background="@drawable/shape_14dp"
                 app:cardElevation="8dp"
-                android:backgroundTint="@color/Accent_P_100"
                 android:clickable="true"
-                android:text="Валюта"
+                android:text="Default currency"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 app:backgroundTint="@color/Gray_55"
                 app:layout_constraintBottom_toBottomOf="@+id/subscription_price_txt_layout"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/end_border_upcard"
                 app:layout_constraintStart_toEndOf="@+id/subscription_price_txt_layout"
                 app:layout_constraintTop_toTopOf="@+id/subscription_price_txt_layout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <View
-        android:id="@+id/circular_view_start"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/shape_circular"
-        android:elevation="6dp"
-        app:layout_constraintBottom_toBottomOf="@id/dashed_line"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dashed_line" />
-
-    <!-- Пунктирная линия -->
-    <View
-        android:id="@+id/dashed_line"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginHorizontal="16dp"
-        android:background="@drawable/dashed_line_new_sub"
-        android:elevation="6dp"
-        app:layout_constraintBottom_toBottomOf="@id/top_card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/circular_view_end"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/shape_circular"
-        android:elevation="6dp"
-        app:layout_constraintBottom_toBottomOf="@id/dashed_line"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dashed_line" />
 
 
     <!-- Нижняя карточка с деталями подписки -->
@@ -206,11 +186,7 @@
         android:id="@+id/details_card"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="22dp"
-        android:layout_marginBottom="22dp"
-        app:cardBackgroundColor="@color/Gray_75"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/Gray_80"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -218,20 +194,35 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
+            android:layout_height="match_parent">
+
+            <!-- Отcтупы -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="23dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="23dp" />
+
 
             <!-- Поля информации о подписке -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/details_card_inside"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:cardBackgroundColor="@color/Gray_70"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/Gray_75"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/end_border"
+                app:layout_constraintStart_toStartOf="@id/start_border"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -623,15 +614,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/shape_24dp"
+                android:layout_marginBottom="16dp"
                 android:elevation="8dp"
-                android:text="Save"
+                android:text="Add this platform"
                 android:textColor="@color/White"
+                android:textAllCaps="false"
                 app:backgroundTint="@color/Accent_P_100"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="@id/end_border"
+                app:layout_constraintStart_toStartOf="@id/start_border" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

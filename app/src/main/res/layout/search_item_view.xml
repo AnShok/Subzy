@@ -8,11 +8,15 @@
     android:paddingBottom="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_sub_background_shape"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="16dp">
+        android:paddingVertical="16dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
 
         <androidx.cardview.widget.CardView
@@ -41,21 +45,34 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:layout_marginEnd="8dp"
             android:textAllCaps="false"
             android:textColor="?attr/colorOnPrimary"
             android:textFontWeight="500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_view"
+            app:layout_constraintEnd_toStartOf="@id/add_sub_button"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Spotify" />
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
+            android:freezesText="true"
+            android:gravity="center_vertical"
+            tools:text="Super Long Streaming Platform Name Premium Ultra HD Subscription" />
 
         <ImageButton
             android:id="@+id/add_sub_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@null"
             android:contentDescription="Add subscription"
             android:src="@drawable/ic_add_app"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

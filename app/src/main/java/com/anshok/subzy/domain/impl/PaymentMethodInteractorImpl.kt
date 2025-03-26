@@ -1,31 +1,36 @@
 package com.anshok.subzy.domain.impl
 
+import com.anshok.subzy.data.converters.DomainToEntityMapper
+import com.anshok.subzy.data.converters.EntityToDomainMapper
 import com.anshok.subzy.domain.api.PaymentMethodInteractor
 import com.anshok.subzy.domain.api.PaymentMethodRepository
-import com.anshok.subzy.data.local.db.entities.PaymentMethodEntity
+import com.anshok.subzy.domain.model.PaymentMethod
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class PaymentMethodInteractorImpl(
     private val repository: PaymentMethodRepository
 ) : PaymentMethodInteractor {
 
-    override suspend fun insertPaymentMethod(paymentMethod: PaymentMethodEntity) {
-        repository.insertPaymentMethod(paymentMethod)
+    override suspend fun insertPaymentMethod(paymentMethod: PaymentMethod) {
+        repository.insertPaymentMethod(DomainToEntityMapper.paymentMethod(paymentMethod))
     }
 
-    override suspend fun updatePaymentMethod(paymentMethod: PaymentMethodEntity) {
-        repository.updatePaymentMethod(paymentMethod)
+    override suspend fun updatePaymentMethod(paymentMethod: PaymentMethod) {
+        repository.updatePaymentMethod(DomainToEntityMapper.paymentMethod(paymentMethod))
     }
 
-    override suspend fun deletePaymentMethod(paymentMethod: PaymentMethodEntity) {
-        repository.deletePaymentMethod(paymentMethod)
+    override suspend fun deletePaymentMethod(paymentMethod: PaymentMethod) {
+        repository.deletePaymentMethod(DomainToEntityMapper.paymentMethod(paymentMethod))
     }
 
-    override fun getAllPaymentMethods(): Flow<List<PaymentMethodEntity>> {
-        return repository.getAllPaymentMethods()
+    override fun getAllPaymentMethods(): Flow<List<PaymentMethod>> {
+        return repository.getAllPaymentMethods().map { list ->
+            list.map { EntityToDomainMapper.paymentMethod(it) }
+        }
     }
 
-    override suspend fun getPaymentMethodById(id: Long): PaymentMethodEntity? {
-        return repository.getPaymentMethodById(id)
+    override suspend fun getPaymentMethodById(id: Long): PaymentMethod? {
+        return repository.getPaymentMethodById(id)?.let { EntityToDomainMapper.paymentMethod(it) }
     }
 }

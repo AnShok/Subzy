@@ -1,9 +1,10 @@
 package com.anshok.subzy.data.remote.search.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class LogoResponse(
-    val name: String? = null,
-    val domain: String? = null,
-    val logoUrl: String? = null
-) : Response() {
-    override var resultCode: Int = 0 // Используем override
-}
+    @SerializedName("name") val name: String?,
+    @SerializedName("domain") val domain: String?,
+    @SerializedName("logo_url") val logoUrl: String?,
+    var resultCode: Int = 0
+)

@@ -1,10 +1,12 @@
 package com.anshok.subzy.di
 
 import com.anshok.subzy.domain.api.CategoryInteractor
+import com.anshok.subzy.domain.api.LocalLogoInteractor
 import com.anshok.subzy.domain.api.PaymentMethodInteractor
 import com.anshok.subzy.domain.api.SearchInteractor
 import com.anshok.subzy.domain.api.SubscriptionInteractor
 import com.anshok.subzy.domain.impl.CategoryInteractorImpl
+import com.anshok.subzy.domain.impl.LocalLogoInteractorImpl
 import com.anshok.subzy.domain.impl.PaymentMethodInteractorImpl
 import com.anshok.subzy.domain.impl.SearchInteractorImpl
 import com.anshok.subzy.domain.impl.SubscriptionInteractorImpl
@@ -26,4 +28,6 @@ val interactorModule = module {
     factory<SearchInteractor> {
         SearchInteractorImpl(repository = get())
     }
+
+    factory<LocalLogoInteractor> { LocalLogoInteractorImpl() }
 }

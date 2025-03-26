@@ -20,7 +20,7 @@ interface CategoryDao {
     suspend fun delete(category: CategoryEntity)
 
     @Query("SELECT * FROM categories")
-    fun getAll(): Flow<List<CategoryEntity>> // Возвращаем Flow
+    fun getAll(): Flow<List<CategoryEntity>>
 
     @Query("SELECT * FROM categories WHERE id = :id")
     suspend fun getById(id: Long): CategoryEntity?

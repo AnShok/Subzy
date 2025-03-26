@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class ReminderEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val subscriptionId: Long,
-    val reminderTime: Long // timestamp напоминания
+    val reminderTime: Long
 )
 

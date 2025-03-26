@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class SubscriptionEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val name: String,  // Название подписки (например, "Netflix")
+    val name: String,  // Название подписки ("Netflix")
     val logoUrl: String?,  // URL логотипа подписки (может быть null)
     val price: Double,  // Стоимость подписки
     val currencyCode: String,  // Код валюты (USD, EUR)

@@ -11,11 +11,11 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAddSubCreateBinding
-import com.anshok.subzy.presentation.bottomSheetCreateSub.CategoryBottomSheetFragment
-import com.anshok.subzy.presentation.bottomSheetCreateSub.CommentBottomSheet
-import com.anshok.subzy.presentation.bottomSheetCreateSub.DescriptionBottomSheet
-import com.anshok.subzy.presentation.bottomSheetCreateSub.NotificationReminderBottomSheet
-import com.anshok.subzy.presentation.bottomSheetCreateSub.PaymentPeriodBottomSheet
+import com.anshok.subzy.presentation.add_sub.create.bottomSheetCreateSub.CategoryBottomSheetFragment
+import com.anshok.subzy.presentation.add_sub.create.bottomSheetCreateSub.CommentBottomSheet
+import com.anshok.subzy.presentation.add_sub.create.bottomSheetCreateSub.DescriptionBottomSheet
+import com.anshok.subzy.presentation.add_sub.create.bottomSheetCreateSub.NotificationReminderBottomSheet
+import com.anshok.subzy.presentation.add_sub.create.bottomSheetCreateSub.PaymentPeriodBottomSheet
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
