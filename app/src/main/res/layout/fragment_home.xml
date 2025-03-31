@@ -39,18 +39,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="18dp" />
 
-            <ImageButton
-                android:id="@+id/settings_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="settings"
-                android:padding="16dp"
-                android:src="@drawable/ic_settings"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/Gray_30" />
-
             <!-- Круглый прогресс-бар -->
             <com.zigis.segmentedarcview.SegmentedArcView
                 android:id="@+id/progress_view"
@@ -134,13 +122,13 @@
                 android:id="@+id/appTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="54dp"
+                android:layout_marginTop="110dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
                 app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@+id/settings_button">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <!-- Лого -->
                 <ImageView

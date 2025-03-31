@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.add_sub.search.AddSubSearchFragment">
+    tools:context=".presentation.addSub.search.AddSubSearchFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/upcard"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-6dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:backgroundTint="@color/Gray_30"
                 android:contentDescription="Back"
@@ -55,7 +55,7 @@
                 android:id="@+id/add_sub_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Add subscription"
                 android:src="@drawable/ic_add_app"
@@ -236,7 +236,7 @@
         android:id="@+id/create_sub_frame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border">

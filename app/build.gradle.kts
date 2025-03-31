@@ -131,4 +131,7 @@ dependencies {
     implementation (libs.bio.matic.segmentedarcview)
     implementation ("com.google.android.material:material:1.9.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+
 }
