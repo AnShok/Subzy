@@ -4,7 +4,7 @@ import com.anshok.subzy.data.local.db.entities.CategoryEntity
 import com.anshok.subzy.data.local.db.entities.PaymentMethodEntity
 import com.anshok.subzy.data.local.db.entities.ReminderEntity
 import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
-import com.anshok.subzy.data.remote.search.dto.LogoResponse
+import com.anshok.subzy.data.remote.logo.search.dto.LogoResponse
 import com.anshok.subzy.domain.model.Category
 import com.anshok.subzy.domain.model.Logo
 import com.anshok.subzy.domain.model.PaymentMethod

@@ -38,14 +38,14 @@ class RootActivity : AppCompatActivity() {
                     binding.fab.isVisible = true
                 }
 
-                R.id.spendFragment, R.id.walletFragment -> {
+                R.id.spendFragment, R.id.settingsFragment -> {
                     // Установка цвета статус-бара для SpendFragment и WalletFragment
                     setStatusBarColor(R.color.Gray_80)
                     binding.bottomNavigationView.isVisible = true
                     binding.fab.isVisible = true
                 }
 
-                R.id.settingsFragment, R.id.addSubSearchFragment -> {
+                R.id.addSubSearchFragment -> {
                     // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
                     setStatusBarColor(R.color.Gray_80)
                     binding.bottomNavigationView.isVisible = false

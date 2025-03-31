@@ -25,4 +25,8 @@ object PriceFormatter {
 
         return "${formatter.format(price)} $symbol"
     }
+
+    fun getSymbol(currencyCode: String): String {
+        return currencySymbols[currencyCode] ?: currencyCode
+    }
 }

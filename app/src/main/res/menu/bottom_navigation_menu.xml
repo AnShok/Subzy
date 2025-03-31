@@ -22,7 +22,7 @@
         android:title="" />
 
     <item
-        android:id="@+id/walletFragment"
-        android:icon="@drawable/ic_bottom_navigation_wallet"
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_bottom_navigation_settings"
         android:title="" />
 </menu>

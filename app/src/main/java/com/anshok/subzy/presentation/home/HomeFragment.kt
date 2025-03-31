@@ -42,9 +42,7 @@ class HomeFragment : Fragment() {
             260f    // maxSweepAngle - Максимальный угол секции
         )
 
-        binding.settingsButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
-        }
+
     }
 
     private fun setUpTabLayoutWithViewPager() {
