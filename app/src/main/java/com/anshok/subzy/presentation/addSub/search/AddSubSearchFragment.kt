@@ -51,9 +51,6 @@ class AddSubSearchFragment : Fragment() {
 
         viewModel.onInitialLoad()
         binding.backButton.setOnClickListener { findNavController().navigateUp() }
-        binding.addSubButton.setOnClickListener {
-            findNavController().navigate(R.id.action_addSubSearchFragment_to_addSubCreateFragment)
-        }
         binding.createSubButton.setOnClickListener {
             findNavController().navigate(R.id.action_addSubSearchFragment_to_addSubCreateFragment)
         }
@@ -83,7 +80,7 @@ class AddSubSearchFragment : Fragment() {
                     stopProgressBar()
                     removePlaceholders()
                     stopProgressBarNextPage()
-                    adapter.setLogo(state.logos) // ✅ добавить!
+                    adapter.setLogo(state.logos)
                 }
 
                 is AddSubSearchState.NothingFound -> {

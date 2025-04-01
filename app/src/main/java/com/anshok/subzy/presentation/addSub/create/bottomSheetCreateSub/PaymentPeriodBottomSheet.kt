@@ -24,7 +24,7 @@ class PaymentPeriodBottomSheet(private val onPeriodSelected: (Int, String) -> Un
 
         // Настройка NumberPicker для чисел
         binding.numberPicker.minValue = 1
-        binding.numberPicker.maxValue = 30
+        binding.numberPicker.maxValue = 100
 
         // Настройка NumberPicker для периодов
         val periods = arrayOf("дни", "недели", "месяцы", "годы")

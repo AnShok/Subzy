@@ -6,10 +6,10 @@ sealed interface AddSubSearchState {
     data object LoadingNextPage : AddSubSearchState
 
     data class LocalOnly(val logos: List<Logo>) :
-        AddSubSearchState // ✅ Показ только локальных данных
+        AddSubSearchState // Показ только локальных данных
 
     data class Success(val logos: List<Logo>) :
-        AddSubSearchState    // ✅ Комбинированный успех (локальные + API)
+        AddSubSearchState    // Комбинированный успех (локальные + API)
 
     data class LoadNextPage(val logos: List<Logo>) : AddSubSearchState
     data object NoMoreData : AddSubSearchState

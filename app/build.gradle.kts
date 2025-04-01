@@ -11,10 +11,11 @@ val logoSecretKey = localProperties.getProperty("LOGO_SECRET_KEY") ?: throw Grad
 
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.android.application") version "8.5.2"
+    id("org.jetbrains.kotlin.android") version "2.0.0"
     id("com.google.devtools.ksp") version "2.0.0-1.0.21"  // Для Room с использованием KSP
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin") version "2.7.7"
 }
 
 android {
@@ -30,15 +31,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Добавляем LOGO_API_KEY в BuildConfig
-        buildConfigField("String", "LOGO_API_KEY", "\"${logoApiKey}\"") 
+        // LOGO_API в BuildConfig
+        //buildConfigField("String", "LOGO_API_KEY", "\"${logoApiKey}\"")
         buildConfigField("String", "LOGO_SECRET_KEY", "\"${logoSecretKey}\"")
 
-
-        // Явно указываем пакет для BuildConfig
         buildConfigField("String", "APPLICATION_ID", "\"$applicationId\"")
 
-        // Укажите путь для экспорта схемы Room
+        // Путь для экспорта схемы Room
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += mapOf(
@@ -47,6 +46,7 @@ android {
             }
         }
     }
+
 
     buildTypes {
         release {
@@ -134,4 +134,6 @@ dependencies {
 
     implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
 
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 }
