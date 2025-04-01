@@ -29,7 +29,7 @@ class CommentBottomSheet(private val onOptionSelected: (String?) -> Unit) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Следим за вводом текста в EditText
+        // Ввод текста в EditText
         binding.commentEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 

@@ -5,6 +5,7 @@ import com.anshok.subzy.data.repository.impl.SettingsRepositoryImpl
 import com.anshok.subzy.domain.api.HelpInteractor
 import com.anshok.subzy.domain.api.SettingsRepository
 import com.anshok.subzy.presentation.addSub.search.AddSubSearchViewModel
+import com.anshok.subzy.presentation.mySub.viewmodel.MySubViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AboutUsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.EasterEggViewModel
@@ -43,6 +44,13 @@ val viewModelModule = module {
     viewModel { AboutUsViewModel(get()) }
     viewModel { EasterEggViewModel() }
 
+    viewModel {
+        MySubViewModel(
+            subscriptionInteractor = get(),
+            currencyInteractor = get(),
+            userPreferences = get()
+        )
+    }
 
 }
 

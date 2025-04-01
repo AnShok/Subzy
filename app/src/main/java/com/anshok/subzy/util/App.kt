@@ -33,7 +33,7 @@ class App : Application() {
 
         val prefs = getKoin().get<UserPreferences>()
 
-        // ✅ Применяем выбранную тему при старте приложения
+        // Применяем выбранную тему при старте приложения
         when (prefs.getAppTheme()) {
             AppTheme.LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             AppTheme.DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

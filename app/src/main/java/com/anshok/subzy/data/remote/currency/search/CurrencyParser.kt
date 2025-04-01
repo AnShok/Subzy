@@ -31,7 +31,6 @@ object CurrencyParser {
             event = parser.next()
         }
 
-        // Добавим вручную RUB
         result.add(0, Currency("RUB", "Российский рубль", 1, 1.0))
 
         return result

@@ -36,14 +36,12 @@ class AddSubSearchViewHolder(
         Glide.with(itemView)
             .load(logoSource)
             .placeholder(R.drawable.ic_placeholder_30px)
-            .error(R.drawable.ic_placeholder_30px) // 🔥 fallback если .load неудачна
+            .error(R.drawable.ic_placeholder_30px)
             .centerCrop()
             .transform(
                 RoundedCorners(itemView.resources.getDimensionPixelSize(R.dimen.dimen_12dp))
             )
             .into(itemLogo)
 
-        // При клике на кнопку «+» вызываем callback
-        //addSubButton.setOnClickListener { onItemClick(item) }
     }
 }

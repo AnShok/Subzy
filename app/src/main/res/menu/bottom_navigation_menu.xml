@@ -6,7 +6,7 @@
         android:title="" />
 
     <item
-        android:id="@+id/spendFragment"
+        android:id="@+id/mySubFragment"
         android:icon="@drawable/ic_bottom_navigation_spending_budgets"
         android:title="" />
 

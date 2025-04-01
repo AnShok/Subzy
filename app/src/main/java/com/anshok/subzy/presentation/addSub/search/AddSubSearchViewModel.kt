@@ -29,7 +29,7 @@ class AddSubSearchViewModel(
     val currentQueryText: String get() = currentQuery
 
     private var currentPage = 0
-    private var maxPages = 1 // это просто заглушка для пагинации
+    private var maxPages = 1
     private var isNextPageLoading = false
 
     private var accumulatedResults: MutableList<Logo> = mutableListOf()
@@ -65,7 +65,7 @@ class AddSubSearchViewModel(
             _state.postValue(AddSubSearchState.LoadingNextPage)
             searchCombined(currentQuery, isNewRequest = false)
         } else if (!isNextPageLoading && currentPage >= maxPages) {
-            _state.postValue(AddSubSearchState.NoMoreData) // 🔥
+            _state.postValue(AddSubSearchState.NoMoreData)
         }
     }
 

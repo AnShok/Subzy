@@ -7,7 +7,8 @@ data class Subscription(
     val price: Double,
     val currencyCode: String,
     val description: String?,
-    val paymentPeriodDays: Int,
+    val paymentPeriod: Int, // 1-100
+    val paymentPeriodType: PaymentPeriodType, // тип
     val firstPaymentDate: Long,
     val nextPaymentDate: Long,
     val paymentMethodId: Long,
