@@ -19,6 +19,7 @@ class RootActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //enableEdgeToEdge()
 
         setContentView(binding.root)
 
@@ -30,21 +31,21 @@ class RootActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment, R.id.calendarFragment, R.id.mySubFragment -> {
-                    // Установка цвета статус-бара для HomeFragment и CalendarFragment, mySubFragment
+                R.id.homeFragment, R.id.calendarFragment -> {
+                    // Установка цвета статус-бара для HomeFragment и CalendarFragment
                     setStatusBarColor(R.color.Gray_75)
                     binding.bottomNavigationView.isVisible = true
                     binding.fab.isVisible = true
                 }
 
-                R.id.settingsFragment -> {
+                R.id.spendFragment, R.id.walletFragment -> {
                     // Установка цвета статус-бара для SpendFragment и WalletFragment
                     setStatusBarColor(R.color.Gray_80)
                     binding.bottomNavigationView.isVisible = true
                     binding.fab.isVisible = true
                 }
 
-                R.id.addSubSearchFragment -> {
+                R.id.settingsFragment, R.id.addSubSearchFragment -> {
                     // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
                     setStatusBarColor(R.color.Gray_80)
                     binding.bottomNavigationView.isVisible = false

@@ -7,10 +7,9 @@ import com.anshok.subzy.data.interceptors.LoggingInterceptor
 import com.anshok.subzy.data.local.LocalDataSource
 import com.anshok.subzy.data.local.db.AppDatabase
 import com.anshok.subzy.data.local.impl.LocalDataSourceImpl
-import com.anshok.subzy.data.remote.logo.RemoteDataSource
-import com.anshok.subzy.data.remote.logo.impl.RemoteDataSourceImpl
-import com.anshok.subzy.data.remote.logo.search.network.LogoApiService
-import com.anshok.subzy.data.remote.logo.search.network.RetrofitNetworkClient
+import com.anshok.subzy.data.remote.RemoteDataSource
+import com.anshok.subzy.data.remote.impl.RemoteDataSourceImpl
+import com.anshok.subzy.data.remote.search.network.LogoApiService
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -51,7 +50,7 @@ val dataModule = module {
 
     // NetworkClient
     single<NetworkClient> {
-        RetrofitNetworkClient(
+        com.anshok.subzy.data.remote.search.network.RetrofitNetworkClient(
             logoApiService = get(),
             context = androidContext()
         )
