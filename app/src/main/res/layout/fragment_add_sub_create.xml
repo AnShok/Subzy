@@ -73,7 +73,7 @@
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_marginTop="34dp"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="4dp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="@id/start_border_upcard"
