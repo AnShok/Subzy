@@ -13,5 +13,12 @@ val currencyModule = module {
     single { CbrNetworkClient.provideCbrApi() }
     single<CurrencyRepository> { CurrencyRepositoryImpl(get()) }
     single<CurrencyInteractor> { CurrencyInteractorImpl(get()) }
-    viewModel { CurrencyViewModel(get(), get()) }
+    viewModel {
+        CurrencyViewModel(
+            currencyInteractor = get(),
+            preferences = get(),
+            notifier = get()
+        )
+    }
+
 }

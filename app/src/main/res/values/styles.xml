@@ -88,15 +88,7 @@
         <item name="android:textColorHint">@color/Gray_30</item>
     </style>
 
-    <!-- скругление для иконки новой подписки -->
-    <style name="new_sub_icon_shape">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
-    </style>
 
-    <style name="new_sub_icon_background">
-        <item name="android:backgroundTint">@color/Gray_30</item>
-    </style>
 
 
     <!-- Кастомный стиль для DatePickerDialog -->

@@ -1,14 +1,16 @@
 package com.anshok.subzy.util
 
+import com.anshok.subzy.domain.model.CurrencyRate
 import java.text.NumberFormat
 import java.util.Locale
 
-object PriceFormatter {
+object CurrencyUtils {
 
     private val currencySymbols = mapOf(
 
         "EUR" to "€",
         "USD" to "$",
+        "RUB" to "₽",
         "KZT" to "₸",
         "UZS" to "сўм",
         "CNY" to "¥",
@@ -53,19 +55,20 @@ object PriceFormatter {
 
         )
 
-    fun formatPrice(price: Double?, currencyCode: String?): String {
-        if (price == null || currencyCode.isNullOrEmpty()) {
-            return "--"
-        }
+    fun getSymbol(code: String): String {
+        return currencySymbols[code.uppercase()] ?: code
+    }
 
-        val symbol = currencySymbols[currencyCode] ?: currencyCode
+    fun formatPrice(price: Double?, currencyCode: String?): String {
+        if (price == null || currencyCode.isNullOrBlank()) return "--"
         val formatter = NumberFormat.getNumberInstance(Locale("ru"))
         formatter.maximumFractionDigits = if (price % 1 == 0.0) 0 else 2
-
-        return "${formatter.format(price)} $symbol"
+        return "${formatter.format(price)} ${getSymbol(currencyCode)}"
     }
 
-    fun getSymbol(currencyCode: String): String {
-        return currencySymbols[currencyCode] ?: currencyCode
+    fun convert(amount: Double, from: CurrencyRate, to: CurrencyRate): Double {
+        val rubAmount = amount * from.value / from.nominal
+        return rubAmount * to.nominal / to.value
     }
 }
+

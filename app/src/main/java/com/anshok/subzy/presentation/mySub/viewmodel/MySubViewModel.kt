@@ -8,8 +8,8 @@ import com.anshok.subzy.domain.api.CurrencyInteractor
 import com.anshok.subzy.domain.api.SubscriptionInteractor
 import com.anshok.subzy.domain.model.CurrencyRate
 import com.anshok.subzy.domain.model.Subscription
-import com.anshok.subzy.util.CurrencyConverter
-import com.anshok.subzy.util.PriceFormatter
+import com.anshok.subzy.shared.events.CurrencyChangedNotifier
+import com.anshok.subzy.util.CurrencyUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,7 +21,8 @@ import java.time.ZoneId
 class MySubViewModel(
     private val subscriptionInteractor: SubscriptionInteractor,
     private val currencyInteractor: CurrencyInteractor,
-    private val userPreferences: UserPreferences
+    private val userPreferences: UserPreferences,
+    notifier: CurrencyChangedNotifier
 ) : ViewModel() {
 
     private val _subscriptions = MutableStateFlow<List<Subscription>>(emptyList())
@@ -30,19 +31,29 @@ class MySubViewModel(
     private val _upcomingBills = MutableStateFlow<List<Subscription>>(emptyList())
     val upcomingBills: StateFlow<List<Subscription>> = _upcomingBills.asStateFlow()
 
-    private val _metrics = MutableStateFlow<Triple<String, Subscription?, Subscription?>>(
+    private val _metrics = MutableStateFlow<Triple<String, Pair<Subscription, Double>?, Pair<Subscription, Double>?>>(
         Triple("--", null, null)
     )
-    val metrics: StateFlow<Triple<String, Subscription?, Subscription?>> = _metrics.asStateFlow()
+    val metrics: StateFlow<Triple<String, Pair<Subscription, Double>?, Pair<Subscription, Double>?>> = _metrics.asStateFlow()
 
     init {
         fetchSubscriptions()
+
+        viewModelScope.launch {
+            notifier.flow.collect {
+                calculateMetrics(_subscriptions.value)
+            }
+        }
+    }
+
+    fun getDefaultCurrencyCode(): String {
+        return userPreferences.getDefaultCurrency()
     }
 
     private fun fetchSubscriptions() {
         viewModelScope.launch {
             subscriptionInteractor.getAllSubscriptions().collect { list ->
-                _subscriptions.value = list
+                _subscriptions.value = list.sortedByDescending { it.id }
 
                 val now = LocalDate.now()
                 _upcomingBills.value = list.filter { subscription ->
@@ -64,9 +75,8 @@ class MySubViewModel(
         val defaultCurrency = currencies.find { it.code == defaultCode } ?: return
 
         val converted = list.mapNotNull { sub ->
-            val fromCurrency =
-                currencies.find { it.code == sub.currencyCode } ?: return@mapNotNull null
-            val convertedPrice = CurrencyConverter.convert(sub.price, fromCurrency, defaultCurrency)
+            val fromCurrency = currencies.find { it.code == sub.currencyCode } ?: return@mapNotNull null
+            val convertedPrice = CurrencyUtils.convert(sub.price, fromCurrency, defaultCurrency)
             Pair(sub, convertedPrice)
         }
 
@@ -74,12 +84,12 @@ class MySubViewModel(
         val mostExpensive = converted.maxByOrNull { it.second }
         val cheapest = converted.minByOrNull { it.second }
 
-        val formattedTotal = PriceFormatter.formatPrice(totalAmount, defaultCode)
+        val formattedTotal = CurrencyUtils.formatPrice(totalAmount, defaultCode)
 
         _metrics.value = Triple(
             formattedTotal,
-            mostExpensive?.first,
-            cheapest?.first
+            mostExpensive,
+            cheapest
         )
     }
 }

@@ -33,6 +33,9 @@ class AddSubSearchFragment : Fragment() {
         val bundle = Bundle().apply {
             putString("logoName", logo.name)
             putString("logoUrl", logo.logoUrl)
+            logo.logoResId?.let { resId ->
+                putInt("logoResId", resId)
+            }
         }
         findNavController().navigate(
             R.id.action_addSubSearchFragment_to_addSubCreateFragment,

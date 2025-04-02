@@ -17,7 +17,7 @@ import com.anshok.subzy.databinding.FragmentSettingsBinding
 import com.anshok.subzy.domain.model.AppIconStyle
 import com.anshok.subzy.domain.model.AppTheme
 import com.anshok.subzy.presentation.settings.bottomSheet.AppIconBottomSheet
-import com.anshok.subzy.presentation.settings.bottomSheet.CurrencyBottomSheet
+import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.EditNameBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.HelpBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.RateBottomSheet
@@ -26,7 +26,6 @@ import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.CurrencyViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.SettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.ThemeViewModel
-import com.anshok.subzy.util.PriceFormatter
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -83,13 +82,16 @@ class SettingsFragment : Fragment() {
         }
 
         currencyViewModel.selectedCurrencyCode.observe(viewLifecycleOwner) { code ->
-            val full = currencyViewModel.currencies.value?.find { it.code == code }
-            binding.selectedCurrencyCode.text = if (full != null) {
-                "${full.code} (${PriceFormatter.getSymbol(full.code)})"
-            } else {
-                code
-            }
+            // val full = currencyViewModel.currencies.value?.find { it.code == code }
+            // binding.selectedCurrencyCode.text = if (full != null) {
+            //     "${full.code} (${PriceFormatter.getSymbol(full.code)})"
+            // } else {
+            //     code
+            // }
+
+            binding.selectedCurrencyCode.text = code
         }
+
 
         appIconViewModel.selectedStyle.observe(viewLifecycleOwner) {
             binding.appIconValue.text = it.label
@@ -146,12 +148,15 @@ class SettingsFragment : Fragment() {
 
     // Выбор валюты по умолчанию
     private val showCurrencyBottomSheet = {
-        CurrencyBottomSheet(
+        CurrencyPickerBottomSheet(
             currencies = currencyViewModel.currencies.value.orEmpty(),
             currentCode = currencyViewModel.selectedCurrencyCode.value ?: "USD",
-            onCurrencySelected = { currencyViewModel.setCurrencyCode(it) }
-        ).show(parentFragmentManager, "CurrencyBottomSheet")
+            onCurrencySelected = { selectedCode ->
+                currencyViewModel.setCurrencyCode(selectedCode)
+            }
+        ).show(parentFragmentManager, "CurrencyPicker")
     }
+
 
     // Выбор иконки приложения
     private val showAppIconBottomSheet = {

@@ -1,8 +1,11 @@
 package com.anshok.subzy.data.local
 
 import android.content.Context
+import android.util.Log
+import java.util.Currency
 import com.anshok.subzy.domain.model.AppIconStyle
 import com.anshok.subzy.domain.model.AppTheme
+import java.util.Locale
 
 class UserPreferences(private val context: Context) {
 
@@ -29,8 +32,19 @@ class UserPreferences(private val context: Context) {
     }
 
     fun getDefaultCurrency(): String {
-        return prefs.getString("default_currency_code", "USD") ?: "USD"
+        val saved = prefs.getString("default_currency_code", null)
+        return if (saved != null) {
+            saved
+        } else {
+            val default = "USD"
+            saveDefaultCurrency(default)
+            default
+        }
     }
+
+
+
+
 
     fun saveAppIconStyle(style: AppIconStyle) {
         prefs.edit().putString("app_icon_style", style.name).apply()

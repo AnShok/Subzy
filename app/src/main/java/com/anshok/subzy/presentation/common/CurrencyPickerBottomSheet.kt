@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.settings.bottomSheet
+package com.anshok.subzy.presentation.common
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +10,11 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.BottomSheetCurrencySelectorBinding
 import com.anshok.subzy.domain.model.CurrencyRate
-import com.anshok.subzy.presentation.settings.adapter.CurrencyAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class CurrencyBottomSheet(
+
+class CurrencyPickerBottomSheet(
     private val currencies: List<CurrencyRate>,
     private val currentCode: String,
     private val onCurrencySelected: (String) -> Unit
@@ -22,8 +22,8 @@ class CurrencyBottomSheet(
 
     private val binding: BottomSheetCurrencySelectorBinding by viewBinding(CreateMethod.INFLATE)
     private lateinit var adapter: CurrencyAdapter
-    override fun getTheme(): Int = com.anshok.subzy.R.style.BottomSheetDialogResizeStyle
 
+    override fun getTheme(): Int = com.anshok.subzy.R.style.BottomSheetDialogResizeStyle
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,14 +34,13 @@ class CurrencyBottomSheet(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         adapter = CurrencyAdapter(currencies, currentCode) { code ->
             onCurrencySelected(code)
             dismiss()
         }
 
-        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
 
         binding.searchEditText.doAfterTextChanged { query ->
             adapter.filter(query.toString())
@@ -50,13 +49,12 @@ class CurrencyBottomSheet(
 
     override fun onStart() {
         super.onStart()
-        dialog?.let { dialog ->
-            val bottomSheet =
-                dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
-            val behavior = BottomSheetBehavior.from(bottomSheet!!)
-            behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            behavior.peekHeight = 0
+        dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)?.let {
+            it.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+            BottomSheetBehavior.from(it).apply {
+                state = BottomSheetBehavior.STATE_EXPANDED
+                peekHeight = 0
+            }
         }
     }
 }

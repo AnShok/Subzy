@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.settings.adapter
+package com.anshok.subzy.presentation.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anshok.subzy.databinding.ItemUpcomingBillsBinding
 import com.anshok.subzy.domain.model.Subscription
-import com.anshok.subzy.util.PriceFormatter
+import com.anshok.subzy.util.CurrencyUtils
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -20,7 +20,8 @@ class UpcomingBillsAdapter : RecyclerView.Adapter<UpcomingBillsAdapter.BillViewH
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BillViewHolder {
-        val binding = ItemUpcomingBillsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemUpcomingBillsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BillViewHolder(binding)
     }
 
@@ -44,7 +45,14 @@ class UpcomingBillsAdapter : RecyclerView.Adapter<UpcomingBillsAdapter.BillViewH
             binding.dayText.text = day
             binding.monthText.text = month
             binding.positionTitle.text = subscription.name
-            binding.costTitle.text = PriceFormatter.formatPrice(subscription.price, subscription.currencyCode)
+            binding.costTitle.text =
+                CurrencyUtils.formatPrice(subscription.price, subscription.currencyCode)
+            binding.positionTitle.isSelected = false
+
+            // Включаем с задержкой
+            binding.positionTitle.postDelayed({
+                binding.positionTitle.isSelected = true
+            }, 1500)
         }
     }
 }

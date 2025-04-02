@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.anshok.subzy.data.local.UserPreferences
 import com.anshok.subzy.domain.api.CurrencyInteractor
 import com.anshok.subzy.domain.model.CurrencyRate
+import com.anshok.subzy.shared.events.CurrencyChangedNotifier
 import kotlinx.coroutines.launch
 
 class CurrencyViewModel(
     private val currencyInteractor: CurrencyInteractor,
-    private val preferences: UserPreferences
+    private val preferences: UserPreferences,
+    private val notifier: CurrencyChangedNotifier
 ) : ViewModel() {
 
     private val _currencies = MutableLiveData<List<CurrencyRate>>()
@@ -35,13 +37,15 @@ class CurrencyViewModel(
                     value = it.value
                 )
             }
-
         }
     }
 
     fun setCurrencyCode(code: String) {
         preferences.saveDefaultCurrency(code)
         _selectedCurrencyCode.value = code
+
+        viewModelScope.launch {
+            notifier.notify(code)
+        }
     }
 }
-

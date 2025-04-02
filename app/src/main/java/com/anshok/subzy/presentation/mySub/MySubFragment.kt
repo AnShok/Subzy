@@ -18,12 +18,11 @@ import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentMySubBinding
 import com.anshok.subzy.presentation.mySub.adapter.SubscriptionPagerAdapter
 import com.anshok.subzy.presentation.mySub.viewmodel.MySubViewModel
-import com.anshok.subzy.util.PriceFormatter
+import com.anshok.subzy.util.CurrencyUtils
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class MySubFragment : Fragment() {
 
@@ -48,12 +47,14 @@ class MySubFragment : Fragment() {
     private fun observeMetrics() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.metrics.collectLatest { (total, highest, lowest) ->
+                val defaultCurrency = viewModel.getDefaultCurrencyCode()
+
                 binding.activeSubsCount.text = total
                 binding.highestSubsAmount.text = highest?.let {
-                    PriceFormatter.formatPrice(it.price, it.currencyCode)
+                    CurrencyUtils.formatPrice(it.second, defaultCurrency)
                 } ?: "--"
                 binding.lowestSubsAmount.text = lowest?.let {
-                    PriceFormatter.formatPrice(it.price, it.currencyCode)
+                    CurrencyUtils.formatPrice(it.second, defaultCurrency)
                 } ?: "--"
             }
         }
@@ -90,19 +91,18 @@ class MySubFragment : Fragment() {
 
         setupAnimatedClick(binding.highestSubs) {
             viewModel.metrics.value.second?.let {
-                val action = MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.id)
+                val action = MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.first.id)
                 findNavController().navigate(action)
             }
         }
 
         setupAnimatedClick(binding.lowestSubs) {
             viewModel.metrics.value.third?.let {
-                val action = MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.id)
+                val action = MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.first.id)
                 findNavController().navigate(action)
             }
         }
     }
-
 
     private fun setUpTabLayoutWithViewPager() {
         binding.viewPager.adapter = SubscriptionPagerAdapter(this)
@@ -111,8 +111,8 @@ class MySubFragment : Fragment() {
         }.attach()
 
         for (i in 0..1) {
-            val textView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.tab_title, null) as TextView
+            val textView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.tab_title, null) as TextView
             binding.tabLayoutSubscription.getTabAt(i)?.customView = textView
         }
     }
@@ -140,6 +140,4 @@ class MySubFragment : Fragment() {
             }
         }
     }
-
-
 }

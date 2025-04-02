@@ -26,7 +26,7 @@
     <string name="feedback_prompt">Вы хотите отправить отзыв?</string>
     <string name="send_email">Отправить по email</string>
     <string name="no_thanks">Нет, спасибо</string>
-
+    <string name="subscription_exists">Такая подписка уже существует</string>
 
 
 
