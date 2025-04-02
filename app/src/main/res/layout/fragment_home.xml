@@ -39,6 +39,18 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="18dp" />
 
+            <ImageButton
+                android:id="@+id/settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="settings"
+                android:padding="16dp"
+                android:src="@drawable/ic_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/Gray_30" />
+
             <!-- Круглый прогресс-бар -->
             <com.zigis.segmentedarcview.SegmentedArcView
                 android:id="@+id/progress_view"
@@ -122,13 +134,13 @@
                 android:id="@+id/appTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="110dp"
+                android:layout_marginTop="54dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
                 app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/settings_button">
 
                 <!-- Лого -->
                 <ImageView
@@ -197,10 +209,208 @@
                 app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
                 app:layout_constraintTop_toBottomOf="@+id/monthBills" />
 
+            <!-- Метрики подписок -->
+            <LinearLayout
+                android:id="@+id/subscriptionsMetrics"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="3"
+                app:layout_constraintEnd_toStartOf="@id/end_border_upcard"
+                app:layout_constraintStart_toEndOf="@id/start_border_upcard"
+                app:layout_constraintTop_toBottomOf="@id/seeBudgetButton">
 
+                <!-- Карточка Active subs -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/activeSubsCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    app:cardBackgroundColor="@color/Gray_65"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <!-- Полоска сверху -->
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/Accent_P_50"
+                            android:elevation="4dp" />
+
+                        <TextView
+                            android:id="@+id/activeSubsTitle"
+                            style="@style/TextAppearance.Headline1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingTop="14dp"
+                            android:text="Active subs"
+                            android:textColor="@color/Gray_40"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/activeSubsCount"
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingBottom="14dp"
+                            android:text="$12.99"
+                            android:textColor="@color/White"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Отступ -->
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp" />
+
+                <!-- Карточка Highest subs -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/Gray_65"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <!-- Полоска сверху -->
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/Primary_10"
+                            android:elevation="4dp" />
+
+                        <TextView
+                            android:id="@+id/highestSubsTitle"
+                            style="@style/TextAppearance.Headline1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingTop="14dp"
+                            android:text="Highest subs"
+                            android:textColor="@color/Gray_40"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/highestSubsAmount"
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingBottom="14dp"
+                            android:text="$19.99"
+                            android:textColor="@color/White"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Отступ -->
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp" />
+
+                <!-- Карточка Lowest subs -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/Gray_65"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <!-- Полоска сверху -->
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/Accent_S_50"
+                            android:elevation="4dp" />
+
+                        <TextView
+                            android:id="@+id/lowestSubsTitle"
+                            style="@style/TextAppearance.Headline1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingTop="14dp"
+                            android:text="Lowest subs"
+                            android:textColor="@color/Gray_40"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/lowestSubsAmount"
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingBottom="14dp"
+                            android:text="$5.99"
+                            android:textColor="@color/White"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
+    <!-- TabLayout для переключения вкладок -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_subscription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/tab_background"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toBottomOf="@id/upcard"
+        app:tabGravity="center"
+        app:tabIndicatorColor="@color/White"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@null"
+        app:tabTextAppearance="@style/CustomTabText"
+        tools:tabs="Your subscriptions, Upcoming bills" />
+
+    <!-- ViewPager2 для отображения контента -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout_subscription"
+        tools:listitem="@layout/fragment_home_rv_your_sub" />
 
 
     <!-- Отcтупы -->

@@ -1,26 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- =================== -->
-    <!-- THEME: LIGHT        -->
-    <!-- =================== -->
-
+    <!-- Base application theme for light mode -->
     <style name="Base.Theme.Subzy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@android:color/white</item>
-        <item name="colorOnPrimary">@android:color/black</item>
+        <!-- Цвет фона -->
+        <item name="colorPrimary">@color/Gray_100</item>
 
-        <item name="colorSecondary">@color/Gray_30</item>
-        <item name="colorSecondaryVariant">@color/Gray_50</item>
-        <item name="colorOnSecondary">@android:color/black</item>
-        <item name="colorOnSecondaryFixed">@color/Gray_60</item>
+        <!-- Текст основной -->
+        <item name="colorOnPrimary">@color/white</item>
 
-        <item name="colorSurface">@android:color/white</item>
-        <item name="colorOnSurface">@android:color/black</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorSecondaryVariant">@color/light_gray</item>
 
-        <item name="colorAccent">@color/Accent_P_100</item>
-        <item name="android:windowBackground">@android:color/white</item>
+        <!-- текст в edit text -->
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- hint в edit text -->
+        <item name="colorOnSecondaryFixed">@color/gray</item>
+
+        <!-- кнопки -->
+        <item name="colorSurface">@color/Gray_60</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- кнопки сброса и добавления в избранное -->
+        <item name="colorAccent">@color/Accent_P_50</item>
+
+        <!--позволяет динамически изменять фон окна приложения в соответствии с выбранной темой-->
+        <item name="android:windowBackground">@color/Gray_100</item>
     </style>
 
-    <style name="Theme.Subzy" parent="Base.Theme.Subzy" />
+    <!-- Тема приложения -->
+    <style name="Theme.Subzy" parent="Base.Theme.Subzy">
+        <!-- Дополнительные настройки можно добавить здесь -->
+    </style>
 
 </resources>
