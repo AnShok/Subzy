@@ -7,15 +7,16 @@ import androidx.room.PrimaryKey
 data class SubscriptionEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val name: String,  // Название подписки ("Netflix")
-    val logoUrl: String?,  // URL логотипа подписки (может быть null)
-    val price: Double,  // Стоимость подписки
-    val currencyCode: String,  // Код валюты (USD, EUR)
-    val description: String?,  // Описание (необязательно)
-    val paymentPeriodDays: Int,  // Период оплаты в днях (например, 30 для месячной подписки)
-    val firstPaymentDate: Long,  // Timestamp даты первой оплаты
-    val nextPaymentDate: Long,  // Timestamp даты следующего платежа
-    val paymentMethodId: Long,  // ID метода оплаты
-    val categoryId: Long,  // ID категории подписки
-    val comment: String?  // Комментарий (опционально)
+    val name: String,
+    val logoUrl: String?,
+    val price: Double,
+    val currencyCode: String,
+    val description: String?,
+    val paymentPeriod: Int,
+    val paymentPeriodType: String,
+    val firstPaymentDate: Long,
+    val nextPaymentDate: Long,
+    val paymentMethodId: Long,
+    val categoryId: Long,
+    val comment: String?
 )

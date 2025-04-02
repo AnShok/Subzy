@@ -51,6 +51,10 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <!-- Body Big -->
+    <style name="TextAppearance.BodyBig" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+    </style>
     <!-- Body Large -->
     <style name="TextAppearance.BodyLarge" parent="TextAppearance.AppCompat">
         <item name="android:textSize">16sp</item>
@@ -84,15 +88,7 @@
         <item name="android:textColorHint">@color/Gray_30</item>
     </style>
 
-    <!-- скругление для иконки новой подписки -->
-    <style name="new_sub_icon_shape">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
-    </style>
 
-    <style name="new_sub_icon_background">
-        <item name="android:backgroundTint">@color/Gray_30</item>
-    </style>
 
 
     <!-- Кастомный стиль для DatePickerDialog -->
@@ -109,6 +105,27 @@
 
     <!-- Стиль для NumberPicker в выборе периода подписки-->
     <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="android:textColorPrimary">@color/Gray_30</item>
+        <item name="android:textColorPrimary">@color/Gray_20</item>
+        <item name="colorControlNormal">@color/Accent_P_100</item>
     </style>
+
+
+    <style name="RoundedDialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@drawable/bg_rounded_16</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+    </style>
+
+    <style name="Widget.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/Primary_20</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="BottomSheet.Transparent" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item> <!-- прозрачный фон системного контейнера -->
+        <item name="backgroundTint">@android:color/transparent</item> <!-- важно для API 31+ -->
+    </style>
+
 </resources>

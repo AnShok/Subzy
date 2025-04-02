@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.add_sub.search.AddSubSearchFragment">
+    tools:context=".presentation.addSub.search.AddSubSearchFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/upcard"
@@ -50,31 +50,20 @@
                 app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--Кнопка добавления вручную-->
-            <ImageButton
-                android:id="@+id/add_sub_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Add subscription"
-                android:src="@drawable/ic_add_app"
-                app:layout_constraintEnd_toStartOf="@+id/end_border_upcard"
-                app:layout_constraintTop_toTopOf="parent" />
-
 
             <!-- Заголовок страницы -->
             <TextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.BodyLarge"
+                style="@style/TextAppearance.Headline4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New subscription"
+                android:layout_marginStart="24dp"
+                android:text="Search subscription"
                 android:textColor="@color/Gray_30"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/back_button"
-                app:layout_constraintEnd_toStartOf="@id/end_border_upcard"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toEndOf="@id/start_border_upcard"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/back_button"
                 app:layout_constraintTop_toTopOf="@+id/back_button" />
 
             <FrameLayout
@@ -95,7 +84,6 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="12dp"
                     android:background="@drawable/shape_14dp"
-                    app:cardElevation="8dp"
                     android:hint="@string/search_hint"
                     android:imeOptions="actionDone"
                     android:inputType="text"
@@ -107,7 +95,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/White"
                     android:textColorHint="@color/Gray_30"
-                    android:textCursorDrawable="@drawable/ic_edit_text_cursor" />
+                    android:textCursorDrawable="@drawable/ic_edit_text_cursor"
+                    app:cardElevation="8dp" />
 
                 <ImageView
                     android:id="@+id/search_icon_loupe"
@@ -151,7 +140,7 @@
         app:layout_constraintTop_toBottomOf="@id/upcard"
         tools:itemCount="3"
         tools:listitem="@layout/search_item_view"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/no_connection_placeholder"
@@ -236,7 +225,7 @@
         android:id="@+id/create_sub_frame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border">

@@ -5,7 +5,7 @@
     "resName": "local_youtube"
   },
   {
-    "name": "Netflix",
+    "name": "Netflix rtrt rt rtrt rt rt rtttrrtrt t r rt trtswrthtrh dtrshthsr hsrth srths srth ",
     "domain": "netflix.com",
     "resName": "local_netflix"
   },
@@ -26,8 +26,8 @@
   },
   {
     "name": "Яндекс Плюс",
-    "domain": "plus.yandex.ru",
-    "resName": "local_yandex_plus"
+    "domain": "яндекс.ру",
+    "resName": "local_ya_plus"
   },
   {
     "name": "Spotify",
@@ -662,8 +662,8 @@
   },
   {
     "name": "Яндекс Музыка",
-    "domain": "music.yandex.ru",
-    "resName": "local_yandeks_muzyka"
+    "domain": "music.ya.ru",
+    "resName": "local_ya_muzyka"
   },
   {
     "name": "VK Музыка",

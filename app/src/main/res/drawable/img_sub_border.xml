@@ -4,9 +4,9 @@
     <stroke
         android:width="4dp"
         android:color="@color/Gray_30"
-        android:dashWidth="16dp"
-        android:dashGap="16dp" />
+        android:dashWidth="24dp"
+        android:dashGap="24dp" />
 
-    <corners android:radius="24dp" />
+    <corners android:radius="64dp" />
 
 </shape>

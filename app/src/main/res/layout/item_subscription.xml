@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="6dp"
-    android:paddingBottom="6dp">
+    android:paddingVertical="6dp"
+    android:paddingHorizontal="23dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_sub_background_shape"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp">
 
@@ -41,14 +45,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:gravity="center_vertical"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textAllCaps="false"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="@color/white"
             android:textFontWeight="500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cost_title"
             app:layout_constraintStart_toEndOf="@id/card_view"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Spotify" />
+            tools:text="Super Long Streaming Platform Name Premium Ultra HD Subscription" />
 
         <TextView
             android:id="@+id/cost_title"
@@ -57,13 +71,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="15dp"
+            android:maxLines="1"
             android:textAllCaps="false"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="@color/white"
             android:textFontWeight="500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="$5.98" />
+            tools:text="$587.98" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

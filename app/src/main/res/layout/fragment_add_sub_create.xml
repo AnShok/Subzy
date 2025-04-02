@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray_80"
-    tools:context=".presentation.add_sub.create.AddSubCreateFragment">
+    tools:context=".presentation.addSub.create.AddSubCreateFragment">
 
     <!-- Верхняя карточка с иконкой и названием -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/top_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:shapeAppearanceOverlay="@style/CustomShapeUpCard"
         app:cardBackgroundColor="@color/Gray_75"
         app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CustomShapeUpCard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -54,48 +54,37 @@
             <!-- Заголовок страницы -->
             <TextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.BodyLarge"
+                style="@style/TextAppearance.Headline4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:text="New Subscription"
                 android:textColor="@color/Gray_30"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/back_button"
-                app:layout_constraintEnd_toEndOf="@id/end_border_upcard"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@id/start_border_upcard"
+                app:layout_constraintStart_toEndOf="@+id/back_button"
                 app:layout_constraintTop_toTopOf="@id/back_button" />
 
             <!-- Иконка приложения -->
-            <ImageView
-                android:id="@+id/app_icon"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_marginTop="34dp"
-                android:contentDescription="App Icon"
-                android:src="@drawable/img_sub_placeholder"
-                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@id/title" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_new_sub_icon"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_marginTop="34dp"
-                app:cardBackgroundColor="@color/Gray_55"
-                app:cardCornerRadius="8dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="@id/start_border_upcard"
                 app:layout_constraintTop_toBottomOf="@id/title">
 
                 <ImageView
-                    android:id="@+id/new_sub_icon"
-                    style="@style/new_sub_icon_background"
+                    android:id="@+id/item_logo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/img_sub_placeholder"
-                    app:shapeAppearanceOverlay="@style/new_sub_icon_shape" />
+                    android:src="@drawable/img_sub_placeholder" />
             </androidx.cardview.widget.CardView>
 
 
@@ -109,10 +98,10 @@
                 android:hint="Subscription Name*"
                 app:cursorColor="@color/Accent_P_100"
                 app:hintTextColor="@color/Gray_30"
-                app:layout_constraintBottom_toBottomOf="@+id/app_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/card_view_new_sub_icon"
                 app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
-                app:layout_constraintStart_toEndOf="@+id/app_icon"
-                app:layout_constraintTop_toTopOf="@id/app_icon">
+                app:layout_constraintStart_toEndOf="@+id/card_view_new_sub_icon"
+                app:layout_constraintTop_toTopOf="@id/card_view_new_sub_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/subscription_name_edit_txt"
@@ -135,15 +124,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:hint="Price*"
                 android:maxWidth="140dp"
-                android:minWidth="140dp"
-                android:layout_marginBottom="16dp"
+                android:minWidth="220dp"
                 app:cursorColor="@color/Accent_P_100"
                 app:hintTextColor="@color/Gray_30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@id/app_icon">
+                app:layout_constraintTop_toBottomOf="@id/card_view_new_sub_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/subscription_price_edit_txt"
@@ -159,26 +148,27 @@
                     tools:text="5.99" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/currency_button"
                 style="@style/TextAppearance.Headline2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/shape_14dp"
-                app:cardElevation="8dp"
-                android:clickable="true"
-                android:text="Default currency"
+                android:text="USD"
                 android:textAllCaps="false"
                 android:textStyle="bold"
+                app:icon="@drawable/ic_arrow_down"
+                app:iconGravity="end"
+                app:iconSize="16dp"
+                app:iconPadding="8dp"
                 app:backgroundTint="@color/Gray_55"
+                app:cornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/subscription_price_txt_layout"
                 app:layout_constraintEnd_toEndOf="@id/end_border_upcard"
                 app:layout_constraintStart_toEndOf="@+id/subscription_price_txt_layout"
                 app:layout_constraintTop_toTopOf="@+id/subscription_price_txt_layout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
 
 
     <!-- Нижняя карточка с деталями подписки -->
@@ -613,12 +603,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/shape_24dp"
                 android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_24dp"
                 android:elevation="8dp"
                 android:text="Add this platform"
-                android:textColor="@color/White"
                 android:textAllCaps="false"
+                android:textColor="@color/White"
                 app:backgroundTint="@color/Accent_P_100"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/end_border"
