@@ -13,22 +13,4 @@
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="no_more_data_add_manually">Других данных нет — добавьте вручную</string>
 
-    <string name="share_app_text">Я использую Subzy для управления подписками. Его можно загрузить в Google Play. https://play.google.com/store/apps/details?id=app.subzy.android</string>
-    <string name="share_with_friends">Поделиться через</string>
-
-    <string name="thanks_for_sharing">Спасибо, что делишься!</string>
-
-    <string name="email_subject">Вопрос / предложение по приложению Subzy</string>
-    <string name="email_body">Здравствуйте, уважаемые разработчики!\n\n</string>
-    <string name="choose_email">Отправить письмо через:</string>
-
-    <string name="rate_title">Помогите нам стать лучше,\nоцените приложение</string>
-    <string name="feedback_prompt">Вы хотите отправить отзыв?</string>
-    <string name="send_email">Отправить по email</string>
-    <string name="no_thanks">Нет, спасибо</string>
-
-
-
-
-
 </resources>

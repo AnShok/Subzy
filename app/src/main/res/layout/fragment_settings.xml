@@ -6,20 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".presentation.settings.SettingsFragment">
 
+    <!--Кнопка назад-->
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-6dp"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Заголовок страницы -->
 
     <TextView
         android:id="@+id/title"
-        style="@style/TextAppearance.Headline4"
+        style="@style/TextAppearance.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="Settings"
-        android:textStyle="bold"
         android:textColor="@color/Gray_30"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/back_button"
+        app:layout_constraintEnd_toStartOf="@id/end_border"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toEndOf="@id/start_border"
+        app:layout_constraintTop_toTopOf="@+id/back_button" />
 
     <View
         android:id="@+id/border_line"
@@ -27,98 +40,57 @@
         android:layout_height="2dp"
         app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/back_button" />
 
     <!-- Аватар профиля -->
 
-    <FrameLayout
-        android:id="@+id/frame_profile_image_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_image_card"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginTop="38dp"
+        app:cardCornerRadius="45dp"
+        app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/border_line">
 
-        <!-- Аватар -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/profile_image_card"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            app:cardCornerRadius="45dp"
-            app:cardElevation="4dp">
-
-            <ImageView
-                android:id="@+id/profile_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="Profile Picture"
-                android:scaleType="centerCrop"
-                android:src="@drawable/uifaces_abstract"
-                tools:src="@drawable/uifaces_abstract" />
-        </androidx.cardview.widget.CardView>
-
-        <!-- Иконка смены фото внизу справа -->
         <ImageView
-            android:id="@+id/profile_image_reload"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_circle_white"
-            android:contentDescription="Change photo"
-            android:elevation="@dimen/dimen_4dp"
-            android:padding="4dp"
-            android:src="@drawable/ic_arrows_reload" />
-    </FrameLayout>
+            android:id="@+id/profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Profile Picture"
+            android:scaleType="centerCrop"
+            android:src="@drawable/photo"
+            tools:src="@drawable/photo" />
+    </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/user_name_block"
+
+    <!-- Имя пользователя -->
+    <TextView
+        android:id="@+id/user_name"
+        style="@style/TextAppearance.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Pyska"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frame_profile_image_card">
-
-        <TextView
-            android:id="@+id/user_name"
-            style="@style/TextAppearance.Headline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Name" />
-
-        <ImageView
-            android:id="@+id/profile_name_editor"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            android:contentDescription="Edit name"
-            android:src="@drawable/ic_edit_pencil_liner"
-            app:layout_constraintBottom_toBottomOf="@id/user_name"
-            app:layout_constraintStart_toEndOf="@id/user_name"
-            app:layout_constraintTop_toTopOf="@id/user_name" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        app:layout_constraintTop_toBottomOf="@id/profile_image_card"
+        tools:text="Pyska" />
 
     <!-- Прокручиваемая часть -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toBottomOf="@+id/user_name_block">
+        app:layout_constraintTop_toBottomOf="@+id/user_name">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,10 +100,11 @@
             <!-- Содержимое, которое должно прокручиваться -->
 
 
+
             <!-- Заголовок раздела My subscriptions -->
             <TextView
                 android:id="@+id/subscriptions_title"
-                style="@style/TextAppearance.Headline4"
+                style="@style/TextAppearance.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -155,139 +128,200 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-
-                    <!-- Настройка Default currency -->
+                    <!-- Настройка Sorting -->
                     <LinearLayout
-                        android:id="@+id/currencySelector"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
+                            android:contentDescription="Sorting"
+                            android:src="@drawable/ic_sorting" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Sorting"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Настройка Summary -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="Summary"
+                            android:src="@drawable/ic_summary" />
+
+                        <TextView
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Summary"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average"
+                            android:textColor="@color/Gray_30" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward_medium" />
+                    </LinearLayout>
+
+                    <!-- Настройка Default currency -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:contentDescription="Default currency"
                             android:src="@drawable/ic_money" />
 
                         <TextView
-                            android:id="@+id/currencySelectorText"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="Default currency"
                             android:textColor="@color/white" />
 
                         <TextView
-                            android:id="@+id/selectedCurrencyCode"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.BodySmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
                             android:text="USD ($)"
                             android:textColor="@color/Gray_30" />
 
                         <ImageButton
-                            android:id="@+id/CurrencyButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="Open currency picker"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
                             android:src="@drawable/ic_arrow_forward_medium" />
                     </LinearLayout>
 
                     <!-- Настройка App icon -->
                     <LinearLayout
-                        android:id="@+id/appIconSetting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
                             android:contentDescription="App icon"
                             android:src="@drawable/ic_app_icon" />
 
                         <TextView
-                            android:id="@+id/appIconText"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="App icon"
                             android:textColor="@color/white" />
 
                         <TextView
-                            android:id="@+id/appIconValue"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.BodySmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
                             android:text="Default"
                             android:textColor="@color/Gray_30" />
 
                         <ImageButton
-                            android:id="@+id/appIconButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:contentDescription="Arrow"
                             android:src="@drawable/ic_arrow_forward_medium" />
                     </LinearLayout>
 
                     <!-- Настройка Theme -->
                     <LinearLayout
-                        android:id="@+id/theme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginTop="8dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
                             android:contentDescription="Theme"
                             android:src="@drawable/ic_theme" />
 
                         <TextView
-                            android:id="@+id/themeText"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="Theme"
                             android:textColor="@color/white" />
 
                         <TextView
-                            android:id="@+id/themeValue"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.BodySmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
                             android:text="Dark"
                             android:textColor="@color/Gray_30" />
 
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:contentDescription="Arrow"
                             android:src="@drawable/ic_arrow_forward_medium" />
                     </LinearLayout>
@@ -297,11 +331,11 @@
             <!-- Заголовок раздела About us -->
             <TextView
                 android:id="@+id/about_us_title"
-                style="@style/TextAppearance.Headline4"
+                style="@style/TextAppearance.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Others"
+                android:text="About us"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -323,138 +357,55 @@
 
                     <!-- Настройка about the application -->
                     <LinearLayout
-                        android:id="@+id/aboutUs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
-                            android:contentDescription="Аbout us"
-                            android:src="@drawable/ic_info" />
+                            android:contentDescription="Аbout the application"
+                            android:src="@drawable/ic_app_icon" />
 
                         <TextView
-                            android:id="@+id/aboutUsText"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_weight="1"
-                            android:text="About us"
+                            android:text="About the application"
                             android:textColor="@color/white" />
 
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
-
-                    <!-- Настройка оценить приложение -->
-                    <LinearLayout
-                        android:id="@+id/rateUs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
-                            android:contentDescription="rate"
-                            android:src="@drawable/ic_rate" />
-
-                        <TextView
-                            android:id="@+id/rateUsText"
-                            style="@style/TextAppearance.Headline3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Rate us"
-                            android:textColor="@color/white" />
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
-
-                    <!-- Настройка рассказать о приложении -->
-                    <LinearLayout
-                        android:id="@+id/tellFriends"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
-                            android:contentDescription="share"
-                            android:src="@drawable/ic_share" />
-
-                        <TextView
-                            android:id="@+id/tellFriendsText"
-                            style="@style/TextAppearance.Headline3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Tell your friends"
-                            android:textColor="@color/white" />
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:background="@android:color/transparent"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:contentDescription="Arrow"
                             android:src="@drawable/ic_arrow_forward_medium" />
                     </LinearLayout>
 
                     <!-- Настройка Help -->
                     <LinearLayout
-                        android:id="@+id/help"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginTop="8dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
                             android:contentDescription="Help"
-                            android:src="@drawable/ic_help" />
+                            android:src="@drawable/ic_theme" />
 
                         <TextView
-                            android:id="@+id/helpText"
-                            style="@style/TextAppearance.Headline3"
+                            style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="Help"
                             android:textColor="@color/white" />
@@ -463,7 +414,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:background="@android:color/transparent"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:contentDescription="Arrow"
                             android:src="@drawable/ic_arrow_forward_medium" />
                     </LinearLayout>
