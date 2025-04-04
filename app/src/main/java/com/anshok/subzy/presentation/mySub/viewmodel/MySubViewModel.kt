@@ -31,13 +31,25 @@ class MySubViewModel(
     private val _upcomingBills = MutableStateFlow<List<Subscription>>(emptyList())
     val upcomingBills: StateFlow<List<Subscription>> = _upcomingBills.asStateFlow()
 
-    private val _metrics = MutableStateFlow<Triple<String, Pair<Subscription, Double>?, Pair<Subscription, Double>?>>(
-        Triple("--", null, null)
-    )
-    val metrics: StateFlow<Triple<String, Pair<Subscription, Double>?, Pair<Subscription, Double>?>> = _metrics.asStateFlow()
+    private val _metrics =
+        MutableStateFlow<Triple<String, Pair<Subscription, Double>?, Pair<Subscription, Double>?>>(
+            Triple("--", null, null)
+        )
+    val metrics: StateFlow<Triple<String, Pair<Subscription, Double>?, Pair<Subscription, Double>?>> =
+        _metrics.asStateFlow()
 
     init {
-        fetchSubscriptions()
+        viewModelScope.launch {
+            val cached = currencyInteractor.getCurrencies()
+            if (cached.isEmpty()) {
+                try {
+                    currencyInteractor.loadCurrencies()
+                } catch (e: Exception) {
+                    //  тост для ручного обновления?
+                }
+            }
+            fetchSubscriptions()
+        }
 
         viewModelScope.launch {
             notifier.flow.collect {
@@ -45,6 +57,7 @@ class MySubViewModel(
             }
         }
     }
+
 
     fun getDefaultCurrencyCode(): String {
         return userPreferences.getDefaultCurrency()
@@ -75,7 +88,8 @@ class MySubViewModel(
         val defaultCurrency = currencies.find { it.code == defaultCode } ?: return
 
         val converted = list.mapNotNull { sub ->
-            val fromCurrency = currencies.find { it.code == sub.currencyCode } ?: return@mapNotNull null
+            val fromCurrency =
+                currencies.find { it.code == sub.currencyCode } ?: return@mapNotNull null
             val convertedPrice = CurrencyUtils.convert(sub.price, fromCurrency, defaultCurrency)
             Pair(sub, convertedPrice)
         }

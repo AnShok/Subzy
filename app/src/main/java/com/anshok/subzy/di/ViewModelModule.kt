@@ -14,6 +14,7 @@ import com.anshok.subzy.presentation.settings.viewmodel.HelpViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.RateViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.SettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.ThemeViewModel
+import com.anshok.subzy.presentation.subDetails.DetailsSubViewModel
 import com.anshok.subzy.shared.events.CurrencyChangedNotifier
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -65,6 +66,8 @@ val viewModelModule = module {
     }
 
     single { CurrencyChangedNotifier() }
+
+    viewModel { DetailsSubViewModel(get()) }
 
 
 }

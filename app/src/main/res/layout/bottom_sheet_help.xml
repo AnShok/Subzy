@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_bottom_sheet_background"
     android:orientation="vertical"
-    android:paddingHorizontal="16dp">
+    android:paddingHorizontal="8dp">
 
     <!-- Линия наверху -->
     <View
@@ -21,9 +21,10 @@
         android:id="@+id/emailContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/bg_selectable_rounded"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
         android:paddingVertical="12dp">
 
         <ImageView
@@ -51,9 +52,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="26dp"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/bg_selectable_rounded"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
         android:paddingVertical="12dp">
 
         <ImageView

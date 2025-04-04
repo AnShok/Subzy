@@ -3,12 +3,9 @@ package com.anshok.subzy.presentation.mySub.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.anshok.subzy.R
 import com.anshok.subzy.databinding.ItemSubscriptionBinding
 import com.anshok.subzy.domain.model.Subscription
 import com.anshok.subzy.util.CurrencyUtils
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.anshok.subzy.util.adapter.bindLogo
 
 class SubscriptionsAdapter(
@@ -40,7 +37,7 @@ class SubscriptionsAdapter(
         fun bind(item: Subscription) {
             binding.positionTitle.text = item.name
             binding.costTitle.text = CurrencyUtils.formatPrice(item.price, item.currencyCode)
-            binding.root.setOnClickListener { onItemClick(item) }
+            binding.container.setOnClickListener { onItemClick(item) }
             binding.positionTitle.isSelected = false
 
             binding.positionTitle.postDelayed({

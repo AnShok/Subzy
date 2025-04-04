@@ -16,8 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Settings"
-        android:textStyle="bold"
         android:textColor="@color/Gray_30"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/start_border"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -153,7 +153,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="16dp">
 
 
                     <!-- Настройка Default currency -->
@@ -162,9 +163,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/bg_selectable_rounded"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp">
 
@@ -208,9 +210,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/bg_selectable_rounded"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp">
 
@@ -253,9 +256,10 @@
                         android:id="@+id/theme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/bg_selectable_rounded"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp">
 
@@ -319,7 +323,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="16dp">
 
                     <!-- Настройка about the application -->
                     <LinearLayout
@@ -327,9 +332,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/bg_selectable_rounded"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp">
 
@@ -364,9 +370,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/bg_selectable_rounded"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp">
 
@@ -401,9 +408,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/bg_selectable_rounded"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp">
 
@@ -437,9 +445,10 @@
                         android:id="@+id/help"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/bg_selectable_rounded"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp">
 
