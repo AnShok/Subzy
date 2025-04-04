@@ -30,28 +30,28 @@ class RootActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment, R.id.calendarFragment, R.id.mySubFragment -> {
-                    // Установка цвета статус-бара для HomeFragment и CalendarFragment, mySubFragment
+                R.id.calendarFragment, R.id.mySubFragment -> {
+                    // Установка цвета статус-бара для CalendarFragment, mySubFragment
                     setStatusBarColor(R.color.Gray_75)
                     binding.bottomNavigationView.isVisible = true
                     binding.fab.isVisible = true
                 }
 
-                R.id.settingsFragment -> {
+                R.id.homeFragment, R.id.settingsFragment -> {
                     // Установка цвета статус-бара для SpendFragment и WalletFragment
                     setStatusBarColor(R.color.Gray_80)
                     binding.bottomNavigationView.isVisible = true
                     binding.fab.isVisible = true
                 }
 
-                R.id.addSubSearchFragment -> {
-                    // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
-                    setStatusBarColor(R.color.Gray_80)
-                    binding.bottomNavigationView.isVisible = false
-                    binding.fab.isVisible = false
-                }
+//                R.id.addSubSearchFragment -> {
+//                    // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
+//                    setStatusBarColor(R.color.Gray_80)
+//                    binding.bottomNavigationView.isVisible = false
+//                    binding.fab.isVisible = false
+//                }
 
-                R.id.addSubSearchFragment -> {
+                R.id.addSubSearchFragment, R.id.addSubCreateFragment, R.id.detailsSubFragment -> {
                     // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
                     setStatusBarColor(R.color.Gray_75)
                     binding.bottomNavigationView.isVisible = false

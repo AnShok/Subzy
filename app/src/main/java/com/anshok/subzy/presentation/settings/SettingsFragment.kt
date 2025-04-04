@@ -16,8 +16,8 @@ import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentSettingsBinding
 import com.anshok.subzy.domain.model.AppIconStyle
 import com.anshok.subzy.domain.model.AppTheme
-import com.anshok.subzy.presentation.settings.bottomSheet.AppIconBottomSheet
 import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
+import com.anshok.subzy.presentation.settings.bottomSheet.AppIconBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.EditNameBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.HelpBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.RateBottomSheet
@@ -82,13 +82,6 @@ class SettingsFragment : Fragment() {
         }
 
         currencyViewModel.selectedCurrencyCode.observe(viewLifecycleOwner) { code ->
-            // val full = currencyViewModel.currencies.value?.find { it.code == code }
-            // binding.selectedCurrencyCode.text = if (full != null) {
-            //     "${full.code} (${PriceFormatter.getSymbol(full.code)})"
-            // } else {
-            //     code
-            // }
-
             binding.selectedCurrencyCode.text = code
         }
 

@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.FragmentMySubItemRvBinding
 import com.anshok.subzy.presentation.mySub.adapter.SubscriptionsAdapter
 import com.anshok.subzy.presentation.mySub.viewmodel.MySubViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RvItemSubFragment : Fragment() {
@@ -30,13 +31,15 @@ class RvItemSubFragment : Fragment() {
         adapter = SubscriptionsAdapter { subscription ->
             val action =
                 MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(subscription.id)
-            findNavController().navigate(action)
+
+            // Навигация через родителя
+            (parentFragment?.findNavController() ?: findNavController()).navigate(action)
         }
 
         binding.subscriptionsList.layoutManager = LinearLayoutManager(requireContext())
         binding.subscriptionsList.adapter = adapter
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.subscriptions.collect { list ->
                 adapter.submitList(list)
 
@@ -46,5 +49,4 @@ class RvItemSubFragment : Fragment() {
             }
         }
     }
-
 }

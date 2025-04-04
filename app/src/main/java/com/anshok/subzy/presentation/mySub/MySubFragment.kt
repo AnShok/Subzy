@@ -49,7 +49,8 @@ class MySubFragment : Fragment() {
             viewModel.metrics.collectLatest { (total, highest, lowest) ->
                 val defaultCurrency = viewModel.getDefaultCurrencyCode()
 
-                binding.activeSubsCount.text = total
+                binding.activeSubsCount.text =
+                    if (highest == null && lowest == null) "--" else total
                 binding.highestSubsAmount.text = highest?.let {
                     CurrencyUtils.formatPrice(it.second, defaultCurrency)
                 } ?: "--"
@@ -91,14 +92,16 @@ class MySubFragment : Fragment() {
 
         setupAnimatedClick(binding.highestSubs) {
             viewModel.metrics.value.second?.let {
-                val action = MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.first.id)
+                val action =
+                    MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.first.id)
                 findNavController().navigate(action)
             }
         }
 
         setupAnimatedClick(binding.lowestSubs) {
             viewModel.metrics.value.third?.let {
-                val action = MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.first.id)
+                val action =
+                    MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(it.first.id)
                 findNavController().navigate(action)
             }
         }

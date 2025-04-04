@@ -7,25 +7,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:scaleType="centerInside"
-            android:contentDescription="app_icon" />
+            android:contentDescription="app_icon"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/iconLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Style name"
             android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:layout_marginTop="4dp"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
 </FrameLayout>

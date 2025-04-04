@@ -10,12 +10,14 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-class UpcomingBillsAdapter : RecyclerView.Adapter<UpcomingBillsAdapter.BillViewHolder>() {
+class UpcomingBillsAdapter(
+    private val onItemClick: (Subscription) -> Unit
+) : RecyclerView.Adapter<UpcomingBillsAdapter.BillViewHolder>() {
 
     private var items: List<Subscription> = emptyList()
 
     fun submitList(list: List<Subscription>) {
-        items = list.sortedBy { it.nextPaymentDate } // сортировка от ближайшей даты
+        items = list.sortedBy { it.nextPaymentDate }
         notifyDataSetChanged()
     }
 
@@ -31,28 +33,27 @@ class UpcomingBillsAdapter : RecyclerView.Adapter<UpcomingBillsAdapter.BillViewH
 
     override fun getItemCount(): Int = items.size
 
-    class BillViewHolder(private val binding: ItemUpcomingBillsBinding) :
+    inner class BillViewHolder(private val binding: ItemUpcomingBillsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(subscription: Subscription) {
-            val localDate = Instant.ofEpochMilli(subscription.nextPaymentDate)
+        fun bind(item: Subscription) {
+            val localDate = Instant.ofEpochMilli(item.nextPaymentDate)
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate()
 
-            val day = localDate.format(DateTimeFormatter.ofPattern("dd"))
-            val month = localDate.format(DateTimeFormatter.ofPattern("MMM")).uppercase()
+            binding.dayText.text = localDate.format(DateTimeFormatter.ofPattern("dd"))
+            binding.monthText.text =
+                localDate.format(DateTimeFormatter.ofPattern("MMM")).uppercase()
 
-            binding.dayText.text = day
-            binding.monthText.text = month
-            binding.positionTitle.text = subscription.name
-            binding.costTitle.text =
-                CurrencyUtils.formatPrice(subscription.price, subscription.currencyCode)
+            binding.positionTitle.text = item.name
+            binding.costTitle.text = CurrencyUtils.formatPrice(item.price, item.currencyCode)
+
             binding.positionTitle.isSelected = false
-
-            // Включаем с задержкой
             binding.positionTitle.postDelayed({
                 binding.positionTitle.isSelected = true
             }, 1500)
+
+            binding.container.setOnClickListener { onItemClick(item) }
         }
     }
 }

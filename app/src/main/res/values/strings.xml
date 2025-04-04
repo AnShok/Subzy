@@ -3,7 +3,6 @@
 
     <string name="search_hint">Enter request</string>
 
-
     <string name="sub_not_found_or_deleted">Sub not found or\n deleted</string>
     <string name="server_error">Server error</string>
     <string name="favorite_list_empty">The list is empty</string>
@@ -15,7 +14,6 @@
 
     <string name="share_app_text">Я использую Subzy для управления подписками. Его можно загрузить в Google Play. https://play.google.com/store/apps/details?id=app.subzy.android</string>
     <string name="share_with_friends">Поделиться через</string>
-
     <string name="thanks_for_sharing">Спасибо, что делишься!</string>
 
     <string name="email_subject">Вопрос / предложение по приложению Subzy</string>
@@ -26,8 +24,23 @@
     <string name="feedback_prompt">Вы хотите отправить отзыв?</string>
     <string name="send_email">Отправить по email</string>
     <string name="no_thanks">Нет, спасибо</string>
+
     <string name="subscription_exists">Такая подписка уже существует</string>
 
+    <string name="month_1">January</string>
+    <string name="month_2">February</string>
+    <string name="month_3">March</string>
+    <string name="month_4">April</string>
+    <string name="month_5">May</string>
+    <string name="month_6">June</string>
+    <string name="month_7">July</string>
+    <string name="month_8">August</string>
+    <string name="month_9">September</string>
+    <string name="month_10">October</string>
+    <string name="month_11">November</string>
+    <string name="month_12">December</string>
+
+    <string name="month_title">%1$s %2$d</string>
 
 
 

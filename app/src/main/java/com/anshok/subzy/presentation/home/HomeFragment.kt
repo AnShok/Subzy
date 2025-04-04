@@ -1,120 +1,84 @@
 package com.anshok.subzy.presentation.home
 
-import android.animation.ValueAnimator
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentHomeBinding
-import com.zigis.segmentedarcview.custom.ArcSegment
-import com.zigis.segmentedarcview.custom.BlinkAnimationSettings
+import com.anshok.subzy.util.MonthUtils
+import com.kizitonwose.calendar.core.CalendarDay
+import com.kizitonwose.calendar.view.MonthDayBinder
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.YearMonth
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private val binding: FragmentHomeBinding by viewBinding(CreateMethod.INFLATE)
-    private val tabTitles = arrayListOf("Your subscriptions", "Upcoming bills")
+    private val binding by viewBinding(FragmentHomeBinding::bind)
+    private val today = LocalDate.now()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupDottedCircles()
-        return binding.root
-    }
+    private val subscriptionMap = mapOf(
+        LocalDate.of(2025, 4, 2) to listOf("Netflix"),
+        LocalDate.of(2025, 4, 9) to listOf("YouTube Premium", "GitHub Copilot"),
+        LocalDate.of(2025, 4, 10) to listOf("Notion Pro"),
+        LocalDate.of(2025, 4, 24) to listOf("Spotify"),
+
+        LocalDate.of(2025, 5, 2) to listOf("Netflix"),
+        LocalDate.of(2025, 5, 9) to listOf("YouTube Premium", "GitHub Copilot"),
+        LocalDate.of(2025, 5, 10) to listOf("Notion Pro"),
+        LocalDate.of(2025, 5, 24) to listOf("Spotify"),
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val calendarView = binding.calendarView
+        val currentMonth = YearMonth.now()
 
-        setupArcView(
-            63f,  // progressPercentage - Процент заполения,
-            260f    // maxSweepAngle - Максимальный угол секции
+        calendarView.setup(
+            startMonth = currentMonth.minusMonths(12),
+            endMonth = currentMonth.plusMonths(24),
+            firstDayOfWeek = DayOfWeek.MONDAY
         )
+        calendarView.scrollToMonth(currentMonth)
 
-
-    }
-
-    private fun setupArcView(progressPercentage: Float, maxSweepAngle: Float) {
-        // Задний фон
-        val arcViewBackground = binding.progressViewBackground
-        arcViewBackground.segments = listOf(
-            ArcSegment(
-                ContextCompat.getColor(requireContext(), R.color.Gray_62),
-                ContextCompat.getColor(requireContext(), R.color.Gray_62)
-            )
-        )
-
-
-        val arcView = binding.progressView
-        val animator = ValueAnimator.ofFloat(0f, progressPercentage)
-        animator.duration = 1500
-        animator.addUpdateListener { animation ->
-            val animatedValue = animation.animatedValue as Float
-            arcView.segments = listOf(
-                ArcSegment(
-                    ContextCompat.getColor(requireContext(), R.color.Primary_10),
-                    ContextCompat.getColor(requireContext(), R.color.Accent_P_100),
-                    sweepAngle = maxSweepAngle * (animatedValue / 100f) //рассчет для секции
-                )
-            )
+        calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
+            override fun create(view: View) = DayViewContainer(view)
+            override fun bind(container: DayViewContainer, day: CalendarDay) {
+                container.bind(day, subscriptionMap.containsKey(day.date), today)
+                container.view.setOnClickListener {
+                    updateSubscriptionsForDate(day.date)
+                    calendarView.notifyDayChanged(day)
+                }
+            }
         }
-        animator.start()
 
-        arcView.blinkAnimationSettings = BlinkAnimationSettings(
-            minAlpha = 0.4F,
-            maxAlpha = 1F,
-            duration = 2000L
-        )
+        calendarView.monthScrollListener = {
+            val monthName =
+                MonthUtils.getLocalizedMonthName(requireContext(), it.yearMonth.monthValue)
+            val year = it.yearMonth.year
+            binding.monthTitle.text = getString(R.string.month_title, monthName, year)
+        }
+
+
+
+        binding.prevMonthButton.setOnClickListener {
+            calendarView.findFirstVisibleMonth()?.let {
+                calendarView.scrollToMonth(it.yearMonth.minusMonths(1))
+            }
+        }
+
+        binding.nextMonthButton.setOnClickListener {
+            calendarView.findFirstVisibleMonth()?.let {
+                calendarView.scrollToMonth(it.yearMonth.plusMonths(1))
+            }
+        }
+
+        updateSubscriptionsForDate(today)
     }
 
-    // Отдельный метод для настройки всех кругов
-    private fun setupDottedCircles() {
-        setupDotInside()
-        setupDotOutside()
-        setupDotOutsideSecond()
-    }
-
-    // Настройка внутреннего круга с заданными углами
-    private fun setupDotInside() {
-        val dotInside = binding.dotInside
-        dotInside.setCircleParams(
-            numberOfDots = 32,
-            dotRadius = 5f,
-            circleRadius = 315f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_62),
-            startAngle = 140.0,  // Угол начала
-            endAngle = 408.0     // Угол конца
-        )
-    }
-
-    // Настройка внешнего круга с заданными углами
-    private fun setupDotOutside() {
-        val dotOutside = binding.dotOutside
-        dotOutside.setCircleParams(
-            numberOfDots = 92,
-            dotRadius = 5f,
-            circleRadius = 450f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_62),
-            startAngle = 135.0,    // Угол начала
-            endAngle = 408.0     // Угол конца
-        )
-    }
-
-    // Настройка внешнего круга с заданными углами
-    private fun setupDotOutsideSecond() {
-        val dotOutside = binding.dotOutsideSecond
-        dotOutside.setCircleParams(
-            numberOfDots = 110,
-            dotRadius = 5f,
-            circleRadius = 520f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_65),
-            startAngle = 135.0,    // Угол начала
-            endAngle = 408.0     // Угол конца
-        )
+    private fun updateSubscriptionsForDate(date: LocalDate) {
+        val subs = subscriptionMap[date]
+        binding.todaySubscriptionsSubtitle.text =
+            if (subs.isNullOrEmpty()) "Нет подписок" else subs.joinToString(", ")
     }
 }
