@@ -25,7 +25,8 @@
     <string name="send_email">Отправить по email</string>
     <string name="no_thanks">Нет, спасибо</string>
 
-    <string name="subscription_exists">Такая подписка уже существует</string>
+    <string name="subscription_exists">Подписка с таким именем уже существует</string>
+    <string name="subscription_invalid_input">Укажите название подписки и цену</string>
 
     <string name="month_1">January</string>
     <string name="month_2">February</string>
@@ -41,7 +42,6 @@
     <string name="month_12">December</string>
 
     <string name="month_title">%1$s %2$d</string>
-
 
 
 </resources>

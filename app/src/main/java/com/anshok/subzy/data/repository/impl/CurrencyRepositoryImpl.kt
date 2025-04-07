@@ -1,10 +1,10 @@
 package com.anshok.subzy.data.repository.impl
 
-import com.anshok.subzy.data.local.UserPreferences
-import com.anshok.subzy.data.remote.currency.search.CbrApiService
-import com.anshok.subzy.data.remote.currency.search.CurrencyParser
+import com.anshok.subzy.data.local.preferences.UserPreferences
+import com.anshok.subzy.data.remote.currency.network.CbrApiService
+import com.anshok.subzy.data.remote.currency.network.CurrencyParser
 import com.anshok.subzy.data.remote.models.Currency
-import com.anshok.subzy.domain.api.CurrencyRepository
+import com.anshok.subzy.domain.currency.CurrencyRepository
 import com.google.gson.Gson
 
 class CurrencyRepositoryImpl(

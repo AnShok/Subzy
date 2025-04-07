@@ -4,9 +4,9 @@ import android.util.Log
 import com.anshok.subzy.data.converters.EmbeddedLogoMapper
 import com.anshok.subzy.data.converters.EntityToDomainMapper
 import com.anshok.subzy.data.local.impl.EmbeddedLogoProvider
-import com.anshok.subzy.data.remote.logo.search.network.LogoApiService
-import com.anshok.subzy.domain.api.SearchRepository
-import com.anshok.subzy.domain.model.Logo
+import com.anshok.subzy.data.remote.logo.network.LogoApiService
+import com.anshok.subzy.domain.search.SearchRepository
+import com.anshok.subzy.domain.logo.model.Logo
 import com.anshok.subzy.util.ResourceLogo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

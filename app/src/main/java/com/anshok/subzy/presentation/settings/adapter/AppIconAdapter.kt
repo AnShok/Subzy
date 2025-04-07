@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.ItemAppIconBinding
-import com.anshok.subzy.domain.model.AppIconStyle
+import com.anshok.subzy.domain.settings.model.AppIconStyle
 
 class AppIconAdapter(
     private val styles: List<AppIconStyle>,

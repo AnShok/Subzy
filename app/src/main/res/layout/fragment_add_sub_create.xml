@@ -14,11 +14,11 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/Gray_75"
         app:cardElevation="6dp"
-        app:strokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/CustomShapeUpCard">
+        app:shapeAppearanceOverlay="@style/CustomShapeUpCard"
+        app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -157,11 +157,11 @@
                 android:text="USD"
                 android:textAllCaps="false"
                 android:textStyle="bold"
+                app:backgroundTint="@color/Gray_55"
+                app:cornerRadius="12dp"
                 app:icon="@drawable/ic_arrow_down_special"
                 app:iconGravity="textEnd"
                 app:iconPadding="8dp"
-                app:backgroundTint="@color/Gray_55"
-                app:cornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/subscription_price_txt_layout"
                 app:layout_constraintEnd_toEndOf="@id/end_border_upcard"
                 app:layout_constraintStart_toEndOf="@+id/subscription_price_txt_layout"
@@ -176,10 +176,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/Gray_80"
-        app:layout_constraintTop_toBottomOf="@id/top_card"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/top_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -605,10 +605,10 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/shape_24dp"
                 android:elevation="8dp"
+                android:enabled="false"
                 android:text="Add this platform"
                 android:textAllCaps="false"
                 android:textColor="@color/White"
-                android:enabled="false"
                 app:backgroundTint="@color/Gray_55"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/end_border"

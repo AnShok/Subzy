@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.FragmentActivity
-import com.anshok.subzy.domain.model.AppIconStyle
+import com.anshok.subzy.domain.settings.model.AppIconStyle
 import com.anshok.subzy.presentation.settings.RestartDialogFragment
 
 fun switchAppIcon(context: Context, style: AppIconStyle) {

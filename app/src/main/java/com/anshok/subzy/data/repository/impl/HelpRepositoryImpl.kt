@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.anshok.subzy.R
-import com.anshok.subzy.domain.api.HelpRepository
+import com.anshok.subzy.domain.help.HelpRepository
 
 class HelpRepositoryImpl(private val context: Context) : HelpRepository {
     override fun getEmailIntent(): Intent {

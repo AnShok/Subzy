@@ -2,10 +2,10 @@ package com.anshok.subzy.util
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.anshok.subzy.data.local.UserPreferences
+import com.anshok.subzy.data.local.preferences.UserPreferences
 import com.anshok.subzy.data.local.impl.EmbeddedLogoProvider
-import com.anshok.subzy.domain.api.CurrencyInteractor
-import com.anshok.subzy.domain.model.AppTheme
+import com.anshok.subzy.domain.currency.CurrencyInteractor
+import com.anshok.subzy.domain.settings.model.AppTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

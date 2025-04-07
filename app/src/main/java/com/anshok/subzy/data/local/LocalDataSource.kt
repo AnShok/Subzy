@@ -1,11 +1,11 @@
 package com.anshok.subzy.data.local
 
-import com.anshok.subzy.data.local.db.entities.CategoryEntity
-import com.anshok.subzy.data.local.db.entities.PaymentMethodEntity
-import com.anshok.subzy.data.local.db.entities.ReminderEntity
-import com.anshok.subzy.data.local.db.entities.SubscriptionCategoryEntity
-import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
-import com.anshok.subzy.data.local.db.entities.SubscriptionPaymentMethodEntity
+import com.anshok.subzy.data.local.entities.CategoryEntity
+import com.anshok.subzy.data.local.entities.PaymentMethodEntity
+import com.anshok.subzy.data.local.entities.ReminderEntity
+import com.anshok.subzy.data.local.entities.SubscriptionCategoryEntity
+import com.anshok.subzy.data.local.entities.SubscriptionEntity
+import com.anshok.subzy.data.local.entities.SubscriptionPaymentMethodEntity
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {

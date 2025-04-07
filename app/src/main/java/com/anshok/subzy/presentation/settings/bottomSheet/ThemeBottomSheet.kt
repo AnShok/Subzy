@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.anshok.subzy.R
-import com.anshok.subzy.domain.model.AppTheme
+import com.anshok.subzy.domain.settings.model.AppTheme
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ThemeBottomSheet(

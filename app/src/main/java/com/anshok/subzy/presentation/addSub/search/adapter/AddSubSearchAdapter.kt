@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.anshok.subzy.databinding.SearchItemViewBinding
-import com.anshok.subzy.domain.model.Logo
+import com.anshok.subzy.domain.logo.model.Logo
 
 class AddSubSearchAdapter(
     private val onItemClick: (Logo) -> Unit

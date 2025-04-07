@@ -1,7 +1,6 @@
 package com.anshok.subzy.util
 
 import android.app.Application
-import com.anshok.subzy.di.currencyModule
 import com.anshok.subzy.di.dataModule
 import com.anshok.subzy.di.interactorModule
 import com.anshok.subzy.di.repositoryModule
@@ -21,8 +20,7 @@ class App : Application() {
                 viewModelModule,
                 interactorModule,
                 repositoryModule,
-                dataModule,
-                currencyModule
+                dataModule
             )
         }
 

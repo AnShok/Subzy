@@ -3,7 +3,7 @@ package com.anshok.subzy.data.repository.impl
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.anshok.subzy.domain.api.RateRepository
+import com.anshok.subzy.domain.rate.RateRepository
 
 class RateRepositoryImpl(
     private val context: Context

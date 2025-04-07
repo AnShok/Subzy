@@ -1,4 +1,4 @@
-import com.anshok.subzy.domain.model.Logo
+import com.anshok.subzy.domain.logo.model.Logo
 import com.anshok.subzy.util.ResourceLogo
 
 sealed interface AddSubSearchState {

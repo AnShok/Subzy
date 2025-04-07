@@ -18,11 +18,13 @@ class RestartDialogFragment(private val onComplete: () -> Unit) : DialogFragment
     private val binding get() = _binding!!
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return Dialog(requireContext(), R.style.RoundedDialog).apply {
+        return Dialog(requireContext()).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setCancelable(false)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +42,9 @@ class RestartDialogFragment(private val onComplete: () -> Unit) : DialogFragment
         }
 
         Handler(Looper.getMainLooper()).postDelayed({
-            onComplete()
+            if (isAdded) onComplete()
         }, 1500)
+
     }
 
     override fun onDestroyView() {

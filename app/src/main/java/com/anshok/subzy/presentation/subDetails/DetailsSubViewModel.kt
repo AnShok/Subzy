@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anshok.subzy.domain.api.SubscriptionInteractor
-import com.anshok.subzy.domain.model.Subscription
+import com.anshok.subzy.domain.subscription.SubscriptionInteractor
+import com.anshok.subzy.domain.subscription.model.Subscription
 import kotlinx.coroutines.launch
 
 class DetailsSubViewModel(

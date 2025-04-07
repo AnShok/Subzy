@@ -1,7 +1,7 @@
 package com.anshok.subzy.data.repository.impl
 
-import com.anshok.subzy.data.local.UserPreferences
-import com.anshok.subzy.domain.api.SettingsRepository
+import com.anshok.subzy.data.local.preferences.UserPreferences
+import com.anshok.subzy.domain.settings.SettingsRepository
 
 class SettingsRepositoryImpl(private val userPreferences: UserPreferences) : SettingsRepository {
     override fun saveProfileImagePath(path: String) = userPreferences.saveProfileImagePath(path)

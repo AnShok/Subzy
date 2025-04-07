@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anshok.subzy.data.local.UserPreferences
-import com.anshok.subzy.domain.model.AppTheme
+import com.anshok.subzy.data.local.preferences.UserPreferences
+import com.anshok.subzy.domain.settings.model.AppTheme
 
 class ThemeViewModel(
     private val preferences: UserPreferences

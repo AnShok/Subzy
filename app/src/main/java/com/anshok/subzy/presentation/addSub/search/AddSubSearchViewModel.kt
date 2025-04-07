@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anshok.subzy.domain.api.LocalLogoInteractor
-import com.anshok.subzy.domain.api.SearchInteractor
-import com.anshok.subzy.domain.model.Logo
+import com.anshok.subzy.domain.logo.LocalLogoInteractor
+import com.anshok.subzy.domain.logo.model.Logo
+import com.anshok.subzy.domain.search.SearchInteractor
 import com.anshok.subzy.util.ResourceLogo
 import com.anshok.subzy.util.debounce
 import kotlinx.coroutines.Dispatchers

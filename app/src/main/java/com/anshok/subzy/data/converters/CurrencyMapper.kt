@@ -1,7 +1,7 @@
 package com.anshok.subzy.data.converters
 
 import com.anshok.subzy.data.remote.models.Currency
-import com.anshok.subzy.domain.model.CurrencyRate
+import com.anshok.subzy.domain.currency.model.CurrencyRate
 
 object CurrencyMapper {
 

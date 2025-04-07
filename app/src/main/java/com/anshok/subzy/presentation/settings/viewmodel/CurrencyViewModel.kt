@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anshok.subzy.data.local.UserPreferences
-import com.anshok.subzy.domain.api.CurrencyInteractor
-import com.anshok.subzy.domain.model.CurrencyRate
+import com.anshok.subzy.data.local.preferences.UserPreferences
+import com.anshok.subzy.domain.currency.CurrencyInteractor
+import com.anshok.subzy.domain.currency.model.CurrencyRate
 import com.anshok.subzy.shared.events.CurrencyChangedNotifier
 import kotlinx.coroutines.launch
 

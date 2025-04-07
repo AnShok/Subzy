@@ -1,6 +1,6 @@
 package com.anshok.subzy.util
 
-import com.anshok.subzy.domain.model.CurrencyRate
+import com.anshok.subzy.domain.currency.model.CurrencyRate
 import java.text.NumberFormat
 import java.util.Locale
 

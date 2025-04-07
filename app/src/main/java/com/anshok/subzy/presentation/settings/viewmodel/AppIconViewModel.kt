@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anshok.subzy.data.local.UserPreferences
-import com.anshok.subzy.domain.model.AppIconStyle
-import com.anshok.subzy.domain.model.AppIconStyle.Companion.getCurrentComponentName
+import com.anshok.subzy.data.local.preferences.UserPreferences
+import com.anshok.subzy.domain.settings.model.AppIconStyle
+import com.anshok.subzy.domain.settings.model.AppIconStyle.Companion.getCurrentComponentName
 import com.anshok.subzy.util.switchAppIcon
 
 class AppIconViewModel(

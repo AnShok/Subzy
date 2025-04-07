@@ -1,17 +1,14 @@
 package com.anshok.subzy.presentation.subDetails
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -22,11 +19,10 @@ import com.anshok.subzy.presentation.subDetails.adapter.SubscriptionDetailAdapte
 import com.anshok.subzy.presentation.subDetails.dialog.DeleteConfirmationDialog
 import com.anshok.subzy.util.CurrencyUtils
 import com.anshok.subzy.util.adapter.bindLogo
+import com.anshok.subzy.util.adapter.toLogo
 import com.anshok.subzy.util.safeDelayedAction
 import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsSubFragment : Fragment() {
@@ -57,7 +53,7 @@ class DetailsSubFragment : Fragment() {
                 binding.subscriptionName.text = it.name
                 binding.subscriptionPrice.text =
                     CurrencyUtils.formatPrice(it.price, it.currencyCode)
-                bindLogo(it.logoUrl, binding.itemLogo)
+                bindLogo(it.logoUrl.toLogo(requireContext()), binding.itemLogo)
             }
         })
 
@@ -92,21 +88,20 @@ class DetailsSubFragment : Fragment() {
         popupWindow.isFocusable = true
         popupWindow.animationStyle = R.style.PopupWindowAnimation
 
-        // 🔹 Измеряем popupView перед показом
+        // Измеряем popupView перед показом
         popupView.measure(
             View.MeasureSpec.UNSPECIFIED,
             View.MeasureSpec.UNSPECIFIED
         )
         val popupWidth = popupView.measuredWidth
 
-        // 🔹 Показ под якорем, но сдвигаем влево на ширину popup - ширина anchor
+        // Показ под якорем
         val offsetX = -popupWidth
-        val offsetY = anchor.height /10
+        val offsetY = anchor.height / 10
 
-        // 🔹 Используем showAsDropDown, а не showAtLocation
         popupWindow.showAsDropDown(anchor, offsetX, offsetY)
 
-        // 🔹 Обработчики кликов
+        // Обработчики кликов
         val editOption = popupView.findViewById<LinearLayout>(R.id.edit_option)
         val deleteOption = popupView.findViewById<LinearLayout>(R.id.delete_option)
 
@@ -120,7 +115,12 @@ class DetailsSubFragment : Fragment() {
             DeleteConfirmationDialog {
                 viewModel.deleteSubscription {
                     Snackbar.make(binding.root, "Subscription deleted", Snackbar.LENGTH_SHORT)
-                        .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.Accent_P_100))
+                        .setBackgroundTint(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.Accent_P_100
+                            )
+                        )
                         .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                         .show()
                     findNavController().navigateUp()

@@ -10,20 +10,28 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAddSubCreateBinding
-import com.anshok.subzy.domain.model.PaymentPeriodType
-import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.*
+import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
+import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.CategoryBottomSheetFragment
+import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.CommentBottomSheet
+import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.DescriptionBottomSheet
+import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.NotificationReminderBottomSheet
+import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.PaymentPeriodBottomSheet
+import com.anshok.subzy.presentation.addSub.create.state.SaveResult
 import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
+import com.anshok.subzy.presentation.common.CustomErrorDialogFragment
 import com.anshok.subzy.util.adapter.bindLogo
+import com.anshok.subzy.util.adapter.toLogo
 import com.anshok.subzy.util.safeDelayedClick
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class AddSubCreateFragment : Fragment() {
 
@@ -34,7 +42,8 @@ class AddSubCreateFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
                 viewModel.selectedImageFromGallery = it.toString()
-                bindLogo(it.toString(), binding.itemLogo)
+                bindLogo(it.toString().toLogo(requireContext()), binding.itemLogo)
+
             }
         }
 
@@ -68,7 +77,7 @@ class AddSubCreateFragment : Fragment() {
 
     private fun observeCurrency() {
         viewModel.currencyCode.observe(viewLifecycleOwner) { code ->
-            binding.currencyButton.text = code // код + символ не нужен
+            binding.currencyButton.text = code
         }
     }
 
@@ -80,14 +89,15 @@ class AddSubCreateFragment : Fragment() {
 
             bundle.getString("logoUrl")?.let {
                 viewModel.selectedLogoUrl = it
-                bindLogo(it, binding.itemLogo)
+                bindLogo(it.toLogo(requireContext()), binding.itemLogo)
+
             }
 
             val logoResId = bundle.getInt("logoResId")
             if (logoResId != 0) {
                 val resName = requireContext().resources.getResourceEntryName(logoResId)
                 viewModel.selectedLogoResName = resName
-                bindLogo("res://$resName", binding.itemLogo)
+                bindLogo("res://$resName".toLogo(requireContext()), binding.itemLogo)
             }
         }
     }
@@ -131,9 +141,12 @@ class AddSubCreateFragment : Fragment() {
 
     private fun onSaveClicked() {
         val name = binding.subscriptionNameEditTxt.text?.toString()?.trim().orEmpty()
-        val price = binding.subscriptionPriceEditTxt.text?.toString()?.replace(",", ".")?.toDoubleOrNull() ?: 0.0
+        val price =
+            binding.subscriptionPriceEditTxt.text?.toString()?.replace(",", ".")?.toDoubleOrNull()
+                ?: 0.0
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        val dateMillis = dateFormat.parse(binding.firstPaymentValue.text.toString())?.time ?: System.currentTimeMillis()
+        val dateMillis = dateFormat.parse(binding.firstPaymentValue.text.toString())?.time
+            ?: System.currentTimeMillis()
 
         viewModel.saveSubscription(
             name = name,
@@ -145,14 +158,23 @@ class AddSubCreateFragment : Fragment() {
             categoryId = 0L,
             paymentMethodId = 0L,
             comment = binding.commentValue.text.toString().takeIf { it != "Not specified" }
-        ) { success, errorMessage ->
-            if (success) {
-                findNavController().navigate(R.id.action_addSubCreateFragment_to_homeFragment)
-            } else {
-                showErrorDialog(errorMessage ?: getString(R.string.subscription_exists))
+        ) { result ->
+            when (result) {
+                SaveResult.Success -> {
+                    findNavController().navigate(R.id.action_addSubCreateFragment_to_homeFragment)
+                }
+
+                SaveResult.Duplicate -> {
+                    showErrorDialog(getString(R.string.subscription_exists))
+                }
+
+                SaveResult.InvalidInput -> {
+                    showErrorDialog(getString(R.string.subscription_invalid_input))
+                }
             }
         }
     }
+
 
     private fun setCurrentDate() {
         val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())
@@ -165,7 +187,8 @@ class AddSubCreateFragment : Fragment() {
             requireContext(),
             { _, year, month, day ->
                 calendar.set(year, month, day)
-                val selectedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(calendar.time)
+                val selectedDate =
+                    SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(calendar.time)
                 binding.firstPaymentValue.text = selectedDate
                 validateFields()
             },
@@ -207,12 +230,11 @@ class AddSubCreateFragment : Fragment() {
     }
 
     private fun showErrorDialog(message: String) {
-        android.app.AlertDialog.Builder(requireContext())
-            .setTitle("Ошибка")
-            .setMessage(message)
-            .setPositiveButton("ОК", null)
-            .show()
+        CustomErrorDialogFragment(
+            message = message
+        ).show(parentFragmentManager, "CustomErrorDialog")
     }
+
 
     private fun setupValidation() {
         binding.subscriptionNameEditTxt.doAfterTextChanged { validateFields() }
@@ -223,12 +245,13 @@ class AddSubCreateFragment : Fragment() {
             validateFields()
         }
 
-        validateFields() // стартовая валидация
+        validateFields()
     }
 
     private fun validateFields() {
         val isNameValid = binding.subscriptionNameEditTxt.text?.isNotBlank() == true
-        val isPriceValid = binding.subscriptionPriceEditTxt.text?.toString()?.toDoubleOrNull()?.let { it > 0 } == true
+        val isPriceValid = binding.subscriptionPriceEditTxt.text?.toString()?.toDoubleOrNull()
+            ?.let { it > 0 } == true
         val isDateValid = binding.firstPaymentValue.text?.isNotBlank() == true
 
         val enabled = isNameValid && isPriceValid && isDateValid

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.BottomSheetAppIconBinding
-import com.anshok.subzy.domain.model.AppIconStyle
+import com.anshok.subzy.domain.settings.model.AppIconStyle
 import com.anshok.subzy.presentation.settings.RestartDialogFragment
 import com.anshok.subzy.presentation.settings.adapter.AppIconAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

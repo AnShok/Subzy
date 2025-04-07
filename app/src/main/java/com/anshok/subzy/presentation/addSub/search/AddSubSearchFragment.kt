@@ -236,7 +236,7 @@ class AddSubSearchFragment : Fragment() {
     private fun showMessage(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
             .setTextColor(requireContext().getColor(R.color.white))
-            .setBackgroundTint(requireContext().getColor(R.color.Gray_60))
+            .setBackgroundTint(requireContext().getColor(R.color.Accent_P_100))
             .show()
     }
 }

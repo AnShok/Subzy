@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.ItemCurrencyBinding
-import com.anshok.subzy.domain.model.CurrencyRate
+import com.anshok.subzy.domain.currency.model.CurrencyRate
 
 class CurrencyAdapter(
     private val allCurrencies: List<CurrencyRate>,

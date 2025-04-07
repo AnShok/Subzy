@@ -1,12 +1,12 @@
 package com.anshok.subzy.data.repository.impl
 
 import com.anshok.subzy.data.local.LocalDataSource
-import com.anshok.subzy.data.local.db.entities.CategoryEntity
-import com.anshok.subzy.data.local.db.entities.PaymentMethodEntity
-import com.anshok.subzy.data.local.db.entities.SubscriptionCategoryEntity
-import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
-import com.anshok.subzy.data.local.db.entities.SubscriptionPaymentMethodEntity
-import com.anshok.subzy.domain.api.SubscriptionRepository
+import com.anshok.subzy.data.local.entities.CategoryEntity
+import com.anshok.subzy.data.local.entities.PaymentMethodEntity
+import com.anshok.subzy.data.local.entities.SubscriptionCategoryEntity
+import com.anshok.subzy.data.local.entities.SubscriptionEntity
+import com.anshok.subzy.data.local.entities.SubscriptionPaymentMethodEntity
+import com.anshok.subzy.domain.subscription.SubscriptionRepository
 import kotlinx.coroutines.flow.Flow
 
 class SubscriptionRepositoryImpl(

@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anshok.subzy.domain.api.HelpInteractor
+import com.anshok.subzy.domain.help.HelpInteractor
 import com.anshok.subzy.util.Event
 
 class HelpViewModel(
