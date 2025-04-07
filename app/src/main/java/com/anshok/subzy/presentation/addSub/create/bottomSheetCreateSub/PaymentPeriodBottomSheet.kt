@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.anshok.subzy.databinding.BottomSheetPaymentPeriodBinding
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PaymentPeriodBottomSheet(private val onPeriodSelected: (Int, String) -> Unit) :
@@ -33,7 +34,7 @@ class PaymentPeriodBottomSheet(private val onPeriodSelected: (Int, String) -> Un
         binding.periodPicker.displayedValues = periods
 
         // Обработка нажатия кнопки "Готово"
-        binding.confirmButton.setOnClickListener {
+        binding.confirmButton.safeDelayedClick {
             val selectedNumber = binding.numberPicker.value
             val selectedPeriod = periods[binding.periodPicker.value]
             onPeriodSelected(selectedNumber, selectedPeriod)

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -26,6 +27,7 @@ import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.CurrencyViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.SettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.ThemeViewModel
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,11 +49,10 @@ class SettingsFragment : Fragment() {
     private val shareLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK || result.resultCode == AppCompatActivity.RESULT_CANCELED) {
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.thanks_for_sharing),
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                Snackbar.make(binding.root, getString(R.string.thanks_for_sharing), Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.Accent_P_100))
+                    .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    .show()
             }
         }
 
@@ -67,7 +68,24 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.aboutUs.setOnClickListener {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            val radius = 20f
+            val blurEffect = android.graphics.RenderEffect.createBlurEffect(
+                radius, radius,
+                android.graphics.Shader.TileMode.CLAMP
+            )
+            binding.tgNotices.setRenderEffect(blurEffect)
+        }
+        binding.tgNotices.safeDelayedClick {
+            Snackbar.make(binding.root, "Soon to be available", Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.Accent_P_100))
+                .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                .show()
+
+        }
+
+
+        binding.aboutUs.safeDelayedClick {
             findNavController().navigate(R.id.action_settingsFragment_to_aboutUsFragment)
         }
 
@@ -102,29 +120,30 @@ class SettingsFragment : Fragment() {
             pickImageLauncher.launch("image/*")
         }
 
-        binding.userName.setOnClickListener { showEditNameBottomSheet() }
-        binding.profileNameEditor.setOnClickListener { showEditNameBottomSheet() }
+        binding.userName.safeDelayedClick { showEditNameBottomSheet() }
+        binding.profileNameEditor.safeDelayedClick { showEditNameBottomSheet() }
 
         // Выбор валюты по умолчанию
-        binding.currencySelector.setOnClickListener { showCurrencyBottomSheet() }
-        binding.CurrencyButton.setOnClickListener { showCurrencyBottomSheet() }
+        binding.currencySelector.safeDelayedClick { showCurrencyBottomSheet() }
 
         // Выбор иконки приложения
-        binding.appIconSetting.setOnClickListener { showAppIconBottomSheet() }
-        binding.appIconButton.setOnClickListener { showAppIconBottomSheet() }
+        binding.appIconSetting.safeDelayedClick { showAppIconBottomSheet() }
+
 
         // Тема
-        binding.theme.setOnClickListener { showThemeBottomSheet() }
+        binding.theme.safeDelayedClick { showThemeBottomSheet() }
 
-        binding.rateUs.setOnClickListener {
+        binding.rateUs.safeDelayedClick {
             RateBottomSheet().show(parentFragmentManager, "RateBottomSheet")
         }
 
         // Поделиться
-        binding.tellFriends.setOnClickListener { shareApp() }
+        binding.tellFriends.safeDelayedClick {
+            shareApp()
+        }
 
         // Помощь
-        binding.help.setOnClickListener {
+        binding.help.safeDelayedClick {
             HelpBottomSheet().show(parentFragmentManager, "HelpBottomSheet")
         }
 

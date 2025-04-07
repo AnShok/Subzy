@@ -8,9 +8,9 @@ import android.widget.ImageView
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
-import com.anshok.subzy.databinding.BottomSheetHelpBinding
 import com.anshok.subzy.databinding.BottomSheetRateBinding
 import com.anshok.subzy.presentation.settings.viewmodel.RateViewModel
+import com.anshok.subzy.util.safeDelayedAction
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -67,9 +67,9 @@ class RateBottomSheet : BottomSheetDialogFragment() {
         updateStars(rating)
 
         // Добавим задержку 600 мс перед отправкой события
-        binding.starContainer.postDelayed({
+        binding.starContainer.safeDelayedAction(600) {
             viewModel.onStarSelected(rating)
-        }, 600)
+        }
     }
 
 

@@ -26,58 +26,23 @@ class RootActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.navController
 
-        binding.bottomNavigationView.setupWithNavController(navController)
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.calendarFragment, R.id.mySubFragment -> {
-                    // Установка цвета статус-бара для CalendarFragment, mySubFragment
-                    setStatusBarColor(R.color.Gray_75)
-                    binding.bottomNavigationView.isVisible = true
-                    binding.fab.isVisible = true
-                }
-
-                R.id.homeFragment, R.id.settingsFragment -> {
+                R.id.homeFragment, R.id.settingsFragment, R.id.calendarFragment, -> {
                     // Установка цвета статус-бара для SpendFragment и WalletFragment
                     setStatusBarColor(R.color.Gray_80)
-                    binding.bottomNavigationView.isVisible = true
-                    binding.fab.isVisible = true
                 }
-
-//                R.id.addSubSearchFragment -> {
-//                    // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
-//                    setStatusBarColor(R.color.Gray_80)
-//                    binding.bottomNavigationView.isVisible = false
-//                    binding.fab.isVisible = false
-//                }
 
                 R.id.addSubSearchFragment, R.id.addSubCreateFragment, R.id.detailsSubFragment -> {
                     // Установка цвета статус-бара для SettingsFragment и NewSubscriptionFragment
                     setStatusBarColor(R.color.Gray_75)
-                    binding.bottomNavigationView.isVisible = false
-                    binding.fab.isVisible = false
                 }
 
                 else -> {
                     // Установка стандартного цвета статус-бара
                     setStatusBarColor(R.color.Gray_80)
-                    binding.bottomNavigationView.isVisible = false
-                    binding.fab.isVisible = false
                 }
             }
-        }
-
-        // Обработка нажатия на FloatingActionButton (FAB)
-        binding.fab.setOnClickListener {
-            navController.navigate(R.id.addSubSearchFragment)
-        }
-
-        // Обработка системных отступов для корректной работы с навигацией и FAB
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
-            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            binding.bottomNavigationView.setPadding(0, 0, 0, systemBarsInsets.bottom)
-            binding.fab.translationY = -systemBarsInsets.bottom.toFloat() / 2
-            insets
         }
     }
 

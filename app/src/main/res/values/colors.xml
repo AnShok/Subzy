@@ -22,22 +22,62 @@
 
 
 
-    <!--Primary -->
+    <!-- Primary -->
     <color name="Primary_100">#5E00F5</color>
-    <color name="Primary_500">#7722FF</color>
+    <color name="Primary_80">#6A0DFA</color>
+    <color name="Primary_60">#7722FF</color>
+    <color name="Primary_40">#8337FF</color>
     <color name="Primary_20">#924EFF</color>
     <color name="Primary_10">#AD7BFF</color>
     <color name="Primary_05">#C9A7FF</color>
     <color name="Primary_0">#E4D3FF</color>
 
+    <!-- Primary with Alpha (Glow / Gradient) -->
+    <color name="Primary_100_88">#885E00F5</color> <!-- 53% -->
+    <color name="Primary_100_55">#555E00F5</color> <!-- 33% -->
+    <color name="Primary_20_55">#55924EFF</color>  <!-- 33% -->
+    <color name="Primary_10_33">#55AD7BFF</color>  <!-- 33% -->
+    <color name="Primary_05_20">#33C9A7FF</color>  <!-- 20% -->
+    <color name="Primary_0_10">#1AE4D3FF</color>   <!-- 10% -->
+
+
     <!--Accent Primary -->
-    <color name="Accent_P_100">#FF7966</color>
+    <color name="Accent_P_1000">#FF7966</color>
     <color name="Accent_P_50">#FFA699</color>
     <color name="Accent_P_0">#FFD2CC</color>
 
-    <!--Accent Secondary -->
+    <!-- Accent Secondary -->
     <color name="Accent_S_100">#00FAD9</color>
+    <color name="Accent_S_90">#14FADB</color>
+    <color name="Accent_S_80">#2EFBDC</color>
+    <color name="Accent_S_70">#4BFDDE</color>
+    <color name="Accent_S_60">#66FEE1</color>
     <color name="Accent_S_50">#7DFFEE</color>
+    <color name="Accent_S_40">#99FFF1</color>
+    <color name="Accent_S_30">#B3FFF4</color>
+    <color name="Accent_S_20">#CCFFF7</color>
+    <color name="Accent_S_10">#E6FFFB</color>
+    <color name="Accent_S_05">#F3FFFD</color>
+    <color name="Accent_S_0">#FAFFFE</color>
+
+    <!-- Accent Secondary with alpha (Glow / Soft gradient) -->
+    <color name="Accent_S_100_88">#8800FAD9</color> <!-- 53% -->
+    <color name="Accent_S_100_55">#5500FAD9</color> <!-- 33% -->
+    <color name="Accent_S_100_33">#3300FAD9</color> <!-- 20% -->
+    <color name="Accent_S_50_33">#337DFFEE</color>
+    <color name="Accent_S_20_20">#33CCFFF7</color>
+
+    <color name="test">#6C4EFF</color>
+    <color name="Accent_P_100">#3F88FF</color>
+    <color name="Accent_P_100_88">#883F88FF</color> <!-- 53% -->
+    <color name="Accent_P_100_55">#553F88FF</color> <!-- 33% -->
+    <color name="test2">#00FAD9</color>
+    <color name="test3">#7D4FFF</color>
+    <color name="test4">#5E5BFF</color>
+
+
+
+
 
 
     <color name="black">#1A1B22</color>

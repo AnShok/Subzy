@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.home
+package com.anshok.subzy.presentation.calendar
 
 import android.view.View
 import android.widget.TextView

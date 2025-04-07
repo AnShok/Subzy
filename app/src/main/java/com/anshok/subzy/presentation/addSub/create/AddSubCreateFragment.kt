@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.anshok.subzy.domain.model.PaymentPeriodType
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.*
 import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
 import com.anshok.subzy.util.adapter.bindLogo
+import com.anshok.subzy.util.safeDelayedClick
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,18 +47,23 @@ class AddSubCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.backButton.setOnClickListener { findNavController().navigateUp() }
+        binding.backButton.safeDelayedClick {
+            findNavController().navigateUp()
+        }
 
         observeCurrency()
         setupClickListeners()
         setupPassedArguments()
         setupPriceValidation()
+        setupValidation()
 
-        binding.itemLogo.setOnClickListener {
+        binding.itemLogo.safeDelayedClick {
             galleryLauncher.launch("image/*")
         }
 
-        binding.saveButton.setOnClickListener { onSaveClicked() }
+        binding.saveButton.safeDelayedClick {
+            onSaveClicked()
+        }
     }
 
     private fun observeCurrency() {
@@ -160,6 +167,7 @@ class AddSubCreateFragment : Fragment() {
                 calendar.set(year, month, day)
                 val selectedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(calendar.time)
                 binding.firstPaymentValue.text = selectedDate
+                validateFields()
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -205,4 +213,32 @@ class AddSubCreateFragment : Fragment() {
             .setPositiveButton("ОК", null)
             .show()
     }
+
+    private fun setupValidation() {
+        binding.subscriptionNameEditTxt.doAfterTextChanged { validateFields() }
+        binding.subscriptionPriceEditTxt.doAfterTextChanged { validateFields() }
+
+        // Если дата может меняться программно (например, через DatePicker)
+        binding.firstPaymentValue.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            validateFields()
+        }
+
+        validateFields() // стартовая валидация
+    }
+
+    private fun validateFields() {
+        val isNameValid = binding.subscriptionNameEditTxt.text?.isNotBlank() == true
+        val isPriceValid = binding.subscriptionPriceEditTxt.text?.toString()?.toDoubleOrNull()?.let { it > 0 } == true
+        val isDateValid = binding.firstPaymentValue.text?.isNotBlank() == true
+
+        val enabled = isNameValid && isPriceValid && isDateValid
+
+        binding.saveButton.isEnabled = enabled
+        binding.saveButton.backgroundTintList = ContextCompat.getColorStateList(
+            requireContext(),
+            if (enabled) R.color.Accent_P_100 else R.color.Gray_30
+        )
+    }
+
+
 }

@@ -6,7 +6,7 @@ import com.anshok.subzy.domain.api.HelpInteractor
 import com.anshok.subzy.domain.api.SettingsRepository
 import com.anshok.subzy.presentation.addSub.create.AddSubCreateViewModel
 import com.anshok.subzy.presentation.addSub.search.AddSubSearchViewModel
-import com.anshok.subzy.presentation.mySub.viewmodel.MySubViewModel
+import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AboutUsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.EasterEggViewModel

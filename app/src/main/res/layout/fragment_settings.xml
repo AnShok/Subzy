@@ -14,10 +14,9 @@
         style="@style/TextAppearance.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="Settings"
         android:textColor="@color/Gray_30"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/start_border"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +34,7 @@
         android:id="@+id/frame_profile_image_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/border_line">
@@ -102,7 +101,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
             android:contentDescription="Edit name"
-            android:src="@drawable/ic_edit_pencil_liner"
+            android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/user_name"
             app:layout_constraintStart_toEndOf="@id/user_name"
             app:layout_constraintTop_toTopOf="@id/user_name" />
@@ -154,37 +153,45 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingHorizontal="8dp"
-                    android:paddingVertical="16dp">
+                    android:paddingVertical="8dp">
 
 
                     <!-- Настройка Default currency -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/currencySelector"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
                         android:paddingHorizontal="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_selectable_rounded"
+                        android:clipToOutline="true">
 
                         <ImageView
+                            android:id="@+id/currencyIcon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
                             android:contentDescription="Default currency"
-                            android:src="@drawable/ic_money" />
+                            android:src="@drawable/ic_money"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/currencySelectorText"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="4dp"
                             android:text="Default currency"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/currencyIcon"
+                            app:layout_constraintTop_toTopOf="@id/currencyIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/currencyIcon"
+                            app:layout_constraintEnd_toStartOf="@id/selectedCurrencyCode" />
 
                         <TextView
                             android:id="@+id/selectedCurrencyCode"
@@ -193,7 +200,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:text="USD ($)"
-                            android:textColor="@color/Gray_30" />
+                            android:textColor="@color/Gray_30"
+                            app:layout_constraintTop_toTopOf="@id/currencyIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/currencyIcon"
+                            app:layout_constraintEnd_toStartOf="@id/CurrencyButton" />
 
                         <ImageButton
                             android:id="@+id/CurrencyButton"
@@ -201,37 +211,49 @@
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:contentDescription="Open currency picker"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintTop_toTopOf="@id/currencyIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/currencyIcon"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- Настройка App icon -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/appIconSetting"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
                         android:paddingHorizontal="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_selectable_rounded"
+                        android:clipToOutline="true">
 
                         <ImageView
+                            android:id="@+id/appIconImage"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
                             android:contentDescription="App icon"
-                            android:src="@drawable/ic_app_icon" />
+                            android:src="@drawable/ic_app_icon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/appIconText"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="4dp"
                             android:text="App icon"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/appIconImage"
+                            app:layout_constraintTop_toTopOf="@id/appIconImage"
+                            app:layout_constraintBottom_toBottomOf="@id/appIconImage"
+                            app:layout_constraintEnd_toStartOf="@id/appIconValue" />
 
                         <TextView
                             android:id="@+id/appIconValue"
@@ -240,7 +262,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:text="Default"
-                            android:textColor="@color/Gray_30" />
+                            android:textColor="@color/Gray_30"
+                            app:layout_constraintTop_toTopOf="@id/appIconImage"
+                            app:layout_constraintBottom_toBottomOf="@id/appIconImage"
+                            app:layout_constraintEnd_toStartOf="@id/appIconButton" />
 
                         <ImageButton
                             android:id="@+id/appIconButton"
@@ -248,36 +273,48 @@
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintTop_toTopOf="@id/appIconImage"
+                            app:layout_constraintBottom_toBottomOf="@id/appIconImage"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- Настройка Theme -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/theme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
                         android:paddingHorizontal="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_selectable_rounded"
+                        android:clipToOutline="true">
 
                         <ImageView
+                            android:id="@+id/themeIcon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
                             android:contentDescription="Theme"
-                            android:src="@drawable/ic_theme" />
+                            android:src="@drawable/ic_theme"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/themeText"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="4dp"
                             android:text="Theme"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/themeIcon"
+                            app:layout_constraintTop_toTopOf="@id/themeIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/themeIcon"
+                            app:layout_constraintEnd_toStartOf="@id/themeValue" />
 
                         <TextView
                             android:id="@+id/themeValue"
@@ -286,15 +323,74 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:text="Dark"
-                            android:textColor="@color/Gray_30" />
+                            android:textColor="@color/Gray_30"
+                            app:layout_constraintTop_toTopOf="@id/themeIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/themeIcon"
+                            app:layout_constraintEnd_toStartOf="@+id/themeArrow" />
 
                         <ImageButton
+                            android:id="@+id/themeArrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintTop_toTopOf="@id/themeIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/themeIcon"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <!-- Настройка уведомлений ТГ -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/tgNotices"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="@drawable/bg_selectable_rounded"
+                            android:clipToOutline="true"
+                            >
+
+                            <ImageView
+                                android:id="@+id/tgIcon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="tg_notifications"
+                                android:src="@drawable/ic_tg"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tgNoticesText"
+                                style="@style/TextAppearance.Headline3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginEnd="12dp"
+                                android:text="Telegram notifications"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toBottomOf="@id/tgIcon"
+                                app:layout_constraintEnd_toStartOf="@id/tgNoticesSwitch"
+                                app:layout_constraintStart_toEndOf="@id/tgIcon"
+                                app:layout_constraintTop_toTopOf="@id/tgIcon" />
+
+                            <com.google.android.material.materialswitch.MaterialSwitch
+                                android:id="@+id/tgNoticesSwitch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                app:layout_constraintBottom_toBottomOf="@id/tgIcon"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tgIcon"
+                                app:thumbIconTint="@color/white"
+                                app:trackColorActive="@color/Accent_P_100"
+                                app:trackColorInactive="@color/Gray_40" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -324,158 +420,201 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingHorizontal="8dp"
-                    android:paddingVertical="16dp">
+                    android:paddingVertical="8dp">
 
-                    <!-- Настройка about the application -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/aboutUs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
                         android:paddingHorizontal="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_selectable_rounded"
+                        android:clipToOutline="true">
 
                         <ImageView
+                            android:id="@+id/aboutUsIcon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
-                            android:contentDescription="Аbout us"
-                            android:src="@drawable/ic_info" />
+                            android:contentDescription="About us"
+                            android:src="@drawable/ic_info"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/aboutUsText"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="8dp"
                             android:text="About us"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/aboutUsIcon"
+                            app:layout_constraintTop_toTopOf="@id/aboutUsIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/aboutUsIcon"
+                            app:layout_constraintEnd_toStartOf="@id/aboutUsArrow" />
 
                         <ImageButton
+                            android:id="@+id/aboutUsArrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintTop_toTopOf="@id/aboutUsIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/aboutUsIcon"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- Настройка оценить приложение -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/rateUs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
                         android:paddingHorizontal="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_selectable_rounded"
+                        android:clipToOutline="true">
 
                         <ImageView
+                            android:id="@+id/rateUsIcon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
-                            android:contentDescription="rate"
-                            android:src="@drawable/ic_rate" />
+                            android:contentDescription="Rate us"
+                            android:src="@drawable/ic_rate"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/rateUsText"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="8dp"
                             android:text="Rate us"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/rateUsIcon"
+                            app:layout_constraintTop_toTopOf="@id/rateUsIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/rateUsIcon"
+                            app:layout_constraintEnd_toStartOf="@id/rateUsArrow" />
 
                         <ImageButton
+                            android:id="@+id/rateUsArrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintTop_toTopOf="@id/rateUsIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/rateUsIcon"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- Настройка рассказать о приложении -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/tellFriends"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp"
                         android:paddingHorizontal="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_selectable_rounded"
+                        android:clipToOutline="true">
 
                         <ImageView
+                            android:id="@+id/tellFriendsIcon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
-                            android:contentDescription="share"
-                            android:src="@drawable/ic_share" />
+                            android:contentDescription="Tell your friends"
+                            android:src="@drawable/ic_share"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/tellFriendsText"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="8dp"
                             android:text="Tell your friends"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/tellFriendsIcon"
+                            app:layout_constraintTop_toTopOf="@id/tellFriendsIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/tellFriendsIcon"
+                            app:layout_constraintEnd_toStartOf="@id/tellFriendsArrow" />
 
                         <ImageButton
+                            android:id="@+id/tellFriendsArrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintTop_toTopOf="@id/tellFriendsIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/tellFriendsIcon"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- Настройка Help -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/help"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
                         android:paddingHorizontal="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_selectable_rounded"
+                        android:clipToOutline="true">
 
                         <ImageView
+                            android:id="@+id/helpIcon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
                             android:contentDescription="Help"
-                            android:src="@drawable/ic_help" />
+                            android:src="@drawable/ic_help"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/helpText"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="8dp"
                             android:text="Help"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toEndOf="@id/helpIcon"
+                            app:layout_constraintTop_toTopOf="@id/helpIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/helpIcon"
+                            app:layout_constraintEnd_toStartOf="@id/helpArrow" />
 
                         <ImageButton
+                            android:id="@+id/helpArrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward_medium" />
-                    </LinearLayout>
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintTop_toTopOf="@id/helpIcon"
+                            app:layout_constraintBottom_toBottomOf="@id/helpIcon"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
@@ -487,13 +626,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="23dp" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="23dp" />
+        app:layout_constraintGuide_end="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

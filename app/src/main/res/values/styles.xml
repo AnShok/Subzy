@@ -118,7 +118,7 @@
     </style>
 
     <style name="Widget.Button.Primary" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">@color/Primary_20</item>
+        <item name="android:backgroundTint">@color/Accent_P_100</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="cornerRadius">12dp</item>
     </style>
@@ -127,5 +127,10 @@
         <item name="android:background">@android:color/transparent</item> <!-- прозрачный фон системного контейнера -->
         <item name="backgroundTint">@android:color/transparent</item> <!-- важно для API 31+ -->
     </style>
+
+    <style name="PopupWindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/popup_fade_in</item>
+    </style>
+
 
 </resources>

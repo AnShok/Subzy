@@ -7,6 +7,7 @@ import com.anshok.subzy.domain.model.Logo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.anshok.subzy.util.adapter.bindLogo
+import com.anshok.subzy.util.safeDelayedClick
 
 class AddSubSearchViewHolder(
     private val binding: SearchItemViewBinding,
@@ -18,7 +19,9 @@ class AddSubSearchViewHolder(
         positionTitle.isSelected = false
         positionTitle.postDelayed({ positionTitle.isSelected = true }, 1500)
 
-        container.setOnClickListener { onItemClick(item) }
+        container.safeDelayedClick {
+            onItemClick(item)
+        }
 
         val logo = when {
             !item.logoUrl.isNullOrBlank() -> item.logoUrl

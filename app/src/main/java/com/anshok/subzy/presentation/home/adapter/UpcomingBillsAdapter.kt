@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.mySub.adapter
+package com.anshok.subzy.presentation.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anshok.subzy.databinding.ItemUpcomingBillsBinding
 import com.anshok.subzy.domain.model.Subscription
 import com.anshok.subzy.util.CurrencyUtils
+import com.anshok.subzy.util.safeDelayedAction
+import com.anshok.subzy.util.safeDelayedClick
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -49,11 +51,13 @@ class UpcomingBillsAdapter(
             binding.costTitle.text = CurrencyUtils.formatPrice(item.price, item.currencyCode)
 
             binding.positionTitle.isSelected = false
-            binding.positionTitle.postDelayed({
+            binding.positionTitle.safeDelayedAction(1500) {
                 binding.positionTitle.isSelected = true
-            }, 1500)
+            }
 
-            binding.container.setOnClickListener { onItemClick(item) }
+            binding.container.safeDelayedClick {
+                onItemClick(item)
+            }
         }
     }
 }

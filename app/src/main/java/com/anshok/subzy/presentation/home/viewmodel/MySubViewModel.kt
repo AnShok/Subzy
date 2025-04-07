@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.mySub.viewmodel
+package com.anshok.subzy.presentation.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

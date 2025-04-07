@@ -125,7 +125,7 @@ dependencies {
     androidTestImplementation ("org.mockito:mockito-android:4.0.0")
     androidTestImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
-    implementation ("com.google.android.material:material:1.9.0")
+    implementation ("com.google.android.material:material:1.11.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
 
     implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")

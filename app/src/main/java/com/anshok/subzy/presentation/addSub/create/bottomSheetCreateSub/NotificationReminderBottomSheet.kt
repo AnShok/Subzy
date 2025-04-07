@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.BottomSheetNotificationReminderBinding
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class NotificationReminderBottomSheet(private val onOptionSelected: (String) -> Unit) :
@@ -24,22 +25,22 @@ class NotificationReminderBottomSheet(private val onOptionSelected: (String) -> 
         super.onViewCreated(view, savedInstanceState)
 
         // Обработка выбора уведомления
-        binding.optionOneDay.setOnClickListener {
+        binding.optionOneDay.safeDelayedClick {
             onOptionSelected("за 1 день")
             dismiss()
         }
 
-        binding.optionThreeDays.setOnClickListener {
+        binding.optionThreeDays.safeDelayedClick {
             onOptionSelected("за 3 дня")
             dismiss()
         }
 
-        binding.optionOneWeek.setOnClickListener {
+        binding.optionOneWeek.safeDelayedClick {
             onOptionSelected("за 1 неделю")
             dismiss()
         }
 
-        binding.optionNoReminder.setOnClickListener {
+        binding.optionNoReminder.safeDelayedClick {
             onOptionSelected("без уведомлений")
             dismiss()
         }

@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.BottomSheetCommentBinding
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class CommentBottomSheet(private val onOptionSelected: (String?) -> Unit) :
@@ -39,14 +40,14 @@ class CommentBottomSheet(private val onOptionSelected: (String?) -> Unit) :
         })
 
         // Обработка нажатия кнопки "ОК"
-        binding.saveButton.setOnClickListener {
+        binding.saveButton.safeDelayedClick {
             val comment = binding.commentEditText.text.toString()
             onOptionSelected(comment)
             dismiss()
         }
 
         // Обработка нажатия кнопки "Отмена"
-        binding.cancelButton.setOnClickListener {
+        binding.cancelButton.safeDelayedClick {
             dismiss()
         }
     }

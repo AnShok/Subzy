@@ -5,7 +5,7 @@
     <!-- THEME: LIGHT        -->
     <!-- =================== -->
 
-    <style name="Base.Theme.Subzy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.Subzy" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@android:color/white</item>
         <item name="colorOnPrimary">@android:color/black</item>
 
@@ -19,6 +19,10 @@
 
         <item name="colorAccent">@color/Accent_P_100</item>
         <item name="android:windowBackground">@android:color/white</item>
+
+        <item name="bottomSheetStyle">@style/BottomSheet.Transparent</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Material3</item>
+
     </style>
 
     <style name="Theme.Subzy" parent="Base.Theme.Subzy" />

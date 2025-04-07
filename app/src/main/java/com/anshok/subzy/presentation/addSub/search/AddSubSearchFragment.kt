@@ -21,6 +21,7 @@ import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAddSubSearchBinding
 import com.anshok.subzy.presentation.addSub.search.adapter.AddSubSearchAdapter
 import com.anshok.subzy.util.ResourceLogo
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -53,8 +54,11 @@ class AddSubSearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.onInitialLoad()
-        binding.backButton.setOnClickListener { findNavController().navigateUp() }
-        binding.createSubButton.setOnClickListener {
+        binding.backButton.safeDelayedClick {
+            findNavController().navigateUp()
+        }
+
+        binding.createSubButton.safeDelayedClick {
             findNavController().navigate(R.id.action_addSubSearchFragment_to_addSubCreateFragment)
         }
 
@@ -152,7 +156,7 @@ class AddSubSearchFragment : Fragment() {
             }
         }
 
-        binding.clearCrossIc.setOnClickListener {
+        binding.clearCrossIc.safeDelayedClick {
             binding.searchQuery.text.clear()
         }
 
