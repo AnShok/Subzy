@@ -1,5 +1,6 @@
 package com.anshok.subzy.util.adapter
 
+import android.net.Uri
 import android.widget.ImageView
 import com.anshok.subzy.R
 import com.bumptech.glide.Glide
@@ -28,6 +29,16 @@ fun bindLogo(logoUrl: String?, imageView: ImageView) {
             } else {
                 imageView.setImageResource(R.drawable.ic_placeholder_30px)
             }
+        }
+
+        logoUrl.startsWith("content://") || logoUrl.startsWith("file://") -> {
+            Glide.with(context)
+                .load(Uri.parse(logoUrl)) // ⬅️ используем Uri!
+                .placeholder(R.drawable.ic_placeholder_30px)
+                .error(R.drawable.ic_placeholder_30px)
+                .centerCrop()
+                .transform(RoundedCorners(cornerRadius))
+                .into(imageView)
         }
 
         else -> {

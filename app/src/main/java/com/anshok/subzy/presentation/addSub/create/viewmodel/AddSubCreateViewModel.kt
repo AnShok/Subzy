@@ -92,7 +92,7 @@ class AddSubCreateViewModel(
 
         viewModelScope.launch {
             val result = subscriptionInteractor.insertSubscription(subscription)
-            onResult(result, if (!result) "Подписка с таким названием уже существует" else null)
+            onResult(result, if (!result) "A subscription with that name already exists" else null)
         }
     }
 

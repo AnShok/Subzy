@@ -1,120 +1,175 @@
 package com.anshok.subzy.presentation.home
 
-import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.view.animation.AnimationUtils
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentHomeBinding
-import com.zigis.segmentedarcview.custom.ArcSegment
-import com.zigis.segmentedarcview.custom.BlinkAnimationSettings
+import com.anshok.subzy.presentation.home.adapter.HomePagerAdapter
+import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
+import com.anshok.subzy.util.CurrencyUtils
+import com.anshok.subzy.util.safeDelayedAction
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private val binding: FragmentHomeBinding by viewBinding(CreateMethod.INFLATE)
     private val tabTitles = arrayListOf("Your subscriptions", "Upcoming bills")
+    private val viewModel: MySubViewModel by viewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        setupDottedCircles()
+        setUpTabLayoutWithViewPager()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        setupButtonsClicks()
+        observeMetrics()
+        setupMetricClicks()
 
-        setupArcView(
-            63f,  // progressPercentage - Процент заполения,
-            260f    // maxSweepAngle - Максимальный угол секции
-        )
-
-
-    }
-
-    private fun setupArcView(progressPercentage: Float, maxSweepAngle: Float) {
-        // Задний фон
-        val arcViewBackground = binding.progressViewBackground
-        arcViewBackground.segments = listOf(
-            ArcSegment(
-                ContextCompat.getColor(requireContext(), R.color.Gray_62),
-                ContextCompat.getColor(requireContext(), R.color.Gray_62)
-            )
-        )
-
-
-        val arcView = binding.progressView
-        val animator = ValueAnimator.ofFloat(0f, progressPercentage)
-        animator.duration = 1500
-        animator.addUpdateListener { animation ->
-            val animatedValue = animation.animatedValue as Float
-            arcView.segments = listOf(
-                ArcSegment(
-                    ContextCompat.getColor(requireContext(), R.color.Primary_10),
-                    ContextCompat.getColor(requireContext(), R.color.Accent_P_100),
-                    sweepAngle = maxSweepAngle * (animatedValue / 100f) //рассчет для секции
-                )
-            )
+        binding.activeSubsCount.safeDelayedAction(2000) {
+            binding.activeSubsCount.isSelected = true
+            binding.highestSubsAmount.isSelected = true
+            binding.lowestSubsAmount.isSelected = true
         }
-        animator.start()
 
-        arcView.blinkAnimationSettings = BlinkAnimationSettings(
-            minAlpha = 0.4F,
-            maxAlpha = 1F,
-            duration = 2000L
-        )
     }
 
-    // Отдельный метод для настройки всех кругов
-    private fun setupDottedCircles() {
-        setupDotInside()
-        setupDotOutside()
-        setupDotOutsideSecond()
+    private fun observeMetrics() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.metrics.collectLatest { (total, highest, lowest) ->
+                val defaultCurrency = viewModel.getDefaultCurrencyCode()
+
+                binding.activeSubsCount.text =
+                    if (highest == null && lowest == null) "--" else total
+                binding.highestSubsAmount.text = highest?.let {
+                    CurrencyUtils.formatPrice(it.second, defaultCurrency)
+                } ?: "--"
+                binding.lowestSubsAmount.text = lowest?.let {
+                    CurrencyUtils.formatPrice(it.second, defaultCurrency)
+                } ?: "--"
+            }
+        }
     }
 
-    // Настройка внутреннего круга с заданными углами
-    private fun setupDotInside() {
-        val dotInside = binding.dotInside
-        dotInside.setCircleParams(
-            numberOfDots = 32,
-            dotRadius = 5f,
-            circleRadius = 315f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_62),
-            startAngle = 140.0,  // Угол начала
-            endAngle = 408.0     // Угол конца
-        )
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupMetricClicks() {
+        val scaleDown = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_down)
+        val scaleUp = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_up)
+
+        fun setupAnimatedClick(view: View, onClick: () -> Unit) {
+            view.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        v.startAnimation(scaleDown)
+                        vibrateLight()
+                    }
+
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> v.startAnimation(scaleUp)
+                }
+                false
+            }
+            view.setOnClickListener { onClick() }
+        }
+
+
+        setupAnimatedClick(binding.highestSubs) {
+            viewModel.metrics.value.second?.let {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(it.first.id)
+                findNavController().navigate(action)
+            }
+        }
+
+        setupAnimatedClick(binding.lowestSubs) {
+            viewModel.metrics.value.third?.let {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(it.first.id)
+                findNavController().navigate(action)
+            }
+        }
     }
 
-    // Настройка внешнего круга с заданными углами
-    private fun setupDotOutside() {
-        val dotOutside = binding.dotOutside
-        dotOutside.setCircleParams(
-            numberOfDots = 92,
-            dotRadius = 5f,
-            circleRadius = 450f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_62),
-            startAngle = 135.0,    // Угол начала
-            endAngle = 408.0     // Угол конца
-        )
+    private fun setUpTabLayoutWithViewPager() {
+        binding.viewPager.adapter = HomePagerAdapter(this)
+        TabLayoutMediator(binding.tabLayoutSubscription, binding.viewPager) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
+
+        for (i in 0..1) {
+            val textView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.tab_title, null) as TextView
+            binding.tabLayoutSubscription.getTabAt(i)?.customView = textView
+        }
     }
 
-    // Настройка внешнего круга с заданными углами
-    private fun setupDotOutsideSecond() {
-        val dotOutside = binding.dotOutsideSecond
-        dotOutside.setCircleParams(
-            numberOfDots = 110,
-            dotRadius = 5f,
-            circleRadius = 520f,
-            dotColor = ContextCompat.getColor(requireContext(), R.color.Gray_65),
-            startAngle = 135.0,    // Угол начала
-            endAngle = 408.0     // Угол конца
-        )
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupButtonsClicks() {
+        val scaleDown = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_down)
+        val scaleUp = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_up)
+
+        fun setupAnimatedClick(view: View, onClick: () -> Unit) {
+            view.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        v.startAnimation(scaleDown)
+                        vibrateLight()
+                    }
+
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> v.startAnimation(scaleUp)
+                }
+                false
+            }
+            view.setOnClickListener { onClick() }
+        }
+
+        setupAnimatedClick(binding.settingsButton) {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
+
+        setupAnimatedClick(binding.fabCalendar) {
+            findNavController().navigate(R.id.action_homeFragment_to_calendarFragment)
+        }
+
+        setupAnimatedClick(binding.fabAdd) {
+            findNavController().navigate(R.id.action_homeFragment_to_addSubSearchFragment)
+        }
+    }
+
+    private fun vibrateLight() {
+        val vibrator = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            val manager = requireContext().getSystemService(android.os.VibratorManager::class.java)
+            manager?.defaultVibrator
+        } else {
+            @Suppress("DEPRECATION")
+            requireContext().getSystemService(Vibrator::class.java)
+        }
+
+        vibrator?.let {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                it.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                @Suppress("DEPRECATION")
+                it.vibrate(30)
+            }
+        }
     }
 }

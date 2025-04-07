@@ -1,207 +1,363 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_overlay_home_fragment"
     tools:context=".presentation.home.HomeFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/upcard"
+    <!-- Логотип и название -->
+    <LinearLayout
+        android:id="@+id/appTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:cardBackgroundColor="@color/Gray_75"
-        app:cardElevation="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/tab_layout_subscription"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/CustomShapeUpCard">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/app_logo_transparent" />
+
+        <TextView
+            android:id="@+id/appName"
+            style="@style/TextAppearance.Headline5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Subzy"
+            android:textStyle="bold"
+            android:textColor="@color/White" />
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/shape_14dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_bottom_navigation_settings"
+            android:contentDescription="settings"
+            app:tint="@color/Gray_30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/statsBlock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintEnd_toEndOf="@+id/invisibleAnchor">
+
+        <!-- Заголовок -->
+        <TextView
+            android:id="@+id/statsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly"
+            android:textColor="@color/White"
+            android:textSize="16sp" />
+
+        <!-- Сумма -->
+        <TextView
+            android:id="@+id/activeSubsCount"
+            style="@style/TextAppearance.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingEnd="8dp"
+            android:text="--"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="1"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
+            android:textAlignment="viewStart"
+            android:gravity="start"
+            tools:text="$1,234,567,890.00" />
+
+
+        <!-- Обновление -->
+        <TextView
+            android:id="@+id/statsSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Updated Today"
+            android:textColor="@color/Gray_30"
+            android:textSize="12sp" />
+
+        <!-- Кнопки фильтра -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/filterAll"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:minWidth="64dp"
+                android:text="All"
+                android:textColor="@color/White"
+                app:backgroundTint="@color/Gray_70"
+                app:strokeColor="@color/Gray_60"
+                app:cornerRadius="8dp"
+                app:iconPadding="0dp"
+                app:iconGravity="textStart"
+                android:layout_marginEnd="8dp"
+                android:textAllCaps="false"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/filterStatus"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:minWidth="64dp"
+                android:text="Status"
+                android:textColor="@color/White"
+                app:icon="@drawable/ic_share"
+                app:backgroundTint="@color/Gray_70"
+                app:strokeColor="@color/Gray_60"
+                app:cornerRadius="8dp"
+                app:iconTint="@color/White"
+                app:iconPadding="8dp"
+                app:iconGravity="textStart"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Отступ -->
+    <View
+        android:id="@+id/invisibleAnchor"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="invisible"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="@id/start_border"
+        app:layout_constraintEnd_toEndOf="@id/end_border"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.58" />
+
+
+    <!-- Карточка Highest subs -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/highest_subs_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:cardBackgroundColor="@color/Gray_65"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="@+id/statsBlock"
+        app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
+        app:layout_constraintEnd_toEndOf="@id/end_border">
+
+        <LinearLayout
+            android:id="@+id/highestSubs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/ripple_primary_500"
+            android:focusable="true">
 
-            <!-- Отcтупы -->
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/start_border_upcard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="18dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/end_border_upcard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="18dp" />
-
-            <!-- Круглый прогресс-бар -->
-            <com.zigis.segmentedarcview.SegmentedArcView
-                android:id="@+id/progress_view"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="62dp"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toTopOf="@id/subscriptionsMetrics"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:sav_segmentSeparationAngle="9"
-                app:sav_segmentThickness="10dp"
-                app:sav_startAngle="140"
-                app:sav_sweepAngle="260"
-                app:sav_useCustomSweepAngles="true"
-                tools:visibility="visible" />
-
-            <com.zigis.segmentedarcview.SegmentedArcView
-                android:id="@+id/progress_view_background"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="62dp"
-                android:elevation="3dp"
-                app:layout_constraintBottom_toTopOf="@id/subscriptionsMetrics"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:sav_segmentSeparationAngle="9"
-                app:sav_segmentThickness="10dp"
-                app:sav_startAngle="140"
-                app:sav_sweepAngle="260" />
-
-            <com.anshok.subzy.util.extensions.DottedCircleView
-                android:id="@+id/dot_inside"
-                android:layout_width="270dp"
-                android:layout_height="270dp"
-                android:layout_gravity="center"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
-                app:layout_constraintEnd_toEndOf="@id/progress_view_background"
-                app:layout_constraintStart_toStartOf="@id/progress_view_background"
-                app:layout_constraintTop_toTopOf="@id/progress_view_background" />
-
-            <!-- Градиентная View на заднем плане -->
+            <!-- Полоска сверху -->
             <View
-                android:id="@+id/gradient_background_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/gradient_overlay_home_fragment"
-                android:elevation="2dp"
-                app:layout_constraintBottom_toTopOf="@id/subscriptionsMetrics"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentAmount" />
+                android:layout_width="64dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/Primary_10"
+                android:elevation="4dp" />
 
-            <com.anshok.subzy.util.extensions.DottedCircleView
-                android:id="@+id/dot_outside"
-                android:layout_width="350dp"
-                android:layout_height="350dp"
-                android:layout_gravity="center"
-                android:elevation="1dp"
-                app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
-                app:layout_constraintEnd_toEndOf="@id/progress_view_background"
-                app:layout_constraintStart_toStartOf="@id/progress_view_background"
-                app:layout_constraintTop_toTopOf="@id/progress_view_background" />
-
-            <com.anshok.subzy.util.extensions.DottedCircleView
-                android:id="@+id/dot_outside_second"
-                android:layout_width="400dp"
-                android:layout_height="400dp"
-                android:layout_gravity="center"
-                android:elevation="1dp"
-                app:layout_constraintBottom_toBottomOf="@id/progress_view_background"
-                app:layout_constraintEnd_toEndOf="@id/progress_view_background"
-                app:layout_constraintStart_toStartOf="@id/progress_view_background"
-                app:layout_constraintTop_toTopOf="@id/progress_view_background" />
-
-            <!-- Лого и название приложения -->
-            <LinearLayout
-                android:id="@+id/appTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="110dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
-                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <!-- Лого -->
-                <ImageView
-                    android:id="@+id/appLogo"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="App Logo"
-                    android:src="@drawable/app_logo_transparent" />
-
-                <!-- Название приложения -->
-                <TextView
-                    android:id="@+id/appName"
-                    style="@style/TextAppearance.Headline4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:text="Subzy"
-                    android:textColor="@color/White"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Текущая сумма -->
             <TextView
-                android:id="@+id/currentAmount"
-                style="@style/TextAppearance.Headline7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:text="$1,235"
-                android:textColor="@color/White"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
-                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@+id/appTitle" />
-
-            <!-- Текст This month bills -->
-            <TextView
-                android:id="@+id/monthBills"
+                android:id="@+id/highestSubsTitle"
                 style="@style/TextAppearance.Headline1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:elevation="1dp"
-                android:text="This month bills"
-                android:textColor="@color/Gray_30"
-                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
-                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@+id/currentAmount" />
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:text="Highest subs"
+                android:textColor="@color/Gray_40"
+                android:textSize="14sp" />
 
-            <!-- Кнопка See your budget -->
-            <Button
-                android:id="@+id/seeBudgetButton"
+            <TextView
+                android:id="@+id/highestSubsAmount"
                 style="@style/TextAppearance.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/shape_22dp_gray55"
-                android:minHeight="32dp"
-                android:text="See your budget"
-                android:textAllCaps="false"
+                android:paddingBottom="14dp"
+                android:paddingHorizontal="8dp"
+                android:text="--"
                 android:textColor="@color/White"
                 android:textStyle="bold"
-                app:backgroundTint="@color/Gray_65"
-                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
-                app:layout_constraintStart_toStartOf="@+id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@+id/monthBills" />
+                android:ellipsize="marquee"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:marqueeRepeatLimit="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:textAlignment="viewStart"
+                android:gravity="start"
+                tools:text="$1,234,567,890.00"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Карточка Lowest subs -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/lowest_subs_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:cardBackgroundColor="@color/Gray_65"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/highest_subs_card"
+        app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
+        app:layout_constraintEnd_toEndOf="@id/end_border"
+        app:layout_constraintBottom_toBottomOf="@+id/statsBlock">
+
+        <LinearLayout
+            android:id="@+id/lowestSubs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/ripple_accent_s_100"
+            android:focusable="true">
+
+            <!-- Полоска сверху -->
+            <View
+                android:layout_width="64dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/Accent_S_50"
+                android:elevation="4dp" />
+
+            <TextView
+                android:id="@+id/lowestSubsTitle"
+                style="@style/TextAppearance.Headline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:text="Lowest subs"
+                android:textColor="@color/Gray_40"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/lowestSubsAmount"
+                style="@style/TextAppearance.Headline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="14dp"
+                android:paddingHorizontal="8dp"
+                android:text="--"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                android:ellipsize="marquee"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:marqueeRepeatLimit="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:textAlignment="viewStart"
+                android:gravity="start"
+                tools:text="$1,234,5"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    <!-- TabLayout для переключения вкладок -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_subscription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tab_background"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toBottomOf="@id/statsBlock"
+        app:tabGravity="center"
+        app:tabIndicatorColor="@color/White"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@null"
+        app:tabTextAppearance="@style/CustomTabText"
+        tools:tabs="Your subscriptions, Upcoming bills" />
+
+    <!-- ViewPager2 для отображения контента -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout_subscription"
+        tools:listitem="@layout/fragment_my_sub_item_rv" />
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Open calendar"
+        android:tint="@color/White"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toTopOf="@id/fabAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/Accent_S_100_88"
+        app:rippleColor="@color/Accent_S_100"
+        app:fabCustomSize="40dp"
+        app:maxImageSize="24dp"
+        app:iconTint="@color/white" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Add subscription"
+        android:elevation="8dp"
+        android:src="@drawable/ic_add_sub"
+        android:tint="@color/White"
+        android:translationZ="8dp"
+        app:backgroundTint="@color/Accent_P_100_88"
+        app:elevation="8dp"
+        app:fabCustomSize="58dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/end_border"
+        app:rippleColor="@color/Accent_P_0" />
 
     <!-- Отcтупы -->
     <androidx.constraintlayout.widget.Guideline
@@ -209,14 +365,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="23dp" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="23dp" />
-
-
+        app:layout_constraintGuide_end="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,47 +13,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_navigation_graph" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/shape_bottom_14dp"
-        app:elevation="4dp"
-        app:itemHorizontalTranslationEnabled="false"
-        app:itemIconSize="22dp"
-        app:itemIconTint="@drawable/bottom_nav_color"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
-
-    <!-- Плавающая кнопка действия (FAB) -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:contentDescription="Add subscription"
-        android:elevation="8dp"
-        android:src="@drawable/ic_add_sub"
-        android:tint="@color/White"
-        android:translationZ="8dp"
-        app:backgroundTint="@color/Accent_P_100"
-        app:elevation="8dp"
-        app:fabCustomSize="58dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation_view"
-        app:layout_constraintEnd_toEndOf="@+id/end_border"
-        app:layout_constraintStart_toStartOf="@+id/start_border"
-        app:rippleColor="@color/Accent_P_0" />
 
     <!-- Отcтупы -->
     <androidx.constraintlayout.widget.Guideline
@@ -61,13 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="23dp" />
+        app:layout_constraintGuide_begin="20dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="23dp" />
+        app:layout_constraintGuide_end="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

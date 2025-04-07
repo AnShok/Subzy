@@ -11,6 +11,7 @@ import com.anshok.subzy.R
 import com.anshok.subzy.databinding.BottomSheetCurrencySelectorBinding
 import com.anshok.subzy.databinding.BottomSheetFeedbackBinding
 import com.anshok.subzy.presentation.settings.viewmodel.RateViewModel
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,12 +33,12 @@ class FeedbackBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.sendEmailButton.setOnClickListener {
+        binding.sendEmailButton.safeDelayedClick {
             viewModel.onSendEmailClicked()
             dismiss()
         }
 
-        binding.declineButton.setOnClickListener {
+        binding.declineButton.safeDelayedClick {
             dismiss()
         }
 

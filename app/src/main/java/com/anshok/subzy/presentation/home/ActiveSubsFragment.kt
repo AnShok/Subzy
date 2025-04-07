@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.mySub
+package com.anshok.subzy.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.FragmentMySubItemRvBinding
-import com.anshok.subzy.presentation.mySub.adapter.SubscriptionsAdapter
-import com.anshok.subzy.presentation.mySub.viewmodel.MySubViewModel
+import com.anshok.subzy.presentation.home.adapter.SubscriptionsAdapter
+import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RvItemSubFragment : Fragment() {
+class ActiveSubsFragment : Fragment() {
 
     private val binding: FragmentMySubItemRvBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: MySubViewModel by viewModel()
@@ -29,14 +30,16 @@ class RvItemSubFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = SubscriptionsAdapter { subscription ->
             val action =
-                MySubFragmentDirections.actionMySubFragmentToDetailsSubFragment(subscription.id)
-            findNavController().navigate(action)
+                HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(subscription.id)
+
+            // Навигация через родителя
+            (parentFragment?.findNavController() ?: findNavController()).navigate(action)
         }
 
         binding.subscriptionsList.layoutManager = LinearLayoutManager(requireContext())
         binding.subscriptionsList.adapter = adapter
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.subscriptions.collect { list ->
                 adapter.submitList(list)
 
@@ -46,5 +49,4 @@ class RvItemSubFragment : Fragment() {
             }
         }
     }
-
 }

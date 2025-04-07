@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.BottomSheetEditNameBinding
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class EditNameBottomSheet(
@@ -30,7 +31,7 @@ class EditNameBottomSheet(
 
         binding.nameEditText.setText(currentName)
 
-        binding.saveButton.setOnClickListener {
+        binding.saveButton.safeDelayedClick {
             val newName = binding.nameEditText.text.toString().trim()
             if (newName.isNotEmpty()) {
                 onNameSaved(newName)
@@ -38,7 +39,7 @@ class EditNameBottomSheet(
             }
         }
 
-        binding.cancelButton.setOnClickListener {
+        binding.cancelButton.safeDelayedClick {
             dismiss()
         }
     }

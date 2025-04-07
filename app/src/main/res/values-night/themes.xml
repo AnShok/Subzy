@@ -2,11 +2,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- =================== -->
-    <!-- THEME: DARK         -->
+    <!-- THEME: DARK    MaterialComponents     -->
     <!-- =================== -->
 
-    <style name="Base.Theme.Subzy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/Accent_P_50</item>
+    <style name="Base.Theme.Subzy" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/Accent_P_100</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/white</item>
@@ -21,6 +21,8 @@
         <item name="android:windowBackground">@color/Gray_80</item>
 
         <item name="bottomSheetStyle">@style/BottomSheet.Transparent</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Material3</item>
+
 
     </style>
 

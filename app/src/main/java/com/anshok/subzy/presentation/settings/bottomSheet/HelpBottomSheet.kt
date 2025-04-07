@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.BottomSheetHelpBinding
 import com.anshok.subzy.presentation.settings.viewmodel.HelpViewModel
+import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,8 +39,12 @@ class HelpBottomSheet : BottomSheetDialogFragment() {
             }
         }
 
-        binding.emailContainer.setOnClickListener { viewModel.onEmailClick() }
-        binding.telegramContainer.setOnClickListener { viewModel.onTelegramClick() }
+        binding.emailContainer.safeDelayedClick {
+            viewModel.onEmailClick()
+        }
+        binding.telegramContainer.safeDelayedClick {
+            viewModel.onTelegramClick()
+        }
     }
 }
 

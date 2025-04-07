@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:background="@null"
+    app:cardCornerRadius="20dp"
+    app:cardBackgroundColor="@color/Gray_75">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/delete_title"
+            style="@style/TextAppearance.Headline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Subscription?"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/delete_message"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="You can't undo this action"
+            android:textColor="@color/Gray_30" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/cancel_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:paddingHorizontal="24dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/Gray_50" />
+
+            <Space android:layout_width="12dp" android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/confirm_delete_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:paddingHorizontal="24dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/red" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

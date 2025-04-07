@@ -22,6 +22,7 @@ import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAboutUsBinding
 import com.anshok.subzy.presentation.settings.bottomSheet.EasterEggBottomSheet
 import com.anshok.subzy.presentation.settings.viewmodel.AboutUsViewModel
+import com.anshok.subzy.util.safeDelayedClick
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AboutUsFragment : Fragment() {
@@ -64,16 +65,16 @@ class AboutUsFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.backButton.setOnClickListener {
+        binding.backButton.safeDelayedClick {
             findNavController().navigateUp()
         }
-        binding.privacyPolicy.setOnClickListener {
+        binding.privacyPolicy.safeDelayedClick {
             openWeb("https://yourdomain.com/privacy")
         }
-        binding.termsOfUse.setOnClickListener {
+        binding.termsOfUse.safeDelayedClick {
             openWeb("https://yourdomain.com/terms")
         }
-        binding.logoDevLink.setOnClickListener {
+        binding.logoDevLink.safeDelayedClick {
             openWeb("https://logo.dev")
         }
     }

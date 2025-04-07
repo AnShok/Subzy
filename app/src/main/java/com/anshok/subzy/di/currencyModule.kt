@@ -6,12 +6,13 @@ import com.anshok.subzy.domain.api.CurrencyInteractor
 import com.anshok.subzy.domain.api.CurrencyRepository
 import com.anshok.subzy.domain.impl.CurrencyInteractorImpl
 import com.anshok.subzy.presentation.settings.viewmodel.CurrencyViewModel
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val currencyModule = module {
     single { CbrNetworkClient.provideCbrApi() }
-    single<CurrencyRepository> { CurrencyRepositoryImpl(get()) }
+    single<CurrencyRepository> { CurrencyRepositoryImpl(get(), get(), get()) }
     single<CurrencyInteractor> { CurrencyInteractorImpl(get()) }
     viewModel {
         CurrencyViewModel(
@@ -20,5 +21,7 @@ val currencyModule = module {
             notifier = get()
         )
     }
+    single { Gson() }
+
 
 }

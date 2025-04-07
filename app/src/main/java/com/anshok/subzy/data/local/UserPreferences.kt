@@ -1,11 +1,9 @@
 package com.anshok.subzy.data.local
 
 import android.content.Context
-import android.util.Log
-import java.util.Currency
 import com.anshok.subzy.domain.model.AppIconStyle
 import com.anshok.subzy.domain.model.AppTheme
-import java.util.Locale
+import java.time.LocalDate
 
 class UserPreferences(private val context: Context) {
 
@@ -43,7 +41,19 @@ class UserPreferences(private val context: Context) {
     }
 
 
+    fun saveCurrencyCache(json: String) {
+        prefs.edit().putString("cached_currency_json", json).apply()
+        prefs.edit().putLong("cached_currency_date", System.currentTimeMillis()).apply()
+    }
 
+    fun getCurrencyCache(): String? = prefs.getString("cached_currency_json", null)
+
+    fun isCurrencyCacheToday(): Boolean {
+        val savedTime = prefs.getLong("cached_currency_date", 0L)
+        val savedDate = LocalDate.ofEpochDay(savedTime / (1000 * 60 * 60 * 24))
+        val today = LocalDate.now()
+        return savedDate.isEqual(today)
+    }
 
 
     fun saveAppIconStyle(style: AppIconStyle) {

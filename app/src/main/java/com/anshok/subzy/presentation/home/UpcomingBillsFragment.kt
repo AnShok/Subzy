@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.mySub
+package com.anshok.subzy.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.FragmentMySubUpcomingBillsRvBinding
-import com.anshok.subzy.presentation.mySub.adapter.UpcomingBillsAdapter
-import com.anshok.subzy.presentation.mySub.viewmodel.MySubViewModel
+import com.anshok.subzy.presentation.home.adapter.UpcomingBillsAdapter
+import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RvUpcomingBillsFragment : Fragment() {
+class UpcomingBillsFragment : Fragment() {
 
     private val binding: FragmentMySubUpcomingBillsRvBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: MySubViewModel by viewModel()
@@ -27,7 +28,13 @@ class RvUpcomingBillsFragment : Fragment() {
     ): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = UpcomingBillsAdapter()
+
+        adapter = UpcomingBillsAdapter { subscription ->
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(subscription.id)
+
+            (parentFragment?.findNavController() ?: findNavController()).navigate(action)
+        }
         binding.billsList.layoutManager = LinearLayoutManager(requireContext())
         binding.billsList.adapter = adapter
 

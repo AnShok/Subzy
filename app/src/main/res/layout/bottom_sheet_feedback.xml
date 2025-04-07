@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_bottom_sheet_background"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="16dp">
 
     <!-- Верхняя линия -->
     <View
@@ -49,12 +49,13 @@
     <TextView
         android:id="@+id/declineButton"
         style="@style/TextAppearance.Headline3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="26dp"
         android:background="?attr/selectableItemBackground"
         android:text="@string/no_thanks"
+        android:gravity="center_horizontal"
         android:textColor="@color/Gray_30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
