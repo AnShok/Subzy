@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anshok.subzy.databinding.ItemUpcomingBillsBinding
-import com.anshok.subzy.domain.model.Subscription
+import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.util.CurrencyUtils
 import com.anshok.subzy.util.safeDelayedAction
 import com.anshok.subzy.util.safeDelayedClick

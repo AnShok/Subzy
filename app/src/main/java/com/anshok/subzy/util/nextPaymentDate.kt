@@ -1,6 +1,6 @@
 package com.anshok.subzy.util
 
-import com.anshok.subzy.domain.model.PaymentPeriodType
+import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
 import java.time.LocalDate
 
 fun calculateNextPaymentDate(

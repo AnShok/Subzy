@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.anshok.subzy.data.local.db.entities.CategoryEntity
+import com.anshok.subzy.data.local.entities.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

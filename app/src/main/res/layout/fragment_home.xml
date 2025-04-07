@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/gradient_overlay_home_fragment"
     tools:context=".presentation.home.HomeFragment">
 
@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -34,19 +34,19 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Subzy"
-            android:textStyle="bold"
-            android:textColor="@color/White" />
+            android:textColor="@color/White"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/settings_button"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:background="@drawable/shape_14dp"
-            android:scaleType="centerInside"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_bottom_navigation_settings"
             android:contentDescription="settings"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_bottom_navigation_settings"
             app:tint="@color/Gray_30" />
     </LinearLayout>
 
@@ -56,9 +56,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingVertical="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/appTitle"
+        app:layout_constraintEnd_toEndOf="@+id/invisibleAnchor"
         app:layout_constraintStart_toStartOf="@+id/start_border"
-        app:layout_constraintEnd_toEndOf="@+id/invisibleAnchor">
+        app:layout_constraintTop_toBottomOf="@+id/appTitle">
 
         <!-- Заголовок -->
         <TextView
@@ -76,19 +76,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:paddingEnd="8dp"
-            android:text="--"
-            android:textColor="@color/White"
-            android:textStyle="bold"
             android:ellipsize="marquee"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:marqueeRepeatLimit="1"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:scrollHorizontally="true"
-            android:textAlignment="viewStart"
             android:gravity="start"
+            android:marqueeRepeatLimit="1"
+            android:maxLines="1"
+            android:paddingEnd="8dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="--"
+            android:textAlignment="viewStart"
+            android:textColor="@color/White"
+            android:textStyle="bold"
             tools:text="$1,234,567,890.00" />
 
 
@@ -106,24 +106,24 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/filterAll"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
                 android:minWidth="64dp"
                 android:text="All"
+                android:textAllCaps="false"
                 android:textColor="@color/White"
                 app:backgroundTint="@color/Gray_70"
-                app:strokeColor="@color/Gray_60"
                 app:cornerRadius="8dp"
-                app:iconPadding="0dp"
                 app:iconGravity="textStart"
-                android:layout_marginEnd="8dp"
-                android:textAllCaps="false"/>
+                app:iconPadding="0dp"
+                app:strokeColor="@color/Gray_60" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/filterStatus"
@@ -132,15 +132,15 @@
                 android:layout_height="40dp"
                 android:minWidth="64dp"
                 android:text="Status"
+                android:textAllCaps="false"
                 android:textColor="@color/White"
-                app:icon="@drawable/ic_share"
                 app:backgroundTint="@color/Gray_70"
-                app:strokeColor="@color/Gray_60"
                 app:cornerRadius="8dp"
-                app:iconTint="@color/White"
-                app:iconPadding="8dp"
+                app:icon="@drawable/ic_share"
                 app:iconGravity="textStart"
-                android:textAllCaps="false"/>
+                app:iconPadding="8dp"
+                app:iconTint="@color/White"
+                app:strokeColor="@color/Gray_60" />
         </LinearLayout>
     </LinearLayout>
 
@@ -149,12 +149,12 @@
         android:id="@+id/invisibleAnchor"
         android:layout_width="1dp"
         android:layout_height="1dp"
-        android:visibility="invisible"
         android:layout_marginTop="100dp"
-        app:layout_constraintStart_toStartOf="@id/start_border"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.58" />
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="@id/start_border"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <!-- Карточка Highest subs -->
@@ -162,24 +162,24 @@
         android:id="@+id/highest_subs_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         app:cardBackgroundColor="@color/Gray_65"
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="@+id/statsBlock"
+        app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
-        app:layout_constraintEnd_toEndOf="@id/end_border">
+        app:layout_constraintTop_toTopOf="@+id/statsBlock">
 
         <LinearLayout
             android:id="@+id/highestSubs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
             android:background="@drawable/ripple_primary_500"
-            android:focusable="true">
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <!-- Полоска сверху -->
             <View
@@ -205,21 +205,21 @@
                 style="@style/TextAppearance.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingHorizontal="8dp"
-                android:text="--"
-                android:textColor="@color/White"
-                android:textStyle="bold"
                 android:ellipsize="marquee"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:marqueeRepeatLimit="1"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:scrollHorizontally="true"
-                android:textAlignment="viewStart"
                 android:gravity="start"
-                tools:text="$1,234,567,890.00"/>
+                android:marqueeRepeatLimit="1"
+                android:maxLines="1"
+                android:paddingHorizontal="8dp"
+                android:paddingBottom="14dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="--"
+                android:textAlignment="viewStart"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                tools:text="$1,234,567,890.00" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -228,26 +228,26 @@
         android:id="@+id/lowest_subs_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="1"
         app:cardBackgroundColor="@color/Gray_65"
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/highest_subs_card"
-        app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
+        app:layout_constraintBottom_toBottomOf="@+id/statsBlock"
         app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintBottom_toBottomOf="@+id/statsBlock">
+        app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
+        app:layout_constraintTop_toBottomOf="@+id/highest_subs_card">
 
         <LinearLayout
             android:id="@+id/lowestSubs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
             android:background="@drawable/ripple_accent_s_100"
-            android:focusable="true">
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <!-- Полоска сверху -->
             <View
@@ -273,21 +273,21 @@
                 style="@style/TextAppearance.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingHorizontal="8dp"
-                android:text="--"
-                android:textColor="@color/White"
-                android:textStyle="bold"
                 android:ellipsize="marquee"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:marqueeRepeatLimit="1"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:scrollHorizontally="true"
-                android:textAlignment="viewStart"
                 android:gravity="start"
-                tools:text="$1,234,5"/>
+                android:marqueeRepeatLimit="1"
+                android:maxLines="1"
+                android:paddingHorizontal="8dp"
+                android:paddingBottom="14dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="--"
+                android:textAlignment="viewStart"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                tools:text="$1,234,5" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -330,15 +330,15 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="Open calendar"
-        android:tint="@color/White"
         android:src="@drawable/ic_calendar"
+        android:tint="@color/White"
+        app:backgroundTint="@color/Accent_S_100_88"
+        app:fabCustomSize="40dp"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toTopOf="@id/fabAdd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/Accent_S_100_88"
-        app:rippleColor="@color/Accent_S_100"
-        app:fabCustomSize="40dp"
         app:maxImageSize="24dp"
-        app:iconTint="@color/white" />
+        app:rippleColor="@color/Accent_S_100" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

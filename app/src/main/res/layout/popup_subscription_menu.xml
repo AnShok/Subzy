@@ -4,25 +4,25 @@
     android:id="@+id/popup_container"
     android:layout_width="120dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@drawable/bg_popup_menu"
     android:elevation="8dp"
+    android:orientation="vertical"
     android:padding="8dp">
 
     <LinearLayout
         android:id="@+id/edit_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:padding="12dp">
 
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
             android:src="@drawable/ic_edit"
-            app:tint="@color/White"
-            android:layout_marginEnd="8dp" />
+            app:tint="@color/White" />
 
         <TextView
             android:id="@+id/text_edit"
@@ -33,27 +33,27 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <!-- 🔹 Разделитель -->
+    <!-- Разделитель -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginVertical="4dp"
-        android:background="@color/Gray_30"
-        android:alpha="0.6"/>
+        android:alpha="0.6"
+        android:background="@color/Gray_30" />
 
     <LinearLayout
         android:id="@+id/delete_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:padding="12dp">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_delete"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_delete" />
 
         <TextView
             android:id="@+id/text_delete"

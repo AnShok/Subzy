@@ -1,7 +1,7 @@
 package com.anshok.subzy.data.converters
 
 import com.anshok.subzy.data.local.models.EmbeddedLogo
-import com.anshok.subzy.domain.model.Logo
+import com.anshok.subzy.domain.logo.model.Logo
 
 object EmbeddedLogoMapper {
     fun mapToDomain(embeddedLogo: EmbeddedLogo): Logo {

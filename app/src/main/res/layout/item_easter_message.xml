@@ -2,8 +2,8 @@
     style="@style/TextAppearance.BodyLarge"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_easter_chat_bubble"
-    android:textColor="@color/white"
-    android:padding="12dp"
+    android:layout_marginStart="8dp"
     android:layout_marginBottom="12dp"
-    android:layout_marginStart="8dp"/>
+    android:background="@drawable/bg_easter_chat_bubble"
+    android:padding="12dp"
+    android:textColor="@color/white" />

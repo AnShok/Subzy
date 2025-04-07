@@ -4,7 +4,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.anshok.subzy.data.local.db.AppDatabase
-import com.anshok.subzy.data.local.db.entities.SubscriptionEntity
+import com.anshok.subzy.data.local.entities.SubscriptionEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before

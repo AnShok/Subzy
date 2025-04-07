@@ -15,8 +15,8 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentSettingsBinding
-import com.anshok.subzy.domain.model.AppIconStyle
-import com.anshok.subzy.domain.model.AppTheme
+import com.anshok.subzy.domain.settings.model.AppIconStyle
+import com.anshok.subzy.domain.settings.model.AppTheme
 import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.AppIconBottomSheet
 import com.anshok.subzy.presentation.settings.bottomSheet.EditNameBottomSheet

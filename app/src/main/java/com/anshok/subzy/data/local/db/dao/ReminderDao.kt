@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.anshok.subzy.data.local.db.entities.ReminderEntity
+import com.anshok.subzy.data.local.entities.ReminderEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

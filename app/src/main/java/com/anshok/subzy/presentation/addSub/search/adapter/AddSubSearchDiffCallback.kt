@@ -1,7 +1,7 @@
 package com.anshok.subzy.presentation.addSub.search.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.anshok.subzy.domain.model.Logo
+import com.anshok.subzy.domain.logo.model.Logo
 
 class AddSubSearchDiffCallback(
     private val oldList: List<Logo>,

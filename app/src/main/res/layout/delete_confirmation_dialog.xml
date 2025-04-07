@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="16dp"
     android:background="@null"
-    app:cardCornerRadius="20dp"
-    app:cardBackgroundColor="@color/Gray_75">
+    app:cardBackgroundColor="@color/Gray_75"
+    app:cardCornerRadius="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,30 +37,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:orientation="horizontal"
-            android:gravity="end">
+            android:gravity="end"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/cancel_button"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
+                android:backgroundTint="@color/Gray_50"
                 android:paddingHorizontal="24dp"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/Gray_50" />
+                android:text="Cancel"
+                android:textColor="@color/white" />
 
-            <Space android:layout_width="12dp" android:layout_height="wrap_content" />
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/confirm_delete_button"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:backgroundTint="@color/red"
                 android:paddingHorizontal="24dp"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/red" />
+                android:text="Delete"
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

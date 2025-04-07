@@ -26,7 +26,8 @@
     <string name="send_email">Send via email</string>
     <string name="no_thanks">No, thanks</string>
 
-    <string name="subscription_exists">This subscription already exists</string>
+    <string name="subscription_exists">A subscription with that name already exists</string>
+    <string name="subscription_invalid_input">Specify the subscription name and price</string>
 
     <string name="month_1">Январь</string>
     <string name="month_2">Февраль</string>

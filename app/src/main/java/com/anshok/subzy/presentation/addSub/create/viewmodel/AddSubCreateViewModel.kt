@@ -4,14 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anshok.subzy.data.local.UserPreferences
-import com.anshok.subzy.domain.api.CurrencyInteractor
-import com.anshok.subzy.domain.api.SubscriptionInteractor
-import com.anshok.subzy.domain.model.CurrencyRate
-import com.anshok.subzy.domain.model.PaymentPeriodType
-import com.anshok.subzy.domain.model.Subscription
+import com.anshok.subzy.data.local.preferences.UserPreferences
+import com.anshok.subzy.domain.currency.CurrencyInteractor
+import com.anshok.subzy.domain.currency.model.CurrencyRate
+import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
+import com.anshok.subzy.domain.subscription.SubscriptionInteractor
+import com.anshok.subzy.domain.subscription.model.Subscription
+import com.anshok.subzy.presentation.addSub.create.state.SaveResult
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 class AddSubCreateViewModel(
     private val subscriptionInteractor: SubscriptionInteractor,
@@ -24,10 +26,9 @@ class AddSubCreateViewModel(
     }
     val currencyCode: LiveData<String> = _currencyCode
 
-    var selectedLogoUrl: String? = null // из API
-    var selectedLogoResName: String? = null // из ресурсов
-    var selectedImageFromGallery: String? = null // путь из галереи
-
+    var selectedLogoUrl: String? = null
+    var selectedLogoResName: String? = null
+    var selectedImageFromGallery: String? = null
     var cachedCurrencies: List<CurrencyRate> = emptyList()
 
     fun setCurrency(code: String) {
@@ -58,10 +59,10 @@ class AddSubCreateViewModel(
         categoryId: Long = 0L,
         paymentMethodId: Long = 0L,
         comment: String? = null,
-        onResult: (success: Boolean, error: String?) -> Unit
+        onResult: (SaveResult) -> Unit
     ) {
         if (name.isBlank() || price <= 0.0) {
-            onResult(false, "Укажите название подписки и цену")
+            onResult(SaveResult.InvalidInput)
             return
         }
 
@@ -84,7 +85,11 @@ class AddSubCreateViewModel(
             paymentPeriod = paymentPeriod,
             paymentPeriodType = paymentPeriodType,
             firstPaymentDate = firstPaymentDate,
-            nextPaymentDate = calculateNextPaymentDate(firstPaymentDate, paymentPeriod, paymentPeriodType),
+            nextPaymentDate = calculateNextPaymentDate(
+                firstPaymentDate,
+                paymentPeriod,
+                paymentPeriodType
+            ),
             paymentMethodId = paymentMethodId,
             categoryId = categoryId,
             comment = comment
@@ -92,7 +97,9 @@ class AddSubCreateViewModel(
 
         viewModelScope.launch {
             val result = subscriptionInteractor.insertSubscription(subscription)
-            onResult(result, if (!result) "A subscription with that name already exists" else null)
+            onResult(if (result) SaveResult.Success else SaveResult.Duplicate)
+
+
         }
     }
 
