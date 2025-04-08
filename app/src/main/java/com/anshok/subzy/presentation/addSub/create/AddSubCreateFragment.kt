@@ -38,6 +38,9 @@ class AddSubCreateFragment : Fragment() {
     private val binding: FragmentAddSubCreateBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: AddSubCreateViewModel by viewModel()
 
+    private var selectedPeriodNumber: Int = 1
+    private var selectedPeriodType: PaymentPeriodType = PaymentPeriodType.MONTHLY
+
     private val galleryLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
@@ -115,11 +118,11 @@ class AddSubCreateFragment : Fragment() {
 
         binding.descriptionContainer.setOnClickListener { openDescriptionBottomSheet() }
         binding.paymentPeriodContainer.setOnClickListener { openPaymentPeriodBottomSheet() }
-        binding.categoryContainer.setOnClickListener {
-            CategoryBottomSheetFragment { category ->
-                binding.categoryValue.text = category
-            }.show(parentFragmentManager, "CategoryBottomSheet")
-        }
+//        binding.categoryContainer.setOnClickListener {
+//            CategoryBottomSheetFragment { category ->
+//                binding.categoryValue.text = category
+//            }.show(parentFragmentManager, "CategoryBottomSheet")
+//        }
 
         setCurrentDate()
         binding.firstPaymentContainer.setOnClickListener { showDatePicker() }
@@ -152,8 +155,8 @@ class AddSubCreateFragment : Fragment() {
             name = name,
             price = price,
             description = binding.descriptionValue.text.toString(),
-            paymentPeriod = 1,
-            paymentPeriodType = PaymentPeriodType.MONTHLY,
+            paymentPeriod = selectedPeriodNumber,
+            paymentPeriodType = selectedPeriodType,
             firstPaymentDate = dateMillis,
             categoryId = 0L,
             paymentMethodId = 0L,
@@ -161,7 +164,10 @@ class AddSubCreateFragment : Fragment() {
         ) { result ->
             when (result) {
                 SaveResult.Success -> {
-                    findNavController().navigate(R.id.action_addSubCreateFragment_to_homeFragment)
+                    findNavController().apply {
+                        previousBackStackEntry?.savedStateHandle?.set("refreshAfterSave", true)
+                        popBackStack(R.id.homeFragment, false)
+                    }
                 }
 
                 SaveResult.Duplicate -> {
@@ -205,14 +211,24 @@ class AddSubCreateFragment : Fragment() {
     }
 
     private fun openPaymentPeriodBottomSheet() {
-        PaymentPeriodBottomSheet { number, period ->
-            val correctForm = when (period) {
-                "дни" -> resources.getQuantityString(R.plurals.days, number, number)
-                "недели" -> resources.getQuantityString(R.plurals.weeks, number, number)
-                "месяцы" -> resources.getQuantityString(R.plurals.months, number, number)
-                "годы" -> resources.getQuantityString(R.plurals.years, number, number)
-                else -> "$number $period"
+        PaymentPeriodBottomSheet { number, periodString ->
+            val type = when (periodString) {
+                "дни" -> PaymentPeriodType.DAILY
+                "недели" -> PaymentPeriodType.WEEKLY
+                "месяцы" -> PaymentPeriodType.MONTHLY
+                "годы" -> PaymentPeriodType.YEARLY
+                else -> PaymentPeriodType.MONTHLY
             }
+            selectedPeriodNumber = number
+            selectedPeriodType = type
+
+            val correctForm = when (type) {
+                PaymentPeriodType.DAILY -> resources.getQuantityString(R.plurals.days, number, number)
+                PaymentPeriodType.WEEKLY -> resources.getQuantityString(R.plurals.weeks, number, number)
+                PaymentPeriodType.MONTHLY -> resources.getQuantityString(R.plurals.months, number, number)
+                PaymentPeriodType.YEARLY -> resources.getQuantityString(R.plurals.years, number, number)
+            }
+
             binding.paymentPeriodValue.text = correctForm
         }.show(parentFragmentManager, "PaymentPeriodBottomSheet")
     }

@@ -40,17 +40,13 @@ class SubscriptionsAdapter(
         fun bind(item: Subscription) {
             binding.positionTitle.text = item.name
             binding.costTitle.text = CurrencyUtils.formatPrice(item.price, item.currencyCode)
-            binding.container.safeDelayedClick {
-                onItemClick(item)
-            }
+            binding.container.safeDelayedClick { onItemClick(item) }
             binding.positionTitle.isSelected = false
-
             binding.positionTitle.safeDelayedAction(1500) {
                 binding.positionTitle.isSelected = true
             }
 
             bindLogo(item.logoUrl.toLogo(binding.root.context), binding.itemLogo)
-
         }
     }
 }

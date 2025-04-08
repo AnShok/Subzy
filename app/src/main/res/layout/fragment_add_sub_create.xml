@@ -273,58 +273,6 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- Период оплаты -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/payment_period_container"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:paddingVertical="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/description_container">
-
-                        <TextView
-                            android:id="@+id/payment_period_label"
-                            style="@style/TextAppearance.Headline2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Payment period"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/payment_period_value"
-                            style="@style/TextAppearance.BodySmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="end"
-                            android:text="every month"
-                            android:textColor="@color/Gray_30"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_payment_period"
-                            app:layout_constraintStart_toEndOf="@id/payment_period_label"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/arrow_payment_period"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
                     <!-- Первый платеж -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/first_payment_container"
@@ -336,7 +284,7 @@
                         android:paddingVertical="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/payment_period_container">
+                        app:layout_constraintTop_toBottomOf="@+id/description_container">
 
                         <TextView
                             android:id="@+id/first_payment_label"
@@ -376,6 +324,59 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                    <!-- Период оплаты -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/payment_period_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingVertical="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/first_payment_container">
+
+                        <TextView
+                            android:id="@+id/payment_period_label"
+                            style="@style/TextAppearance.Headline2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Payment period"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/payment_period_value"
+                            style="@style/TextAppearance.BodySmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:gravity="end"
+                            android:text="1 месяц"
+                            android:textColor="@color/Gray_30"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/arrow_payment_period"
+                            app:layout_constraintStart_toEndOf="@id/payment_period_label"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/arrow_payment_period"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Arrow"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                     <!-- Напоминания -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/reminder_container"
@@ -387,7 +388,7 @@
                         android:paddingVertical="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/first_payment_container">
+                        app:layout_constraintTop_toBottomOf="@+id/payment_period_container">
 
                         <TextView
                             android:id="@+id/reminder_label"
@@ -429,113 +430,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <!-- Метод оплаты -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/payment_method_container"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:paddingVertical="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/reminder_container">
-
-                        <TextView
-                            android:id="@+id/payment_method_label"
-                            style="@style/TextAppearance.Headline2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Payment method"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/payment_method_value"
-                            style="@style/TextAppearance.BodySmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:ellipsize="end"
-                            android:gravity="end"
-                            android:maxLines="1"
-                            android:text="Not specified"
-                            android:textColor="@color/Gray_30"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_payment_method"
-                            app:layout_constraintStart_toEndOf="@id/payment_method_label"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/arrow_payment_method"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <!-- Категория -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/category_container"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:paddingVertical="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/payment_method_container">
-
-                        <TextView
-                            android:id="@+id/category_label"
-                            style="@style/TextAppearance.Headline2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Category"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/category_value"
-                            style="@style/TextAppearance.BodySmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:ellipsize="end"
-                            android:gravity="end"
-                            android:maxLines="1"
-                            android:text="Not specified"
-                            android:textColor="@color/Gray_30"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_category"
-                            app:layout_constraintStart_toEndOf="@id/category_label"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/arrow_category"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- Комментарий -->
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -548,7 +442,7 @@
                         android:paddingVertical="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/category_container">
+                        app:layout_constraintTop_toBottomOf="@id/reminder_container">
 
                         <!-- Комментарий Label -->
                         <TextView

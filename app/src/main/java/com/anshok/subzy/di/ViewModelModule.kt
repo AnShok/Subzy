@@ -6,6 +6,7 @@ import com.anshok.subzy.domain.help.HelpInteractor
 import com.anshok.subzy.domain.settings.SettingsRepository
 import com.anshok.subzy.presentation.addSub.create.AddSubCreateViewModel
 import com.anshok.subzy.presentation.addSub.search.AddSubSearchViewModel
+import com.anshok.subzy.presentation.calendar.CalendarViewModel
 import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AboutUsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
@@ -99,6 +100,13 @@ val viewModelModule = module {
 
     // EventBus для обновлений валюты (через SharedFlow)
     single { CurrencyChangedNotifier() }
+
+    viewModel {
+        CalendarViewModel(
+            subscriptionInteractor = get(),
+            userPreferences = get()
+        )
+    }
 
 }
 

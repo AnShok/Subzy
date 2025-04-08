@@ -14,9 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneId
 
 class MySubViewModel(
     private val subscriptionInteractor: SubscriptionInteractor,
@@ -27,9 +24,8 @@ class MySubViewModel(
 
     private val _subscriptions = MutableStateFlow<List<Subscription>>(emptyList())
     val subscriptions: StateFlow<List<Subscription>> = _subscriptions.asStateFlow()
+    val isManualRefreshPending = MutableStateFlow(false)
 
-    private val _upcomingBills = MutableStateFlow<List<Subscription>>(emptyList())
-    val upcomingBills: StateFlow<List<Subscription>> = _upcomingBills.asStateFlow()
 
     private val _metrics =
         MutableStateFlow<Triple<String, Pair<Subscription, Double>?, Pair<Subscription, Double>?>>(
@@ -58,7 +54,6 @@ class MySubViewModel(
         }
     }
 
-
     fun getDefaultCurrencyCode(): String {
         return userPreferences.getDefaultCurrency()
     }
@@ -67,14 +62,6 @@ class MySubViewModel(
         viewModelScope.launch {
             subscriptionInteractor.getAllSubscriptions().collect { list ->
                 _subscriptions.value = list.sortedByDescending { it.id }
-
-                val now = LocalDate.now()
-                _upcomingBills.value = list.filter { subscription ->
-                    val next = Instant.ofEpochMilli(subscription.nextPaymentDate)
-                        .atZone(ZoneId.systemDefault()).toLocalDate()
-                    next.isAfter(now) || next.isEqual(now)
-                }.sortedBy { it.nextPaymentDate }
-
                 calculateMetrics(list)
             }
         }
@@ -106,4 +93,18 @@ class MySubViewModel(
             cheapest
         )
     }
+
+    fun refreshSubscriptionsManually(callback: (List<Subscription>) -> Unit) {
+        viewModelScope.launch {
+            isManualRefreshPending.value = true
+            subscriptionInteractor.getAllSubscriptions().collect { list ->
+                val sorted = list.sortedByDescending { it.id }
+                _subscriptions.value = sorted
+                calculateMetrics(sorted)
+                isManualRefreshPending.value = false
+                callback(sorted)
+            }
+        }
+    }
+
 }

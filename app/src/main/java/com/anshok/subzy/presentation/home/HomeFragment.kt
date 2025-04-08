@@ -9,19 +9,18 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentHomeBinding
-import com.anshok.subzy.presentation.home.adapter.HomePagerAdapter
+import com.anshok.subzy.presentation.home.adapter.SubscriptionsAdapter
 import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
 import com.anshok.subzy.util.CurrencyUtils
 import com.anshok.subzy.util.safeDelayedAction
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,13 +28,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
 
     private val binding: FragmentHomeBinding by viewBinding(CreateMethod.INFLATE)
-    private val tabTitles = arrayListOf("Your subscriptions", "Upcoming bills")
+
     private val viewModel: MySubViewModel by viewModel()
+    private lateinit var adapter: SubscriptionsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        setUpTabLayoutWithViewPager()
         return binding.root
     }
 
@@ -50,6 +49,34 @@ class HomeFragment : Fragment() {
             binding.lowestSubsAmount.isSelected = true
         }
 
+        adapter = SubscriptionsAdapter { subscription ->
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(subscription.id)
+            findNavController().navigate(action)
+        }
+
+        binding.subscriptionsList.layoutManager = LinearLayoutManager(requireContext())
+        binding.subscriptionsList.adapter = adapter
+
+        val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.getLiveData<Boolean>("refreshAfterSave")
+            ?.observe(viewLifecycleOwner) { shouldRefresh ->
+                if (shouldRefresh == true) {
+                    viewModel.refreshSubscriptionsManually {}
+                    // 👈 добавим это ниже
+                    savedStateHandle.remove<Boolean>("refreshAfterSave")
+                }
+            }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.subscriptions.collect { list ->
+                adapter.submitList(list)
+
+                val isEmpty = list.isEmpty()
+                binding.subscriptionsList.visibility = if (isEmpty) View.GONE else View.VISIBLE
+                binding.placeholderGroup.visibility = if (isEmpty) View.VISIBLE else View.GONE
+            }
+        }
     }
 
     private fun observeMetrics() {
@@ -106,20 +133,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-    private fun setUpTabLayoutWithViewPager() {
-        binding.viewPager.adapter = HomePagerAdapter(this)
-        TabLayoutMediator(binding.tabLayoutSubscription, binding.viewPager) { tab, position ->
-            tab.text = tabTitles[position]
-        }.attach()
-
-        for (i in 0..1) {
-            val textView = LayoutInflater.from(requireContext())
-                .inflate(R.layout.tab_title, null) as TextView
-            binding.tabLayoutSubscription.getTabAt(i)?.customView = textView
-        }
-    }
-
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupButtonsClicks() {

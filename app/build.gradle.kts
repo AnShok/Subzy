@@ -135,7 +135,11 @@ dependencies {
 
     implementation("com.kizitonwose.calendar:view:2.6.2")
 
-
+    //implementation ("com.timehop.stickyheadersrecyclerview:library:0.4.3")
+    //implementation ("com.github.shuhart:stickyheader:1.1.0")
+    implementation ("com.github.lisawray.groupie:groupie:2.10.1")
+    //implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.1"
+    implementation ("com.github.lisawray.groupie:groupie-viewbinding:2.10.1")
 
 
 
