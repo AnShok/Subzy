@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="8dp">
+
+    <!-- Заголовок с датой -->
+    <TextView
+        android:id="@+id/groupDateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="7 апр. 2025"
+        android:textColor="@color/Accent_S_100_88"
+        android:textSize="14sp"
+
+        android:drawablePadding="6dp"
+        android:paddingHorizontal="16dp" />
+
+    <!-- Контейнер для подписок -->
+    <LinearLayout
+        android:id="@+id/subscriptionsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="6dp" />
+
+</LinearLayout>

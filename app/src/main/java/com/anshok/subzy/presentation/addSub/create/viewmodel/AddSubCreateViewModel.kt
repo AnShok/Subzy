@@ -12,6 +12,8 @@ import com.anshok.subzy.domain.subscription.SubscriptionInteractor
 import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
 
@@ -104,14 +106,25 @@ class AddSubCreateViewModel(
     }
 
     private fun calculateNextPaymentDate(start: Long, period: Int, type: PaymentPeriodType): Long {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date(start)
-        when (type) {
-            PaymentPeriodType.DAILY -> calendar.add(Calendar.DAY_OF_MONTH, period)
-            PaymentPeriodType.WEEKLY -> calendar.add(Calendar.WEEK_OF_YEAR, period)
-            PaymentPeriodType.MONTHLY -> calendar.add(Calendar.MONTH, period)
-            PaymentPeriodType.YEARLY -> calendar.add(Calendar.YEAR, period)
+        val zone = ZoneId.systemDefault()
+        val from = Instant.ofEpochMilli(start).atZone(zone).toLocalDate()
+
+        val result = when (type) {
+            PaymentPeriodType.DAILY -> from.plusDays(period.toLong())
+            PaymentPeriodType.WEEKLY -> from.plusWeeks(period.toLong())
+            PaymentPeriodType.MONTHLY -> {
+                val added = from.plusMonths(period.toLong())
+                val day = minOf(from.dayOfMonth, added.lengthOfMonth())
+                added.withDayOfMonth(day)
+            }
+            PaymentPeriodType.YEARLY -> {
+                val added = from.plusYears(period.toLong())
+                val day = minOf(from.dayOfMonth, added.lengthOfMonth())
+                added.withDayOfMonth(day)
+            }
         }
-        return calendar.timeInMillis
+
+        return result.atStartOfDay(zone).toInstant().toEpochMilli()
     }
+
 }

@@ -23,16 +23,16 @@ class ActiveSubsFragment : Fragment() {
     private lateinit var adapter: SubscriptionsAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = binding.root
+    ): View =
+        binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = SubscriptionsAdapter { subscription ->
             val action =
                 HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(subscription.id)
-
-            // Навигация через родителя
             (parentFragment?.findNavController() ?: findNavController()).navigate(action)
         }
 

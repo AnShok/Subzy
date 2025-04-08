@@ -58,9 +58,6 @@
         android:name="com.anshok.subzy.presentation.addSub.create.AddSubCreateFragment"
         android:label="fragment_vacancy"
         tools:layout="@layout/fragment_add_sub_create" >
-        <action
-            android:id="@+id/action_addSubCreateFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
     </fragment>
 
     <!-- DetailsSubFragment -->
