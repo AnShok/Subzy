@@ -50,170 +50,48 @@
             app:tint="@color/Gray_30" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/statsBlock"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/metricsCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingVertical="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/invisibleAnchor"
+        app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border"
         app:layout_constraintTop_toBottomOf="@+id/appTitle">
 
-        <!-- Заголовок -->
-        <TextView
-            android:id="@+id/statsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Monthly"
-            android:textColor="@color/White"
-            android:textSize="16sp"
-            tools:text="Monthly"/>
-
-        <!-- Сумма -->
-        <TextView
-            android:id="@+id/activeSubsCount"
-            style="@style/TextAppearance.Headline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="start"
-            android:marqueeRepeatLimit="1"
-            android:maxLines="1"
-            android:paddingEnd="8dp"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:text="--"
-            android:textAlignment="viewStart"
-            android:textColor="@color/White"
-            android:textStyle="bold"
-            tools:text="$1,234.00" />
-
-
-        <!-- Обновление -->
-        <TextView
-            android:id="@+id/statsSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Updated Today"
-            android:textColor="@color/Gray_30"
-            android:textSize="12sp" />
-
-        <!-- Кнопки фильтра -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/statsBlock"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingVertical="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/invisibleAnchor"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/filterAll"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-                android:minWidth="64dp"
-                android:text="All"
-                android:textAllCaps="false"
-                android:textColor="@color/White"
-                app:backgroundTint="@color/Gray_70"
-                app:cornerRadius="8dp"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:strokeColor="@color/Gray_60" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/filterStatus"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:minWidth="64dp"
-                android:text="Status"
-                android:textAllCaps="false"
-                android:textColor="@color/White"
-                app:backgroundTint="@color/Gray_70"
-                app:cornerRadius="8dp"
-                app:icon="@drawable/ic_share"
-                app:iconGravity="textStart"
-                app:iconPadding="8dp"
-                app:iconTint="@color/White"
-                app:strokeColor="@color/Gray_60" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Отступ -->
-    <View
-        android:id="@+id/invisibleAnchor"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="100dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintHorizontal_bias="0.58"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <!-- Карточка Highest subs -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/highest_subs_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        app:cardBackgroundColor="@color/Gray_65"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
-        app:layout_constraintTop_toTopOf="@+id/statsBlock">
-
-        <LinearLayout
-            android:id="@+id/highestSubs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple_primary_500"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <!-- Полоска сверху -->
-            <View
-                android:layout_width="64dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/Primary_10"
-                android:elevation="4dp" />
-
+            <!-- Заголовок -->
             <TextView
-                android:id="@+id/highestSubsTitle"
-                style="@style/TextAppearance.Headline1"
+                android:id="@+id/statsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="14dp"
-                android:text="Highest subs"
-                android:textColor="@color/Gray_40"
-                android:textSize="14sp" />
+                android:text="Monthly"
+                android:textColor="@color/White"
+                android:textSize="16sp"
+                tools:text="Monthly" />
 
+            <!-- Сумма -->
             <TextView
-                android:id="@+id/highestSubsAmount"
-                style="@style/TextAppearance.Headline2"
+                android:id="@+id/activeSubsCount"
+                style="@style/TextAppearance.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="start"
                 android:marqueeRepeatLimit="1"
                 android:maxLines="1"
-                android:paddingHorizontal="8dp"
-                android:paddingBottom="14dp"
+                android:paddingEnd="8dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="--"
@@ -221,77 +99,208 @@
                 android:textColor="@color/White"
                 android:textStyle="bold"
                 tools:text="$1,234.00" />
+
+
+            <!-- Обновление -->
+            <TextView
+                android:id="@+id/statsSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Updated Today"
+                android:textColor="@color/Gray_30"
+                android:textSize="12sp" />
+
+            <!-- Кнопки фильтра -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterAll"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="64dp"
+                    android:text="All"
+                    android:textAllCaps="false"
+                    android:textColor="@color/White"
+                    app:backgroundTint="@color/Gray_70"
+                    app:cornerRadius="8dp"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:strokeColor="@color/Gray_60" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterStatus"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:minWidth="64dp"
+                    android:text="Status"
+                    android:textAllCaps="false"
+                    android:textColor="@color/White"
+                    app:backgroundTint="@color/Gray_70"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_share"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
+                    app:iconTint="@color/White"
+                    app:strokeColor="@color/Gray_60" />
+            </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <!-- Карточка Lowest subs -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lowest_subs_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"
-        app:cardBackgroundColor="@color/Gray_65"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/statsBlock"
-        app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
-        app:layout_constraintTop_toBottomOf="@+id/highest_subs_card">
+        <!-- Отступ -->
+        <View
+            android:id="@+id/invisibleAnchor"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="100dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.58"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/lowestSubs"
-            android:layout_width="match_parent"
+
+        <!-- Карточка Highest subs -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/highest_subs_card"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_accent_s_100"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/Gray_65"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
+            app:layout_constraintTop_toTopOf="@+id/statsBlock">
 
-            <!-- Полоска сверху -->
-            <View
-                android:layout_width="64dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/Accent_S_50"
-                android:elevation="4dp" />
-
-            <TextView
-                android:id="@+id/lowestSubsTitle"
-                style="@style/TextAppearance.Headline1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/highestSubs"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="14dp"
-                android:text="Lowest subs"
-                android:textColor="@color/Gray_40"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/lowestSubsAmount"
-                style="@style/TextAppearance.Headline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
+                android:background="@drawable/ripple_primary_500"
+                android:clickable="true"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="start"
-                android:marqueeRepeatLimit="1"
-                android:maxLines="1"
-                android:paddingHorizontal="8dp"
-                android:paddingBottom="14dp"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:text="--"
-                android:textAlignment="viewStart"
-                android:textColor="@color/White"
-                android:textStyle="bold"
-                tools:text="$1,234,5" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <!-- Полоска сверху -->
+                <View
+                    android:layout_width="64dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/Primary_10"
+                    android:elevation="4dp" />
+
+                <TextView
+                    android:id="@+id/highestSubsTitle"
+                    style="@style/TextAppearance.Headline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="14dp"
+                    android:text="Highest subs"
+                    android:textColor="@color/Gray_40"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/highestSubsAmount"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="start"
+                    android:marqueeRepeatLimit="1"
+                    android:maxLines="1"
+                    android:paddingHorizontal="8dp"
+                    android:paddingBottom="14dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="--"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/White"
+                    android:textStyle="bold"
+                    tools:text="$1,234.00" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Карточка Lowest subs -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/lowest_subs_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/Gray_65"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/statsBlock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/invisibleAnchor"
+            app:layout_constraintTop_toBottomOf="@+id/highest_subs_card">
+
+            <LinearLayout
+                android:id="@+id/lowestSubs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_accent_s_100"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- Полоска сверху -->
+                <View
+                    android:layout_width="64dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/Accent_S_50"
+                    android:elevation="4dp" />
+
+                <TextView
+                    android:id="@+id/lowestSubsTitle"
+                    style="@style/TextAppearance.Headline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="14dp"
+                    android:text="Lowest subs"
+                    android:textColor="@color/Gray_40"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/lowestSubsAmount"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="start"
+                    android:marqueeRepeatLimit="1"
+                    android:maxLines="1"
+                    android:paddingHorizontal="8dp"
+                    android:paddingBottom="14dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="--"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/White"
+                    android:textStyle="bold"
+                    tools:text="$1,234,5" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- TabLayout для переключения вкладок -->
     <com.google.android.material.tabs.TabLayout
@@ -302,7 +311,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
         app:layout_constraintStart_toStartOf="@+id/start_border"
-        app:layout_constraintTop_toBottomOf="@id/statsBlock"
+        app:layout_constraintTop_toBottomOf="@id/metricsCard"
         app:tabGravity="center"
         app:tabIndicatorColor="@color/White"
         app:tabIndicatorHeight="0dp"
@@ -320,7 +329,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statsBlock"
+        app:layout_constraintTop_toBottomOf="@+id/metricsCard"
         tools:visibility="visible">
         <!-- RecyclerView для списка подписок -->
         <androidx.recyclerview.widget.RecyclerView
@@ -346,7 +355,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statsBlock"
+        app:layout_constraintTop_toBottomOf="@+id/metricsCard"
         tools:visibility="gone">
 
         <ImageView

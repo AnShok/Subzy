@@ -20,6 +20,8 @@ import com.anshok.subzy.databinding.FragmentHomeBinding
 import com.anshok.subzy.presentation.home.adapter.SubscriptionsAdapter
 import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
 import com.anshok.subzy.util.CurrencyUtils
+import com.anshok.subzy.util.animation.animateAppear
+import com.anshok.subzy.util.animation.fadeInWithTranslation
 import com.anshok.subzy.util.safeDelayedAction
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -31,6 +33,9 @@ class HomeFragment : Fragment() {
 
     private val viewModel: MySubViewModel by viewModel()
     private lateinit var adapter: SubscriptionsAdapter
+    private var hasAnimatedList = false
+    private var hasAnimatedMetrics = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -39,16 +44,30 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupButtonsClicks()
+        super.onViewCreated(view, savedInstanceState)
+
+        setupInitialAnimations()
+        setupRecyclerView()
         observeMetrics()
+        observeSubscriptions()
         setupMetricClicks()
+        setupButtonsClicks()
+        observeRefreshAfterSave()
+
+    }
+
+    private fun setupInitialAnimations() {
+        binding.root.alpha = 0f
+        binding.root.animate().alpha(1f).setDuration(250).start()
 
         binding.activeSubsCount.safeDelayedAction(2000) {
             binding.activeSubsCount.isSelected = true
             binding.highestSubsAmount.isSelected = true
             binding.lowestSubsAmount.isSelected = true
         }
+    }
 
+    private fun setupRecyclerView() {
         adapter = SubscriptionsAdapter { subscription ->
             val action =
                 HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(subscription.id)
@@ -57,26 +76,6 @@ class HomeFragment : Fragment() {
 
         binding.subscriptionsList.layoutManager = LinearLayoutManager(requireContext())
         binding.subscriptionsList.adapter = adapter
-
-        val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
-        savedStateHandle?.getLiveData<Boolean>("refreshAfterSave")
-            ?.observe(viewLifecycleOwner) { shouldRefresh ->
-                if (shouldRefresh == true) {
-                    viewModel.refreshSubscriptionsManually {}
-                    // 👈 добавим это ниже
-                    savedStateHandle.remove<Boolean>("refreshAfterSave")
-                }
-            }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.subscriptions.collect { list ->
-                adapter.submitList(list)
-
-                val isEmpty = list.isEmpty()
-                binding.subscriptionsList.visibility = if (isEmpty) View.GONE else View.VISIBLE
-                binding.placeholderGroup.visibility = if (isEmpty) View.VISIBLE else View.GONE
-            }
-        }
     }
 
     private fun observeMetrics() {
@@ -92,6 +91,28 @@ class HomeFragment : Fragment() {
                 binding.lowestSubsAmount.text = lowest?.let {
                     CurrencyUtils.formatPrice(it.second, defaultCurrency)
                 } ?: "--"
+
+                if (!hasAnimatedMetrics) {
+                    hasAnimatedMetrics = true
+                    binding.metricsCard.animateAppear()
+                }
+            }
+        }
+    }
+
+    private fun observeSubscriptions() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.subscriptions.collect { list ->
+                adapter.submitList(list)
+
+                val isEmpty = list.isEmpty()
+                binding.subscriptionsList.visibility = if (isEmpty) View.GONE else View.VISIBLE
+                binding.placeholderGroup.visibility = if (isEmpty) View.VISIBLE else View.GONE
+
+                if (!hasAnimatedList && list.isNotEmpty()) {
+                    hasAnimatedList = true
+                    binding.subscriptionsList.fadeInWithTranslation()
+                }
             }
         }
     }
@@ -166,6 +187,18 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_addSubSearchFragment)
         }
     }
+
+    private fun observeRefreshAfterSave() {
+        val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.getLiveData<Boolean>("refreshAfterSave")
+            ?.observe(viewLifecycleOwner) { shouldRefresh ->
+                if (shouldRefresh == true) {
+                    viewModel.refreshSubscriptionsManually {}
+                    savedStateHandle.remove<Boolean>("refreshAfterSave")
+                }
+            }
+    }
+
 
     private fun vibrateLight() {
         val vibrator = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {

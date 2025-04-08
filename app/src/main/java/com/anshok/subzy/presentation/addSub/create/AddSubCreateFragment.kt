@@ -59,29 +59,62 @@ class AddSubCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.backButton.safeDelayedClick {
-            findNavController().navigateUp()
-        }
-
+        setupInitialAnimations()
         observeCurrency()
         setupClickListeners()
         setupPassedArguments()
         setupPriceValidation()
         setupValidation()
 
-        binding.itemLogo.safeDelayedClick {
-            galleryLauncher.launch("image/*")
-        }
+    }
 
-        binding.saveButton.safeDelayedClick {
-            onSaveClicked()
-        }
+    private fun setupInitialAnimations() {
+        binding.root.alpha = 0f
+        binding.root.animate().alpha(1f).setDuration(250).start()
     }
 
     private fun observeCurrency() {
         viewModel.currencyCode.observe(viewLifecycleOwner) { code ->
             binding.currencyButton.text = code
         }
+    }
+
+    private fun setupClickListeners() {
+        binding.backButton.safeDelayedClick {
+            findNavController().navigateUp()
+        }
+
+        binding.saveButton.safeDelayedClick {
+            onSaveClicked()
+        }
+
+        binding.currencyButton.setOnClickListener {
+            viewModel.loadCurrencies { currencies ->
+                CurrencyPickerBottomSheet(
+                    currencies = currencies,
+                    currentCode = viewModel.currencyCode.value.orEmpty(),
+                    onCurrencySelected = { viewModel.setCurrency(it) }
+                ).show(parentFragmentManager, "CurrencyPicker")
+            }
+        }
+
+        binding.itemLogo.safeDelayedClick {
+            galleryLauncher.launch("image/*")
+        }
+
+        binding.descriptionContainer.setOnClickListener { openDescriptionBottomSheet() }
+        binding.paymentPeriodContainer.setOnClickListener { openPaymentPeriodBottomSheet() }
+        binding.firstPaymentContainer.setOnClickListener { showDatePicker() }
+        binding.reminderContainer.setOnClickListener { openReminderBottomSheet() }
+        binding.commentContainer.setOnClickListener { openCommentBottomSheet() }
+
+//        binding.categoryContainer.setOnClickListener {
+//            CategoryBottomSheetFragment { category ->
+//                binding.categoryValue.text = category
+//            }.show(parentFragmentManager, "CategoryBottomSheet")
+//        }
+
+        setCurrentDate()
     }
 
     private fun setupPassedArguments() {
@@ -105,31 +138,6 @@ class AddSubCreateFragment : Fragment() {
         }
     }
 
-    private fun setupClickListeners() {
-        binding.currencyButton.setOnClickListener {
-            viewModel.loadCurrencies { currencies ->
-                CurrencyPickerBottomSheet(
-                    currencies = currencies,
-                    currentCode = viewModel.currencyCode.value.orEmpty(),
-                    onCurrencySelected = { viewModel.setCurrency(it) }
-                ).show(parentFragmentManager, "CurrencyPicker")
-            }
-        }
-
-        binding.descriptionContainer.setOnClickListener { openDescriptionBottomSheet() }
-        binding.paymentPeriodContainer.setOnClickListener { openPaymentPeriodBottomSheet() }
-//        binding.categoryContainer.setOnClickListener {
-//            CategoryBottomSheetFragment { category ->
-//                binding.categoryValue.text = category
-//            }.show(parentFragmentManager, "CategoryBottomSheet")
-//        }
-
-        setCurrentDate()
-        binding.firstPaymentContainer.setOnClickListener { showDatePicker() }
-        binding.reminderContainer.setOnClickListener { openReminderBottomSheet() }
-        binding.commentContainer.setOnClickListener { openCommentBottomSheet() }
-    }
-
     private fun setupPriceValidation() {
         binding.subscriptionPriceEditTxt.doAfterTextChanged { text ->
             val clean = text.toString().replace(",", ".")
@@ -140,6 +148,18 @@ class AddSubCreateFragment : Fragment() {
                 binding.subscriptionPriceEditTxt.setSelection(fixed.length)
             }
         }
+    }
+
+    private fun setupValidation() {
+        binding.subscriptionNameEditTxt.doAfterTextChanged { validateFields() }
+        binding.subscriptionPriceEditTxt.doAfterTextChanged { validateFields() }
+
+        // Если дата может меняться программно (например, через DatePicker)
+        binding.firstPaymentValue.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            validateFields()
+        }
+
+        validateFields()
     }
 
     private fun onSaveClicked() {
@@ -252,17 +272,7 @@ class AddSubCreateFragment : Fragment() {
     }
 
 
-    private fun setupValidation() {
-        binding.subscriptionNameEditTxt.doAfterTextChanged { validateFields() }
-        binding.subscriptionPriceEditTxt.doAfterTextChanged { validateFields() }
 
-        // Если дата может меняться программно (например, через DatePicker)
-        binding.firstPaymentValue.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            validateFields()
-        }
-
-        validateFields()
-    }
 
     private fun validateFields() {
         val isNameValid = binding.subscriptionNameEditTxt.text?.isNotBlank() == true

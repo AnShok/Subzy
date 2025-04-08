@@ -61,13 +61,27 @@ class CalendarFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.backButton.safeDelayedClick {
-            findNavController().navigateUp()
-        }
+        super.onViewCreated(view, savedInstanceState)
 
+        setupInitialAnimations()
+        setupSubscriptionList()
+        setupCalendar()
+        observeViewModel()
+        setupClickListeners()
+
+    }
+
+    private fun setupInitialAnimations() {
+        binding.root.alpha = 0f
+        binding.root.animate().alpha(1f).setDuration(250).start()
+    }
+
+    private fun setupSubscriptionList() {
         binding.calendarSubscriptionList.adapter = adapter
         binding.calendarSubscriptionList.layoutManager = LinearLayoutManager(requireContext())
+    }
 
+    private fun setupCalendar() {
         val calendarView = binding.calendarView
         val currentMonth = YearMonth.now()
 
@@ -83,7 +97,6 @@ class CalendarFragment : Fragment() {
 
             override fun bind(container: DayViewContainer, day: CalendarDay) {
                 val hasSubs = viewModel.hasSubscriptionsOn(day.date)
-
                 container.bind(day, hasSubs, today, selectedDate)
 
                 container.view.setOnClickListener {
@@ -91,8 +104,6 @@ class CalendarFragment : Fragment() {
                     showDayMode = true
                     calendarView.notifyCalendarChanged()
                     updateList()
-
-                    // Показываем кнопку возврата
                     binding.returnTodayButton.visibility = View.VISIBLE
                 }
             }
@@ -100,31 +111,40 @@ class CalendarFragment : Fragment() {
 
         calendarView.monthScrollListener = { month ->
             val newMonth = month.yearMonth
-
             if (lastVisibleMonth == null || lastVisibleMonth != newMonth) {
                 animateMonthTitleScroll(lastVisibleMonth ?: newMonth, newMonth)
                 lastVisibleMonth = newMonth
             }
 
-            // Показываем кнопку возврата, если не текущий месяц
             binding.returnTodayButton.visibility =
                 if (newMonth == YearMonth.now() && !showDayMode) View.GONE else View.VISIBLE
 
             if (!showDayMode) updateList()
             calendarView.notifyCalendarChanged()
         }
+    }
+
+    private fun observeViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.upcomingBills.collectLatest {
+                binding.calendarView.notifyCalendarChanged()
+                updateList()
+            }
+        }
+    }
+
+    private fun setupClickListeners() {
+        binding.backButton.safeDelayedClick {
+            findNavController().navigateUp()
+        }
 
         binding.returnTodayButton.safeDelayedClick {
             val currentMonth = YearMonth.now()
             val fromMonth = binding.calendarView.findFirstVisibleMonth()?.yearMonth ?: currentMonth
 
-            // Плавный скролл
             binding.calendarView.smoothScrollToMonth(currentMonth)
-
-            // Анимация заголовока месяца
             animateMonthTitleScroll(fromMonth, currentMonth, delayMs = 25L)
 
-            // Сброс на текущую дату
             selectedDate = today
             showDayMode = false
             binding.returnTodayButton.visibility = View.GONE
@@ -134,24 +154,26 @@ class CalendarFragment : Fragment() {
         }
 
         binding.prevMonthButton.safeDelayedClick {
-            calendarView.findFirstVisibleMonth()?.let {
-                calendarView.scrollToMonth(it.yearMonth.minusMonths(1))
+            binding.calendarView.findFirstVisibleMonth()?.let {
+                binding.calendarView.scrollToMonth(it.yearMonth.minusMonths(1))
             }
         }
 
         binding.nextMonthButton.safeDelayedClick {
-            calendarView.findFirstVisibleMonth()?.let {
-                calendarView.scrollToMonth(it.yearMonth.plusMonths(1))
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.upcomingBills.collectLatest {
-                calendarView.notifyCalendarChanged()
-                updateList()
+            binding.calendarView.findFirstVisibleMonth()?.let {
+                binding.calendarView.scrollToMonth(it.yearMonth.plusMonths(1))
             }
         }
     }
+
+
+
+
+
+
+
+
+
 
     private fun updateMonthTitle(yearMonth: YearMonth) {
         val monthName = MonthUtils.getLocalizedMonthName(requireContext(), yearMonth.monthValue)
