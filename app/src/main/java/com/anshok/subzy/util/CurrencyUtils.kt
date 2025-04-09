@@ -1,5 +1,7 @@
 package com.anshok.subzy.util
 
+import android.animation.ValueAnimator
+import android.widget.TextView
 import com.anshok.subzy.domain.currency.model.CurrencyRate
 import java.text.NumberFormat
 import java.util.Locale
@@ -70,5 +72,21 @@ object CurrencyUtils {
         val rubAmount = amount * from.value / from.nominal
         return rubAmount * to.nominal / to.value
     }
+
+    fun TextView.animateCurrencyChange(
+        start: Double,
+        end: Double,
+        currencyCode: String,
+        duration: Long = 500L
+    ) {
+        val animator = ValueAnimator.ofFloat(start.toFloat(), end.toFloat())
+        animator.duration = duration
+        animator.addUpdateListener {
+            val value = (it.animatedValue as Float).toDouble()
+            text = CurrencyUtils.formatPrice(value, currencyCode)
+        }
+        animator.start()
+    }
+
 }
 

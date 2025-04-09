@@ -74,9 +74,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Monthly"
+                android:paddingVertical="5dp"
                 android:textColor="@color/White"
                 android:textSize="16sp"
-                tools:text="Monthly" />
+                tools:text="Monthly"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:background="@drawable/bg_selectable_rounded"
+                 />
 
             <!-- Сумма -->
             <TextView

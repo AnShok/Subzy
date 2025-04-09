@@ -1,5 +1,6 @@
 package com.anshok.subzy.presentation.home
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -9,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -80,17 +82,47 @@ class HomeFragment : Fragment() {
 
     private fun observeMetrics() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.metrics.collectLatest { (total, highest, lowest) ->
+            viewModel.metrics.collectLatest { metrics ->
                 val defaultCurrency = viewModel.getDefaultCurrencyCode()
+                binding.statsTitle.text = metrics.period.displayText()
 
-                binding.activeSubsCount.text =
-                    if (highest == null && lowest == null) "--" else total
-                binding.highestSubsAmount.text = highest?.let {
-                    CurrencyUtils.formatPrice(it.second, defaultCurrency)
-                } ?: "--"
-                binding.lowestSubsAmount.text = lowest?.let {
-                    CurrencyUtils.formatPrice(it.second, defaultCurrency)
-                } ?: "--"
+                val shouldAnimate = viewModel.shouldAnimateNextMetrics
+                viewModel.disableMetricsAnimation()
+
+                if (metrics.highest == null && metrics.lowest == null) {
+                    binding.activeSubsCount.text = "--"
+                    binding.highestSubsAmount.text = "--"
+                    binding.lowestSubsAmount.text = "--"
+                } else {
+                    val total = metrics.totalFormatted.replace("[^\\d.,]".toRegex(), "").replace(",", ".").toDoubleOrNull() ?: 0.0
+                    val currentTotal = binding.activeSubsCount.text.toString().replace("[^\\d.,]".toRegex(), "").replace(",", ".").toDoubleOrNull() ?: 0.0
+
+                    if (shouldAnimate) {
+                        binding.activeSubsCount.animateCurrencyChange(currentTotal, total, defaultCurrency)
+                    } else {
+                        binding.activeSubsCount.text = CurrencyUtils.formatPrice(total, defaultCurrency)
+                    }
+
+                    //Самая дорогая
+                    metrics.highest?.let {
+                        val current = binding.highestSubsAmount.text.toString().replace("[^\\d.,]".toRegex(), "").replace(",", ".").toDoubleOrNull() ?: 0.0
+                        if (shouldAnimate) {
+                            binding.highestSubsAmount.animateCurrencyChange(current, it.second, defaultCurrency)
+                        } else {
+                            binding.highestSubsAmount.text = CurrencyUtils.formatPrice(it.second, defaultCurrency)
+                        }
+                    } ?: run { binding.highestSubsAmount.text = "--" }
+
+                    //Самая дешевая
+                    metrics.lowest?.let {
+                        val current = binding.lowestSubsAmount.text.toString().replace("[^\\d.,]".toRegex(), "").replace(",", ".").toDoubleOrNull() ?: 0.0
+                        if (shouldAnimate) {
+                            binding.lowestSubsAmount.animateCurrencyChange(current, it.second, defaultCurrency)
+                        } else {
+                            binding.lowestSubsAmount.text = CurrencyUtils.formatPrice(it.second, defaultCurrency)
+                        }
+                    } ?: run { binding.lowestSubsAmount.text = "--" }
+                }
 
                 if (!hasAnimatedMetrics) {
                     hasAnimatedMetrics = true
@@ -99,6 +131,8 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
 
     private fun observeSubscriptions() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -137,9 +171,13 @@ class HomeFragment : Fragment() {
             view.setOnClickListener { onClick() }
         }
 
+        // теперь всё работает
+        setupAnimatedClick(binding.statsTitle) {
+            viewModel.switchMetricsPeriod()
+        }
 
         setupAnimatedClick(binding.highestSubs) {
-            viewModel.metrics.value.second?.let {
+            viewModel.metrics.value.highest?.let {
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(it.first.id)
                 findNavController().navigate(action)
@@ -147,13 +185,14 @@ class HomeFragment : Fragment() {
         }
 
         setupAnimatedClick(binding.lowestSubs) {
-            viewModel.metrics.value.third?.let {
+            viewModel.metrics.value.lowest?.let {
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(it.first.id)
                 findNavController().navigate(action)
             }
         }
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupButtonsClicks() {
@@ -198,6 +237,29 @@ class HomeFragment : Fragment() {
                 }
             }
     }
+
+
+    private fun TextView.animateCurrencyChange(
+        start: Double,
+        end: Double,
+        currencyCode: String,
+        duration: Long = 500L
+    ) {
+        if (start == end) {
+            text = CurrencyUtils.formatPrice(end, currencyCode)
+            return
+        }
+
+        ValueAnimator.ofFloat(start.toFloat(), end.toFloat()).apply {
+            this.duration = duration
+            addUpdateListener {
+                val value = (it.animatedValue as Float).toDouble()
+                text = CurrencyUtils.formatPrice(value, currencyCode)
+            }
+            start()
+        }
+    }
+
 
 
     private fun vibrateLight() {
