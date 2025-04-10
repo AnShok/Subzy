@@ -185,7 +185,6 @@ class AddSubCreateFragment : Fragment() {
             when (result) {
                 SaveResult.Success -> {
                     findNavController().apply {
-                        previousBackStackEntry?.savedStateHandle?.set("refreshAfterSave", true)
                         popBackStack(R.id.homeFragment, false)
                     }
                 }

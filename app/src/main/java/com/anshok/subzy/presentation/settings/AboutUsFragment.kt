@@ -20,7 +20,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAboutUsBinding
-import com.anshok.subzy.presentation.settings.bottomSheet.EasterEggBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.EasterEggBottomSheet
 import com.anshok.subzy.presentation.settings.viewmodel.AboutUsViewModel
 import com.anshok.subzy.util.animation.animateAppear
 import com.anshok.subzy.util.safeDelayedClick

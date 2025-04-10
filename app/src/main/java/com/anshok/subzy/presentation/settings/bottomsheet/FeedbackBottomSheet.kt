@@ -1,4 +1,4 @@
-package com.anshok.subzy.presentation.settings.bottomSheet
+package com.anshok.subzy.presentation.settings.bottomsheet
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
-import com.anshok.subzy.databinding.BottomSheetCurrencySelectorBinding
 import com.anshok.subzy.databinding.BottomSheetFeedbackBinding
 import com.anshok.subzy.presentation.settings.viewmodel.RateViewModel
 import com.anshok.subzy.util.safeDelayedClick
