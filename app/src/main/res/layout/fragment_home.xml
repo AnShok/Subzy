@@ -83,6 +83,8 @@
                 tools:text="Monthly" />
 
             <!-- Сумма -->
+
+
             <TextView
                 android:id="@+id/activeSubsCount"
                 style="@style/TextAppearance.Headline6"
@@ -92,6 +94,7 @@
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:freezesText="true"
                 android:gravity="start"
                 android:marqueeRepeatLimit="1"
                 android:maxLines="1"
@@ -103,7 +106,6 @@
                 android:textColor="@color/White"
                 android:textStyle="bold"
                 tools:text="$1,234.00" />
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/sort"
@@ -178,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingTop="14dp"
+                    android:paddingTop="6dp"
                     android:text="Highest subs"
                     android:textColor="@color/Gray_40"
                     android:textSize="14sp" />
@@ -195,7 +197,8 @@
                     android:marqueeRepeatLimit="1"
                     android:maxLines="1"
                     android:paddingHorizontal="8dp"
-                    android:paddingBottom="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="12dp"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:text="--"
@@ -246,7 +249,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingTop="14dp"
+                    android:paddingTop="6dp"
                     android:text="Lowest subs"
                     android:textColor="@color/Gray_40"
                     android:textSize="14sp" />
@@ -263,7 +266,8 @@
                     android:marqueeRepeatLimit="1"
                     android:maxLines="1"
                     android:paddingHorizontal="8dp"
-                    android:paddingBottom="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="12dp"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:text="--"

@@ -96,7 +96,6 @@ class HomeFragment : Fragment() {
                     binding.activeSubsCount.text = "--"
                     binding.highestSubsAmount.text = "--"
                     binding.lowestSubsAmount.text = "--"
-                    viewModel.disableMetricsAnimation()
                     return@collectLatest
                 }
 
@@ -113,8 +112,6 @@ class HomeFragment : Fragment() {
                     hasAnimatedMetrics = true
                     binding.metricsCard.animateAppear()
                 }
-
-                viewModel.disableMetricsAnimation()
             }
         }
     }

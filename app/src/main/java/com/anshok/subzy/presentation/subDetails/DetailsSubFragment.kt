@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -22,9 +21,9 @@ import com.anshok.subzy.util.adapter.bindLogo
 import com.anshok.subzy.util.adapter.toLogo
 import com.anshok.subzy.util.animation.animateAppear
 import com.anshok.subzy.util.animation.fadeInWithTranslation
-import com.anshok.subzy.util.safeDelayedAction
 import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.snackbar.Snackbar
+import marqueeOnceThenFadeToEllipsizeEnd
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsSubFragment : Fragment() {
@@ -72,17 +71,25 @@ class DetailsSubFragment : Fragment() {
             binding.detailsList.fadeInWithTranslation()
         }
 
-        binding.backButton.safeDelayedClick {
-            findNavController().navigateUp()
-        }
+//        binding.backButton.safeDelayedClick {
+//            findNavController().navigateUp()
+//        }
 
         binding.menuButton.safeDelayedClick {
             showCustomPopupMenu(binding.menuButton)
         }
 
-        binding.subscriptionName.safeDelayedAction(2000) {
-            binding.subscriptionName.isSelected = true
-        }
+//        binding.subscriptionName.safeDelayedAction(1000) {
+//            binding.subscriptionName.isSelected = true
+//        }
+//
+//        binding.subscriptionPrice.safeDelayedAction(1000) {
+//            binding.subscriptionPrice.isSelected = true
+//        }
+
+        binding.subscriptionName.marqueeOnceThenFadeToEllipsizeEnd(viewLifecycleOwner)
+        binding.subscriptionPrice.marqueeOnceThenFadeToEllipsizeEnd(viewLifecycleOwner)
+
 
     }
 

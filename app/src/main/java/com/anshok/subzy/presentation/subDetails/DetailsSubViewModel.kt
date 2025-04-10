@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anshok.subzy.domain.subscription.SubscriptionInteractor
 import com.anshok.subzy.domain.subscription.model.Subscription
+import com.anshok.subzy.shared.events.SubscriptionChangedNotifier
 import kotlinx.coroutines.launch
 
 class DetailsSubViewModel(
-    private val interactor: SubscriptionInteractor
+    private val interactor: SubscriptionInteractor,
+    private val subscriptionChangedNotifier: SubscriptionChangedNotifier
 ) : ViewModel() {
 
     private val _subscription = MutableLiveData<Subscription?>()
@@ -46,6 +48,7 @@ class DetailsSubViewModel(
         viewModelScope.launch {
             currentSubscription?.let {
                 interactor.deleteSubscription(it)
+                subscriptionChangedNotifier.notify()
                 onDeleted()
             }
         }

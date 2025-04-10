@@ -84,7 +84,7 @@ class AddSubCreateFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.saveButton.safeDelayedClick {
+        binding.addButton.safeDelayedClick {
             onSaveClicked()
         }
 
@@ -281,8 +281,8 @@ class AddSubCreateFragment : Fragment() {
 
         val enabled = isNameValid && isPriceValid && isDateValid
 
-        binding.saveButton.isEnabled = enabled
-        binding.saveButton.backgroundTintList = ContextCompat.getColorStateList(
+        binding.addButton.isEnabled = enabled
+        binding.addButton.backgroundTintList = ContextCompat.getColorStateList(
             requireContext(),
             if (enabled) R.color.Accent_P_100 else R.color.Gray_30
         )

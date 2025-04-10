@@ -11,6 +11,7 @@ import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
 import com.anshok.subzy.domain.subscription.SubscriptionInteractor
 import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
+import com.anshok.subzy.shared.events.SubscriptionChangedNotifier
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.ZoneId
@@ -20,7 +21,8 @@ import java.util.Date
 class AddSubCreateViewModel(
     private val subscriptionInteractor: SubscriptionInteractor,
     private val currencyInteractor: CurrencyInteractor,
-    userPreferences: UserPreferences
+    userPreferences: UserPreferences,
+    private val subscriptionChangedNotifier: SubscriptionChangedNotifier
 ) : ViewModel() {
 
     private val _currencyCode = MutableLiveData<String>().apply {
@@ -100,6 +102,8 @@ class AddSubCreateViewModel(
         viewModelScope.launch {
             val result = subscriptionInteractor.insertSubscription(subscription)
             onResult(if (result) SaveResult.Success else SaveResult.Duplicate)
+            subscriptionChangedNotifier.notify()
+
 
 
         }

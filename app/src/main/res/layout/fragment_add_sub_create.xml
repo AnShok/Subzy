@@ -177,7 +177,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/Gray_80"
-        app:layout_constraintBottom_toTopOf="@id/save_button"
+        app:layout_constraintBottom_toTopOf="@id/addButton"
         app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@id/start_border"
         app:layout_constraintTop_toBottomOf="@id/top_card">
@@ -492,7 +492,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- Кнопка "Сохранить" -->
     <Button
-        android:id="@+id/save_button"
+        android:id="@+id/addButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -500,13 +500,55 @@
         android:background="@drawable/shape_24dp"
         android:elevation="8dp"
         android:enabled="false"
-        android:text="Add this platform"
+        android:text="Add sub"
         android:textAllCaps="false"
         android:textColor="@color/White"
         app:backgroundTint="@color/Gray_55"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@id/start_border" />
+
+    <LinearLayout
+        android:id="@+id/editButtonsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/end_border"
+        app:layout_constraintStart_toStartOf="@id/start_border"
+        android:visibility="gone">
+        <!-- Кнопка отменить -->
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_24dp"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            app:backgroundTint="@color/Gray_55"
+            tools:visibility="gone"/>
+
+        <!-- Кнопка сохранить -->
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_24dp"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            app:backgroundTint="@color/Accent_P_100"
+            tools:visibility="gone"/>
+    </LinearLayout>
 
     <!-- Отcтупы -->
     <androidx.constraintlayout.widget.Guideline

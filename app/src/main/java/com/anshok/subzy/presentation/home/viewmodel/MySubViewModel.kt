@@ -71,9 +71,6 @@ class MySubViewModel(
         calculateMetrics(_subscriptions.value, next)
     }
 
-    fun disableMetricsAnimation() {
-        shouldAnimateNextMetrics = false
-    }
 
 
     fun setSort(option: SortOption, direction: SortDirection) {

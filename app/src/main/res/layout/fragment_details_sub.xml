@@ -27,17 +27,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/back_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="back"
-                android:src="@drawable/ic_arrow_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/White" />
 
             <TextView
                 android:id="@+id/subscription_name"
@@ -45,11 +34,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:freezesText="true"
                 android:marqueeRepeatLimit="1"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
@@ -57,8 +46,9 @@
                 android:textColor="@color/White"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/menu_button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/back_button"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="1Password" />
 
 
@@ -70,8 +60,9 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="small menu"
                 android:src="@drawable/ic_more_vert"
+                app:layout_constraintBottom_toBottomOf="@+id/subscription_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/subscription_name"
                 app:tint="@color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,15 +126,28 @@
                 <!-- Цена -->
                 <TextView
                     android:id="@+id/subscription_price"
-                    style="@style/TextAppearance.Headline5"
-                    android:layout_width="wrap_content"
+                    style="@style/TextAppearance.Headline6"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:freezesText="true"
+                    android:gravity="center_vertical|end"
+                    android:marqueeRepeatLimit="1"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textAlignment="viewEnd"
                     android:textColor="@color/White"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/card_view"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="BDT 666.00" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -157,48 +161,10 @@
         android:paddingHorizontal="@dimen/dimen_20dp"
         android:paddingBottom="100dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detailsCard" />
 
-    <LinearLayout
-        android:id="@+id/buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
-        android:weightSum="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="visible">
-        <!-- Кнопка отменить -->
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_24dp"
-            android:text="Cancel"
-            android:textAllCaps="false"
-            android:textColor="@color/White"
-            app:backgroundTint="@color/Gray_55" />
 
-        <!-- Кнопка сохранить -->
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_24dp"
-            android:text="Save"
-            android:textAllCaps="false"
-            android:textColor="@color/White"
-            app:backgroundTint="@color/Accent_P_100" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
