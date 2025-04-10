@@ -143,16 +143,16 @@ class HomeFragment : Fragment() {
     private fun observeSubscriptions() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.subscriptions.collect { list ->
-                adapter.submitList(list)
-                binding.subscriptionsList.visibility =
-                    if (list.isEmpty()) View.GONE else View.VISIBLE
-                binding.placeholderGroup.visibility =
-                    if (list.isEmpty()) View.VISIBLE else View.GONE
-
+                // Показываем только при первом появлении с анимацией
                 if (!hasAnimatedList && list.isNotEmpty()) {
                     hasAnimatedList = true
-                    binding.subscriptionsList.fadeInWithTranslation()
+                    adapter.submitListWithAnimation(list)
+                } else {
+                    adapter.submitList(list)
                 }
+
+                binding.subscriptionsList.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
+                binding.placeholderGroup.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }

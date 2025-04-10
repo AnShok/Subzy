@@ -23,6 +23,13 @@ class MySubAdapter(
     private val onItemClick: (Subscription) -> Unit
 ) : ListAdapter<Subscription, MySubAdapter.SubscriptionViewHolder>(DiffCallback()) {
 
+    private var shouldAnimateAppearance = false
+
+    fun submitListWithAnimation(list: List<Subscription>) {
+        shouldAnimateAppearance = true
+        submitList(list)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val binding =
             ItemSubscriptionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,6 +38,21 @@ class MySubAdapter(
 
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         holder.bind(getItem(position))
+
+        if (shouldAnimateAppearance) {
+            holder.itemView.translationY = 50f
+            holder.itemView.alpha = 0f
+            holder.itemView.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setStartDelay(position * 40L)
+                .setDuration(300)
+                .start()
+
+            if (position == currentList.lastIndex) {
+                shouldAnimateAppearance = false
+            }
+        }
     }
 
     inner class SubscriptionViewHolder(private val binding: ItemSubscriptionBinding) :
