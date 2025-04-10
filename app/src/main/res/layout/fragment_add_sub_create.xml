@@ -155,7 +155,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="USD"
-                android:textAllCaps="false"
                 android:textStyle="bold"
                 app:backgroundTint="@color/Gray_55"
                 app:cornerRadius="12dp"

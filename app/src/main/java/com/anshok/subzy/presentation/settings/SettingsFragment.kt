@@ -18,11 +18,11 @@ import com.anshok.subzy.databinding.FragmentSettingsBinding
 import com.anshok.subzy.domain.settings.model.AppIconStyle
 import com.anshok.subzy.domain.settings.model.AppTheme
 import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
-import com.anshok.subzy.presentation.settings.bottomSheet.AppIconBottomSheet
-import com.anshok.subzy.presentation.settings.bottomSheet.EditNameBottomSheet
-import com.anshok.subzy.presentation.settings.bottomSheet.HelpBottomSheet
-import com.anshok.subzy.presentation.settings.bottomSheet.RateBottomSheet
-import com.anshok.subzy.presentation.settings.bottomSheet.ThemeBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.AppIconBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.EditNameBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.HelpBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.RateBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.ThemeBottomSheet
 import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.CurrencyViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.SettingsViewModel
