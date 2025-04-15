@@ -53,19 +53,29 @@ class AddSubSearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.onInitialLoad()
-        binding.backButton.safeDelayedClick {
-            findNavController().navigateUp()
-        }
+        setupInitialAnimations()
+        setupRecyclerView()
+        observeState()
+        observeLogos()
+        setupSearchField()
+        setupClickListeners()
+        setupPagination()
+        initData()
 
-        binding.createSubButton.safeDelayedClick {
-            findNavController().navigate(R.id.action_addSubSearchFragment_to_addSubCreateFragment)
-        }
 
+    }
+
+    private fun setupInitialAnimations() {
+        binding.root.alpha = 0f
+        binding.root.animate().alpha(1f).setDuration(250).start()
+    }
+
+    private fun setupRecyclerView() {
         binding.searchRecycleView.layoutManager = LinearLayoutManager(requireContext())
         binding.searchRecycleView.adapter = adapter
+    }
 
-        // Подписка на состояния экрана
+    private fun observeState() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is AddSubSearchState.LocalOnly -> {
@@ -80,7 +90,6 @@ class AddSubSearchFragment : Fragment() {
                     removePlaceholders()
                     startProgressBar()
                     stopProgressBarNextPage()
-                    //binding.searchDefaultPlaceholder.isVisible = false
                 }
 
                 is AddSubSearchState.Success -> {
@@ -98,18 +107,16 @@ class AddSubSearchFragment : Fragment() {
                 is AddSubSearchState.Error -> {
                     clearList()
                     removePlaceholders()
-                    //binding.searchDefaultPlaceholder.isVisible = false
                     when (state.errorType) {
                         ResourceLogo.ResponseError.NO_INTERNET -> showNoInternetState()
                         ResourceLogo.ResponseError.CLIENT_ERROR,
                         ResourceLogo.ResponseError.SERVER_ERROR -> showServerError()
-
                         ResourceLogo.ResponseError.NOT_FOUND -> showNothingFoundState()
                         ResourceLogo.ResponseError.UNKNOWN_ERROR -> showMessage(getString(R.string.unknown_error))
                     }
                 }
 
-                AddSubSearchState.LoadingNextPage -> {
+                is AddSubSearchState.LoadingNextPage -> {
                     binding.progressBarNextPage.isVisible = true
                 }
 
@@ -128,30 +135,29 @@ class AddSubSearchFragment : Fragment() {
                     showMessage(getString(R.string.no_more_data_add_manually))
                 }
 
-
                 else -> {
                     showMessage(getString(R.string.unknown_error))
                 }
             }
         }
+    }
 
-
-        // Подписка на список логотипов
+    // Подписка на список логотипов
+    private fun observeLogos() {
         viewModel.logos.observe(viewLifecycleOwner) { logos ->
             adapter.setLogo(logos)
-            // binding.searchDefaultPlaceholder.isGone = logos.isNotEmpty()
         }
+    }
 
+    private fun setupSearchField() {
         binding.searchQuery.doOnTextChanged { text, _, _, _ ->
             if (!text.isNullOrEmpty()) {
                 binding.searchIconLoupe.isVisible = false
                 binding.clearCrossIc.isVisible = true
-                //binding.searchDefaultPlaceholder.isVisible = false
                 viewModel.onQueryChanged(text.toString())
             } else {
                 binding.searchIconLoupe.isVisible = true
                 binding.clearCrossIc.isVisible = false
-                //binding.searchDefaultPlaceholder.isVisible = true
                 viewModel.onQueryChanged("")
             }
         }
@@ -161,15 +167,24 @@ class AddSubSearchFragment : Fragment() {
         }
 
         binding.searchQuery.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                hideKeyboard()
-            }
+            if (actionId == EditorInfo.IME_ACTION_DONE) hideKeyboard()
             false
         }
+    }
 
+    private fun setupClickListeners() {
+        binding.backButton.safeDelayedClick {
+            findNavController().navigateUp()
+        }
+
+        binding.createSubButton.safeDelayedClick {
+            findNavController().navigate(R.id.action_addSubSearchFragment_to_addSubCreateFragment)
+        }
+    }
+
+    private fun setupPagination() {
         binding.searchRecycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
                     val pos = (binding.searchRecycleView.layoutManager as LinearLayoutManager)
                         .findLastVisibleItemPosition()
@@ -180,6 +195,11 @@ class AddSubSearchFragment : Fragment() {
             }
         })
     }
+
+    private fun initData() {
+        viewModel.onInitialLoad()
+    }
+
 
     private fun hideKeyboard() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager

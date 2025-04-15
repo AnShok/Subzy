@@ -11,14 +11,18 @@ import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
 import com.anshok.subzy.domain.subscription.SubscriptionInteractor
 import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
+import com.anshok.subzy.shared.events.SubscriptionChangedNotifier
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
 
 class AddSubCreateViewModel(
     private val subscriptionInteractor: SubscriptionInteractor,
     private val currencyInteractor: CurrencyInteractor,
-    userPreferences: UserPreferences
+    userPreferences: UserPreferences,
+    private val subscriptionChangedNotifier: SubscriptionChangedNotifier
 ) : ViewModel() {
 
     private val _currencyCode = MutableLiveData<String>().apply {
@@ -98,20 +102,33 @@ class AddSubCreateViewModel(
         viewModelScope.launch {
             val result = subscriptionInteractor.insertSubscription(subscription)
             onResult(if (result) SaveResult.Success else SaveResult.Duplicate)
+            subscriptionChangedNotifier.notify()
+
 
 
         }
     }
 
     private fun calculateNextPaymentDate(start: Long, period: Int, type: PaymentPeriodType): Long {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date(start)
-        when (type) {
-            PaymentPeriodType.DAILY -> calendar.add(Calendar.DAY_OF_MONTH, period)
-            PaymentPeriodType.WEEKLY -> calendar.add(Calendar.WEEK_OF_YEAR, period)
-            PaymentPeriodType.MONTHLY -> calendar.add(Calendar.MONTH, period)
-            PaymentPeriodType.YEARLY -> calendar.add(Calendar.YEAR, period)
+        val zone = ZoneId.systemDefault()
+        val from = Instant.ofEpochMilli(start).atZone(zone).toLocalDate()
+
+        val result = when (type) {
+            PaymentPeriodType.DAILY -> from.plusDays(period.toLong())
+            PaymentPeriodType.WEEKLY -> from.plusWeeks(period.toLong())
+            PaymentPeriodType.MONTHLY -> {
+                val added = from.plusMonths(period.toLong())
+                val day = minOf(from.dayOfMonth, added.lengthOfMonth())
+                added.withDayOfMonth(day)
+            }
+            PaymentPeriodType.YEARLY -> {
+                val added = from.plusYears(period.toLong())
+                val day = minOf(from.dayOfMonth, added.lengthOfMonth())
+                added.withDayOfMonth(day)
+            }
         }
-        return calendar.timeInMillis
+
+        return result.atStartOfDay(zone).toInstant().toEpochMilli()
     }
+
 }

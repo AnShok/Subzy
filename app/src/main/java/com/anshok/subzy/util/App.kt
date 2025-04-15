@@ -1,6 +1,7 @@
 package com.anshok.subzy.util
 
 import android.app.Application
+import android.util.Log
 import com.anshok.subzy.di.dataModule
 import com.anshok.subzy.di.interactorModule
 import com.anshok.subzy.di.repositoryModule
@@ -30,6 +31,11 @@ class App : Application() {
             prefs = getKoin().get(),
             currencyInteractor = getKoin().get()
         ).init()
+
+        Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+            Log.e("GlobalException", "Непойманная ошибка: ${throwable.message}", throwable)
+            // подключить Firebase / Crashlytics
+        }
     }
 }
 

@@ -20,8 +20,9 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAboutUsBinding
-import com.anshok.subzy.presentation.settings.bottomSheet.EasterEggBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.EasterEggBottomSheet
 import com.anshok.subzy.presentation.settings.viewmodel.AboutUsViewModel
+import com.anshok.subzy.util.animation.animateAppear
 import com.anshok.subzy.util.safeDelayedClick
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,15 +44,39 @@ class AboutUsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.appIconImage.apply {
-            clipToOutline = true
-            outlineProvider = ViewOutlineProvider.BACKGROUND
-        }
-
+        setupInitialAnimations()
         observeViewModel()
         setupUI()
         setupEasterEggGesture()
+
     }
+
+    private fun setupInitialAnimations() {
+        binding.root.alpha = 0f
+        binding.root.animate().alpha(1f).setDuration(250).start()
+
+        val animatedViews = listOf(
+            //binding.appIconImage,
+            //binding.appVersionText,
+            binding.privacyPolicy,
+            binding.termsOfUse,
+            //binding.logoDevLink,
+            //binding.backButton
+        )
+
+        animatedViews.forEachIndexed { index, view ->
+            view.animateAppear(delay = index * 30L)
+        }
+
+//        binding.appIconImage.apply {
+//            clipToOutline = true
+//            outlineProvider = ViewOutlineProvider.BACKGROUND
+//        }
+
+        binding.appIconImage.clipToOutline = true
+        binding.appIconImage.outlineProvider = ViewOutlineProvider.BACKGROUND
+    }
+
 
     private fun observeViewModel() {
         viewModel.version.observe(viewLifecycleOwner) {

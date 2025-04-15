@@ -6,6 +6,7 @@ import com.anshok.subzy.domain.help.HelpInteractor
 import com.anshok.subzy.domain.settings.SettingsRepository
 import com.anshok.subzy.presentation.addSub.create.AddSubCreateViewModel
 import com.anshok.subzy.presentation.addSub.search.AddSubSearchViewModel
+import com.anshok.subzy.presentation.calendar.CalendarViewModel
 import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AboutUsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
@@ -17,6 +18,7 @@ import com.anshok.subzy.presentation.settings.viewmodel.SettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.ThemeViewModel
 import com.anshok.subzy.presentation.subDetails.DetailsSubViewModel
 import com.anshok.subzy.shared.events.CurrencyChangedNotifier
+import com.anshok.subzy.shared.events.SubscriptionChangedNotifier
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -36,7 +38,8 @@ val viewModelModule = module {
         AddSubCreateViewModel(
             subscriptionInteractor = get(),
             currencyInteractor = get(),
-            userPreferences = get()
+            userPreferences = get(),
+            subscriptionChangedNotifier = get()
         )
     }
 
@@ -46,12 +49,18 @@ val viewModelModule = module {
             subscriptionInteractor = get(),
             currencyInteractor = get(),
             userPreferences = get(),
-            notifier = get()
+            notifier = get(),
+            subscriptionChangedNotifier = get()
         )
     }
 
     // ViewModel для детального экрана подписки
-    viewModel { DetailsSubViewModel(get()) }
+    viewModel {
+        DetailsSubViewModel(
+            interactor = get(),
+            subscriptionChangedNotifier = get() // добавить сюда
+        )
+    }
 
     // ViewModel для выбора валюты в настройках
     viewModel {
@@ -99,6 +108,16 @@ val viewModelModule = module {
 
     // EventBus для обновлений валюты (через SharedFlow)
     single { CurrencyChangedNotifier() }
+
+    // EventBus для обновлений подписок
+    single { SubscriptionChangedNotifier() }
+
+    viewModel {
+        CalendarViewModel(
+            subscriptionInteractor = get(),
+            userPreferences = get()
+        )
+    }
 
 }
 
