@@ -86,7 +86,7 @@
 
 
             <TextView
-                android:id="@+id/activeSubsCount"
+                android:id="@+id/activeSubsSum"
                 style="@style/TextAppearance.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

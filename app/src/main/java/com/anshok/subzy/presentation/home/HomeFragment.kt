@@ -1,6 +1,5 @@
 package com.anshok.subzy.presentation.home
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -24,9 +23,6 @@ import com.anshok.subzy.presentation.home.bottomsheet.SortBottomSheet
 import com.anshok.subzy.presentation.home.bottomsheet.SortDirection
 import com.anshok.subzy.presentation.home.bottomsheet.SortOption
 import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
-import com.anshok.subzy.util.CurrencyUtils
-import com.anshok.subzy.util.animation.animateAppear
-import com.anshok.subzy.util.animation.fadeInWithTranslation
 import com.anshok.subzy.util.safeDelayedAction
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -38,8 +34,6 @@ class HomeFragment : Fragment() {
     private val viewModel: MySubViewModel by viewModel()
 
     private lateinit var adapter: MySubAdapter
-    private var hasAnimatedList = false
-    private var hasAnimatedMetrics = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -57,17 +51,23 @@ class HomeFragment : Fragment() {
         setupButtonsClicks()
     }
 
+    /**
+     * Первичная анимация при открытии экрана + авто-прокрутка текста у метрик
+     */
     private fun setupInitialAnimations() {
         binding.root.alpha = 0f
         binding.root.animate().alpha(1f).setDuration(250).start()
 
-        binding.activeSubsCount.safeDelayedAction(2000) {
-            binding.activeSubsCount.isSelected = true
+        binding.activeSubsSum.safeDelayedAction(2000) {
+            binding.activeSubsSum.isSelected = true
             binding.highestSubsAmount.isSelected = true
             binding.lowestSubsAmount.isSelected = true
         }
     }
 
+    /**
+     * Настройка RecyclerView: layout, адаптер и переход к деталям по клику
+     */
     private fun setupRecyclerView() {
         adapter = MySubAdapter { subscription ->
             val action =
@@ -83,76 +83,58 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Подписка на метрики: общая сумма, самая дорогая и дешёвая подписка
-     * Отображение и анимация при первом показе
+     * Подписка на изменения метрик.
+     * Обновляет UI с защитой от глюков TextView при одинаковом тексте.
      */
     private fun observeMetrics() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.metrics.collectLatest { metrics ->
-                val currency = viewModel.getDefaultCurrencyCode()
+
                 binding.statsTitle.text = metrics.period.displayText()
 
-                if (metrics.highest == null && metrics.lowest == null) {
-                    binding.activeSubsCount.text = "--"
-                    binding.highestSubsAmount.text = "--"
-                    binding.lowestSubsAmount.text = "--"
-                    return@collectLatest
-                }
+                safeSetText(binding.activeSubsSum, metrics.totalFormatted)
+                safeSetText(binding.highestSubsAmount, metrics.highestFormatted)
+                safeSetText(binding.lowestSubsAmount, metrics.lowestFormatted)
 
-                updateMetricText(binding.activeSubsCount, metrics.totalFormatted, currency)
-                metrics.highest?.let {
-                    updateMetricText(binding.highestSubsAmount, it.second, currency)
-                } ?: run { binding.highestSubsAmount.text = "--" }
-
-                metrics.lowest?.let {
-                    updateMetricText(binding.lowestSubsAmount, it.second, currency)
-                } ?: run { binding.lowestSubsAmount.text = "--" }
-
-                if (!hasAnimatedMetrics) {
-                    hasAnimatedMetrics = true
-                    binding.metricsCard.animateAppear()
-                }
             }
         }
     }
 
     /**
-     * Обновление текста метрики с анимацией
+     * Безопасная установка текста в TextView.
+     * Принудительно обновляет UI, даже если текст визуально не изменился.
      */
-    private fun updateMetricText(view: TextView, value: Double, currency: String) {
-        val current = view.text.toString().replace("[^\\d.,]".toRegex(), "").replace(",", ".")
-            .toDoubleOrNull() ?: 0.0
-        if (viewModel.shouldAnimateNextMetrics) {
-            view.animateCurrencyChange(current, value, currency)
-        } else {
-            view.text = CurrencyUtils.formatPrice(value, currency)
+    private fun safeSetText(textView: TextView, newText: String?) {
+        val current = textView.text.toString()
+        if (current != (newText ?: "--")) {
+            textView.text = ""
+            textView.postDelayed({
+                textView.text = newText ?: "--"
+            }, 10)
         }
     }
 
-    private fun updateMetricText(view: TextView, text: String, currency: String) {
-        val value = text.replace("[^\\d.,]".toRegex(), "").replace(",", ".").toDoubleOrNull() ?: 0.0
-        updateMetricText(view, value, currency)
-    }
 
     /**
-     * Подписка на список подписок: отображение, placeholder, анимация
+     * Подписка на список подписок.
+     * Обновляет адаптер и отображение плейсхолдера.
      */
     private fun observeSubscriptions() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.subscriptions.collect { list ->
-                // Показываем только при первом появлении с анимацией
-                if (!hasAnimatedList && list.isNotEmpty()) {
-                    hasAnimatedList = true
-                    adapter.submitListWithAnimation(list)
-                } else {
-                    adapter.submitList(list)
+                adapter.submitListWithCallback(list) {
+                    // Прокрутка наверх после вставки
+                    binding.subscriptionsList.scrollToPosition(0)
                 }
 
-                binding.subscriptionsList.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
-                binding.placeholderGroup.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+                binding.subscriptionsList.visibility =
+                    if (list.isEmpty()) View.GONE else View.VISIBLE
+                binding.placeholderGroup.visibility =
+                    if (list.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }
+
 
     /**
      * Обработка нажатий по метрикам:
@@ -166,28 +148,26 @@ class HomeFragment : Fragment() {
         }
 
         setupAnimatedClick(binding.highestSubs) {
-            viewModel.metrics.value.highest?.let {
+            viewModel.metrics.value.highestSub?.let { sub ->
                 findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(it.first.id)
+                    HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(sub.id)
                 )
             }
         }
 
         setupAnimatedClick(binding.lowestSubs) {
-            viewModel.metrics.value.lowest?.let {
+            viewModel.metrics.value.lowestSub?.let { sub ->
                 findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(it.first.id)
+                    HomeFragmentDirections.actionHomeFragmentToDetailsSubFragment(sub.id)
                 )
             }
         }
     }
 
+
     /**
-     * Обработка кликов по иконкам:
-     * – настройки
-     * – календарь
-     * – добавить подписку
-     * – сортировка
+     * Обработка нажатий на кнопки и FAB-элементы:
+     * - переход в настройки, календарь, добавление и сортировку
      */
     @SuppressLint("ClickableViewAccessibility")
     private fun setupButtonsClicks() {
@@ -222,7 +202,8 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Подписка на изменение сортировки и обновление кнопки сортировки
+     * Подписка на изменение состояния сортировки.
+     * Обновляет внешний вид кнопки сортировки.
      */
     private fun observeSortState() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -232,7 +213,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-
+    /**
+     * Отображает текущую сортировку и направление в UI
+     */
     private fun updateFilterButton() {
         val label = when (viewModel.sortOption.value) {
             SortOption.DATE -> "Date"
@@ -247,7 +230,7 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Добавление анимации нажатия и вибрации на любую вьюху
+     * Универсальный обработчик анимации нажатия + вибрация
      */
     private fun setupAnimatedClick(view: View, onClick: () -> Unit) {
         val scaleDown = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_down)
@@ -267,29 +250,6 @@ class HomeFragment : Fragment() {
         view.setOnClickListener { onClick() }
     }
 
-    /**
-     * Анимированное изменение числового значения с форматированием валюты
-     */
-    private fun TextView.animateCurrencyChange(
-        start: Double,
-        end: Double,
-        currencyCode: String,
-        duration: Long = 500L
-    ) {
-        if (start == end) {
-            text = CurrencyUtils.formatPrice(end, currencyCode)
-            return
-        }
-
-        ValueAnimator.ofFloat(start.toFloat(), end.toFloat()).apply {
-            this.duration = duration
-            addUpdateListener {
-                val value = (it.animatedValue as Float).toDouble()
-                text = CurrencyUtils.formatPrice(value, currencyCode)
-            }
-            start()
-        }
-    }
 
     private fun vibrateLight() {
         val vibrator = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {

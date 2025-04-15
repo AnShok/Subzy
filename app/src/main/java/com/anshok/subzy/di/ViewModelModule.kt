@@ -50,7 +50,7 @@ val viewModelModule = module {
             currencyInteractor = get(),
             userPreferences = get(),
             notifier = get(),
-            //subscriptionChangedNotifier = get()
+            subscriptionChangedNotifier = get()
         )
     }
 

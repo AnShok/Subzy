@@ -25,10 +25,10 @@ class MySubAdapter(
 
     private var shouldAnimateAppearance = false
 
-    fun submitListWithAnimation(list: List<Subscription>) {
-        shouldAnimateAppearance = true
-        submitList(list)
-    }
+//    fun submitListWithAnimation(list: List<Subscription>) {
+//        shouldAnimateAppearance = true
+//        submitList(list)
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val binding =
@@ -38,21 +38,6 @@ class MySubAdapter(
 
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         holder.bind(getItem(position))
-
-        if (shouldAnimateAppearance) {
-            holder.itemView.translationY = 50f
-            holder.itemView.alpha = 0f
-            holder.itemView.animate()
-                .alpha(1f)
-                .translationY(0f)
-                .setStartDelay(position * 40L)
-                .setDuration(300)
-                .start()
-
-            if (position == currentList.lastIndex) {
-                shouldAnimateAppearance = false
-            }
-        }
     }
 
     inner class SubscriptionViewHolder(private val binding: ItemSubscriptionBinding) :
@@ -82,4 +67,11 @@ class MySubAdapter(
             return oldItem == newItem
         }
     }
+
+    fun submitListWithCallback(list: List<Subscription>, onCommit: () -> Unit) {
+        submitList(list, onCommit)
+    }
+
+
+
 }
