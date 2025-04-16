@@ -1,6 +1,5 @@
 package com.anshok.subzy.presentation.addSub.create
 
-import android.app.DatePickerDialog
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +15,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAddSubCreateBinding
 import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
-import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.CategoryBottomSheetFragment
-import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.CommentBottomSheet
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.DescriptionBottomSheet
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.NotificationReminderBottomSheet
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.PaymentPeriodBottomSheet
@@ -27,9 +24,9 @@ import com.anshok.subzy.presentation.common.CustomErrorDialogFragment
 import com.anshok.subzy.util.adapter.bindLogo
 import com.anshok.subzy.util.adapter.toLogo
 import com.anshok.subzy.util.safeDelayedClick
+import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -207,21 +204,23 @@ class AddSubCreateFragment : Fragment() {
     }
 
     private fun showDatePicker() {
-        val calendar = Calendar.getInstance()
-        DatePickerDialog(
-            requireContext(),
-            { _, year, month, day ->
-                calendar.set(year, month, day)
-                val selectedDate =
-                    SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(calendar.time)
-                binding.firstPaymentValue.text = selectedDate
-                validateFields()
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        ).show()
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select first payment date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+        datePicker.show(parentFragmentManager, "MATERIAL_DATE_PICKER")
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            // Преобразуем миллисекунды в нужный формат
+            val date = Date(selection)
+            val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(date)
+            binding.firstPaymentValue.text = formattedDate
+            validateFields()
+        }
     }
+
 
     private fun openDescriptionBottomSheet() {
         DescriptionBottomSheet { desc ->
@@ -242,10 +241,29 @@ class AddSubCreateFragment : Fragment() {
             selectedPeriodType = type
 
             val correctForm = when (type) {
-                PaymentPeriodType.DAILY -> resources.getQuantityString(R.plurals.days, number, number)
-                PaymentPeriodType.WEEKLY -> resources.getQuantityString(R.plurals.weeks, number, number)
-                PaymentPeriodType.MONTHLY -> resources.getQuantityString(R.plurals.months, number, number)
-                PaymentPeriodType.YEARLY -> resources.getQuantityString(R.plurals.years, number, number)
+                PaymentPeriodType.DAILY -> resources.getQuantityString(
+                    R.plurals.days,
+                    number,
+                    number
+                )
+
+                PaymentPeriodType.WEEKLY -> resources.getQuantityString(
+                    R.plurals.weeks,
+                    number,
+                    number
+                )
+
+                PaymentPeriodType.MONTHLY -> resources.getQuantityString(
+                    R.plurals.months,
+                    number,
+                    number
+                )
+
+                PaymentPeriodType.YEARLY -> resources.getQuantityString(
+                    R.plurals.years,
+                    number,
+                    number
+                )
             }
 
             binding.paymentPeriodValue.text = correctForm
@@ -269,8 +287,6 @@ class AddSubCreateFragment : Fragment() {
             message = message
         ).show(parentFragmentManager, "CustomErrorDialog")
     }
-
-
 
 
     private fun validateFields() {
