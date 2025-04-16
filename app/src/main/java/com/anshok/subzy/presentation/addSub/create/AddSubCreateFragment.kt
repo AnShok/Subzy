@@ -106,7 +106,7 @@ class AddSubCreateFragment : Fragment() {
         binding.paymentPeriodContainer.setOnClickListener { openPaymentPeriodBottomSheet() }
         binding.firstPaymentContainer.setOnClickListener { showDatePicker() }
         binding.reminderContainer.setOnClickListener { openReminderBottomSheet() }
-        binding.commentContainer.setOnClickListener { openCommentBottomSheet() }
+        //binding.commentContainer.setOnClickListener { openCommentBottomSheet() }
 
 //        binding.categoryContainer.setOnClickListener {
 //            CategoryBottomSheetFragment { category ->
@@ -180,7 +180,7 @@ class AddSubCreateFragment : Fragment() {
             firstPaymentDate = dateMillis,
             categoryId = 0L,
             paymentMethodId = 0L,
-            comment = binding.commentValue.text.toString().takeIf { it != "Not specified" }
+            //comment = binding.commentValue.text.toString().takeIf { it != "Not specified" }
         ) { result ->
             when (result) {
                 SaveResult.Success -> {
@@ -258,11 +258,11 @@ class AddSubCreateFragment : Fragment() {
         }.show(parentFragmentManager, "NotificationReminderBottomSheet")
     }
 
-    private fun openCommentBottomSheet() {
-        CommentBottomSheet { comment ->
-            if (!comment.isNullOrBlank()) binding.commentValue.text = comment
-        }.show(parentFragmentManager, "CommentBottomSheet")
-    }
+//    private fun openCommentBottomSheet() {
+//        CommentBottomSheet { comment ->
+//            if (!comment.isNullOrBlank()) binding.commentValue.text = comment
+//        }.show(parentFragmentManager, "CommentBottomSheet")
+//    }
 
     private fun showErrorDialog(message: String) {
         CustomErrorDialogFragment(

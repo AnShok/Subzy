@@ -41,7 +41,7 @@
 
             <!-- Кнопка назад -->
             <ImageButton
-                android:id="@+id/back_button"
+                android:id="@+id/backButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
 
@@ -62,14 +62,14 @@
                 android:text="New Subscription"
                 android:textColor="@color/Gray_30"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/back_button"
-                app:layout_constraintStart_toEndOf="@+id/back_button"
-                app:layout_constraintTop_toTopOf="@id/back_button" />
+                app:layout_constraintBottom_toBottomOf="@id/backButton"
+                app:layout_constraintStart_toEndOf="@+id/backButton"
+                app:layout_constraintTop_toTopOf="@id/backButton" />
 
             <!-- Иконка приложения -->
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_new_sub_icon"
+                android:id="@+id/cardViewNewSubIcon"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_marginTop="12dp"
@@ -77,10 +77,10 @@
                 app:cardElevation="4dp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="@id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@id/back_button">
+                app:layout_constraintTop_toBottomOf="@id/backButton">
 
                 <ImageView
-                    android:id="@+id/item_logo"
+                    android:id="@+id/itemLogo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -90,7 +90,7 @@
 
             <!-- Поле для ввода названия подписки -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/subscription_name_txt_layout"
+                android:id="@+id/subscriptionNameTxtLayout"
                 style="@style/textLayoutStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -98,13 +98,13 @@
                 android:hint="Subscription Name*"
                 app:cursorColor="@color/Accent_P_100"
                 app:hintTextColor="@color/Gray_30"
-                app:layout_constraintBottom_toBottomOf="@+id/card_view_new_sub_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewNewSubIcon"
                 app:layout_constraintEnd_toEndOf="@+id/end_border_upcard"
-                app:layout_constraintStart_toEndOf="@+id/card_view_new_sub_icon"
-                app:layout_constraintTop_toTopOf="@id/card_view_new_sub_icon">
+                app:layout_constraintStart_toEndOf="@+id/cardViewNewSubIcon"
+                app:layout_constraintTop_toTopOf="@id/cardViewNewSubIcon">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/subscription_name_edit_txt"
+                    android:id="@+id/subscriptionNameEditTxt"
                     style="@style/TextAppearance.Headline3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
 
             <!-- Поле для ввода цены подписки -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/subscription_price_txt_layout"
+                android:id="@+id/subscriptionPriceTxtLayout"
                 style="@style/textLayoutStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -132,10 +132,10 @@
                 app:hintTextColor="@color/Gray_30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/start_border_upcard"
-                app:layout_constraintTop_toBottomOf="@id/card_view_new_sub_icon">
+                app:layout_constraintTop_toBottomOf="@id/cardViewNewSubIcon">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/subscription_price_edit_txt"
+                    android:id="@+id/subscriptionPriceEdit_Txt"
                     style="@style/TextAppearance.Headline3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/currency_button"
+                android:id="@+id/currencyButton"
                 style="@style/TextAppearance.Headline3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -163,17 +163,17 @@
                 app:icon="@drawable/ic_arrow_down_special"
                 app:iconGravity="textEnd"
                 app:iconPadding="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/subscription_price_txt_layout"
+                app:layout_constraintBottom_toBottomOf="@+id/subscriptionPriceTxtLayout"
                 app:layout_constraintEnd_toEndOf="@id/end_border_upcard"
-                app:layout_constraintStart_toEndOf="@+id/subscription_price_txt_layout"
-                app:layout_constraintTop_toTopOf="@+id/subscription_price_txt_layout" />
+                app:layout_constraintStart_toEndOf="@+id/subscriptionPriceTxtLayout"
+                app:layout_constraintTop_toTopOf="@+id/subscriptionPriceTxtLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
 
     <!-- Нижняя карточка с деталями подписки -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/details_card"
+        android:id="@+id/detailsCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/Gray_80"
@@ -186,7 +186,7 @@
 
         <!-- Поля информации о подписке -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/details_card_inside"
+            android:id="@+id/detailsCardInside"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
@@ -212,7 +212,7 @@
 
                     <!-- Описание подписки -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/description_container"
+                        android:id="@+id/descriptionContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_selectable_rounded"
@@ -226,7 +226,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:id="@+id/description_label"
+                            android:id="@+id/descriptionLabel"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/description_value"
+                            android:id="@+id/descriptionValue"
                             style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -249,12 +249,12 @@
                             android:text="Not specified"
                             android:textColor="@color/Gray_30"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_description"
-                            app:layout_constraintStart_toEndOf="@id/description_label"
+                            app:layout_constraintEnd_toStartOf="@id/arrowDescription"
+                            app:layout_constraintStart_toEndOf="@id/descriptionLabel"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/arrow_description"
+                            android:id="@+id/arrowDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="Arrow"
@@ -267,7 +267,7 @@
 
                     <!-- Первый платеж -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/first_payment_container"
+                        android:id="@+id/firstPaymentContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_16dp"
@@ -279,10 +279,10 @@
                         android:paddingVertical="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/description_container">
+                        app:layout_constraintTop_toBottomOf="@+id/descriptionContainer">
 
                         <TextView
-                            android:id="@+id/first_payment_label"
+                            android:id="@+id/firstPaymentLabel"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -293,7 +293,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/first_payment_value"
+                            android:id="@+id/firstPaymentValue"
                             style="@style/TextAppearance.Headline2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -302,11 +302,11 @@
                             android:text="08.01.2022"
                             android:textColor="@color/Gray_30"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_first_payment"
+                            app:layout_constraintEnd_toStartOf="@id/arrowFirstPayment"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/arrow_first_payment"
+                            android:id="@+id/arrowFirstPayment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="Arrow"
@@ -320,7 +320,7 @@
 
                     <!-- Период оплаты -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/payment_period_container"
+                        android:id="@+id/paymentPeriodContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_16dp"
@@ -332,10 +332,10 @@
                         android:paddingVertical="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/first_payment_container">
+                        app:layout_constraintTop_toBottomOf="@+id/firstPaymentContainer">
 
                         <TextView
-                            android:id="@+id/payment_period_label"
+                            android:id="@+id/paymentPeriodLabel"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -346,7 +346,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/payment_period_value"
+                            android:id="@+id/paymentPeriodValue"
                             style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -356,12 +356,12 @@
                             android:text="1 месяц"
                             android:textColor="@color/Gray_30"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_payment_period"
-                            app:layout_constraintStart_toEndOf="@id/payment_period_label"
+                            app:layout_constraintEnd_toStartOf="@id/arrowPaymentPeriod"
+                            app:layout_constraintStart_toEndOf="@id/paymentPeriodLabel"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/arrow_payment_period"
+                            android:id="@+id/arrowPaymentPeriod"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="Arrow"
@@ -375,7 +375,7 @@
 
                     <!-- Напоминания -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/reminder_container"
+                        android:id="@+id/reminderContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_16dp"
@@ -387,10 +387,10 @@
                         android:paddingVertical="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/payment_period_container">
+                        app:layout_constraintTop_toBottomOf="@+id/paymentPeriodContainer">
 
                         <TextView
-                            android:id="@+id/reminder_label"
+                            android:id="@+id/reminderLabel"
                             style="@style/TextAppearance.Headline3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -401,7 +401,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/reminder_value"
+                            android:id="@+id/reminderValue"
                             style="@style/TextAppearance.Headline2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -411,12 +411,12 @@
                             android:text="Never"
                             android:textColor="@color/Gray_30"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_reminder"
-                            app:layout_constraintStart_toEndOf="@id/reminder_label"
+                            app:layout_constraintEnd_toStartOf="@id/arrowReminder"
+                            app:layout_constraintStart_toEndOf="@id/reminderLabel"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/arrow_reminder"
+                            android:id="@+id/arrowReminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="Arrow"
@@ -426,66 +426,6 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    <!-- Комментарий -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/comment_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_16dp"
-                        android:background="@drawable/bg_selectable_rounded"
-                        android:clickable="true"
-                        android:clipToOutline="true"
-                        android:focusable="true"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/reminder_container">
-
-                        <!-- Комментарий Label -->
-                        <TextView
-                            android:id="@+id/comment_label"
-                            style="@style/TextAppearance.Headline3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Сomment"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <!-- Комментарий Value -->
-                        <TextView
-                            android:id="@+id/comment_value"
-                            style="@style/TextAppearance.Headline2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:ellipsize="end"
-                            android:gravity="end"
-                            android:maxLines="3"
-                            android:text="Not specified"
-                            android:textColor="@color/Gray_30"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow_comment"
-                            app:layout_constraintStart_toEndOf="@id/comment_label"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <!-- Кнопка Arrow -->
-                        <ImageView
-                            android:id="@+id/arrow_comment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="Arrow"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </com.google.android.material.card.MaterialCardView>

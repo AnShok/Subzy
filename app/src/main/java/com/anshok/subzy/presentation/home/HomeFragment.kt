@@ -23,6 +23,7 @@ import com.anshok.subzy.presentation.home.bottomsheet.SortBottomSheet
 import com.anshok.subzy.presentation.home.bottomsheet.SortDirection
 import com.anshok.subzy.presentation.home.bottomsheet.SortOption
 import com.anshok.subzy.presentation.home.viewmodel.MySubViewModel
+import com.anshok.subzy.util.VibrationUtils
 import com.anshok.subzy.util.safeDelayedAction
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -240,7 +241,8 @@ class HomeFragment : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     v.startAnimation(scaleDown)
-                    vibrateLight()
+                    VibrationUtils.vibrateLight(requireContext())
+
                 }
 
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> v.startAnimation(scaleUp)
@@ -248,25 +250,5 @@ class HomeFragment : Fragment() {
             false
         }
         view.setOnClickListener { onClick() }
-    }
-
-
-    private fun vibrateLight() {
-        val vibrator = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            val manager = requireContext().getSystemService(android.os.VibratorManager::class.java)
-            manager?.defaultVibrator
-        } else {
-            @Suppress("DEPRECATION")
-            requireContext().getSystemService(Vibrator::class.java)
-        }
-
-        vibrator?.let {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                it.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE))
-            } else {
-                @Suppress("DEPRECATION")
-                it.vibrate(30)
-            }
-        }
     }
 }

@@ -39,7 +39,7 @@
 
             <!--Кнопка назад-->
             <ImageButton
-                android:id="@+id/back_button"
+                android:id="@+id/backButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
@@ -61,10 +61,27 @@
                 android:text="Search subscription"
                 android:textColor="@color/Gray_30"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/back_button"
+                app:layout_constraintBottom_toBottomOf="@+id/backButton"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/back_button"
-                app:layout_constraintTop_toTopOf="@+id/back_button" />
+                app:layout_constraintStart_toEndOf="@+id/backButton"
+                app:layout_constraintTop_toTopOf="@+id/backButton" />
+
+            <ImageButton
+                android:id="@+id/create_sub_button"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_add_sub_button_search"
+                android:contentDescription="Create new subscription"
+                android:src="@drawable/ic_add_sub"
+                android:scaleType="center"
+                app:tint="@color/white"
+                android:elevation="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintTop_toTopOf="@+id/backButton"
+                app:layout_constraintBottom_toBottomOf="@+id/backButton"
+                app:layout_constraintEnd_toEndOf="@+id/end_border_upcard" />
+
 
             <FrameLayout
                 android:id="@+id/search_edit_frame"
@@ -73,7 +90,7 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/back_button">
+                app:layout_constraintTop_toBottomOf="@id/backButton">
 
                 <EditText
                     android:id="@+id/search_query"
@@ -220,31 +237,6 @@
         app:layout_constraintTop_toBottomOf="@id/server_error" />
 
 
-    <FrameLayout
-        android:id="@+id/create_sub_frame"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/end_border"
-        app:layout_constraintStart_toStartOf="@+id/start_border">
-
-        <Button
-            android:id="@+id/create_sub_button"
-            style="@style/TextAppearance.Headline2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_24dp"
-            android:clickable="true"
-            android:elevation="8dp"
-            android:text="Create"
-            android:textAllCaps="false"
-            android:textColor="@color/White"
-            app:backgroundTint="@color/Accent_P_100"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/end_border"
-            app:layout_constraintStart_toStartOf="@+id/start_border" />
-    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -266,7 +258,7 @@
         android:layout_marginVertical="22dp"
         android:indeterminateTint="@color/Accent_P_100"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/create_sub_frame"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_recycle_view"
