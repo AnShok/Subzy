@@ -21,6 +21,7 @@ import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.PaymentP
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
 import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
 import com.anshok.subzy.presentation.common.CustomErrorDialogFragment
+import com.anshok.subzy.util.VibrationUtils
 import com.anshok.subzy.util.adapter.bindLogo
 import com.anshok.subzy.util.adapter.toLogo
 import com.anshok.subzy.util.safeDelayedClick
@@ -82,6 +83,7 @@ class AddSubCreateFragment : Fragment() {
         }
 
         binding.addButton.safeDelayedClick {
+            VibrationUtils.vibrateLight(requireContext())
             onSaveClicked()
         }
 

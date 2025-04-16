@@ -14,12 +14,15 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentCalendarBinding
 import com.anshok.subzy.domain.subscription.model.SubscriptionGroup
-import com.anshok.subzy.presentation.calendar.groupie.*
+import com.anshok.subzy.presentation.calendar.groupie.CalendarGroupieAdapter
+import com.anshok.subzy.presentation.calendar.groupie.GroupedSubscriptionSection
+import com.anshok.subzy.presentation.calendar.groupie.SubscriptionHeaderItem
+import com.anshok.subzy.presentation.calendar.groupie.SubscriptionItem
 import com.anshok.subzy.util.MonthUtils
+import com.anshok.subzy.util.VibrationUtils
 import com.anshok.subzy.util.safeDelayedClick
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.view.MonthDayBinder
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -92,6 +95,9 @@ class CalendarFragment : Fragment() {
         )
         calendarView.scrollToMonth(currentMonth)
 
+        // Заголовок при первом запуске
+        updateMonthTitle(currentMonth)
+
         calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun create(view: View) = DayViewContainer(view)
 
@@ -110,14 +116,9 @@ class CalendarFragment : Fragment() {
         }
 
         calendarView.monthScrollListener = { month ->
-            val newMonth = month.yearMonth
-            if (lastVisibleMonth == null || lastVisibleMonth != newMonth) {
-                animateMonthTitleScroll(lastVisibleMonth ?: newMonth, newMonth)
-                lastVisibleMonth = newMonth
-            }
-
+            updateMonthTitle(month.yearMonth)
             binding.returnTodayButton.visibility =
-                if (newMonth == YearMonth.now() && !showDayMode) View.GONE else View.VISIBLE
+                if (month.yearMonth == YearMonth.now() && !showDayMode) View.GONE else View.VISIBLE
 
             if (!showDayMode) updateList()
             calendarView.notifyCalendarChanged()
@@ -135,44 +136,39 @@ class CalendarFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.backButton.safeDelayedClick {
+            VibrationUtils.vibrateLight(requireContext())
             findNavController().navigateUp()
         }
 
         binding.returnTodayButton.safeDelayedClick {
+            VibrationUtils.vibrateLight(requireContext())
             val currentMonth = YearMonth.now()
-            val fromMonth = binding.calendarView.findFirstVisibleMonth()?.yearMonth ?: currentMonth
 
             binding.calendarView.smoothScrollToMonth(currentMonth)
-            animateMonthTitleScroll(fromMonth, currentMonth, delayMs = 25L)
 
             selectedDate = today
             showDayMode = false
             binding.returnTodayButton.visibility = View.GONE
 
             binding.calendarView.notifyCalendarChanged()
+            updateMonthTitle(currentMonth)
             updateList()
         }
 
-        binding.prevMonthButton.safeDelayedClick {
+        binding.prevMonthButton.setOnClickListener {
+            VibrationUtils.vibrateLight(requireContext())
             binding.calendarView.findFirstVisibleMonth()?.let {
                 binding.calendarView.scrollToMonth(it.yearMonth.minusMonths(1))
             }
         }
 
-        binding.nextMonthButton.safeDelayedClick {
+        binding.nextMonthButton.setOnClickListener {
+            VibrationUtils.vibrateLight(requireContext())
             binding.calendarView.findFirstVisibleMonth()?.let {
                 binding.calendarView.scrollToMonth(it.yearMonth.plusMonths(1))
             }
         }
     }
-
-
-
-
-
-
-
-
 
 
     private fun updateMonthTitle(yearMonth: YearMonth) {
@@ -210,20 +206,5 @@ class CalendarFragment : Fragment() {
         }
 
         binding.calendarSubscriptionList.scheduleLayoutAnimation()
-    }
-
-    private fun animateMonthTitleScroll(from: YearMonth, to: YearMonth, delayMs: Long = 30L) {
-        lifecycleScope.launch {
-            val step = if (to > from) 1 else -1
-            var current = from
-
-            while (current != to) {
-                updateMonthTitle(current)
-                current = current.plusMonths(step.toLong())
-                delay(delayMs)
-            }
-
-            updateMonthTitle(to)
-        }
     }
 }
