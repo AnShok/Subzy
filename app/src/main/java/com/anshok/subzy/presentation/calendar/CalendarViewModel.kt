@@ -35,11 +35,12 @@ class CalendarViewModel(
     private val _upcomingBills = MutableStateFlow<List<Subscription>>(emptyList())
     val upcomingBills: StateFlow<List<Subscription>> = _upcomingBills.asStateFlow()
 
-    init {
-        fetchUpcomingBills()
-    }
+//    init {
+//        fetchUpcomingBills()
+//    }
 
-    private fun fetchUpcomingBills() {
+//    private fun fetchUpcomingBills() {
+    fun fetchUpcomingBills() {
         viewModelScope.launch {
             subscriptionInteractor.getAllSubscriptions().collect { list ->
                 val now = LocalDate.now()

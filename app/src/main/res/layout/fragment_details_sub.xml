@@ -29,7 +29,7 @@
 
 
             <TextView
-                android:id="@+id/subscription_name"
+                android:id="@+id/subscriptionName"
                 style="@style/TextAppearance.Headline6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -60,9 +60,9 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="small menu"
                 android:src="@drawable/ic_more_vert"
-                app:layout_constraintBottom_toBottomOf="@+id/subscription_name"
+                app:layout_constraintBottom_toBottomOf="@+id/subscriptionName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/subscription_name"
+                app:layout_constraintTop_toTopOf="@+id/subscriptionName"
                 app:tint="@color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -114,7 +114,7 @@
                     app:strokeWidth="0dp">
 
                     <ImageView
-                        android:id="@+id/item_logo"
+                        android:id="@+id/itemLogo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="Icon"
@@ -125,7 +125,7 @@
 
                 <!-- Цена -->
                 <TextView
-                    android:id="@+id/subscription_price"
+                    android:id="@+id/subscriptionPrice"
                     style="@style/TextAppearance.Headline6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -152,19 +152,293 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- Детали -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/details_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingHorizontal="@dimen/dimen_20dp"
-        android:paddingBottom="100dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailsCard" />
+        app:layout_constraintTop_toBottomOf="@+id/detailsCard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="@dimen/dimen_20dp">
+
+            <!-- Описание подписки -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/descriptionContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:clickable="true"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/descriptionLabel"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    app:cardBackgroundColor="@color/Gray_80"
+                    app:layout_constraintBottom_toBottomOf="@+id/descriptionLabel"
+                    app:layout_constraintEnd_toStartOf="@+id/descriptionArrow"
+                    app:layout_constraintStart_toEndOf="@+id/descriptionLabel"
+                    app:layout_constraintTop_toTopOf="@+id/descriptionLabel"
+                    app:strokeWidth="0dp">
+
+                    <TextView
+                        android:id="@+id/descriptionValue"
+                        style="@style/TextAppearance.Headline2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="1"
+                        android:paddingHorizontal="@dimen/dimen_4dp"
+                        android:textColor="@color/Gray_30"
+                        tools:text="Not found" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <ImageView
+                    android:id="@+id/descriptionArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Arrow"
+                    android:src="@drawable/ic_arrow_down"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/descriptionLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/descriptionLabel"
+                    tools:visibility="visible" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Первый платеж -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/firstPaymentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/bg_selectable_rounded"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionContainer">
+
+                <TextView
+                    android:id="@+id/firstPaymentLabel"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First payment"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/firstPaymentValue"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/Gray_30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="08.01.2022" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Первый платеж -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nextPaymentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/bg_selectable_rounded"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionContainer">
+
+                <TextView
+                    android:id="@+id/nextPaymentLabel"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next payment"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nextPaymentValue"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="08.01.2022"
+                    android:textColor="@color/Gray_30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="08.01.2022" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!-- Период оплаты -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/paymentPeriodContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/bg_selectable_rounded"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/firstPaymentContainer">
+
+                <TextView
+                    android:id="@+id/paymentPeriodLabel"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payment period"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/paymentPeriodValue"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:text="1 месяц"
+                    android:textColor="@color/Gray_30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/paymentPeriodLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!-- Напоминания -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/reminderContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/bg_selectable_rounded"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paymentPeriodContainer">
+
+                <TextView
+                    android:id="@+id/reminderLabel"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reminder"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/reminderValue"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:text="Never"
+                    android:textColor="@color/Gray_30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/reminderLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Напоминания -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/totalPaidContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/bg_selectable_rounded"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paymentPeriodContainer">
+
+                <TextView
+                    android:id="@+id/totalPaidLabel"
+                    style="@style/TextAppearance.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total paid"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/totalPaidValue"
+                    style="@style/TextAppearance.Headline2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:textColor="@color/Gray_30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/totalPaidLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="--" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

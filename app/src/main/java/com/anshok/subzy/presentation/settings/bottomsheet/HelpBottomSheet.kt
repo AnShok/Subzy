@@ -19,7 +19,6 @@ class HelpBottomSheet : BottomSheetDialogFragment() {
     private val binding: BottomSheetHelpBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: HelpViewModel by viewModel()
 
-    override fun getTheme() = R.style.BottomSheetDialogResizeStyle
 
     override fun onCreateView(
         inflater: LayoutInflater,

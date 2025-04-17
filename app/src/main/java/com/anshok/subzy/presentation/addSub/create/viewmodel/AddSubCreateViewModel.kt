@@ -13,10 +13,11 @@ import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
 import com.anshok.subzy.shared.events.SubscriptionChangedNotifier
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
-import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 class AddSubCreateViewModel(
     private val subscriptionInteractor: SubscriptionInteractor,
@@ -53,7 +54,7 @@ class AddSubCreateViewModel(
         }
     }
 
-    fun saveSubscription(
+    fun addSubscription(
         name: String,
         price: Double,
         description: String?,
@@ -103,13 +104,10 @@ class AddSubCreateViewModel(
             val result = subscriptionInteractor.insertSubscription(subscription)
             onResult(if (result) SaveResult.Success else SaveResult.Duplicate)
             subscriptionChangedNotifier.notify()
-
-
-
         }
     }
 
-    private fun calculateNextPaymentDate(start: Long, period: Int, type: PaymentPeriodType): Long {
+    fun calculateNextPaymentDate(start: Long, period: Int, type: PaymentPeriodType): Long {
         val zone = ZoneId.systemDefault()
         val from = Instant.ofEpochMilli(start).atZone(zone).toLocalDate()
 
@@ -121,6 +119,7 @@ class AddSubCreateViewModel(
                 val day = minOf(from.dayOfMonth, added.lengthOfMonth())
                 added.withDayOfMonth(day)
             }
+
             PaymentPeriodType.YEARLY -> {
                 val added = from.plusYears(period.toLong())
                 val day = minOf(from.dayOfMonth, added.lengthOfMonth())
@@ -131,4 +130,28 @@ class AddSubCreateViewModel(
         return result.atStartOfDay(zone).toInstant().toEpochMilli()
     }
 
+    fun loadSubscriptionForEdit(subscriptionId: Long, onLoaded: (Subscription) -> Unit) {
+        viewModelScope.launch {
+            val sub = subscriptionInteractor.getSubscriptionById(subscriptionId)
+            sub?.let { onLoaded(it) }
+        }
+    }
+
+    fun updateSubscription(
+        original: Subscription,
+        updated: Subscription,
+        onResult: (SaveResult) -> Unit
+    ) {
+        viewModelScope.launch {
+            subscriptionInteractor.updateSubscription(updated.copy(id = original.id))
+            onResult(SaveResult.Success)
+            subscriptionChangedNotifier.notify()
+        }
+    }
+
+    fun formatDate(millis: Long): String {
+        val date = Date(millis)
+        val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return formatter.format(date)
+    }
 }

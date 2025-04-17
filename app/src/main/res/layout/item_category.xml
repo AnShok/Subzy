@@ -14,7 +14,7 @@
         android:paddingVertical="16dp">
 
         <ImageView
-            android:id="@+id/item_logo"
+            android:id="@+id/itemLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Category logo"
@@ -32,8 +32,8 @@
             android:textColor="?attr/colorOnPrimary"
             android:textFontWeight="500"
             app:layout_constraintEnd_toStartOf="@id/cost"
-            app:layout_constraintStart_toEndOf="@id/item_logo"
-            app:layout_constraintTop_toTopOf="@id/item_logo"
+            app:layout_constraintStart_toEndOf="@id/itemLogo"
+            app:layout_constraintTop_toTopOf="@id/itemLogo"
             tools:text="Entertainment" />
 
         <TextView

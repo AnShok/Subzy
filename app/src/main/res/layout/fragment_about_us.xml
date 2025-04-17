@@ -11,7 +11,7 @@
 
     <!-- Кнопка Назад -->
     <ImageButton
-        android:id="@+id/back_button"
+        android:id="@+id/backButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="-8dp"
@@ -32,9 +32,9 @@
         android:text="About Us"
         android:textColor="@color/Gray_30"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/back_button"
-        app:layout_constraintStart_toEndOf="@id/back_button"
-        app:layout_constraintTop_toTopOf="@id/back_button" />
+        app:layout_constraintBottom_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintTop_toTopOf="@id/backButton" />
 
     <!-- Иконка -->
     <ImageView

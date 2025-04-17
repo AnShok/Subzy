@@ -57,7 +57,17 @@
         android:id="@+id/addSubCreateFragment"
         android:name="com.anshok.subzy.presentation.addSub.create.AddSubCreateFragment"
         android:label="fragment_vacancy"
-        tools:layout="@layout/fragment_add_sub_create" >
+        tools:layout="@layout/fragment_add_sub_create">
+
+        <argument
+            android:name="subscriptionId"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="isEdit"
+            android:defaultValue="false"
+            app:argType="boolean" />
     </fragment>
 
     <!-- DetailsSubFragment -->
