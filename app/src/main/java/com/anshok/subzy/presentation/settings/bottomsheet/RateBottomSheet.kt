@@ -22,7 +22,6 @@ class RateBottomSheet : BottomSheetDialogFragment() {
     private var currentRating = 0
     private lateinit var starViews: List<ImageView>
 
-    override fun getTheme(): Int = R.style.BottomSheetDialogResizeStyle
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

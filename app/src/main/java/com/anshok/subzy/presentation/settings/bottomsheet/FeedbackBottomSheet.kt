@@ -20,7 +20,6 @@ class FeedbackBottomSheet : BottomSheetDialogFragment() {
 
     private val viewModel: RateViewModel by viewModel()
 
-    override fun getTheme(): Int = R.style.BottomSheetDialogResizeStyle
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

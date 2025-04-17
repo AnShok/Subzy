@@ -174,8 +174,8 @@
                 android:id="@+id/descriptionContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
                 android:animateLayoutChanges="true"
+                android:clickable="true"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -197,33 +197,33 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     app:cardBackgroundColor="@color/Gray_80"
-                    app:strokeWidth="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/descriptionLabel"
                     app:layout_constraintEnd_toStartOf="@+id/descriptionArrow"
                     app:layout_constraintStart_toEndOf="@+id/descriptionLabel"
-                    app:layout_constraintTop_toTopOf="@+id/descriptionLabel">
+                    app:layout_constraintTop_toTopOf="@+id/descriptionLabel"
+                    app:strokeWidth="0dp">
 
                     <TextView
                         android:id="@+id/descriptionValue"
                         style="@style/TextAppearance.Headline2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingHorizontal="@dimen/dimen_4dp"
                         android:ellipsize="end"
                         android:gravity="end"
                         android:maxLines="1"
+                        android:paddingHorizontal="@dimen/dimen_4dp"
                         android:textColor="@color/Gray_30"
-                        tools:text="Not found"/>
+                        tools:text="Not found" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <ImageView
                     android:id="@+id/descriptionArrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:contentDescription="Arrow"
                     android:src="@drawable/ic_arrow_down"
                     android:visibility="gone"
-                    android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toBottomOf="@+id/descriptionLabel"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/descriptionLabel"
@@ -437,7 +437,6 @@
                     tools:text="--" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         </LinearLayout>

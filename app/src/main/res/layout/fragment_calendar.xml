@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.calendar.CalendarFragment"
-    android:background="@drawable/gradient_overlay_home_fragment">
+    android:background="@drawable/gradient_overlay_home_fragment"
+    tools:context=".presentation.calendar.CalendarFragment">
 
     <!-- Заголовок месяца и стрелки -->
     <LinearLayout
@@ -80,13 +80,13 @@
         android:id="@+id/calendarSubscriptionList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingBottom="16dp"
         android:clipToPadding="false"
+        android:paddingBottom="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/calendarView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendarView"
         tools:listitem="@layout/item_subscription_group"
         tools:visibility="visible" />
 
@@ -95,25 +95,24 @@
         android:id="@+id/placeholderGroup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="32dp"
         android:layout_marginTop="64dp"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
-        app:layout_constraintStart_toStartOf="@+id/start_border"
+        android:paddingHorizontal="32dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/end_border"
-        android:visibility="gone">
+        app:layout_constraintStart_toStartOf="@+id/start_border"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView">
 
         <!-- Линия -->
         <View
             android:id="@+id/timeline"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:background="@color/Accent_S_100_88"
             android:layout_marginHorizontal="32dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/Accent_S_100_88"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <!-- Текст 1 -->
@@ -122,12 +121,12 @@
             style="@style/TextAppearance.BodyLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="Подписок на выбранную дату нет"
             android:textColor="@color/Gray_30"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/timeline"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/timeline" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -139,10 +138,10 @@
         android:contentDescription="Return to today"
         android:src="@drawable/ic_calendar_reset"
         android:visibility="gone"
-        app:tint="@color/White"
         app:backgroundTint="@color/Accent_S_100_33"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/White" />
 
 
     <!-- Отcтупы -->

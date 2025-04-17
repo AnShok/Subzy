@@ -15,9 +15,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAddSubCreateBinding
 import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
+import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.DescriptionBottomSheet
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.NotificationReminderBottomSheet
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.PaymentPeriodBottomSheet
+import com.anshok.subzy.presentation.addSub.create.dialog.CancelConfirmationDialog
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
 import com.anshok.subzy.presentation.common.CurrencyPickerBottomSheet
 import com.anshok.subzy.presentation.common.CustomErrorDialogFragment
@@ -38,13 +40,14 @@ class AddSubCreateFragment : Fragment() {
 
     private var selectedPeriodNumber: Int = 1
     private var selectedPeriodType: PaymentPeriodType = PaymentPeriodType.MONTHLY
+    private var originalSubscription: Subscription? = null
 
     private val galleryLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
                 viewModel.selectedImageFromGallery = it.toString()
                 bindLogo(it.toString().toLogo(requireContext()), binding.itemLogo)
-
+                checkChanges()
             }
         }
 
@@ -60,7 +63,7 @@ class AddSubCreateFragment : Fragment() {
         setupInitialAnimations()
         observeCurrency()
         setupClickListeners()
-        setupPassedArguments()
+        setupPassedArgumentsOrLoadFromId()
         setupPriceValidation()
         setupValidation()
 
@@ -84,7 +87,18 @@ class AddSubCreateFragment : Fragment() {
 
         binding.addButton.safeDelayedClick {
             VibrationUtils.vibrateLight(requireContext())
+            onAddClicked()
+        }
+
+        binding.saveButton.safeDelayedClick {
+            VibrationUtils.vibrateLight(requireContext())
             onSaveClicked()
+        }
+
+        binding.cancelButton.safeDelayedClick {
+            CancelConfirmationDialog {
+                findNavController().popBackStack()
+            }.show(parentFragmentManager, "CancelConfirmationDialog")
         }
 
         binding.currencyButton.setOnClickListener {
@@ -105,8 +119,8 @@ class AddSubCreateFragment : Fragment() {
         binding.paymentPeriodContainer.setOnClickListener { openPaymentPeriodBottomSheet() }
         binding.firstPaymentContainer.setOnClickListener { showDatePicker() }
         binding.reminderContainer.setOnClickListener { openReminderBottomSheet() }
-        //binding.commentContainer.setOnClickListener { openCommentBottomSheet() }
-
+//        binding.commentContainer.setOnClickListener { openCommentBottomSheet() }
+//
 //        binding.categoryContainer.setOnClickListener {
 //            CategoryBottomSheetFragment { category ->
 //                binding.categoryValue.text = category
@@ -137,6 +151,47 @@ class AddSubCreateFragment : Fragment() {
         }
     }
 
+    private fun setupPassedArgumentsOrLoadFromId() {
+        val subscriptionIdRaw = arguments?.getString("subscriptionId")
+        val subscriptionId = subscriptionIdRaw?.toLongOrNull()
+
+        val isEdit = arguments?.getBoolean("isEdit") ?: false
+
+        if (subscriptionId != null && isEdit) {
+            viewModel.loadSubscriptionForEdit(subscriptionId) { subscription ->
+                originalSubscription = subscription
+                binding.subscriptionNameEditTxt.setText(subscription.name)
+                binding.subscriptionPriceEditTxt.setText(subscription.price.toString())
+
+                val desc = subscription.description
+                binding.descriptionValue.text = if (desc.isNullOrBlank()) "Not specified" else desc
+
+                binding.firstPaymentValue.text = viewModel.formatDate(subscription.firstPaymentDate)
+                binding.paymentPeriodValue.text =
+                    "${subscription.paymentPeriod} ${subscription.paymentPeriodType.name.lowercase()}"
+                selectedPeriodNumber = subscription.paymentPeriod
+                selectedPeriodType = subscription.paymentPeriodType
+
+                // логотип
+                bindLogo(subscription.logoUrl.toLogo(requireContext()), binding.itemLogo)
+
+                // валюта 👇
+                viewModel.setCurrency(subscription.currencyCode)
+
+                // заголовок
+                binding.title.text = "Edit Subscription"
+
+                // скрыть кнопку Add
+                binding.addButton.visibility = View.GONE
+            }
+            // Включаем слежку за изменениями
+            enableEditModeWatcher()
+        } else {
+            setupPassedArguments() // Логика из поиска
+        }
+    }
+
+
     private fun setupPriceValidation() {
         binding.subscriptionPriceEditTxt.doAfterTextChanged { text ->
             val clean = text.toString().replace(",", ".")
@@ -153,7 +208,6 @@ class AddSubCreateFragment : Fragment() {
         binding.subscriptionNameEditTxt.doAfterTextChanged { validateFields() }
         binding.subscriptionPriceEditTxt.doAfterTextChanged { validateFields() }
 
-        // Если дата может меняться программно (например, через DatePicker)
         binding.firstPaymentValue.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             validateFields()
         }
@@ -161,7 +215,7 @@ class AddSubCreateFragment : Fragment() {
         validateFields()
     }
 
-    private fun onSaveClicked() {
+    private fun onAddClicked() {
         val name = binding.subscriptionNameEditTxt.text?.toString()?.trim().orEmpty()
         val price =
             binding.subscriptionPriceEditTxt.text?.toString()?.replace(",", ".")?.toDoubleOrNull()
@@ -170,10 +224,11 @@ class AddSubCreateFragment : Fragment() {
         val dateMillis = dateFormat.parse(binding.firstPaymentValue.text.toString())?.time
             ?: System.currentTimeMillis()
 
-        viewModel.saveSubscription(
+        viewModel.addSubscription(
             name = name,
             price = price,
-            description = binding.descriptionValue.text.toString(),
+            description = binding.descriptionValue.text.toString()
+                .takeIf { it.isNotBlank() && it != "Not specified" },
             paymentPeriod = selectedPeriodNumber,
             paymentPeriodType = selectedPeriodType,
             firstPaymentDate = dateMillis,
@@ -215,11 +270,11 @@ class AddSubCreateFragment : Fragment() {
         datePicker.show(parentFragmentManager, "MATERIAL_DATE_PICKER")
 
         datePicker.addOnPositiveButtonClickListener { selection ->
-            // Преобразуем миллисекунды в нужный формат
             val date = Date(selection)
             val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(date)
             binding.firstPaymentValue.text = formattedDate
             validateFields()
+            checkChanges()
         }
     }
 
@@ -306,5 +361,184 @@ class AddSubCreateFragment : Fragment() {
         )
     }
 
+
+    private fun onSaveClicked() {
+        val subId = arguments?.getString("subscriptionId")?.toLongOrNull() ?: return
+        viewModel.loadSubscriptionForEdit(subId) { original ->
+            val newFirstPaymentDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+                .parse(binding.firstPaymentValue.text.toString())?.time
+                ?: System.currentTimeMillis()
+
+            val updated = original.copy(
+                name = binding.subscriptionNameEditTxt.text.toString().trim(),
+                price = binding.subscriptionPriceEditTxt.text.toString()
+                    .replace(",", ".").toDoubleOrNull() ?: 0.0,
+                currencyCode = viewModel.currencyCode.value ?: original.currencyCode,
+                description = binding.descriptionValue.text.toString()
+                    .takeIf { it.isNotBlank() && it != "Not specified" },
+                paymentPeriod = selectedPeriodNumber,
+                paymentPeriodType = selectedPeriodType,
+                firstPaymentDate = newFirstPaymentDate,
+                nextPaymentDate = viewModel.calculateNextPaymentDate(
+                    newFirstPaymentDate,
+                    selectedPeriodNumber,
+                    selectedPeriodType
+                ),
+                logoUrl = viewModel.selectedImageFromGallery
+                    ?: viewModel.selectedLogoUrl
+                    ?: viewModel.selectedLogoResName?.let { "res://$it" }
+                    ?: original.logoUrl
+            )
+
+            viewModel.updateSubscription(original, updated) { result ->
+                if (result == SaveResult.Success) {
+                    findNavController().navigateUp()
+                } else {
+                    showErrorDialog("Failed to update subscription")
+                }
+            }
+        }
+    }
+
+
+    private fun enableEditModeWatcher() {
+        fun checkChanges() {
+            val current = getCurrentSubscriptionSnapshot()
+            val original = originalSubscription
+            if (original != null && current != null && current != original) {
+                binding.editButtonsContainer.visibility = View.VISIBLE
+            } else {
+                binding.editButtonsContainer.visibility = View.GONE
+            }
+        }
+
+        binding.subscriptionNameEditTxt.doAfterTextChanged { checkChanges() }
+        binding.subscriptionPriceEditTxt.doAfterTextChanged { checkChanges() }
+
+        binding.firstPaymentValue.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            checkChanges()
+        }
+
+        binding.currencyButton.setOnClickListener {
+            viewModel.loadCurrencies { currencies ->
+                CurrencyPickerBottomSheet(
+                    currencies = currencies,
+                    currentCode = viewModel.currencyCode.value.orEmpty(),
+                    onCurrencySelected = {
+                        viewModel.setCurrency(it)
+                        checkChanges()
+                    }
+                ).show(parentFragmentManager, "CurrencyPicker")
+            }
+        }
+
+        binding.itemLogo.safeDelayedClick {
+            galleryLauncher.launch("image/*")
+            checkChanges()
+        }
+
+        binding.descriptionContainer.setOnClickListener {
+            val current = originalSubscription?.description
+            DescriptionBottomSheet(
+                initialText = current
+            ) { desc ->
+                // Отображаем в UI
+                binding.descriptionValue.text = if (desc.isNullOrBlank()) {
+                    "Not specified"
+                } else {
+                    desc
+                }
+                checkChanges()
+            }.show(parentFragmentManager, "DescriptionBottomSheet")
+        }
+
+
+        binding.paymentPeriodContainer.setOnClickListener {
+            PaymentPeriodBottomSheet { number, periodString ->
+                val type = when (periodString) {
+                    "дни" -> PaymentPeriodType.DAILY
+                    "недели" -> PaymentPeriodType.WEEKLY
+                    "месяцы" -> PaymentPeriodType.MONTHLY
+                    "годы" -> PaymentPeriodType.YEARLY
+                    else -> PaymentPeriodType.MONTHLY
+                }
+                selectedPeriodNumber = number
+                selectedPeriodType = type
+
+                val correctForm = when (type) {
+                    PaymentPeriodType.DAILY -> resources.getQuantityString(
+                        R.plurals.days,
+                        number,
+                        number
+                    )
+
+                    PaymentPeriodType.WEEKLY -> resources.getQuantityString(
+                        R.plurals.weeks,
+                        number,
+                        number
+                    )
+
+                    PaymentPeriodType.MONTHLY -> resources.getQuantityString(
+                        R.plurals.months,
+                        number,
+                        number
+                    )
+
+                    PaymentPeriodType.YEARLY -> resources.getQuantityString(
+                        R.plurals.years,
+                        number,
+                        number
+                    )
+                }
+                binding.paymentPeriodValue.text = correctForm
+
+                checkChanges()
+            }.show(parentFragmentManager, "PaymentPeriodBottomSheet")
+        }
+
+        binding.reminderContainer.setOnClickListener {
+            NotificationReminderBottomSheet {
+                binding.reminderValue.text = it
+                checkChanges()
+            }.show(parentFragmentManager, "NotificationReminderBottomSheet")
+        }
+    }
+
+    private fun getCurrentSubscriptionSnapshot(): Subscription? {
+        val original = originalSubscription ?: return null
+        val name = binding.subscriptionNameEditTxt.text?.toString()?.trim().orEmpty()
+        val price = binding.subscriptionPriceEditTxt.text?.toString()
+            ?.replace(",", ".")?.toDoubleOrNull() ?: return null
+        val dateMillis = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            .parse(binding.firstPaymentValue.text.toString())?.time ?: return null
+
+        val descriptionText = binding.descriptionValue.text.toString()
+            .takeIf { it.isNotBlank() && it != "Not specified" }
+
+        return original.copy(
+            name = name,
+            price = price,
+            description = descriptionText,
+            paymentPeriod = selectedPeriodNumber,
+            paymentPeriodType = selectedPeriodType,
+            firstPaymentDate = dateMillis,
+            logoUrl = viewModel.selectedImageFromGallery
+                ?: viewModel.selectedLogoUrl
+                ?: viewModel.selectedLogoResName?.let { "res://$it" }
+                ?: original.logoUrl,
+            currencyCode = viewModel.currencyCode.value ?: original.currencyCode
+        )
+    }
+
+
+    private fun checkChanges() {
+        val current = getCurrentSubscriptionSnapshot()
+        val original = originalSubscription
+        if (original != null && current != null && current != original) {
+            binding.editButtonsContainer.visibility = View.VISIBLE
+        } else {
+            binding.editButtonsContainer.visibility = View.GONE
+        }
+    }
 
 }

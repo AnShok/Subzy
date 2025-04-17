@@ -23,7 +23,6 @@ class CurrencyPickerBottomSheet(
     private val binding: BottomSheetCurrencySelectorBinding by viewBinding(CreateMethod.INFLATE)
     private lateinit var adapter: CurrencyAdapter
 
-    override fun getTheme(): Int = com.anshok.subzy.R.style.BottomSheetDialogResizeStyle
 
     override fun onCreateView(
         inflater: LayoutInflater,

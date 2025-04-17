@@ -3,8 +3,6 @@ package com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +14,10 @@ import com.anshok.subzy.databinding.BottomSheetDescriptionBinding
 import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DescriptionBottomSheet(private val onOptionSelected: (String?) -> Unit) :
-    BottomSheetDialogFragment() {
+class DescriptionBottomSheet(
+    private val initialText: String? = null,
+    private val onOptionSelected: (String?) -> Unit
+) : BottomSheetDialogFragment() {
 
     private val binding: BottomSheetDescriptionBinding by viewBinding(CreateMethod.INFLATE)
 
@@ -30,14 +30,9 @@ class DescriptionBottomSheet(private val onOptionSelected: (String?) -> Unit) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Следим за вводом текста в EditText
-        binding.descriptionEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        // Устанавливаем начальный текст, если есть
+        binding.descriptionEditText.setText(initialText.orEmpty())
+        binding.descriptionEditText.setSelection(binding.descriptionEditText.text?.length ?: 0)
 
         // Обработка нажатия кнопки "ОК"
         binding.saveButton.safeDelayedClick {

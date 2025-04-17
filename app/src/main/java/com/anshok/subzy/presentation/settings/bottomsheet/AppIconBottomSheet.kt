@@ -20,7 +20,6 @@ class AppIconBottomSheet(
 ) : BottomSheetDialogFragment() {
 
     private val binding: BottomSheetAppIconBinding by viewBinding(CreateMethod.INFLATE)
-    override fun getTheme(): Int = com.anshok.subzy.R.style.BottomSheetDialogResizeStyle
 
     override fun onCreateView(
         inflater: LayoutInflater,

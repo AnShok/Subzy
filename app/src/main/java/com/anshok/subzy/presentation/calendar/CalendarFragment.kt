@@ -74,6 +74,12 @@ class CalendarFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchUpcomingBills()
+    }
+
+
     private fun setupInitialAnimations() {
         binding.root.alpha = 0f
         binding.root.animate().alpha(1f).setDuration(250).start()

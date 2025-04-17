@@ -1,5 +1,6 @@
 package com.anshok.subzy.presentation.subDetails
 
+//import com.anshok.subzy.presentation.subDetails.adapter.SubscriptionDetailAdapter
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -18,13 +19,11 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentDetailsSubBinding
-//import com.anshok.subzy.presentation.subDetails.adapter.SubscriptionDetailAdapter
 import com.anshok.subzy.presentation.subDetails.dialog.DeleteConfirmationDialog
 import com.anshok.subzy.util.CurrencyUtils
 import com.anshok.subzy.util.adapter.bindLogo
 import com.anshok.subzy.util.adapter.toLogo
 import com.anshok.subzy.util.animation.animateAppear
-import com.anshok.subzy.util.animation.fadeInWithTranslation
 import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.snackbar.Snackbar
 import marqueeOnceThenFadeToEllipsizeEnd
@@ -40,7 +39,6 @@ class DetailsSubFragment : Fragment() {
 
     val Int.dp: Int get() = (this * resources.displayMetrics.density).toInt()
     val Float.dp: Float get() = this * resources.displayMetrics.density
-
 
 
     override fun onCreateView(
@@ -68,8 +66,8 @@ class DetailsSubFragment : Fragment() {
 
                 val description = it.description.orEmpty()
                 if (description.isBlank()) {
-                    binding.descriptionValue.text = "not_specified"
-                    binding.descriptionArrow.isVisible = false
+                    binding.descriptionValue.text = "Not specified"
+                    binding.descriptionArrow.isVisible = true
                 } else {
                     binding.descriptionValue.text = description
                     binding.descriptionArrow.isVisible = true
@@ -88,7 +86,8 @@ class DetailsSubFragment : Fragment() {
 
                 binding.paymentPeriodValue.text =
                     "${it.paymentPeriod} ${it.paymentPeriodType.name.lowercase()}"
-                binding.reminderValue.text = "Not specified" // TODO: подтянуть из ReminderRepository
+                binding.reminderValue.text =
+                    "Not specified" // TODO: подтянуть из ReminderRepository
 
                 val payments = viewModel.calculateTotalPaidAmount(
                     it.firstPaymentDate,
@@ -117,7 +116,8 @@ class DetailsSubFragment : Fragment() {
 
     private fun toggleDescriptionExpansion(expanded: Boolean) {
         val arrow = binding.descriptionArrow
-        val card = binding.descriptionValue.parent as com.google.android.material.card.MaterialCardView
+        val card =
+            binding.descriptionValue.parent as com.google.android.material.card.MaterialCardView
         val value = binding.descriptionValue
 
         // Анимация стрелки
@@ -138,8 +138,10 @@ class DetailsSubFragment : Fragment() {
         val transition = androidx.transition.AutoTransition().apply {
             duration = 250
         }
-        androidx.transition.TransitionManager.beginDelayedTransition(binding.descriptionContainer, transition)
-
+        androidx.transition.TransitionManager.beginDelayedTransition(
+            binding.descriptionContainer,
+            transition
+        )
 
 
         // Обновление layout-параметров карточки
@@ -175,7 +177,10 @@ class DetailsSubFragment : Fragment() {
             radius = if (expanded) 20f.dp else 0f.dp
             strokeWidth = if (expanded) 1.dp else 0
             setCardBackgroundColor(
-                ContextCompat.getColor(context, if (expanded) R.color.Gray_75 else android.R.color.transparent)
+                ContextCompat.getColor(
+                    context,
+                    if (expanded) R.color.Gray_75 else android.R.color.transparent
+                )
             )
         }
 
@@ -192,14 +197,6 @@ class DetailsSubFragment : Fragment() {
             )
         }
     }
-
-
-
-
-
-
-
-
 
 
     private fun showCustomPopupMenu(anchor: View) {
@@ -236,7 +233,11 @@ class DetailsSubFragment : Fragment() {
 
         editOption.setOnClickListener {
             popupWindow.dismiss()
-            // TODO: Навигация на экран редактирования
+            val bundle = Bundle().apply {
+                putString("subscriptionId", args.subscriptionId.toString())
+                putBoolean("isEdit", true)
+            }
+            findNavController().navigate(R.id.addSubCreateFragment, bundle)
         }
 
         deleteOption.setOnClickListener {

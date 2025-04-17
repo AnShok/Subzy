@@ -136,7 +136,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/subscriptionPriceEdit_Txt"
-                    style="@style/TextAppearance.Headline3"
+                    style="@style/TextAppearance.Headline5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -153,7 +153,7 @@
                 android:id="@+id/currencyButton"
                 style="@style/TextAppearance.Headline3"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="USD"
                 android:textAllCaps="false"
@@ -181,7 +181,6 @@
         app:layout_constraintEnd_toEndOf="@id/end_border"
         app:layout_constraintStart_toStartOf="@id/start_border"
         app:layout_constraintTop_toBottomOf="@id/top_card">
-
 
 
         <!-- Поля информации о подписке -->
@@ -456,11 +455,11 @@
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/end_border"
-        app:layout_constraintStart_toStartOf="@id/start_border"
-        android:visibility="gone">
+        app:layout_constraintStart_toStartOf="@id/start_border">
         <!-- Кнопка отменить -->
         <Button
             android:id="@+id/cancelButton"
@@ -473,7 +472,7 @@
             android:textAllCaps="false"
             android:textColor="@color/White"
             app:backgroundTint="@color/Gray_55"
-            tools:visibility="gone"/>
+            tools:visibility="gone" />
 
         <!-- Кнопка сохранить -->
         <Button
@@ -487,7 +486,7 @@
             android:textAllCaps="false"
             android:textColor="@color/White"
             app:backgroundTint="@color/Accent_P_100"
-            tools:visibility="gone"/>
+            tools:visibility="gone" />
     </LinearLayout>
 
     <!-- Отcтупы -->
