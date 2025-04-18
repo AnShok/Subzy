@@ -75,4 +75,26 @@ class UserPreferences(private val context: Context) {
     }
 
 
+    fun saveNotificationTime(hours: Int, minutes: Int) {
+        prefs.edit()
+            .putInt("notification_hour", hours)
+            .putInt("notification_minute", minutes)
+            .apply()
+    }
+
+    fun getNotificationTime(): Pair<Int, Int> {
+        val hour = prefs.getInt("notification_hour", 9)
+        val minute = prefs.getInt("notification_minute", 0)
+        return hour to minute
+    }
+
+    fun saveNotificationsEnabled(enabled: Boolean) {
+        prefs.edit().putBoolean("notifications_enabled", enabled).apply()
+    }
+
+    fun areNotificationsEnabled(): Boolean {
+        return prefs.getBoolean("notifications_enabled", false)
+    }
+
+
 }

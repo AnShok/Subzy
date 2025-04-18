@@ -1,5 +1,6 @@
 package com.anshok.subzy.presentation.settings
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
+import com.anshok.subzy.data.local.preferences.UserPreferences
 import com.anshok.subzy.databinding.FragmentSettingsBinding
 import com.anshok.subzy.domain.settings.model.AppIconStyle
 import com.anshok.subzy.domain.settings.model.AppTheme
@@ -23,8 +25,10 @@ import com.anshok.subzy.presentation.settings.bottomsheet.EditNameBottomSheet
 import com.anshok.subzy.presentation.settings.bottomsheet.HelpBottomSheet
 import com.anshok.subzy.presentation.settings.bottomsheet.RateBottomSheet
 import com.anshok.subzy.presentation.settings.bottomsheet.ThemeBottomSheet
+import com.anshok.subzy.presentation.settings.bottomsheet.TimeNotifBottomSheet
 import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.CurrencyViewModel
+import com.anshok.subzy.presentation.settings.viewmodel.NotificationSettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.SettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.ThemeViewModel
 import com.anshok.subzy.util.animation.animateAppear
@@ -40,6 +44,8 @@ class SettingsFragment : Fragment() {
     private val currencyViewModel: CurrencyViewModel by viewModel()
     private val appIconViewModel: AppIconViewModel by viewModel()
     private val themeViewModel: ThemeViewModel by viewModel()
+    private val notifViewModel: NotificationSettingsViewModel by viewModel()
+
 
     // Выбор изображения из галереи
     private val pickImageLauncher =
@@ -72,6 +78,7 @@ class SettingsFragment : Fragment() {
         setupInitialAnimations()
         observeViewModels()
         setupClickListeners()
+        notifViewModel.loadNotificationSettings()
         initSettings()
 
     }
@@ -84,6 +91,8 @@ class SettingsFragment : Fragment() {
             binding.currencySelector,
             binding.appIconSetting,
             binding.theme,
+            binding.notifications,
+            binding.notificationsTime,
             binding.tgNotices,
             binding.aboutUs,
             binding.rateUs,
@@ -96,6 +105,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private fun observeViewModels() {
         viewModel.profileImage.observe(viewLifecycleOwner) { uri ->
             binding.profileImage.setImageURI(uri)
@@ -119,6 +129,21 @@ class SettingsFragment : Fragment() {
         themeViewModel.selectedTheme.observe(viewLifecycleOwner) {
             binding.themeValue.text = it.label
         }
+
+        notifViewModel.notificationsEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            if (binding.notificationsSwitch.isChecked != isEnabled) {
+                binding.notificationsSwitch.isChecked = isEnabled
+            }
+            setNotificationsTimeEnabled(isEnabled)
+        }
+
+
+
+
+        notifViewModel.notificationTime.observe(viewLifecycleOwner) { (hour, minute) ->
+            binding.notificationsTimeValue.text = String.format("%02d:%02d", hour, minute)
+        }
+
     }
 
     private fun setupClickListeners() {
@@ -164,6 +189,28 @@ class SettingsFragment : Fragment() {
         binding.help.safeDelayedClick {
             HelpBottomSheet().show(parentFragmentManager, "HelpBottomSheet")
         }
+        binding.notifications.safeDelayedClick {
+            binding.notificationsSwitch.toggle()
+        }
+
+
+        binding.notificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            notifViewModel.setNotificationsEnabled(isChecked)
+        }
+
+
+
+        binding.notificationsTime.safeDelayedClick {
+            TimeNotifBottomSheet(
+                onTimeSaved = { hour, minute ->
+                    notifViewModel.setNotificationTime(hour, minute)
+                },
+                initialTime = notifViewModel.notificationTime.value ?: (9 to 0)
+            ).show(parentFragmentManager, "TimeNotifBottomSheet")
+        }
+
+
+
     }
 
     private fun initSettings() {
@@ -217,4 +264,10 @@ class SettingsFragment : Fragment() {
         val chooser = Intent.createChooser(shareIntent, getString(R.string.share_with_friends))
         shareLauncher.launch(chooser)
     }
+
+    private fun setNotificationsTimeEnabled(enabled: Boolean) {
+        binding.notificationsTime.isEnabled = enabled
+        binding.notificationsTime.alpha = if (enabled) 1f else 0.5f
+    }
+
 }
