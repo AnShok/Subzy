@@ -1,5 +1,6 @@
 package com.anshok.subzy.presentation.addSub.create
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.anshok.subzy.data.local.preferences.UserPreferences
 import com.anshok.subzy.domain.currency.CurrencyInteractor
 import com.anshok.subzy.domain.currency.model.CurrencyRate
 import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
+import com.anshok.subzy.domain.reminder.model.ReminderType
 import com.anshok.subzy.domain.subscription.SubscriptionInteractor
 import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
@@ -18,6 +20,8 @@ import java.time.Instant
 import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
+import com.anshok.subzy.util.notification.ReminderManager
+
 
 class AddSubCreateViewModel(
     private val subscriptionInteractor: SubscriptionInteractor,
@@ -55,6 +59,7 @@ class AddSubCreateViewModel(
     }
 
     fun addSubscription(
+        context: Context,
         name: String,
         price: Double,
         description: String?,
@@ -64,6 +69,7 @@ class AddSubCreateViewModel(
         categoryId: Long = 0L,
         paymentMethodId: Long = 0L,
         comment: String? = null,
+        reminderType: ReminderType = ReminderType.NONE,
         onResult: (SaveResult) -> Unit
     ) {
         if (name.isBlank() || price <= 0.0) {
@@ -90,18 +96,18 @@ class AddSubCreateViewModel(
             paymentPeriod = paymentPeriod,
             paymentPeriodType = paymentPeriodType,
             firstPaymentDate = firstPaymentDate,
-            nextPaymentDate = calculateNextPaymentDate(
-                firstPaymentDate,
-                paymentPeriod,
-                paymentPeriodType
-            ),
+            nextPaymentDate = calculateNextPaymentDate(firstPaymentDate, paymentPeriod, paymentPeriodType),
             paymentMethodId = paymentMethodId,
             categoryId = categoryId,
-            comment = comment
+            comment = comment,
+            reminderType = reminderType
         )
 
         viewModelScope.launch {
             val result = subscriptionInteractor.insertSubscription(subscription)
+            if (result) {
+                ReminderManager.scheduleReminderForSubscription(context, subscription)
+            }
             onResult(if (result) SaveResult.Success else SaveResult.Duplicate)
             subscriptionChangedNotifier.notify()
         }
@@ -138,14 +144,21 @@ class AddSubCreateViewModel(
     }
 
     fun updateSubscription(
+        context: Context,
         original: Subscription,
         updated: Subscription,
+        reminderType: ReminderType = ReminderType.NONE,
         onResult: (SaveResult) -> Unit
     ) {
         viewModelScope.launch {
-            subscriptionInteractor.updateSubscription(updated.copy(id = original.id))
+            subscriptionInteractor.updateSubscription(
+                updated.copy(id = original.id, reminderType = reminderType)
+            )
+
+            ReminderManager.scheduleReminderForSubscription(context, updated)
             onResult(SaveResult.Success)
             subscriptionChangedNotifier.notify()
+
         }
     }
 

@@ -20,6 +20,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import com.anshok.subzy.data.local.migrations.MIGRATION_1_2
 
 val dataModule = module {
 
@@ -29,14 +30,16 @@ val dataModule = module {
             androidContext(),
             AppDatabase::class.java,
             "subscription_database"
-        ).build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     // DAO
     single { get<AppDatabase>().subscriptionDao() }
     single { get<AppDatabase>().categoryDao() }
     single { get<AppDatabase>().paymentMethodDao() }
-    single { get<AppDatabase>().reminderDao() }
+    //single { get<AppDatabase>().reminderDao() }
 
     // Local data
     single<LocalDataSource> {
@@ -44,7 +47,7 @@ val dataModule = module {
             subscriptionDao = get(),
             categoryDao = get(),
             paymentMethodDao = get(),
-            reminderDao = get()
+            //reminderDao = get()
         )
     }
 

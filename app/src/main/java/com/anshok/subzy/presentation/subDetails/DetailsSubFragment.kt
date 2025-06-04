@@ -24,6 +24,7 @@ import com.anshok.subzy.util.CurrencyUtils
 import com.anshok.subzy.util.adapter.bindLogo
 import com.anshok.subzy.util.adapter.toLogo
 import com.anshok.subzy.util.animation.animateAppear
+import com.anshok.subzy.util.extension.toLabel
 import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.snackbar.Snackbar
 import marqueeOnceThenFadeToEllipsizeEnd
@@ -86,8 +87,8 @@ class DetailsSubFragment : Fragment() {
 
                 binding.paymentPeriodValue.text =
                     "${it.paymentPeriod} ${it.paymentPeriodType.name.lowercase()}"
-                binding.reminderValue.text =
-                    "Not specified" // TODO: подтянуть из ReminderRepository
+                binding.reminderValue.text = subscription.reminderType.toLabel()
+
 
                 val payments = viewModel.calculateTotalPaidAmount(
                     it.firstPaymentDate,
@@ -243,18 +244,15 @@ class DetailsSubFragment : Fragment() {
         deleteOption.setOnClickListener {
             popupWindow.dismiss()
             DeleteConfirmationDialog {
-                viewModel.deleteSubscription {
+                viewModel.deleteSubscription(requireContext()) {
                     Snackbar.make(binding.root, "Subscription deleted", Snackbar.LENGTH_SHORT)
                         .setBackgroundTint(
-                            ContextCompat.getColor(
-                                requireContext(),
-                                R.color.Accent_P_100
-                            )
+                            ContextCompat.getColor(requireContext(), R.color.Accent_P_100)
                         )
                         .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                         .show()
-                    findNavController().navigateUp()
 
+                    findNavController().navigateUp()
                 }
             }.show(parentFragmentManager, "DeleteConfirmationDialog")
         }

@@ -1,6 +1,7 @@
 package com.anshok.subzy.domain.subscription.model
 
 import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
+import com.anshok.subzy.domain.reminder.model.ReminderType
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -18,7 +19,9 @@ data class Subscription(
     val nextPaymentDate: Long,
     val paymentMethodId: Long,
     val categoryId: Long,
-    val comment: String?
+    val comment: String?,
+    val reminderType: ReminderType = ReminderType.NONE
+
 ) {
     fun getNextPaymentDatesUntil(endDate: LocalDate): List<Long> {
         val result = mutableListOf<LocalDate>()

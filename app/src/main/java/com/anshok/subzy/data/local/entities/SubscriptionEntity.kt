@@ -18,5 +18,6 @@ data class SubscriptionEntity(
     val nextPaymentDate: Long,
     val paymentMethodId: Long,
     val categoryId: Long,
-    val comment: String?
+    val comment: String?,
+    val reminderType: String = "NONE"
 )

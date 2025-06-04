@@ -2,11 +2,9 @@ package com.anshok.subzy.data.converters
 
 import com.anshok.subzy.data.local.entities.CategoryEntity
 import com.anshok.subzy.data.local.entities.PaymentMethodEntity
-import com.anshok.subzy.data.local.entities.ReminderEntity
 import com.anshok.subzy.data.local.entities.SubscriptionEntity
 import com.anshok.subzy.domain.category.model.Category
 import com.anshok.subzy.domain.paymentMethod.model.PaymentMethod
-import com.anshok.subzy.domain.reminder.model.Reminder
 import com.anshok.subzy.domain.subscription.model.Subscription
 
 object DomainToEntityMapper {
@@ -24,7 +22,8 @@ object DomainToEntityMapper {
         nextPaymentDate = domain.nextPaymentDate,
         paymentMethodId = domain.paymentMethodId,
         categoryId = domain.categoryId,
-        comment = domain.comment
+        comment = domain.comment,
+        reminderType = domain.reminderType.name
     )
 
     fun category(domain: Category) = CategoryEntity(
@@ -42,9 +41,9 @@ object DomainToEntityMapper {
         isDefault = domain.isDefault
     )
 
-    fun reminder(domain: Reminder) = ReminderEntity(
-        id = domain.id,
-        subscriptionId = domain.subscriptionId,
-        reminderTime = domain.reminderTime
-    )
+//    fun reminder(domain: Reminder) = ReminderEntity(
+//        id = domain.id,
+//        subscriptionId = domain.subscriptionId,
+//        reminderTime = domain.reminderTime
+//    )
 }

@@ -2,14 +2,13 @@ package com.anshok.subzy.data.converters
 
 import com.anshok.subzy.data.local.entities.CategoryEntity
 import com.anshok.subzy.data.local.entities.PaymentMethodEntity
-import com.anshok.subzy.data.local.entities.ReminderEntity
 import com.anshok.subzy.data.local.entities.SubscriptionEntity
 import com.anshok.subzy.data.remote.logo.dto.LogoResponse
 import com.anshok.subzy.domain.category.model.Category
 import com.anshok.subzy.domain.logo.model.Logo
 import com.anshok.subzy.domain.paymentMethod.model.PaymentMethod
 import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
-import com.anshok.subzy.domain.reminder.model.Reminder
+import com.anshok.subzy.domain.reminder.model.ReminderType
 import com.anshok.subzy.domain.subscription.model.Subscription
 
 object EntityToDomainMapper {
@@ -27,7 +26,8 @@ object EntityToDomainMapper {
         nextPaymentDate = entity.nextPaymentDate,
         paymentMethodId = entity.paymentMethodId,
         categoryId = entity.categoryId,
-        comment = entity.comment
+        comment = entity.comment,
+        reminderType = ReminderType.valueOf(entity.reminderType)
     )
 
     fun category(entity: CategoryEntity) = Category(
@@ -45,11 +45,11 @@ object EntityToDomainMapper {
         isDefault = entity.isDefault
     )
 
-    fun reminder(entity: ReminderEntity) = Reminder(
-        id = entity.id,
-        subscriptionId = entity.subscriptionId,
-        reminderTime = entity.reminderTime
-    )
+//    fun reminder(entity: ReminderEntity) = Reminder(
+//        id = entity.id,
+//        subscriptionId = entity.subscriptionId,
+//        reminderTime = entity.reminderTime
+//    )
 
     fun logo(response: LogoResponse) = Logo(
         name = response.name,

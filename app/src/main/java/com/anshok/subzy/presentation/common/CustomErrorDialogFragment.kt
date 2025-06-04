@@ -14,7 +14,7 @@ class CustomErrorDialogFragment(
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return Dialog(requireContext(), R.style.RoundedDialog).apply {
+        return Dialog(requireContext(), R.style.CustomAlertDialog).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setCancelable(false)
             window?.setBackgroundDrawableResource(android.R.color.transparent)

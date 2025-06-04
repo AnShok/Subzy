@@ -1,5 +1,6 @@
 package com.anshok.subzy.presentation.subDetails
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
 import com.anshok.subzy.domain.subscription.SubscriptionInteractor
 import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.shared.events.SubscriptionChangedNotifier
+import com.anshok.subzy.util.notification.ReminderManager
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -34,10 +36,12 @@ class DetailsSubViewModel(
         }
     }
 
-    fun deleteSubscription(onDeleted: () -> Unit) {
+    fun deleteSubscription(context: Context, onDeleted: () -> Unit)
+    {
         viewModelScope.launch {
             currentSubscription?.let {
                 interactor.deleteSubscription(it)
+                ReminderManager.cancelReminder(context, it.id)
                 subscriptionChangedNotifier.notify()
                 onDeleted()
             }

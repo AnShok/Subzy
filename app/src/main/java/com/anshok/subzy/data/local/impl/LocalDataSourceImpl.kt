@@ -3,11 +3,9 @@ package com.anshok.subzy.data.local.impl
 import com.anshok.subzy.data.local.LocalDataSource
 import com.anshok.subzy.data.local.db.dao.CategoryDao
 import com.anshok.subzy.data.local.db.dao.PaymentMethodDao
-import com.anshok.subzy.data.local.db.dao.ReminderDao
 import com.anshok.subzy.data.local.db.dao.SubscriptionDao
 import com.anshok.subzy.data.local.entities.CategoryEntity
 import com.anshok.subzy.data.local.entities.PaymentMethodEntity
-import com.anshok.subzy.data.local.entities.ReminderEntity
 import com.anshok.subzy.data.local.entities.SubscriptionCategoryEntity
 import com.anshok.subzy.data.local.entities.SubscriptionEntity
 import com.anshok.subzy.data.local.entities.SubscriptionPaymentMethodEntity
@@ -17,7 +15,7 @@ class LocalDataSourceImpl(
     private val subscriptionDao: SubscriptionDao,
     private val categoryDao: CategoryDao,
     private val paymentMethodDao: PaymentMethodDao,
-    private val reminderDao: ReminderDao
+    //private val reminderDao: ReminderDao
 ) : LocalDataSource {
 
     // Подписки
@@ -87,22 +85,22 @@ class LocalDataSourceImpl(
         return paymentMethodDao.getById(id)
     }
 
-    // Напоминания
-    override suspend fun insertReminder(reminder: ReminderEntity) {
-        reminderDao.insert(reminder)
-    }
-
-    override suspend fun deleteReminder(reminder: ReminderEntity) {
-        reminderDao.delete(reminder)
-    }
-
-    override fun getRemindersForSubscription(subscriptionId: Long): Flow<List<ReminderEntity>> {
-        return reminderDao.getRemindersForSubscription(subscriptionId)
-    }
-
-    override suspend fun deleteRemindersForSubscription(subscriptionId: Long) {
-        reminderDao.deleteRemindersForSubscription(subscriptionId)
-    }
+//    // Напоминания
+//    override suspend fun insertReminder(reminder: ReminderEntity) {
+//        reminderDao.insert(reminder)
+//    }
+//
+//    override suspend fun deleteReminder(reminder: ReminderEntity) {
+//        reminderDao.delete(reminder)
+//    }
+//
+//    override fun getRemindersForSubscription(subscriptionId: Long): Flow<List<ReminderEntity>> {
+//        return reminderDao.getRemindersForSubscription(subscriptionId)
+//    }
+//
+//    override suspend fun deleteRemindersForSubscription(subscriptionId: Long) {
+//        reminderDao.deleteRemindersForSubscription(subscriptionId)
+//    }
 
     // Связи подписок с категориями и методами оплаты
     override suspend fun addCategoryToSubscription(subscriptionCategory: SubscriptionCategoryEntity) {
