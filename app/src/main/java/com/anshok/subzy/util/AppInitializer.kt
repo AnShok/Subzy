@@ -20,6 +20,7 @@ class AppInitializer(
         initCurrencies()
         applyTheme()
         applyAppIcon()
+        //checkNotificationPermissions()
     }
 
     private fun initEmbeddedLogos() {
@@ -47,5 +48,13 @@ class AppInitializer(
     private fun applyAppIcon() {
         switchAppIcon(context, prefs.getAppIconStyle())
     }
+//
+//    private fun checkNotificationPermissions() {
+//        val hasAllPermissions = com.anshok.subzy.util.notification.PermissionRequestHelper.hasAllRequiredPermissions(context)
+//        if (!hasAllPermissions) {
+//            prefs.saveNotificationsEnabled(false)
+//        }
+//    }
+
 }
 

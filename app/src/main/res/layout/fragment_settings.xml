@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Settings"
+        android:textStyle="bold"
         android:textColor="@color/Gray_30"
         app:layout_constraintStart_toStartOf="@id/start_border"
         app:layout_constraintTop_toTopOf="parent" />
@@ -297,7 +298,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:contentDescription="Theme"
-                            android:src="@drawable/ic_theme"
+                            android:src="@drawable/ic_moon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -309,7 +310,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="4dp"
-                            android:text="Theme"
+                            android:text="Dark mode"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="@id/themeIcon"
                             app:layout_constraintEnd_toStartOf="@id/themeValue"
@@ -339,6 +340,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/themeIcon" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
                     <!-- Настройка уведомлений ТГ -->
@@ -384,9 +387,8 @@
                             app:layout_constraintBottom_toBottomOf="@id/tgIcon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/tgIcon"
-                            app:thumbIconTint="@color/white"
-                            app:trackColorActive="@color/Accent_P_100"
-                            app:trackColorInactive="@color/Gray_40" />
+                            app:thumbTint="@color/switch_thumb_selector"
+                            app:trackTint="@color/switch_track_selector"  />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -410,6 +412,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/dimen_16dp"
                 app:cardBackgroundColor="@color/Gray_75"
                 app:cardCornerRadius="12dp">
 

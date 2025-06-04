@@ -2,7 +2,6 @@ package com.anshok.subzy.data.local
 
 import com.anshok.subzy.data.local.entities.CategoryEntity
 import com.anshok.subzy.data.local.entities.PaymentMethodEntity
-import com.anshok.subzy.data.local.entities.ReminderEntity
 import com.anshok.subzy.data.local.entities.SubscriptionCategoryEntity
 import com.anshok.subzy.data.local.entities.SubscriptionEntity
 import com.anshok.subzy.data.local.entities.SubscriptionPaymentMethodEntity
@@ -31,11 +30,11 @@ interface LocalDataSource {
     fun getAllPaymentMethods(): Flow<List<PaymentMethodEntity>>
     suspend fun getPaymentMethodById(id: Long): PaymentMethodEntity?
 
-    // Напоминания
-    suspend fun insertReminder(reminder: ReminderEntity)
-    suspend fun deleteReminder(reminder: ReminderEntity)
-    fun getRemindersForSubscription(subscriptionId: Long): Flow<List<ReminderEntity>>
-    suspend fun deleteRemindersForSubscription(subscriptionId: Long)
+//    // Напоминания
+//    suspend fun insertReminder(reminder: ReminderEntity)
+//    suspend fun deleteReminder(reminder: ReminderEntity)
+//    fun getRemindersForSubscription(subscriptionId: Long): Flow<List<ReminderEntity>>
+//    suspend fun deleteRemindersForSubscription(subscriptionId: Long)
 
     // Связи подписок с категориями и методами оплаты
     suspend fun addCategoryToSubscription(subscriptionCategory: SubscriptionCategoryEntity)

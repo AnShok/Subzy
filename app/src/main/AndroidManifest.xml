@@ -3,9 +3,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:name="com.anshok.subzy.util.App"
@@ -18,6 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Subzy"
         tools:targetApi="31">
+
+        <receiver
+            android:name=".util.notification.AlarmReceiver"
+            android:exported="false" />
+
 
         <!-- Основная активность без intent-filter -->
         <activity

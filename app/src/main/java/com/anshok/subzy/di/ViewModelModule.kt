@@ -13,6 +13,7 @@ import com.anshok.subzy.presentation.settings.viewmodel.AppIconViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.CurrencyViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.EasterEggViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.HelpViewModel
+import com.anshok.subzy.presentation.settings.viewmodel.NotificationSettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.RateViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.SettingsViewModel
 import com.anshok.subzy.presentation.settings.viewmodel.ThemeViewModel
@@ -118,6 +119,11 @@ val viewModelModule = module {
             userPreferences = get()
         )
     }
+
+    viewModel {
+        NotificationSettingsViewModel(get())
+    }
+
 
 }
 

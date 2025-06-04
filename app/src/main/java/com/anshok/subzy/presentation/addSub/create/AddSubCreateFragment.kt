@@ -9,15 +9,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
 import com.anshok.subzy.databinding.FragmentAddSubCreateBinding
 import com.anshok.subzy.domain.paymentPeriod.model.PaymentPeriodType
+//import com.anshok.subzy.domain.reminder.model.ReminderType
 import com.anshok.subzy.domain.subscription.model.Subscription
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.DescriptionBottomSheet
-import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.NotificationReminderBottomSheet
+//import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.NotificationReminderBottomSheet
 import com.anshok.subzy.presentation.addSub.create.bottomSheetCreateSub.PaymentPeriodBottomSheet
 import com.anshok.subzy.presentation.addSub.create.dialog.CancelConfirmationDialog
 import com.anshok.subzy.presentation.addSub.create.state.SaveResult
@@ -32,6 +34,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.anshok.subzy.util.extension.toReminderType
+import com.anshok.subzy.util.extension.toLabel
+import kotlinx.coroutines.launch
+
 
 class AddSubCreateFragment : Fragment() {
 
@@ -118,7 +124,7 @@ class AddSubCreateFragment : Fragment() {
         binding.descriptionContainer.setOnClickListener { openDescriptionBottomSheet() }
         binding.paymentPeriodContainer.setOnClickListener { openPaymentPeriodBottomSheet() }
         binding.firstPaymentContainer.setOnClickListener { showDatePicker() }
-        binding.reminderContainer.setOnClickListener { openReminderBottomSheet() }
+//        binding.reminderContainer.setOnClickListener { openReminderBottomSheet() }
 //        binding.commentContainer.setOnClickListener { openCommentBottomSheet() }
 //
 //        binding.categoryContainer.setOnClickListener {
@@ -167,6 +173,7 @@ class AddSubCreateFragment : Fragment() {
                 binding.descriptionValue.text = if (desc.isNullOrBlank()) "Not specified" else desc
 
                 binding.firstPaymentValue.text = viewModel.formatDate(subscription.firstPaymentDate)
+                binding.reminderValue.text = subscription.reminderType.toLabel()
                 binding.paymentPeriodValue.text =
                     "${subscription.paymentPeriod} ${subscription.paymentPeriodType.name.lowercase()}"
                 selectedPeriodNumber = subscription.paymentPeriod
@@ -223,8 +230,10 @@ class AddSubCreateFragment : Fragment() {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         val dateMillis = dateFormat.parse(binding.firstPaymentValue.text.toString())?.time
             ?: System.currentTimeMillis()
+        val reminderType = binding.reminderValue.text.toString().toReminderType()
 
         viewModel.addSubscription(
+            context = requireContext(),
             name = name,
             price = price,
             description = binding.descriptionValue.text.toString()
@@ -234,6 +243,8 @@ class AddSubCreateFragment : Fragment() {
             firstPaymentDate = dateMillis,
             categoryId = 0L,
             paymentMethodId = 0L,
+            reminderType = reminderType
+
             //comment = binding.commentValue.text.toString().takeIf { it != "Not specified" }
         ) { result ->
             when (result) {
@@ -327,11 +338,11 @@ class AddSubCreateFragment : Fragment() {
         }.show(parentFragmentManager, "PaymentPeriodBottomSheet")
     }
 
-    private fun openReminderBottomSheet() {
-        NotificationReminderBottomSheet { selectedOption ->
-            binding.reminderValue.text = selectedOption
-        }.show(parentFragmentManager, "NotificationReminderBottomSheet")
-    }
+//    private fun openReminderBottomSheet() {
+//        NotificationReminderBottomSheet { selectedOption ->
+//            binding.reminderValue.text = selectedOption
+//        }.show(parentFragmentManager, "NotificationReminderBottomSheet")
+//    }
 
 //    private fun openCommentBottomSheet() {
 //        CommentBottomSheet { comment ->
@@ -369,6 +380,8 @@ class AddSubCreateFragment : Fragment() {
                 .parse(binding.firstPaymentValue.text.toString())?.time
                 ?: System.currentTimeMillis()
 
+            val selectedReminderType = binding.reminderValue.text.toString().toReminderType()
+
             val updated = original.copy(
                 name = binding.subscriptionNameEditTxt.text.toString().trim(),
                 price = binding.subscriptionPriceEditTxt.text.toString()
@@ -387,31 +400,37 @@ class AddSubCreateFragment : Fragment() {
                 logoUrl = viewModel.selectedImageFromGallery
                     ?: viewModel.selectedLogoUrl
                     ?: viewModel.selectedLogoResName?.let { "res://$it" }
-                    ?: original.logoUrl
+                    ?: original.logoUrl,
+                reminderType = selectedReminderType
             )
 
-            viewModel.updateSubscription(original, updated) { result ->
-                if (result == SaveResult.Success) {
-                    findNavController().navigateUp()
-                } else {
-                    showErrorDialog("Failed to update subscription")
+            val reminderChanged = selectedReminderType != original.reminderType
+
+            lifecycleScope.launch {
+                if (reminderChanged) {
+                    com.anshok.subzy.util.notification.ReminderManager.cancelReminder(requireContext(), original.id)
                 }
+
+                viewModel.updateSubscription(
+                    context = requireContext(),
+                    original = original,
+                    updated = updated,
+                    onResult = { result ->
+                        if (result == SaveResult.Success) {
+                            findNavController().navigateUp()
+                        } else {
+                            showErrorDialog("Failed to update subscription")
+                        }
+                    }
+                )
             }
         }
     }
 
 
-    private fun enableEditModeWatcher() {
-        fun checkChanges() {
-            val current = getCurrentSubscriptionSnapshot()
-            val original = originalSubscription
-            if (original != null && current != null && current != original) {
-                binding.editButtonsContainer.visibility = View.VISIBLE
-            } else {
-                binding.editButtonsContainer.visibility = View.GONE
-            }
-        }
 
+
+    private fun enableEditModeWatcher() {
         binding.subscriptionNameEditTxt.doAfterTextChanged { checkChanges() }
         binding.subscriptionPriceEditTxt.doAfterTextChanged { checkChanges() }
 
@@ -439,10 +458,7 @@ class AddSubCreateFragment : Fragment() {
 
         binding.descriptionContainer.setOnClickListener {
             val current = originalSubscription?.description
-            DescriptionBottomSheet(
-                initialText = current
-            ) { desc ->
-                // Отображаем в UI
+            DescriptionBottomSheet(initialText = current) { desc ->
                 binding.descriptionValue.text = if (desc.isNullOrBlank()) {
                     "Not specified"
                 } else {
@@ -451,7 +467,6 @@ class AddSubCreateFragment : Fragment() {
                 checkChanges()
             }.show(parentFragmentManager, "DescriptionBottomSheet")
         }
-
 
         binding.paymentPeriodContainer.setOnClickListener {
             PaymentPeriodBottomSheet { number, periodString ->
@@ -466,43 +481,26 @@ class AddSubCreateFragment : Fragment() {
                 selectedPeriodType = type
 
                 val correctForm = when (type) {
-                    PaymentPeriodType.DAILY -> resources.getQuantityString(
-                        R.plurals.days,
-                        number,
-                        number
-                    )
-
-                    PaymentPeriodType.WEEKLY -> resources.getQuantityString(
-                        R.plurals.weeks,
-                        number,
-                        number
-                    )
-
-                    PaymentPeriodType.MONTHLY -> resources.getQuantityString(
-                        R.plurals.months,
-                        number,
-                        number
-                    )
-
-                    PaymentPeriodType.YEARLY -> resources.getQuantityString(
-                        R.plurals.years,
-                        number,
-                        number
-                    )
+                    PaymentPeriodType.DAILY -> resources.getQuantityString(R.plurals.days, number, number)
+                    PaymentPeriodType.WEEKLY -> resources.getQuantityString(R.plurals.weeks, number, number)
+                    PaymentPeriodType.MONTHLY -> resources.getQuantityString(R.plurals.months, number, number)
+                    PaymentPeriodType.YEARLY -> resources.getQuantityString(R.plurals.years, number, number)
                 }
-                binding.paymentPeriodValue.text = correctForm
 
+                binding.paymentPeriodValue.text = correctForm
                 checkChanges()
             }.show(parentFragmentManager, "PaymentPeriodBottomSheet")
         }
 
-        binding.reminderContainer.setOnClickListener {
-            NotificationReminderBottomSheet {
-                binding.reminderValue.text = it
-                checkChanges()
-            }.show(parentFragmentManager, "NotificationReminderBottomSheet")
-        }
+//        binding.reminderContainer.setOnClickListener {
+//            NotificationReminderBottomSheet {
+//                binding.reminderValue.text = it
+//                checkChanges()
+//            }.show(parentFragmentManager, "NotificationReminderBottomSheet")
+//        }
     }
+
+
 
     private fun getCurrentSubscriptionSnapshot(): Subscription? {
         val original = originalSubscription ?: return null
@@ -515,6 +513,8 @@ class AddSubCreateFragment : Fragment() {
         val descriptionText = binding.descriptionValue.text.toString()
             .takeIf { it.isNotBlank() && it != "Not specified" }
 
+        val reminderType = binding.reminderValue.text.toString().toReminderType()
+
         return original.copy(
             name = name,
             price = price,
@@ -526,7 +526,8 @@ class AddSubCreateFragment : Fragment() {
                 ?: viewModel.selectedLogoUrl
                 ?: viewModel.selectedLogoResName?.let { "res://$it" }
                 ?: original.logoUrl,
-            currencyCode = viewModel.currencyCode.value ?: original.currencyCode
+            currencyCode = viewModel.currencyCode.value ?: original.currencyCode,
+            reminderType = reminderType
         )
     }
 
@@ -534,11 +535,13 @@ class AddSubCreateFragment : Fragment() {
     private fun checkChanges() {
         val current = getCurrentSubscriptionSnapshot()
         val original = originalSubscription
-        if (original != null && current != null && current != original) {
-            binding.editButtonsContainer.visibility = View.VISIBLE
-        } else {
-            binding.editButtonsContainer.visibility = View.GONE
-        }
-    }
+        val reminderChanged = binding.reminderValue.text.toString() != original?.reminderType?.toLabel()
 
+        binding.editButtonsContainer.visibility =
+            if (original != null && current != null && (current != original || reminderChanged)) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+    }
 }
