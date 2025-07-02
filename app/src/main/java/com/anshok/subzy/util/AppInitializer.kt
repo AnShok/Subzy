@@ -2,6 +2,7 @@ package com.anshok.subzy.util
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import com.anshok.subzy.BuildConfig
 import com.anshok.subzy.data.local.preferences.UserPreferences
 import com.anshok.subzy.data.local.impl.EmbeddedLogoProvider
 import com.anshok.subzy.domain.currency.CurrencyInteractor
@@ -9,6 +10,7 @@ import com.anshok.subzy.domain.settings.model.AppTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.anshok.subzy.util.ads.AdManager
 
 class AppInitializer(
     private val context: Context,
@@ -21,6 +23,7 @@ class AppInitializer(
         applyTheme()
         applyAppIcon()
         //checkNotificationPermissions()
+        AdManager.init(context, BuildConfig.DEBUG)
     }
 
     private fun initEmbeddedLogos() {

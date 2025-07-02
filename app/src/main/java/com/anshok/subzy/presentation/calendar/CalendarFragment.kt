@@ -12,14 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.R
+import com.anshok.subzy.data.local.preferences.UserPreferences
 import com.anshok.subzy.databinding.FragmentCalendarBinding
 import com.anshok.subzy.domain.subscription.model.SubscriptionGroup
 import com.anshok.subzy.presentation.calendar.groupie.CalendarGroupieAdapter
 import com.anshok.subzy.presentation.calendar.groupie.GroupedSubscriptionSection
 import com.anshok.subzy.presentation.calendar.groupie.SubscriptionHeaderItem
 import com.anshok.subzy.presentation.calendar.groupie.SubscriptionItem
+import com.anshok.subzy.presentation.root.RootActivity
 import com.anshok.subzy.util.MonthUtils
 import com.anshok.subzy.util.VibrationUtils
+import com.anshok.subzy.util.ads.AdManager
 import com.anshok.subzy.util.safeDelayedClick
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.view.MonthDayBinder
@@ -77,6 +80,22 @@ class CalendarFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.fetchUpcomingBills()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val prefs: UserPreferences = org.koin.java.KoinJavaComponent.get(UserPreferences::class.java)
+        prefs.incrementCalendarExitCount()
+
+        val isPro = RootActivity.AppFeaturesManager.isProActive()
+        val count = prefs.getCalendarExitCount()
+
+        AdManager.showOnCalendarExitIfEligible(
+            activity = requireActivity(),
+            isPro = isPro,
+            calendarExitCount = count,
+            onDismiss = {}
+        )
     }
 
 
