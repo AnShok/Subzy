@@ -142,6 +142,8 @@ dependencies {
     implementation ("com.github.lisawray.groupie:groupie-viewbinding:2.10.1")
     implementation ("androidx.work:work-runtime-ktx:2.10.0")
 
+    implementation("com.google.android.gms:play-services-ads:24.3.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
 
 

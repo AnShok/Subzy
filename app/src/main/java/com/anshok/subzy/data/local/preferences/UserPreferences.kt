@@ -96,5 +96,20 @@ class UserPreferences(private val context: Context) {
         return prefs.getBoolean("notifications_enabled", false)
     }
 
+    //Счетчики для рекламы
+    fun incrementCalendarExitCount() {
+        val count = prefs.getInt("calendar_exit_count", 0) + 1
+        prefs.edit().putInt("calendar_exit_count", count).apply()
+    }
+
+    fun getCalendarExitCount(): Int = prefs.getInt("calendar_exit_count", 0)
+
+    fun incrementAppLaunchCount() {
+        val count = prefs.getInt("app_launch_count", 0) + 1
+        prefs.edit().putInt("app_launch_count", count).apply()
+    }
+
+    fun getAppLaunchCount(): Int = prefs.getInt("app_launch_count", 0)
+
 
 }

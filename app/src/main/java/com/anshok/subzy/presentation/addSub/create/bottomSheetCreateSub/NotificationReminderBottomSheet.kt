@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.anshok.subzy.databinding.BottomSheetNotificationReminderBinding
-import com.anshok.subzy.presentation.common.PermissionDialogFragment
+//import com.anshok.subzy.presentation.common.PermissionDialogFragment
 import com.anshok.subzy.util.notification.PermissionRequestHelper
 import com.anshok.subzy.util.safeDelayedClick
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
